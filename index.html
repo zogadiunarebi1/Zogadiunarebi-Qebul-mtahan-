@@ -1,995 +1,167 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101c3a">
-<title>ZQİ Riyaziyyat</title>
-
+<title>Tam ədədlər | ZQİ Riyaziyyat</title>
 <style>
-:root {
-  --bg: #0b1224;
-  --panel: #131f3b;
-  --panel2: #1a294b;
-  --text: #f4f7ff;
-  --muted: #aab8d5;
-  --blue: #6da7ff;
-  --green: #55d6a2;
-  --red: #ff7887;
-  --gold: #ffd166;
-  --line: #2b3b60;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-}
-
-header {
-  padding: 20px 16px;
-  background: #101c3a;
-  border-bottom: 1px solid var(--line);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #6da7ff, #7e72ff);
-  display: grid;
-  place-items: center;
-  font-weight: bold;
-  color: #071329;
-}
-
-h1 {
-  font-size: 20px;
-  margin: 0;
-}
-
-header p {
-  color: var(--muted);
-  font-size: 12px;
-  margin: 4px 0 0;
-}
-
-main {
-  max-width: 760px;
-  margin: auto;
-  padding: 16px 14px 100px;
-}
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-h2 {
-  font-size: 23px;
-}
-
-h3 {
-  font-size: 17px;
-  margin-top: 0;
-}
-
-.sub {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
-  margin: 12px 0;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.stat {
-  background: var(--panel2);
-  border-radius: 14px;
-  padding: 13px;
-}
-
-.stat strong {
-  display: block;
-  font-size: 23px;
-}
-
-.stat span {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
-  border: 0;
-  border-radius: 12px;
-  padding: 12px 14px;
-  background: var(--blue);
-  color: #071329;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: #26385e;
-  color: white;
-}
-
-button.good {
-  background: var(--green);
-}
-
-button:disabled {
-  opacity: 0.5;
-}
-
-.topic {
-  width: 100%;
-  text-align: left;
-  background: var(--panel2);
-  color: white;
-  border: 1px solid var(--line);
-  margin: 6px 0;
-}
-
-.progress {
-  height: 9px;
-  background: #263454;
-  border-radius: 99px;
-  overflow: hidden;
-  margin: 9px 0;
-}
-
-.progress div {
-  height: 100%;
-  background: linear-gradient(90deg, #58d6a6, #6da7ff);
-}
-
-.lesson {
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.rule {
-  background: #1d3157;
-  border-left: 4px solid var(--blue);
-  padding: 12px;
-  border-radius: 10px;
-  margin: 12px 0;
-}
-
-.question {
-  background: #101a32;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  padding: 15px;
-  margin: 12px 0;
-}
-
-.option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  margin: 7px 0;
-  background: #1c2b4d;
-  border: 1px solid #304368;
-  color: white;
-}
-
-.option.correct {
-  background: #164d42;
-}
-
-.option.wrong {
-  background: #57283b;
-}
-
-.explain {
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 10px;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  background: #0c1730;
-  color: white;
-  border: 1px solid #35476e;
-  border-radius: 11px;
-  padding: 12px;
-  margin: 5px 0 10px;
-}
-
-label {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-nav.bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #101a31;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 2px;
-}
-
-nav button {
-  flex: 1;
-  padding: 8px 2px;
-  background: transparent;
-  color: #9eafd0;
-  font-size: 11px;
-}
-
-nav button.active {
-  background: #26385e;
-  color: white;
-}
-
-.emoji {
-  display: block;
-  font-size: 19px;
-  margin-bottom: 3px;
-}
-
-.notice {
-  padding: 11px;
-  border-radius: 12px;
-  background: #1c2d4e;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.big {
-  font-size: 30px;
-  font-weight: 850;
-}
-
-.task {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.task p {
-  margin: 0;
-  flex: 1;
-}
-
-.task small {
-  display: block;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-@media (min-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f6fc;color:#172033;font-family:Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,#102b55,#2868c7);color:white;padding:25px 16px}
+main{max-width:850px;margin:auto;padding:16px}
+.card{background:white;padding:20px;margin-bottom:16px;border-radius:15px;box-shadow:0 3px 12px #0000000b}
+h1{font-size:30px;margin:10px 0}
+h2{color:#173d76;font-size:21px}
+.rule{background:#edf4ff;padding:14px;border-left:4px solid #2868c7;border-radius:8px}
+.example{padding:12px;background:#f7f9fc;border-radius:9px;margin-top:10px}
+.math{font-size:20px;font-weight:bold;color:#245fba}
+button{padding:12px;border:1px solid #ccd7e7;background:white;border-radius:9px;text-align:left;font-size:15px;cursor:pointer}
+button:hover{background:#edf4ff}
+.options{display:grid;gap:8px}
+.question{padding:15px 0;border-top:1px solid #e0e7f0}
+.qtitle{font-weight:bold;margin-bottom:10px}
+.feedback{display:none;padding:10px;margin-top:8px;border-radius:8px}
+.feedback.show{display:block}
+.good{background:#e6f8ed;color:#12643e}
+.bad{background:#fff0f0;color:#a52632}
+.correct{background:#e6f8ed;border-color:#168454}
+.wrong{background:#fff0f0;border-color:#c63b45}
+.primary{background:#245fba;color:white;border:0;text-align:center}
+#result{font-weight:bold;color:#173d76}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="brand">
-    <div class="logo">ZQİ</div>
-    <div>
-      <h1>ZQİ Riyaziyyat</h1>
-      <p>Öyrən • Məşq et • Səviyyəni yüksəlt</p>
-    </div>
-  </div>
+  <div><b>ZQİ RİYAZİYYAT</b></div>
+  <h1>Tam ədədlər və onların müqayisəsi</h1>
+  <p>Qaydanı öyrən, nümunələrə bax və testləri həll et.</p>
 </header>
 
 <main>
-
-<section class="page active" id="page-home">
-  <h2>Xoş gəlmisən! 👋</h2>
-  <p class="sub">Riyaziyyatı addım-addım öyrən və XP qazan.</p>
-
-  <div class="card">
-    <div class="row">
-      <div>
-        <div class="muted">Cari səviyyə</div>
-        <div class="big" id="homeLevel">Səviyyə 1</div>
-      </div>
-      <div style="text-align:right">
-        <div class="muted">Toplam XP</div>
-        <div class="big" id="homeXP">0</div>
-      </div>
-    </div>
-    <div class="progress">
-      <div id="homeBar" style="width:0%"></div>
-    </div>
-    <div class="row">
-      <span class="muted" id="xpNext">Növbəti səviyyəyə 100 XP</span>
-      <span id="homePct">0%</span>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="stat">
-      <strong id="statAnswered">0</strong>
-      <span>Cavablandırılan sual</span>
-    </div>
-    <div class="stat">
-      <strong id="statCorrect">0</strong>
-      <span>Düzgün cavab</span>
-    </div>
-    <div class="stat">
-      <strong id="statStreak">0</strong>
-      <span>Gündəlik tapşırıq</span>
-    </div>
-    <div class="stat">
-      <strong id="statAccuracy">0%</strong>
-      <span>Dəqiqlik</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>🎯 Bu günün tapşırıqları</h3>
-    <div id="homeTasks"></div>
-    <button class="secondary" onclick="showPage('tasks')">
-      Bütün tapşırıqlar
-    </button>
-  </div>
-
-  <div class="card">
-    <h3>📚 Davam et</h3>
-    <button onclick="openTopic('integers')">
-      Müsbət və mənfi ədədlər
-    </button>
-    <button class="secondary" onclick="openTopic('fractions')">
-      Kəsrlər
-    </button>
-  </div>
+<section class="card">
+<h2>1. Tam ədədlər nədir?</h2>
+<p>Tam ədədlərə mənfi tam ədədlər, sıfır və müsbət tam ədədlər daxildir.</p>
+<div class="rule">
+<p><b>Mənfi tam ədədlər:</b> −1, −2, −3, −4, ...</p>
+<p><b>Sıfır:</b> 0</p>
+<p><b>Müsbət tam ədədlər:</b> 1, 2, 3, 4, ...</p>
+</div>
+<p>Qeyd: 2,5 və −1,7 tam ədəd deyil.</p>
 </section>
 
-<section class="page" id="page-learning">
-  <h2>📚 Öyrənmə</h2>
-  <p class="sub">Mövzu seç, qaydanı oxu və testlə məşq et.</p>
-
-  <button class="topic" onclick="openTopic('integers')">
-    ➕➖ Müsbət və mənfi ədədlər
-  </button>
-
-  <button class="topic" onclick="openTopic('fractions')">
-    🍕 Kəsrlər
-  </button>
-
-  <div id="lessonArea"></div>
+<section class="card">
+<h2>2. Ədədlərin müqayisəsi</h2>
+<p>Ədəd oxunda sağda yerləşən ədəd daha böyükdür.</p>
+<div class="example">
+<div class="math">−2 &gt; −5</div>
+<p>Çünki −2, ədəd oxunda −5-in sağında yerləşir.</p>
+</div>
+<div class="example">
+<div class="math">3 &gt; 0 &gt; −4</div>
+<p>Müsbət ədəd sıfırdan, sıfır isə mənfi ədəddən böyükdür.</p>
+</div>
+<div class="example">
+<div class="math">−3 &gt; −8</div>
+<p>İki mənfi ədəddən sıfıra daha yaxın olanı böyükdür.</p>
+</div>
 </section>
 
-<section class="page" id="page-exam">
-  <h2>📝 İmtahan</h2>
-
-  <div class="card">
-    <label>Mövzu</label>
-    <select id="examTopic">
-      <option value="integers">Müsbət və mənfi ədədlər</option>
-      <option value="fractions">Kəsrlər</option>
-    </select>
-
-    <label>Çətinlik</label>
-    <select id="examLevel">
-      <option value="all">Bütün suallar</option>
-      <option value="easy">Asan</option>
-      <option value="medium">Orta</option>
-      <option value="hard">Çətin</option>
-    </select>
-
-    <button onclick="startQuiz('exam')">
-      İmtahana başla
-    </button>
-  </div>
-
-  <div id="examArea"></div>
+<section class="card">
+<h2>3. Yadda saxla</h2>
+<ul>
+<li>Müsbət tam ədədlər sıfırdan böyükdür.</li>
+<li>Mənfi tam ədədlər sıfırdan kiçikdir.</li>
+<li>Sıfır nə müsbət, nə də mənfi ədəddir.</li>
+<li>−3 &gt; −8, çünki −3 sıfıra daha yaxındır.</li>
+</ul>
 </section>
 
-<section class="page" id="page-duel">
-  <h2>⚔️ Duel rejimi</h2>
-  <p class="sub">10 suala cavab ver və nəticəni yoxla.</p>
-
-  <div class="card">
-    <button onclick="startQuiz('duel')">Duelə başla</button>
-  </div>
-
-  <div id="duelArea"></div>
+<section class="card">
+<h2>4. Özünü yoxla</h2>
+<p>Hər sualda bir cavab seç. Seçimdən sonra izah görünəcək.</p>
+<p id="score">Cavablandırılan: 0/10</p>
+<div id="questions"></div>
+<button class="primary" id="finish">Nəticəni göstər</button>
+<button id="restart">Yenidən başla</button>
+<p id="result"></p>
 </section>
-
-<section class="page" id="page-quiz">
-  <h2>⚡ Sürətli test</h2>
-
-  <div class="card">
-    <button onclick="startQuiz('quick')">
-      5 suallıq testə başla
-    </button>
-  </div>
-
-  <div id="quickArea"></div>
-</section>
-
-<section class="page" id="page-tasks">
-  <h2>🎯 Gündəlik tapşırıqlar</h2>
-  <p class="sub">Tapşırıqları tamamla və XP qazan.</p>
-  <div class="card" id="tasksList"></div>
-</section>
-
-<section class="page" id="page-profile">
-  <h2>👤 Profil</h2>
-
-  <div class="card">
-    <label>Adın</label>
-    <input id="profileName" maxlength="35" placeholder="Adını yaz">
-
-    <label>Haqqında</label>
-    <textarea id="profileBio" maxlength="140" rows="3"
-      placeholder="Özün haqqında qısa məlumat"></textarea>
-
-    <button onclick="saveProfile()">Yadda saxla</button>
-  </div>
-
-  <div class="card">
-    <h3>📊 Nəticələrin</h3>
-
-    <div class="grid">
-      <div class="stat">
-        <strong id="profileXP">0</strong>
-        <span>Toplam XP</span>
-      </div>
-      <div class="stat">
-        <strong id="profileLevel">1</strong>
-        <span>Səviyyə</span>
-      </div>
-      <div class="stat">
-        <strong id="profileAnswered">0</strong>
-        <span>Suallar</span>
-      </div>
-      <div class="stat">
-        <strong id="profileCorrect">0</strong>
-        <span>Düzgün</span>
-      </div>
-    </div>
-
-    <p class="notice">
-      İrəliləyiş bu cihazın brauzerində yadda saxlanılır.
-    </p>
-
-    <button class="secondary" onclick="showPage('tasks')">
-      Tapşırıqlara bax
-    </button>
-
-    <button onclick="resetProgress()">
-      İrəliləyişi sıfırla
-    </button>
-  </div>
-</section>
-
-</main><nav class="bottom">
-  <button class="active" data-page="home" onclick="showPage('home')">
-    <span class="emoji">🏠</span>Ana səhifə
-  </button>
-  <button data-page="learning" onclick="showPage('learning')">
-    <span class="emoji">📚</span>Öyrən
-  </button>
-  <button data-page="exam" onclick="showPage('exam')">
-    <span class="emoji">📝</span>İmtahan
-  </button>
-  <button data-page="duel" onclick="showPage('duel')">
-    <span class="emoji">⚔️</span>Duel
-  </button>
-  <button data-page="quiz" onclick="showPage('quiz')">
-    <span class="emoji">⚡</span>Test
-  </button>
-  <button data-page="profile" onclick="showPage('profile')">
-    <span class="emoji">👤</span>Profil
-  </button>
-</nav>
+</main>
 
 <script>
-const KEY = 'zqi-mobile-platform-v1';
+const data=[
+{q:"Hansı ədəd tam ədəd deyil?",o:["−4","0","2,5","7"],a:2,e:"2,5 kəsr ədəddir, tam ədəd deyil."},
+{q:"Hansı müqayisə doğrudur?",o:["−7 > −2","−2 > −7","−5 > 0","0 < −1"],a:1,e:"−2, −7-dən böyükdür, çünki sıfıra daha yaxındır."},
+{q:"Sıfır hansı ədəddir?",o:["Müsbət","Mənfi","Hər ikisi","Nə müsbət, nə mənfi"],a:3,e:"Sıfır nə müsbət, nə də mənfi ədəddir."},
+{q:"Ən böyük ədədi seç: −6, −1, −9, −3.",o:["−6","−1","−9","−3"],a:1,e:"−1 bu ədədlər arasında sıfıra ən yaxın olanıdır."},
+{q:"Ən kiçik ədədi seç: 4, 0, −2, −8.",o:["4","0","−2","−8"],a:3,e:"−8 verilmiş ədədlərin ən kiçiyidir."},
+{q:"−3 __ 2. Uyğun işarəni seç.",o:[">","<","=","≥"],a:1,e:"Mənfi ədəd müsbət ədəddən kiçikdir: −3 < 2."},
+{q:"Hansı sıra kiçikdən böyüyə düzülüb?",o:["2, 0, −1","−1, −3, 2","−4, −1, 0, 3","0, −2, 1"],a:2,e:"−4 < −1 < 0 < 3."},
+{q:"−10 və −4 ədədlərindən hansı böyükdür?",o:["−10","−4","Bərabərdirlər","Müəyyən etmək olmaz"],a:1,e:"−4 sıfıra daha yaxın olduğundan böyükdür."},
+{q:"Hansı müsbət tam ədəddir?",o:["−12","−1","0","12"],a:3,e:"12 sıfırdan böyük tam ədəddir."},
+{q:"Hansı temperatur daha aşağıdır?",o:["−2°C","−6°C","Bərabərdirlər","0°C"],a:1,e:"−6°C, −2°C-dən aşağı temperaturdur."}
+];
 
-function todayKey() {
-  const d = new Date();
-  return d.getFullYear() + '-' +
-    String(d.getMonth() + 1).padStart(2, '0') + '-' +
-    String(d.getDate()).padStart(2, '0');
+const host=document.getElementById("questions");
+let answered=0,correct=0;
+
+function render(){
+host.innerHTML="";
+answered=0;
+correct=0;
+document.getElementById("score").textContent="Cavablandırılan: 0/10";
+document.getElementById("result").textContent="";
+
+data.forEach((item,i)=>{
+const box=document.createElement("div");
+box.className="question";
+const title=document.createElement("div");
+title.className="qtitle";
+title.textContent=(i+1)+". "+item.q;
+box.appendChild(title);
+
+const opts=document.createElement("div");
+opts.className="options";
+const feedback=document.createElement("div");
+feedback.className="feedback";
+
+item.o.forEach((option,j)=>{
+const btn=document.createElement("button");
+btn.textContent=String.fromCharCode(65+j)+") "+option;
+
+btn.onclick=()=>{
+if(box.dataset.done)return;
+box.dataset.done="1";
+answered++;
+const ok=j===item.a;
+if(ok)correct++;
+
+[...opts.children].forEach((b,k)=>{
+b.disabled=true;
+if(k===item.a)b.classList.add("correct");
+else if(k===j)b.classList.add("wrong");
+});
+
+feedback.className="feedback show "+(ok?"good":"bad");
+feedback.textContent=(ok?"Doğru! ":"Düzgün cavab: "+item.o[item.a]+". ")+item.e;
+document.getElementById("score").textContent="Cavablandırılan: "+answered+"/10";
+};
+opts.appendChild(btn);
+});
+
+box.appendChild(opts);
+box.appendChild(feedback);
+host.appendChild(box);
+});
 }
 
-function freshState() {
-  return {
-    name: 'Şagird',
-    bio: '',
-    answered: 0,
-    correct: 0,
-    xp: 0,
-    topics: [],
-    results: {},
-    daily: { date: todayKey(), done: [] },
-    tasksProgress: {
-      lessons: 0,
-      answers: 0,
-      correct: 0
-    }
-  };
-}
-
-let state = freshState();
-let activeQuiz = null;
-
-function load() {
-  try {
-    const old = JSON.parse(localStorage.getItem(KEY));
-
-    if (old) {
-      state = {
-        ...freshState(),
-        ...old,
-        daily: old.daily || {
-          date: todayKey(),
-          done: []
-        },
-        tasksProgress: old.tasksProgress || {
-          lessons: 0,
-          answers: 0,
-          correct: 0
-        }
-      };
-    }
-  } catch (e) {}
-
-  if (!state.daily || state.daily.date !== todayKey()) {
-    state.daily = {
-      date: todayKey(),
-      done: []
-    };
-  }
-
-  if (!Array.isArray(state.daily.done)) {
-    state.daily.done = [];
-  }
-
-  if (!Number.isFinite(state.xp)) {
-    state.xp = 0;
-  }
-}
-
-function save() {
-  localStorage.setItem(KEY, JSON.stringify(state));
-  updateUI();
-}
-
-function levelInfo() {
-  const level = Math.floor(Math.max(0, state.xp) / 100) + 1;
-  const into = Math.max(0, state.xp) % 100;
-
-  return {
-    level: level,
-    into: into,
-    remain: 100 - into
-  };
-}
-
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => {
-    p.classList.remove('active');
-  });
-
-  const page = document.getElementById('page-' + name);
-
-  if (page) {
-    page.classList.add('active');
-  }
-
-  document.querySelectorAll('nav.bottom button').forEach(b => {
-    b.classList.toggle('active', b.dataset.page === name);
-  });
-
-  if (name === 'tasks') renderTasks();
-  if (name === 'profile') fillProfile();
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-</script>const lessons = {
-  integers: {
-    title: 'Müsbət və mənfi ədədlər',
-    body: `
-      <p><b>Müsbət ədədlər</b> sıfırdan böyük ədədlərdir:
-      1, 2, 3 və s.</p>
-
-      <p><b>Mənfi ədədlər</b> sıfırdan kiçik ədədlərdir:
-      −1, −2, −3 və s.</p>
-
-      <div class="rule">
-        <b>Əsas qayda:</b> Ədəd oxunda sağda yerləşən ədəd
-        daha böyükdür. Məsələn, −2 &gt; −5.
-      </div>
-
-      <p><b>Toplama:</b> İşarələr eynidirsə, modulları topla
-      və işarəni saxla. İşarələr fərqlidirsə, modulları çıx
-      və böyük modulun işarəsini saxla.</p>
-
-      <p><b>Vurma və bölmə:</b> Eyni işarələrdə nəticə müsbət,
-      fərqli işarələrdə nəticə mənfi olur.</p>
-
-      <div class="rule">
-        Nümunə: −3 + 7 = 4.
-        Çünki 7 − 3 = 4 və böyük modul müsbətdir.
-      </div>
-    `
-  },
-
-  fractions: {
-    title: 'Kəsrlər',
-    body: `
-      <p>Kəsr bütövün bərabər hissələrini göstərir.
-      Məsələn, <b>3/4</b> kəsrində 3 surət, 4 məxrəcdir.</p>
-
-      <div class="rule">
-        <b>Surət</b> yuxarıdakı ədəddir.
-        <b>Məxrəc</b> aşağıdakı ədəddir.
-        Məxrəc sıfır ola bilməz.
-      </div>
-
-      <p><b>Eyni məxrəcli kəsrləri toplamaq:</b>
-      surətləri topla, məxrəci olduğu kimi saxla.</p>
-
-      <div class="rule">
-        Nümunə: 1/5 + 2/5 = 3/5.
-      </div>
-
-      <p><b>Fərqli məxrəcli kəsrlər:</b> əvvəl ortaq məxrəc
-      tap, sonra surətləri topla və ya çıx.</p>
-
-      <p><b>Sadələşdirmə:</b> surəti və məxrəci eyni sıfırdan
-      fərqli ədədə böl.</p>
-
-      <div class="rule">
-        Nümunə: 2/6 = 1/3.
-      </div>
-    `
-  }
+document.getElementById("finish").onclick=()=>{
+document.getElementById("result").textContent=
+answered<10?"Bütün sualları cavablandır: "+answered+"/10":"Nəticən: "+correct+"/10 doğru cavab.";
 };
 
-function openTopic(id) {
-  showPage('learning');
-
-  const lesson = lessons[id];
-
-  document.getElementById('lessonArea').innerHTML = `
-    <div class="card">
-      <h3>${lesson.title}</h3>
-
-      <div class="lesson">
-        ${lesson.body}
-      </div>
-
-      <div class="actions">
-        <button onclick="markLesson('${id}')">
-          Mövzunu oxudum (+10 XP)
-        </button>
-
-        <button class="secondary"
-          onclick="document.getElementById('examTopic').value='${id}';showPage('exam')">
-          Testə keç
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function markLesson(id) {
-  const key = 'lesson-' + id;
-
-  if (!state.results[key]) {
-    state.results[key] = true;
-    state.xp += 10;
-    state.tasksProgress.lessons++;
-
-    save();
-
-    alert('Mövzu tamamlandı! +10 XP');
-  } else {
-    alert('Bu mövzunun XP mükafatı artıq alınıb.');
-  }
-}const bank = {
-  integers: [
-    {
-      q: '−4 + 7 = ?',
-      opts: ['3', '−3', '11', '−11'],
-      ans: 0,
-      why: 'İşarələr fərqlidir: 7 − 4 = 3. Böyük modul müsbətdir.',
-      diff: 'easy'
-    },
-    {
-      q: '5 − 9 = ?',
-      opts: ['4', '−4', '14', '−14'],
-      ans: 1,
-      why: '5 − 9 = −4.',
-      diff: 'easy'
-    },
-    {
-      q: '−3 − 4 = ?',
-      opts: ['1', '−1', '7', '−7'],
-      ans: 3,
-      why: '−3 − 4 = −3 + (−4) = −7.',
-      diff: 'easy'
-    },
-    {
-      q: '−6 və −2 ədədlərindən hansı böyükdür?',
-      opts: ['−6', '−2', 'Bərabərdir', '0'],
-      ans: 1,
-      why: '−2 sıfıra daha yaxındır və −6-dan böyükdür.',
-      diff: 'easy'
-    },
-    {
-      q: '−5 + (−8) = ?',
-      opts: ['13', '−13', '3', '−3'],
-      ans: 1,
-      why: 'İşarələr eynidir: 5 + 8 = 13, mənfi işarəni saxla.',
-      diff: 'easy'
-    },
-    {
-      q: '−7 + 12 = ?',
-      opts: ['−19', '19', '5', '−5'],
-      ans: 2,
-      why: '12 − 7 = 5. Böyük modul müsbətdir.',
-      diff: 'medium'
-    },
-    {
-      q: '8 + (−11) = ?',
-      opts: ['3', '−3', '19', '−19'],
-      ans: 1,
-      why: '11 − 8 = 3, böyük modul mənfidir.',
-      diff: 'medium'
-    },
-    {
-      q: '(−4) × 6 = ?',
-      opts: ['24', '−24', '10', '−10'],
-      ans: 1,
-      why: 'İşarələr fərqlidir, nəticə mənfidir.',
-      diff: 'medium'
-    },
-    {
-      q: '(−7) × (−3) = ?',
-      opts: ['−21', '21', '−10', '10'],
-      ans: 1,
-      why: 'İki mənfi ədədin hasili müsbətdir.',
-      diff: 'medium'
-    },
-    {
-      q: '(−36) ÷ 6 = ?',
-      opts: ['6', '−6', '−30', '30'],
-      ans: 1,
-      why: 'İşarələr fərqlidir, nəticə mənfidir.',
-      diff: 'medium'
-    },
-
-    {
-      q: '1/4 + 2/4 = ?',
-      opts: ['3/4', '3/8', '2/4', '1/2'],
-      ans: 0,
-      why: 'Məxrəclər eynidir: 1 + 2 = 3.',
-      diff: 'easy'
-    },
-    {
-      q: '3/7 − 1/7 = ?',
-      opts: ['2/7', '2/14', '4/7', '1/7'],
-      ans: 0,
-      why: 'Surətləri çıxırıq, məxrəc dəyişmir.',
-      diff: 'easy'
-    },
-    {
-      q: '2/6 sadələşdirilsə nə alınar?',
-      opts: ['1/3', '2/3', '1/6', '3/6'],
-      ans: 0,
-      why: 'Surəti və məxrəci 2-yə bölürük.',
-      diff: 'easy'
-    },
-    {
-      q: '1/2 + 1/3 = ?',
-      opts: ['2/5', '5/6', '1/6', '2/6'],
-      ans: 1,
-      why: 'Ortaq məxrəc 6: 3/6 + 2/6 = 5/6.',
-      diff: 'medium'
-    },
-    {
-      q: '3/4 − 1/2 = ?',
-      opts: ['2/2', '1/4', '2/4', '1/2'],
-      ans: 1,
-      why: '1/2 = 2/4, deməli 3/4 − 2/4 = 1/4.',
-      diff: 'medium'
-    },
-    {
-      q: '2/3 × 3/5 = ?',
-      opts: ['6/15', '5/8', '2/5', '6/8'],
-      ans: 2,
-      why: '6/15 sadələşdirildikdə 2/5 alınır.',
-      diff: 'medium'
-    },
-    {
-      q: '1/2 ÷ 1/4 = ?',
-      opts: ['1/8', '2', '1/2', '4'],
-      ans: 1,
-      why: '1/2 × 4/1 = 2.',
-      diff: 'medium'
-    },
-    {
-      q: '5/8 + 1/8 = ?',
-      opts: ['6/16', '3/4', '5/16', '1/2'],
-      ans: 1,
-      why: '6/8 sadələşdirildikdə 3/4 alınır.',
-      diff: 'easy'
-    },
-    {
-      q: '7/10 − 2/5 = ?',
-      opts: ['5/5', '3/10', '5/10', '1/2'],
-      ans: 1,
-      why: '2/5 = 4/10. 7/10 − 4/10 = 3/10.',
-      diff: 'medium'
-    },
-    {
-      q: 'Hansı kəsr daha böyükdür?',
-      opts: ['2/3', '3/5', 'Bərabərdir', 'Müqayisə olunmur'],
-      ans: 0,
-      why: '2/3, 3/5-dən böyükdür.',
-      diff: 'medium'
-    }
-  ]
-};function startQuiz(mode) {
-  let topic = mode === 'quick'
-    ? (Math.random() < 0.5 ? 'integers' : 'fractions')
-    : mode === 'duel'
-      ? 'integers'
-      : document.getElementById('examTopic').value;
-
-  let questions = bank[topic].map((q, i) => ({
-    ...q,
-    idx: i,
-    done: false
-  }));
-
-  if (mode === 'exam') {
-    const difficulty = document.getElementById('examLevel').value;
-
-    if (difficulty !== 'all') {
-      questions = questions.filter(q => q.diff === difficulty);
-    }
-  }
-
-  questions.sort(() => Math.random() - 0.5);
-
-  if (mode === 'quick') questions = questions.slice(0, 5);
-  if (mode === 'duel') questions = questions.slice(0, 10);
-
-  activeQuiz = {
-    mode,
-    topic,
-    questions,
-    index: 0,
-    correct: 0,
-    earned: 0
-  };
-
-  renderQuiz();
-}
-
-function quizTarget() {
-  if (activeQuiz.mode === 'duel') return 'duelArea';
-  if (activeQuiz.mode === 'quick') return 'quickArea';
-  return 'examArea';
-}
-
-function renderQuiz() {
-  const quiz = activeQuiz;
-  const target = document.getElementById(quizTarget());
-
-  if (quiz.index >= quiz.questions.length) {
-    target.innerHTML = `
-      <div class="card">
-        <h3>Test tamamlandı! 🎉</h3>
-        <div class="big">${quiz.correct}/${quiz.questions.length}</div>
-        <p class="sub">
-          Qazandığın XP: ${quiz.earned}
-        </p>
-        <button onclick="startQuiz('${quiz.mode}')">
-          Yenidən başla
-        </button>
-      </div>
-    `;
-    return;
-  }
-
-  const q = quiz.questions[quiz.index];
-
-  target.innerHTML = `
-    <div class="card">
-      <div class="row">
-        <span class="muted">
-          Sual ${quiz.index + 1}/${quiz.questions.length}
-        </span>
-        <span class="muted">
-          ${quiz.topic === 'integers' ? 'Ədədlər' : 'Kəsrlər'}
-        </span>
-      </div>
-
-      <div class="progress">
-        <div style="width:${quiz.index / quiz.questions.length * 100}%"></div>
-      </div>
-
-      <div class="question">
-        <p><b>${q.q}</b></p>
-
-        ${q.opts.map((option, i) => `
-          <button class="option" onclick="answerQuestion(${i})">
-            ${String.fromCharCode(65 + i)}) ${option}
-          </button>
-        `).join('')}
-
-        <div id="explain" class="explain"></div>
-      </div>
-
-      <button id="nextQuestion" class="secondary"
-        style="display:none" onclick="nextQuestion()">
-        Növbəti sual
-      </button>
-    </div>
-  `;
-}
-
-function answerQuestion(choice) {
-  const quiz = activeQuiz;
-  const q =
+document.getElementById("restart").onclick=render;
+render();
+</script>
+</body>
+</html>
