@@ -49,6 +49,48 @@ main{width:min(720px,100%);margin:auto;padding:0 16px}
   border:1px solid var(--border);border-radius:25px;
   padding:22px;margin-bottom:17px;
   box-shadow:0 4px 9px #172b3a1c
+
+/* Yalnız aşağı menyunun dizaynı */
+nav.bottom {
+  background: rgba(255,255,255,.98);
+  border: 1px solid #dce6ed;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -5px 22px rgba(23,60,100,.10);
+  padding: 10px 3px calc(9px + env(safe-area-inset-bottom));
+  gap: 2px;
+}
+nav.bottom button {
+  min-width: 0;
+  padding: 5px 0;
+  border-radius: 14px;
+  color: #7b8797;
+  font-size: 11px;
+  transition: background .2s, color .2s;
+}
+nav.bottom button .emoji {
+  width: 38px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 22px;
+  transition: background .2s, transform .2s;
+}
+nav.bottom button.active {
+  color: #2456a6;
+  background: #edf3ff;
+}
+nav.bottom button.active .emoji {
+  background: #d8e7ff;
+  transform: translateY(-2px);
+}
+@media(max-width:380px) {
+  nav.bottom button {font-size:10px}
+  nav.bottom button .emoji {
+    width:32px;height:31px;font-size:20px;
+  }
+}
+
 }
 .card h3{font-size:21px;margin-bottom:7px}
 .card p{color:var(--muted)}
