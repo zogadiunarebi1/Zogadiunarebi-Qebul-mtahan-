@@ -1,690 +1,212 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102447">
-  <meta name="description" content="ZQİ Riyaziyyat — riyaziyyat dərsləri, izahlı suallar və testlərlə qəbul imtahanına hazırlaş.">
-  <title>ZQİ Riyaziyyat | Öyrən və inkişaf et</title>
-
-  <style>
-    :root {
-      --navy: #102447;
-      --blue: #2456a6;
-      --light-blue: #eaf1ff;
-      --white: #ffffff;
-      --bg: #f4f7fc;
-      --text: #17243a;
-      --muted: #68758a;
-      --green: #168451;
-      --red: #c83d4d;
-      --border: #e0e7f1;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
-
-    button { font: inherit; cursor: pointer; }
-
-    .container {
-      width: min(1080px, 92%);
-      margin: auto;
-    }
-
-    header {
-      background: var(--navy);
-      color: white;
-      padding: 17px 0;
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .brand {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: .3px;
-    }
-
-    .brand span { color: #83b3ff; }
-
-    .nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: 14px;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #102447, #2456a6);
-      color: white;
-      padding: 58px 0;
-    }
-
-    .hero-content { max-width: 690px; }
-
-    .tag {
-      display: inline-block;
-      background: #ffffff1c;
-      border: 1px solid #ffffff40;
-      border-radius: 30px;
-      padding: 5px 13px;
-      font-size: 12px;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: clamp(30px, 5vw, 47px);
-      line-height: 1.18;
-      margin-bottom: 17px;
-    }
-
-    .hero p {
-      color: #dce7fb;
-      max-width: 570px;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border: 0;
-      border-radius: 10px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-white {
-      background: white;
-      color: var(--navy);
-    }
-
-    .btn-blue {
-      background: var(--blue);
-      color: white;
-    }
-
-    .section { padding: 38px 0; }
-
-    .section-title {
-      font-size: 26px;
-      color: var(--navy);
-      margin-bottom: 7px;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: -22px;
-      position: relative;
-    }
-
-    .stat, .card, .lesson, .question {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 5px 18px #17243a08;
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--blue);
-      font-size: 27px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .progress-track {
-      height: 11px;
-      background: #e5ebf5;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 12px 0 8px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #2456a6, #69a5ff);
-      border-radius: inherit;
-      transition: width .3s;
-    }
-
-    .progress-note {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .lesson-icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      background: var(--light-blue);
-      border-radius: 12px;
-      font-size: 24px;
-      margin-bottom: 13px;
-    }
-
-    .lesson h3, .card h3 {
-      color: var(--navy);
-      margin-bottom: 7px;
-    }
-
-    .lesson p, .card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .small-label {
-      font-size: 12px;
-      color: var(--blue);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .rule {
-      background: var(--light-blue);
-      border-left: 4px solid var(--blue);
-      border-radius: 8px;
-      padding: 16px;
-      margin: 15px 0;
-    }
-
-    .example {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 13px;
-      border-radius: 9px;
-      margin-top: 10px;
-    }
-
-    .question {
-      margin-bottom: 16px;
-      padding: 20px;
-    }
-
-    .question h3 {
-      font-size: 17px;
-      margin-bottom: 14px;
-    }
-
-    .options {
-      display: grid;
-      gap: 9px;
-    }
-
-    .option {
-      text-align: left;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: white;
-      color: var(--text);
-      transition: .15s;
-    }
-
-    .option:hover:not(:disabled) {
-      border-color: var(--blue);
-      background: #f3f7ff;
-    }
-
-    .option:disabled { cursor: default; }
-
-    .option.correct {
-      border-color: var(--green);
-      background: #e9f8f0;
-      color: #11643d;
-    }
-
-    .option.wrong {
-      border-color: var(--red);
-      background: #fff0f1;
-      color: #a32333;
-    }
-
-    .feedback {
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 9px;
-      font-size: 14px;
-    }
-
-    .feedback.good {
-      background: #e9f8f0;
-      color: #11643d;
-    }
-
-    .feedback.bad {
-      background: #fff0f1;
-      color: #a32333;
-    }
-
-    .hidden { display: none; }
-
-    .quiz-summary {
-      padding: 22px;
-      background: var(--navy);
-      color: white;
-      border-radius: 14px;
-      margin-top: 20px;
-    }
-
-    .quiz-summary p { color: #dce7fb; }
-
-    footer {
-      background: var(--navy);
-      color: #dce7fb;
-      text-align: center;
-      padding: 25px 0;
-      margin-top: 25px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 620px) {
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav a { margin-left: 0; margin-right: 15px; }
-      .nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
-      .hero { padding: 43px 0; }
-      .stats { grid-template-columns: 1fr; }
-      .lesson-grid { grid-template-columns: 1fr; }
-      .section { padding: 30px 0; }
-      .stat { padding: 15px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZQI Riyaziyyat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">ZQİ <span>Riyaziyyat</span></div>
-      <nav class="nav-links">
-        <a href="#movzular">Mövzular</a>
-        <a href="#ders">Dərs</a>
-        <a href="#test">Testlər</a>
-        <a href="#irelileyis">İrəliləyişim</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-content">
-        <span class="tag">RİYAZİYYAT ÖYRƏNMƏ PLATFORMASI</span>
-        <h1>Riyaziyyatı addım-addım öyrən!</h1>
-        <p>
-          Sadə qaydalar, nümunələr və izahlı testlərlə biliklərini artır.
-          Öz sürətinlə öyrən və irəliləyişini izlə.
-        </p>
-        <a class="btn btn-white" href="#movzular">Dərslərə başla →</a>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="stats">
-        <div class="stat">
-          <strong id="answered">0</strong>
-          <span>Cavablandırılan sual</span>
+    <!-- Naviqasiya Menyusu -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="brand-bold">ZQI</span> <span class="brand-blue">Riyaziyyat</span>
         </div>
-        <div class="stat">
-          <strong id="correct">0</strong>
-          <span>Düzgün cavab</span>
+        <nav class="nav-links">
+            <a href="#giris" class="nav-item active" onclick="showSection('giris')">Giriş</a>
+            <a href="#oyrenme" class="nav-item" onclick="showSection('oyrenme')">Öyrənmə</a>
+            <a href="#imtahan" class="nav-item" onclick="showSection('imtahan')">İmtahan</a>
+            <a href="#profil" class="nav-item" onclick="showSection('profil')">Profil</a>
+        </nav>
+    </header>
+
+    <!-- 1. GİRİŞ BÖLMƏSİ -->
+    <section id="giris" class="tab-content active">
+        <div class="hero-card">
+            <span class="badge">RİYAZİYYAT ÖYRƏNMƏ PLATFORMASI</span>
+            <h1>Riyaziyyatı addım-addım öyrən!</h1>
+            <p>Sadə qaydalar, nümunələr və izahlı testlərlə biliklərini artır. Öz sürətinlə öyrən və irəliləyişini izlə.</p>
+            <button class="btn-primary" onclick="showSection('oyrenme')">Dərslərə başla &rarr;</button>
         </div>
-        <div class="stat">
-          <strong id="percent">0%</strong>
-          <span>Düzgünlük faizi</span>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h2>0</h2>
+                <p>Cavablandırılan sual</p>
+            </div>
+            <div class="stat-card">
+                <h2>0%</h2>
+                <p>Ümumi uğur göstəricisi</p>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section class="container section" id="irelileyis">
-      <h2 class="section-title">Mənim irəliləyişim</h2>
-      <p class="section-desc">Testlərdəki nəticələrini burada izlə.</p>
-      <div class="card">
-        <strong id="progressText">0 / 10 sual cavablandırılıb</strong>
-        <div
-          class="progress-track"
-          role="progressbar"
-          aria-label="Testdə irəliləyiş"
-          aria-valuemin="0"
-          aria-valuemax="10"
-          aria-valuenow="0"
-          id="progressBar"
-        >
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p class="progress-note" id="progressNote">
-          Başlamaq üçün aşağıdakı testə keç.
-        </p>
-        <button class="btn btn-blue" id="resetProgress" type="button">
-          Nəticələri sıfırla
-        </button>
-      </div>
+    <!-- 2. ÖYRƏNMƏ BÖLMƏSİ -->
+    <section id="oyrenme" class="tab-content">
+        <h2>Öyrənmə Bölməsi</h2>
+        <p>Bura mövzular və dərslərin siyahısı gələcək.</p>
     </section>
 
-    <section class="container section" id="movzular">
-      <h2 class="section-title">Riyaziyyat mövzuları</h2>
-      <p class="section-desc">Əvvəl mövzunu öyrən, sonra biliklərini yoxla.</p>
-
-      <div class="lesson-grid">
-        <article class="lesson">
-          <div class="lesson-icon">➕</div>
-          <div class="small-label">MÖVZU 01</div>
-          <h3>Müsbət və mənfi ədədlər</h3>
-          <p>Ədədlərin işarələrini və əsas qaydaları öyrən.</p>
-          <a class="btn btn-blue" href="#ders">Dərsi öyrən</a>
-        </article>
-
-        <article class="lesson">
-          <div class="lesson-icon">📘</div>
-          <div class="small-label">NÖVBƏTİ MÖVZULAR</div>
-          <h3>Yeni dərslər hazırlanır</h3>
-          <p>Sonrakı mərhələlərdə natural ədədlər, kəsrlər və digər mövzular əlavə edilə bilər.</p>
-        </article>
-      </div>
+    <!-- 3. İMTAHAN BÖLMƏSİ -->
+    <section id="imtahan" class="tab-content">
+        <h2>İmtahan Bölməsi</h2>
+        <p>Bura onlayn sınaqlar və imtahan testləri yerləşdiriləcək.</p>
     </section>
 
-    <section class="container section" id="ders">
-      <h2 class="section-title">Dərs 1: Müsbət və mənfi ədədlər</h2>
-      <p class="section-desc">Əsas qaydaları nümunələrlə öyrən.</p>
-
-      <article class="card">
-        <h3>1. Müsbət ədədlər</h3>
-        <p>Sıfırdan böyük ədədlər müsbət ədədlərdir. Qarşısında “+” işarəsi ola bilər.</p>
-        <div class="example">Nümunə: +3, +8, 15</div>
-
-        <h3 style="margin-top:20px">2. Mənfi ədədlər</h3>
-        <p>Sıfırdan kiçik ədədlər mənfi ədədlərdir. Qarşılarında “−” işarəsi olur.</p>
-        <div class="example">Nümunə: −2, −7, −12</div>
-
-        <h3 style="margin-top:20px">3. Sıfır</h3>
-        <p>Sıfır nə müsbət, nə də mənfi ədəddir.</p>
-        <div class="example">−3 &lt; 0 &lt; +4</div>
-
-        <div class="rule">
-          <strong>Yadda saxla:</strong>
-          Müsbət ədədlər sıfırdan böyük, mənfi ədədlər isə sıfırdan kiçikdir.
-          Ədəd oxunda sağa getdikcə ədədlər böyüyür, sola getdikcə kiçilir.
-        </div>
-
-        <h3>4. Ədədlərin müqayisəsi</h3>
-        <p>İki mənfi ədədi müqayisə edərkən sıfıra daha yaxın olan ədəd böyükdür.</p>
-        <div class="example">−2 &gt; −5, çünki −2 ədəd oxunda −5-in sağındadır.</div>
-      </article>
+    <!-- 4. PROFİL BÖLMƏSİ -->
+    <section id="profil" class="tab-content">
+        <h2>İstifadəçi Profili</h2>
+        <p>Bura istifadəçi məlumatları və şəxsi statistikalar daxil olacaq.</p>
     </section>
 
-    <section class="container section" id="test">
-      <h2 class="section-title">Biliklərini yoxla</h2>
-      <p class="section-desc">
-        Hər sualda bir cavab seç. Cavabın və izahı dərhal göstəriləcək.
-      </p>
-
-      <div id="questions"></div>
-
-      <div class="quiz-summary" id="quizSummary" aria-live="polite">
-        <h3>Test nəticən</h3>
-        <p id="summaryText">Hələ sual cavablandırmamısan. Uğurlar!</p>
-        <button class="btn btn-white" id="restartQuiz" type="button" style="margin-top:14px">
-          Testi yenidən başla
-        </button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <strong>ZQİ Riyaziyyat</strong>
-      <p>Öyrən • Həll et • İnkişaf et</p>
-      <p>© <span id="year"></span> ZQİ Riyaziyyat</p>
-    </div>
-  </footer>
-
-  <script>
-    const quiz = [
-      {
-        q: "1. Hansı ədəd müsbətdir?",
-        options: ["−6", "0", "+4", "−1"],
-        answer: 2,
-        explanation: "+4 sıfırdan böyükdür, buna görə müsbət ədəddir."
-      },
-      {
-        q: "2. Hansı ədəd mənfidir?",
-        options: ["+8", "0", "12", "−3"],
-        answer: 3,
-        explanation: "−3 sıfırdan kiçikdir və mənfi ədəddir."
-      },
-      {
-        q: "3. Sıfır hansı ədəddir?",
-        options: ["Müsbət", "Mənfi", "Nə müsbət, nə mənfi", "Hər ikisi"],
-        answer: 2,
-        explanation: "Sıfır nə müsbət, nə də mənfi ədəd sayılır."
-      },
-      {
-        q: "4. Hansı müqayisə doğrudur?",
-        options: ["−5 > −2", "−2 > −5", "−5 = −2", "−2 < −5"],
-        answer: 1,
-        explanation: "−2, −5-dən böyükdür, çünki ədəd oxunda onun sağında yerləşir."
-      },
-      {
-        q: "5. +7 hansı ədəddən böyükdür?",
-        options: ["+9", "+10", "+3", "+8"],
-        answer: 2,
-        explanation: "+7 yalnız verilən variantlardan +3-dən böyükdür."
-      },
-      {
-        q: "6. Ədəd oxunda hansı ədəd daha sağdadır?",
-        options: ["−8", "−4", "−10", "−12"],
-        answer: 1,
-        explanation: "−4 digər mənfi ədədlərdən böyükdür və daha sağda yerləşir."
-      },
-      {
-        q: "7. −6 və −1 ədədlərindən hansı böyükdür?",
-        options: ["−6", "−1", "Bərabərdirlər", "Heç biri"],
-        answer: 1,
-        explanation: "−1 sıfıra daha yaxın olduğu üçün −6-dan böyükdür."
-      },
-      {
-        q: "8. Hansı sıra kiçikdən böyüyə doğrudur?",
-        options: ["−1, −4, 0", "0, −2, +3", "−4, −1, 0, +3", "+3, 0, −1"],
-        answer: 2,
-        explanation: "Kiçikdən böyüyə düzgün sıra −4, −1, 0, +3 şəklindədir."
-      },
-      {
-        q: "9. +5 ilə −5 müqayisə edildikdə hansı doğrudur?",
-        options: ["+5 < −5", "+5 > −5", "+5 = −5", "Müqayisə olunmur"],
-        answer: 1,
-        explanation: "Hər müsbət ədəd hər mənfi ədəddən böyükdür."
-      },
-      {
-        q: "10. Aşağıdakılardan ən kiçik ədəd hansıdır?",
-        options: ["−2", "−9", "0", "+1"],
-        answer: 1,
-        explanation: "−9 verilən ədədlər arasında ən kiçikdir."
-      }
-    ];
-
-    const STORAGE_KEY = "zqi-riyaziyyat-progress-v1";
-    let answers = Array(quiz.length).fill(null);
-
-    function loadProgress() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        if (
-          Array.isArray(saved) &&
-          saved.length === quiz.length &&
-          saved.every(v => v === null || (Number.isInteger(v) && v >= 0 && v < 4))
-        ) {
-          answers = saved;
-        }
-      } catch (error) {
-        // Sayt yaddaşdan istifadə edə bilməsə də test işləməyə davam edir.
-      }
-    }
-
-    function saveProgress() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
-      } catch (error) {
-        // Yaddaş bağlıdırsa, nəticələr cari səhifədə saxlanılır.
-      }
-    }
-
-    function renderQuiz() {
-      const root = document.getElementById("questions");
-      root.innerHTML = "";
-
-      quiz.forEach((item, index) => {
-        const box = document.createElement("article");
-        box.className = "question";
-
-        const heading = document.createElement("h3");
-        heading.textContent = item.q;
-        box.appendChild(heading);
-
-        const options = document.createElement("div");
-        options.className = "options";
-
-        item.options.forEach((option, optionIndex) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "option";
-          button.textContent = String.fromCharCode(65 + optionIndex) + ") " + option;
-
-          if (answers[index] !== null) {
-            button.disabled = true;
-
-            if (optionIndex === item.answer) {
-              button.classList.add("correct");
-            } else if (optionIndex === answers[index]) {
-              button.classList.add("wrong");
-            }
-          } else {
-            button.addEventListener("click", () => {
-              answers[index] = optionIndex;
-              saveProgress();
-              renderQuiz();
-            });
-          }
-
-          options.appendChild(button);
-        });
-
-        box.appendChild(options);
-
-        if (answers[index] !== null) {
-          const feedback = document.createElement("div");
-          const isCorrect = answers[index] === item.answer;
-          feedback.className = "feedback " + (isCorrect ? "good" : "bad");
-          feedback.textContent =
-            (isCorrect ? "✓ Düzgün cavab! " : "✗ Düzgün cavab: " +
-            item.options[item.answer] + ". ") + item.explanation;
-          box.appendChild(feedback);
-        }
-
-        root.appendChild(box);
-      });
-
-      updateProgress();
-    }
-
-    function updateProgress() {
-      const answered = answers.filter(a => a !== null).length;
-      const correct = answers.filter((a, i) => a === quiz[i].answer).length;
-      const percent = answered === 0 ? 0 : Math.round(correct / answered * 100);
-      const progress = Math.round(answered / quiz.length * 100);
-
-      document.getElementById("answered").textContent = answered;
-      document.getElementById("correct").textContent = correct;
-      document.getElementById("percent").textContent = percent + "%";
-      document.getElementById("progressText").textContent =
-        answered + " / " + quiz.length + " sual cavablandırılıb";
-      document.getElementById("progressFill").style.width = progress + "%";
-      document.getElementById("progressBar").setAttribute("aria-valuenow", answered);
-
-      const note = document.getElementById("progressNote");
-
-      if (answered === 0) {
-        note.textContent = "Başlamaq üçün aşağıdakı testə keç.";
-      } else if (answered < quiz.length) {
-        note.textContent = "Davam et! Daha " + (quiz.length - answered) + " sual qalıb.";
-      } else {
-        note.textContent = "Test tamamlandı. Nəticən: " + correct + " / " + quiz.length + ".";
-      }
-
-      const summary = document.getElementById("summaryText");
-
-      if (answered === 0) {
-        summary.textContent = "Hələ sual cavablandırmamısan. Uğurlar!";
-      } else if (answered < quiz.length) {
-        summary.textContent =
-          answered + " sualdan " + correct + " düzgün cavabın var. Testi tamamlamağa davam et!";
-      } else {
-        summary.textContent =
-          "Test bitdi! Nəticən: " + correct + " / " + quiz.length +
-          ". Düzgünlük faizi: " + Math.round(correct / quiz.length * 100) + "%.";
-      }
-    }
-
-    document.getElementById("resetProgress").addEventListener("click", () => {
-      if (confirm("Bütün test nəticələrini sıfırlamaq istəyirsən?")) {
-        answers = Array(quiz.length).fill(null);
-        saveProgress();
-        renderQuiz();
-      }
-    });
-
-    document.getElementById("restartQuiz").addEventListener("click", () => {
-      answers = Array(quiz.length).fill(null);
-      saveProgress();
-      renderQuiz();
-      document.getElementById("test").scrollIntoView({ behavior: "smooth" });
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    loadProgress();
-    renderQuiz();
-  </script>
+    <script src="script.js"></script>
 </body>
-</html>
+</html>* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7fe;
+    color: #333;
+}
+
+/* Navbar dizaynı */
+.navbar {
+    background-color: #0d233a;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.brand-blue {
+    color: #4a90e2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 4px;
+}
+
+/* Bölmələrin gizlədilməsi/göstərilməsi */
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Hero kartı (Giriş) */
+.hero-card {
+    background: linear-gradient(135deg, #0d233a 0%, #1a365d 100%);
+    color: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.hero-card h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.hero-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e0;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    color: #0d233a;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Statistika kartları */
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.stat-card h2 {
+    font-size: 32px;
+    color: #1a365d;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    color: #718096;
+    font-size: 14px;
+}function showSection(sectionId) {
+    // Bütün tab məzmunlarını gizlət
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    // Bütün nav-item-lərdən active klasını sil
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+
+    // Seçilən bölməni və düyməni aktiv et
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+
+    // Kliklənən nav-link-i aktiv göstər
+    const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
