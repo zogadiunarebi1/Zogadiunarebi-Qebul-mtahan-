@@ -1,1 +1,414 @@
-index.html
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f6f9">
+<title>ZQİ Riyaziyyat</title>
+<style>
+:root{
+  --blue:#287fa4;
+  --navy:#173c64;
+  --bg:#f4f6f9;
+  --card:#fff;
+  --text:#182335;
+  --muted:#526071;
+  --border:#dce6ed;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);color:var(--text);
+  padding-bottom:100px;line-height:1.5
+}
+header{
+  padding:27px 20px 20px;text-align:center;
+  color:var(--blue);font-size:29px;font-weight:800
+}
+main{width:min(720px,100%);margin:auto;padding:0 16px}
+.page{display:none;animation:appear .2s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
+.profile{
+  background:white;border:1px solid var(--border);
+  border-radius:25px;padding:23px;margin:0 0 18px;
+  box-shadow:0 3px 9px #24384b12
+}
+.profile-top{display:flex;align-items:center;gap:17px}
+.avatar{
+  width:90px;height:90px;border-radius:50%;
+  display:grid;place-items:center;background:#e5f1f7;
+  font-size:43px;flex-shrink:0
+}
+.profile h2{font-size:23px;overflow-wrap:anywhere}
+.username{color:var(--muted);font-size:17px;margin-top:3px}
+.bio{margin-top:18px;color:var(--muted)}
+.card{
+  background:linear-gradient(160deg,#fff,#edf5fb);
+  border:1px solid var(--border);border-radius:25px;
+  padding:22px;margin-bottom:17px;
+  box-shadow:0 4px 9px #172b3a1c
+}
+.card h3{font-size:21px;margin-bottom:7px}
+.card p{color:var(--muted)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pill{
+  border:1px solid #c7dce6;border-radius:30px;
+  padding:8px 13px;color:var(--blue);
+  font-weight:700;white-space:nowrap;background:#ffffffbb
+}
+.action{
+  width:100%;border:1px solid var(--border);
+  border-radius:16px;padding:15px;margin-bottom:12px;
+  background:white;color:var(--blue);font-size:17px;
+  font-weight:700;cursor:pointer
+}
+.action.gold{background:#fff7e3;color:#98651b;border-color:#efdbab}
+.action.red{color:#b52c3a}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{
+  border-radius:16px;padding:15px;background:#e7f2f8;
+  color:var(--blue);font-weight:700
+}
+.stat span{display:block;color:var(--muted);font-size:13px;font-weight:400}
+.page-title{text-align:center;font-size:28px;color:var(--blue);margin:10px 0 26px}
+.study-card{min-height:150px;cursor:pointer;transition:.15s}
+.study-card:active{transform:scale(.99)}
+.study-card h3{font-size:23px}
+.study-card .description{font-weight:600;margin-top:10px}
+.lesson{background:#edf3ff;padding:15px;border-radius:14px;margin-top:15px}
+.lesson h4{margin-bottom:7px}
+.lesson p{margin-bottom:10px}
+.btn{
+  background:var(--blue);color:white;border:0;
+  border-radius:11px;padding:11px 16px;
+  font-weight:700;cursor:pointer;margin-top:10px
+}
+input,select{
+  width:100%;padding:12px;border:1px solid var(--border);
+  border-radius:10px;background:white;font:inherit;margin:7px 0 12px
+}
+.question{background:white;border:1px solid var(--border);border-radius:16px;padding:18px;margin:15px 0}
+.question h3{margin-bottom:12px}
+.answer{
+  display:block;width:100%;text-align:left;padding:12px;
+  margin:8px 0;border:1px solid var(--border);
+  border-radius:10px;background:white;font:inherit;cursor:pointer
+}
+.answer.correct{background:#e5f7ec;border-color:#2d9b60}
+.answer.wrong{background:#ffeded;border-color:#d94a56}
+.feedback{font-size:14px;margin-top:10px;color:var(--muted)}
+.progress{height:10px;background:#e0e8f0;border-radius:10px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;width:0;background:var(--blue);transition:width .2s}
+.empty{text-align:center;padding:24px;color:var(--muted)}
+nav.bottom{
+  position:fixed;bottom:0;left:0;right:0;z-index:5;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  background:#fffffffa;border:1px solid var(--border);
+  padding:10px 2px calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 -2px 8px #172b3a0b
+}
+nav.bottom button{
+  border:0;background:transparent;color:#687586;
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;font-size:12px;font-weight:700;cursor:pointer
+}
+nav.bottom .emoji{font-size:24px}
+nav.bottom button.active{color:var(--blue)}
+.small{font-size:13px;color:var(--muted)}
+@media(min-width:600px){
+  nav.bottom{left:50%;right:auto;transform:translateX(-50%);width:min(720px,100%);border-radius:18px 18px 0 0}
+}
+</style>
+</head>
+<body>
+
+<header>ZQİ Riyaziyyat</header>
+<main>
+
+<section class="page active" id="home">
+  <div class="profile">
+    <div class="profile-top">
+      <div class="avatar">🎓</div>
+      <div>
+        <h2>Şagird profili</h2>
+        <div class="username">@telebe</div>
+        <div class="small">ZQİ təhsil platforması</div>
+      </div>
+    </div>
+    <p class="bio">Öyrən, məşq et və uğur qazan!</p>
+  </div>
+
+  <button class="action" onclick="showPage('profile')">ⓘ Mənim məlumatlarım</button>
+  <button class="action gold" onclick="showPage('quiz')">🎁 Öyrənməyə davam et</button>
+
+  <div class="card">
+    <div class="row">
+      <h3>🏅 Nailiyyətlər</h3>
+      <span class="pill" id="achievementCount">0</span>
+    </div>
+    <p>Testləri tamamla və biliklərini artır.</p>
+  </div>
+
+  <div class="card">
+    <h3>💎 Təhsil göstəriciləri</h3>
+    <div class="stats">
+      <div class="stat">📘 <b id="homeAnswered">0</b><span>Cavablandırılan sual</span></div>
+      <div class="stat">✅ <b id="homeCorrect">0</b><span>Düzgün cavab</span></div>
+      <div class="stat">🎯 <b id="homePercent">0%</b><span>Düzgünlük</span></div>
+      <div class="stat">📚 <b id="homeTopics">0</b><span>Öyrənilən mövzu</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="learning">
+  <h2 class="page-title">📚 Öyrənmə</h2>
+
+  <article class="card study-card" onclick="showLesson('fractions')">
+    <div class="row"><h3>Riyaziyyat</h3><span class="pill" id="mathProgress">0 / 2</span></div>
+    <p class="description">Ədədlər, kəsrlər və riyazi qaydalar</p>
+    <div class="progress"><div id="mathBar"></div></div>
+    <span class="small">Dərsləri açmaq üçün toxun</span>
+  </article>
+
+  <article class="card study-card" onclick="showLesson('integers')">
+    <h3>➕ Müsbət və mənfi ədədlər</h3>
+    <p class="description">İşarələr, müqayisə və ədəd oxu</p>
+    <button class="btn">Dərsə başla</button>
+  </article>
+
+  <article class="card study-card" onclick="showLesson('fractions')">
+    <h3>½ Kəsrlər</h3>
+    <p class="description">Surət, məxrəc, müqayisə və əməliyyatlar</p>
+    <button class="btn">Dərsə başla</button>
+  </article>
+</section>
+
+<section class="page" id="exam">
+  <h2 class="page-title">📝 İmtahan</h2>
+  <div class="card">
+    <h3>Riyaziyyat testi</h3>
+    <p>Mövzu və səviyyə seçərək biliklərini yoxla.</p>
+    <label for="examTopic">Mövzu</label>
+    <select id="examTopic">
+      <option value="fractions">Kəsrlər</option>
+      <option value="integers">Müsbət və mənfi ədədlər</option>
+    </select>
+    <label for="examLevel">Səviyyə</label>
+    <select id="examLevel">
+      <option value="easy">Asan</option>
+      <option value="medium">Orta</option>
+      <option value="hard">Çətin</option>
+    </select>
+    <button class="btn" onclick="startQuiz()">İmtahana başla</button>
+  </div>
+  <div id="examQuestions"></div>
+</section>
+
+<section class="page" id="duel">
+  <h2 class="page-title">⚔️ Duel</h2>
+  <div class="card">
+    <h3>Riyaziyyat dueli</h3>
+    <p>Hazırda tək oyunçu məşq rejimi mövcuddur. Eyni cihazda iki nəfər arasında onlayn duel üçün server və hesab sistemi lazımdır.</p>
+    <button class="btn" onclick="showPage('quiz')">Məşqə başla</button>
+  </div>
+</section>
+
+<section class="page" id="quiz">
+  <h2 class="page-title">🏆 Quiz</h2>
+  <div class="card">
+    <h3>Gündəlik bilik yoxlaması</h3>
+    <p>Suallara cavab ver, nəticəni dərhal gör.</p>
+    <button class="btn" onclick="showPage('exam')">Test seç</button>
+  </div>
+  <div class="card">
+    <h3>📈 İrəliləyişin</h3>
+    <div class="progress"><div id="quizBar"></div></div>
+    <p id="quizProgressText">Hələ sual cavablandırılmayıb.</p>
+  </div>
+</section>
+
+<section class="page" id="profile">
+  <h2 class="page-title">👤 Profil</h2>
+  <div class="card">
+    <div class="avatar" style="margin:0 auto 15px">🎓</div>
+    <label for="studentName">Adın</label>
+    <input id="studentName" placeholder="Adını yaz">
+    <label for="studentBio">Haqqında</label>
+    <input id="studentBio" placeholder="Məsələn, qəbul imtahanına hazırlaşıram">
+    <button class="btn" onclick="saveProfile()">Məlumatları yadda saxla</button>
+  </div>
+  <div class="card">
+    <h3>📊 Nəticələrin</h3>
+    <p id="profileStats">Test nəticələri burada görünəcək.</p>
+    <button class="btn" onclick="resetAll()">Bütün nəticələri sıfırla</button>
+  </div>
+</section>
+
+<section class="page" id="lessonPage">
+  <h2 class="page-title" id="lessonTitle">Dərs</h2>
+  <div class="card" id="lessonContent"></div>
+  <button class="btn" onclick="showPage('learning')">← Mövzulara qayıt</button>
+  <button class="btn" onclick="showPage('exam')">Testə keç →</button>
+</section>
+
+</main>
+
+<nav class="bottom">
+  <button class="active" data-page="home" onclick="showPage('home',this)"><span class="emoji">🏠</span>Əsas</button>
+  <button data-page="learning" onclick="showPage('learning',this)"><span class="emoji">📚</span>Öyrənmə</button>
+  <button data-page="exam" onclick="showPage('exam',this)"><span class="emoji">📝</span>İmtahan</button>
+  <button data-page="duel" onclick="showPage('duel',this)"><span class="emoji">⚔️</span>Duel</button>
+  <button data-page="quiz" onclick="showPage('quiz',this)"><span class="emoji">🏆</span>Quiz</button>
+  <button data-page="profile" onclick="showPage('profile',this)"><span class="emoji">👤</span>Profil</button>
+</nav>
+
+<script>
+const KEY="zqi-mobile-platform-v1";
+let state={name:"Şagird",bio:"",answered:0,correct:0,topics:[],results:{}};
+let currentQuestions=[];
+let currentAnswers=[];
+
+const questionSets={
+fractions:[
+["Kəsrin üst hissəsi necə adlanır?",["Surət","Məxrəc","Cəm","Hasil"],0,"Surət kəsr xəttinin üstündə olur."],
+["Kəsrin alt hissəsi necə adlanır?",["Surət","Məxrəc","Fərq","Qismət"],1,"Məxrəc kəsr xəttinin altında olur."],
+["Hansı düzgün kəsrdir?",["7/4","5/5","2/7","9/3"],2,"Düzgün kəsrdə surət məxrəcdən kiçikdir."],
+["1/6 + 2/6 neçədir?",["3/12","3/6","2/6","1/6"],1,"Məxrəc qalır, surətlər toplanır."],
+["5/8 − 2/8 neçədir?",["3/8","3/16","7/8","2/8"],0,"5−2=3, məxrəc 8 qalır."],
+["3/9 sadələşdirildikdə nə alınır?",["1/3","2/3","1/9","3/3"],0,"Surəti və məxrəci 3-ə bölürük."],
+["1/2-yə bərabər kəsr hansıdır?",["1/3","2/4","3/4","2/5"],1,"2/4 sadələşdirildikdə 1/2 olur."],
+["Hansı daha böyükdür?",["1/5","1/3","Bərabərdir","0"],1,"Surətlər eyni olduqda məxrəci kiçik olan kəsr böyükdür."],
+["4/4 neçədir?",["1","2","4","1/4"],0,"Surət məxrəcə bərabərdirsə, kəsr 1-ə bərabərdir."],
+["Məxrəc sıfır ola bilərmi?",["Bəli","Xeyr","Bəzən","Həmişə"],1,"Sıfıra bölmə müəyyən edilmədiyinə görə məxrəc sıfır ola bilməz."],
+["2/5 + 1/5 neçədir?",["3/10","3/5","2/5","1/5"],1,"2+1=3, məxrəc 5 qalır."],
+["7/10 − 3/10 neçədir?",["4/10","10/10","4/20","3/10"],0,"7−3=4."],
+["6/8 sadələşdirildikdə nə alınır?",["3/4","4/6","2/4","6/4"],0,"Surəti və məxrəci 2-yə bölürük."],
+["Hansı 1-dən böyükdür?",["2/3","3/3","5/4","1/5"],2,"5/4-də surət məxrəcdən böyükdür."],
+["2/3 və 2/5-dən hansı böyükdür?",["2/3","2/5","Bərabərdir","0"],0,"Surətlər eynidir, məxrəci kiçik olan kəsr böyükdür."],
+["1/2 + 1/4 neçədir?",["2/6","2/4","3/4","1/6"],2,"1/2=2/4, sonra 2/4+1/4=3/4."],
+["3/4 necə oxunur?",["Dörddə üç","Üçdə dörd","Üç tam dörd","Dörd üstə üç"],0,"3/4 dörddə üç kimi oxunur."],
+["Hansı düzgün olmayan kəsrdir?",["1/4","2/9","3/8","7/5"],3,"Surət məxrəcdən böyükdür."],
+["2/8 sadələşdirildikdə nə alınır?",["1/4","1/2","2/4","1/8"],0,"2 və 8-i 2-yə bölürük."],
+["Eyni məxrəcli kəsrlər necə toplanır?",["Məxrəclər toplanır","Surətlər toplanır, məxrəc qalır","Hamısı vurulur","Məxrəc çıxılır"],1,"Eyni məxrəcdə surətlər toplanır, məxrəc dəyişmir."]
+],
+integers:[
+["Hansı ədəd müsbətdir?",["−6","0","+4","−1"],2,"+4 sıfırdan böyükdür."],
+["Hansı ədəd mənfidir?",["+8","0","12","−3"],3,"−3 sıfırdan kiçikdir."],
+["Sıfır hansı ədəddir?",["Müsbət","Mənfi","Nə müsbət, nə mənfi","Hər ikisi"],2,"Sıfır nə müsbət, nə də mənfidir."],
+["Hansı müqayisə doğrudur?",["−5>−2","−2>−5","−5=−2","−2<−5"],1,"−2, −5-dən böyükdür."],
+["7−10 neçə edir?",["3","−3","−17","17"],1,"7-dən 10 çıxanda −3 alınır."],
+["−3+5 neçə edir?",["−8","8","2","−2"],2,"Nəticə 2-dir."],
+["−4−3 neçə edir?",["−1","1","−7","7"],2,"Mənfi ədəddən müsbət çıxmaq onu daha kiçik edir."],
+["−2×3 neçə edir?",["6","−6","−5","5"],1,"Mənfi ilə müsbətin hasili mənfidir."],
+["−4×−2 neçə edir?",["−8","8","−6","6"],1,"İki mənfinin hasili müsbətdir."],
+["12÷(−3) neçə edir?",["4","−4","−9","9"],1,"Müsbət ədəd mənfiyə bölünəndə nəticə mənfi olur."],
+["Ən kiçik ədəd hansıdır?",["−2","−9","0","+1"],1,"−9 ən kiçik ədəddir."],
+["−6+6 neçə edir?",["12","−12","0","6"],2,"Əks ədədlərin cəmi sıfırdır."],
+["−8−(−3) neçə edir?",["−11","−5","5","11"],1,"−8+3=−5."],
+["−2×−5 neçə edir?",["−10","10","7","−7"],1,"İki mənfinin hasili müsbətdir."],
+["15÷(−5) neçə edir?",["3","−3","10","−10"],1,"Cavab −3-dür."],
+["−4, −1, 0, 3 sırası necədir?",["Kiçikdən böyüyə","Böyükdən kiçiyə","Hamısı bərabər","Yanlış sıra"],0,"Sıfırdan sola mənfi, sağa müsbət ədədlər yerləşir."],
+["−7+2 neçə edir?",["−9","9","−5","5"],2,"−7+2=−5."],
+["6−(−4) neçə edir?",["2","−2","10","−10"],2,"Mənfi ədədi çıxmaq müsbət əlavə etməkdir."],
+["−18÷−6 neçə edir?",["−3","3","−12","12"],1,"İki mənfinin bölünməsi müsbətdir."],
+["−3 və −8-dən hansı böyükdür?",["−8","−3","Bərabərdir","0"],1,"−3 sıfıra daha yaxın olduğu üçün böyükdür."]
+]};
+
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x)state={...state,...x}}catch(e){}}
+function showPage(id,button){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ const page=document.getElementById(id);if(page)page.classList.add("active");
+ document.querySelectorAll("nav.bottom button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ if(button)button.classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+ updateUI();
+}
+function showLesson(topic){
+ const title=document.getElementById("lessonTitle");
+ const content=document.getElementById("lessonContent");
+ if(topic==="fractions"){
+  title.textContent="½ Kəsrlər";
+  content.innerHTML="<h3>Əsas qaydalar</h3><p>Bir bütövün bərabər hissələrini göstərmək üçün kəsrdən istifadə edirik.</p><div class='lesson'><b>Surət:</b> kəsrin üstündə yazılır və götürülən hissələrin sayını göstərir.</div><div class='lesson'><b>Məxrəc:</b> kəsrin altında yazılır və bütövün neçə bərabər hissəyə bölündüyünü göstərir. Məxrəc sıfır ola bilməz.</div><div class='lesson'><b>Düzgün kəsr:</b> surət məxrəcdən kiçikdir. Məsələn, 2/5.</div><div class='lesson'><b>Toplama:</b> eyni məxrəcli kəsrlərdə surətləri topla, məxrəci saxla. 1/5+2/5=3/5.</div>";
+ }else{
+  title.textContent="➕ Müsbət və mənfi ədədlər";
+  content.innerHTML="<h3>Əsas qaydalar</h3><div class='lesson'><b>Müsbət ədədlər:</b> sıfırdan böyükdür. Məsələn, +3.</div><div class='lesson'><b>Mənfi ədədlər:</b> sıfırdan kiçikdir. Məsələn, −4.</div><div class='lesson'><b>Sıfır:</b> nə müsbət, nə də mənfidir.</div><div class='lesson'><b>Müqayisə:</b> ədəd oxunda sağda olan ədəd böyükdür. Məsələn, −2 &gt; −5.</div>";
+ }
+ showPage("lessonPage");
+}
+function startQuiz(){
+ const topic=document.getElementById("examTopic").value;
+ const level=document.getElementById("examLevel").value;
+ currentQuestions=questionSets[topic].map(q=>q.slice());
+ if(level==="medium")currentQuestions=currentQuestions.slice().reverse();
+ if(level==="hard")currentQuestions=currentQuestions.slice(10).concat(currentQuestions.slice(0,10));
+ currentAnswers=Array(currentQuestions.length).fill(null);
+ renderQuestions();
+}
+function renderQuestions(){
+ const root=document.getElementById("examQuestions");root.innerHTML="";
+ currentQuestions.forEach((q,i)=>{
+  const box=document.createElement("div");box.className="question";
+  const h=document.createElement("h3");h.textContent=(i+1)+". "+q[0];box.appendChild(h);
+  q[1].forEach((opt,j)=>{
+   const b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+j)+") "+opt;
+   if(currentAnswers[i]!==null){
+    b.disabled=true;
+    if(j===q[2])b.classList.add("correct");
+    else if(j===currentAnswers[i])b.classList.add("wrong");
+   }else{
+    b.onclick=()=>{
+     currentAnswers[i]=j;state.answered++;if(j===q[2])state.correct++;
+     if(currentAnswers.every(a=>a!==null)&&!state.topics.includes(document.getElementById("examTopic").value)){
+      state.topics.push(document.getElementById("examTopic").value);
+     }
+     save();renderQuestions();updateUI();
+    };
+   }
+   box.appendChild(b);
+  });
+  if(currentAnswers[i]!==null){
+   const f=document.createElement("p");f.className="feedback";
+   f.textContent=(currentAnswers[i]===q[2]?"✓ Düzgün cavab. ":"✗ Düzgün cavab: "+q[1][q[2]]+". ")+q[3];box.appendChild(f);
+  }
+  root.appendChild(box);
+ });
+ if(currentAnswers.length&&currentAnswers.every(a=>a!==null)){
+  const done=document.createElement("div");done.className="card";
+  done.innerHTML="<h3>Test tamamlandı!</h3><p>"+currentAnswers.filter((a,i)=>a===currentQuestions[i][2]).length+" / "+currentAnswers.length+" düzgün cavab.</p>";
+  root.appendChild(done);
+ }
+}
+function saveProfile(){
+ const name=document.getElementById("studentName").value.trim();
+ const bio=document.getElementById("studentBio").value.trim();
+ if(name)state.name=name;state.bio=bio;save();updateUI();alert("Profil bu cihazda yadda saxlanıldı.");
+}
+function resetAll(){
+ if(confirm("Bu cihazda saxlanılan nəticələri sıfırlamaq istəyirsən?")){
+  state.answered=0;state.correct=0;state.topics=[];state.results={};save();updateUI();
+ }
+}
+function updateUI(){
+ document.getElementById("homeAnswered").textContent=state.answered;
+ document.getElementById("homeCorrect").textContent=state.correct;
+ document.getElementById("homePercent").textContent=state.answered?Math.round(state.correct/state.answered*100)+"%":"0%";
+ document.getElementById("homeTopics").textContent=state.topics.length;
+ document.getElementById("achievementCount").textContent=state.topics.length;
+ document.getElementById("mathProgress").textContent=state.topics.length+" / 2";
+ document.getElementById("mathBar").style.width=(state.topics.length/2*100)+"%";
+ document.getElementById("quizBar").style.width=(state.answered?Math.min(100,state.answered/20*100):0)+"%";
+ document.getElementById("quizProgressText").textContent=state.answered+" sual cavablandırılıb; "+state.correct+" düzgün cavab.";
+ document.getElementById("profileStats").textContent="Cavablandırılan sual: "+state.answered+" · Düzgün cavab: "+state.correct;
+ document.querySelector(".profile h2").textContent=state.name||"Şagird profili";
+ document.querySelector(".profile .username").textContent="@telebe";
+ document.querySelector(".profile .bio").textContent=state.bio||"Öyrən, məşq et və uğur qazan!";
+ document.getElementById("studentName").value=state.name==="Şagird"?"":state.name;
+ document.getElementById("studentBio").value=state.bio||"";
+}
+load();updateUI();
+</script>
+</body>
+</html>
