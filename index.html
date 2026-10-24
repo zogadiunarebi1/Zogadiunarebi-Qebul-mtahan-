@@ -1,4 +1,131 @@
 
+
+currentAnswers[i]=j;
+state.answered++;
+if(j===q[2])state.correct++;
+
+
+ const xp=Math.max(0,state.xp||0);
+ const level=Math.floor(xp/100)+1;
+ const levelXP=xp%100;
+
+ document.getElementById("xpTotal").textContent=xp;
+ document.getElementById("levelText").textContent="Səviyyə "+level;
+ document.getElementById("levelBar").style.width=levelXP+"%";
+ document.getElementById("levelProgressText").textContent=
+   levelXP+"/100 XP növbəti səviyyəyə";
+
+ document.getElementById("dailyAnsweredText").textContent=
+   Math.min(state.dailyAnswered,10)+"/10";
+ document.getElementById("dailyAnsweredBar").style.width=
+   Math.min(state.dailyAnswered/10*100,100)+"%";
+
+ document.getElementById("dailyCorrectText").textContent=
+   Math.min(state.dailyCorrect,5)+"/5";
+ document.getElementById("dailyCorrectBar").style.width=
+   Math.min(state.dailyCorrect/5*100,100)+"%";
+
+ document.getElementById("dailyMessage").textContent=
+   state.dailyAnswered>=10 && state.dailyCorrect>=5
+   ? "🎉 Gündəlik tapşırıqları tamamladın!"
+   : "Davam et! Hər cavaba 5 XP, düzgün cavaba əlavə 5 XP.";
+
+
+let state={
+  name:"Şagird",
+  bio:"",
+  answered:0,
+  correct:0,
+  topics:[],
+  results:{},
+  xp:0,
+  dailyDate:"",
+  dailyAnswered:0,
+  dailyCorrect:0
+};
+
+
+<div class="daily-card">
+  <div class="row">
+    <div>
+      <h3>🎯 Gündəlik tapşırıqlar</h3>
+      <p>Hər gün öyrən, xal qazan!</p>
+    </div>
+    <div class="xp-badge">⚡ <span id="xpTotal">0</span> XP</div>
+  </div>
+
+  <div class="daily-task">
+    <div class="row">
+      <span>📘 10 suala cavab ver</span>
+      <b id="dailyAnsweredText">0/10</b>
+    </div>
+    <div class="progress"><div id="dailyAnsweredBar"></div></div>
+  </div>
+
+  <div class="daily-task">
+    <div class="row">
+      <span>✅ 5 düzgün cavab ver</span>
+      <b id="dailyCorrectText">0/5</b>
+    </div>
+    <div class="progress"><div id="dailyCorrectBar"></div></div>
+  </div>
+
+  <div class="daily-task">
+    <div class="row">
+      <span>🏅 Səviyyən</span>
+      <b id="levelText">Səviyyə 1</b>
+    </div>
+    <div class="level-track"><div id="levelBar"></div></div>
+    <p id="levelProgressText" style="margin-top:7px">0/100 XP növbəti səviyyəyə</p>
+  </div>
+
+  <p id="dailyMessage" style="margin-top:13px">Tapşırıqlara başla və XP qazan!</p>
+</div>
+
+/* Gündəlik tapşırıq və XP sistemi */
+.daily-card {
+  background: linear-gradient(145deg, #173c64, #287fa4);
+  color: white;
+  border-radius: 22px;
+  padding: 21px;
+  margin: 18px 0;
+  box-shadow: 0 5px 15px #173c6425;
+}
+.daily-card h3 { font-size: 21px; margin-bottom: 5px; }
+.daily-card p { color: #e1efff; }
+.xp-badge {
+  background: #ffffff20;
+  border: 1px solid #ffffff55;
+  padding: 8px 12px;
+  border-radius: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.daily-task {
+  background: #ffffff15;
+  border-radius: 13px;
+  padding: 12px;
+  margin-top: 12px;
+}
+.daily-task .progress {
+  background: #ffffff40;
+  margin-bottom: 0;
+}
+.daily-task .progress div { background: #b8e2ff; }
+.level-track {
+  height: 9px;
+  background: #ffffff40;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 9px;
+}
+.level-track div {
+  height: 100%;
+  width: 0;
+  background: #ffe08a;
+  transition: width .25s;
+}
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
