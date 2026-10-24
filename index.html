@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZQİ — Riyaziyyat</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fb;color:#20243a}
+header{background:#263b80;color:white;padding:24px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:27px}
+header p{margin:0;color:#e1e7ff}
+nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:14px;background:white;box-shadow:0 2px 8px #0001}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 15px;font-size:15px}
+nav button{background:#e9edff;color:#263b80;font-weight:bold}
+nav button:hover,.active{background:#263b80!important;color:white!important}
+main{max-width:850px;margin:22px auto;padding:0 14px}
+.card{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 3px 15px #1725540c}
+h2{color:#263b80;margin-top:0}
+.rule{background:#edf1ff;padding:15px;border-radius:10px;line-height:1.8}
+.question{border-top:1px solid #eee;padding:14px 0}
+.question button{background:#263b80;color:white;margin-top:8px}
+.answer{display:none;background:#eaf8ef;padding:12px;border-radius:8px;margin-top:8px;line-height:1.6}
+#quiz-options{display:grid;gap:9px;margin-top:12px}
+#quiz-options button{background:#edf1ff;text-align:left}
+#quiz-options button:hover{background:#dce4ff}
+footer{text-align:center;padding:25px;color:#68708a}
+.small{color:#68708a;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+<h1>📘 ZQİ Riyaziyyat</h1>
+<p>Zogadiunarebi Qəbul İmtahanı • Öyrən, məşq et, uğur qazan!</p>
+</header>
+<nav>
+<button class="active" onclick="showPage('lessons',this)">📚 Dərslər</button>
+<button onclick="showPage('questions',this)">✍️ Suallar</button>
+<button onclick="showPage('quiz',this)">✅ Test</button>
+</nav>
+<main>
+<section id="lessons">
+<div class="card">
+<h2>1. Müsbət və mənfi ədədlər</h2>
+<p>Ədədlər sıfırdan böyük, sıfırdan kiçik və sıfıra bərabər ola bilər.</p>
+<div class="rule">
+<strong>Müsbət ədədlər:</strong> sıfırdan böyük ədədlərdir. Məsələn: 1, 5, +12.<br><br>
+<strong>Mənfi ədədlər:</strong> sıfırdan kiçik ədədlərdir. Məsələn: −2, −7, −15.<br><br>
+<strong>Sıfır (0):</strong> nə müsbət, nə də mənfi ədəddir.<br><br>
+<strong>Müqayisə:</strong> ədəd oxunda sağda yerləşən ədəd daha böyükdür. Məsələn: −2 &gt; −5 və 3 &gt; −1.
+</div>
+</div>
+<div class="card">
+<h2>2. Ədədlərin toplanması</h2>
+<div class="rule">
+<strong>Eyni işarəli ədədlər:</strong> modullarını topla, ümumi işarəni saxla.<br>
+Məsələn: (−3) + (−4) = −7<br><br>
+<strong>Müxtəlif işarəli ədədlər:</strong> modullarını çıx, modulca böyük olan ədədin işarəsini saxla.<br>
+Məsələn: (−8) + 5 = −3
+</div>
+<p class="small">Modul ədədin sıfırdan uzaqlığıdır: |−5| = 5.</p>
+</div>
+</section>
+<section id="questions" hidden>
+<div class="card">
+<h2>İzahlı suallar</h2>
+<div id="question-list"></div>
+</div>
+</section>
+<section id="quiz" hidden>
+<div class="card">
+<h2>🧠 Özünü yoxla</h2>
+<p id="quiz-count">Sual 1</p>
+<h3 id="quiz-question"></h3>
+<div id="quiz-options"></div>
+<p id="quiz-feedback"></p>
+<button onclick="nextQuiz()">Növbəti sual →</button>
+<p id="quiz-score"></p>
+</div>
+</section>
+</main>
+<footer>© 2026 ZQİ Riyaziyyat • Bilik uğura aparır.</footer>
+<script>
+const questions=[
+["3 + (−5) = ?", "−2","3−5=−2 olduğu üçün cavab −2-dir."],
+["−4 + (−3) = ?", "−7","Eyni işarələrdir: 4+3=7, mənfi işarəsi saxlanılır."],
+["−9 + 6 = ?", "−3","9−6=3. Modulca böyük ədəd −9 olduğuna görə cavab −3-dür."],
+["5 − 8 = ?", "−3","5−8=−3."],
+["−2 − 4 = ?", "−6","−2−4=−2+(−4)=−6."],
+["−7 + 10 = ?", "3","10−7=3. Modulca böyük müsbət ədədin işarəsi qalır."],
+["Hansı daha böyükdür: −2 yoxsa −6?", "−2","Ədəd oxunda −2, −6-nın sağında yerləşir."],
+["|−12| = ?", "12","Modul ədədin sıfırdan məsafəsidir, buna görə |−12|=12."],
+["0 müsbət ədəddirmi?", "Xeyr","Sıfır nə müsbət, nə də mənfi ədəddir."],
+["−3 × 4 = ?", "−12","Mənfi ədədlə müsbət ədədin hasili mənfidir: 3×4=12."]
+];
+document.getElementById("question-list").innerHTML=questions.map((q,i)=>`<div class="question"><strong>${i+1}. ${q[0]}</strong><br><button onclick="toggleAnswer(${i})">İzahı göstər</button><div class="answer" id="ans${i}"><strong>Cavab: ${q[1]}</strong><br>${q[2]}</div></div>`).join("");
+function toggleAnswer(i){const el=document.getElementById("ans"+i);el.style.display=el.style.display==="block"?"none":"block"}
+function showPage(id,btn){["lessons","questions","quiz"].forEach(x=>document.getElementById(x).hidden=x!==id);document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active")}
+const tests=[
+{q:"−5 + 8 neçədir?",a:["−13","3","−3","13"],correct:1},
+{q:"−4 + (−6) neçədir?",a:["−2","10","−10","2"],correct:2},
+{q:"Hansı daha kiçikdir?",a:["−1","−8","0","4"],correct:1},
+{q:"|−9| neçədir?",a:["−9","0","9","18"],correct:2},
+{q:"−3 × (−2) neçədir?",a:["−6","6","−5","5"],correct:1}
+];
+let qi=0,score=0,answered=false;
+function renderQuiz(){
+answered=false;const t=tests[qi];
+document.getElementById("quiz-count").textContent=`Sual ${qi+1} / ${tests.length}`;
+document.getElementById("quiz-question").textContent=t.q;
+document.getElementById("quiz-feedback").textContent="";
+document.getElementById("quiz-options").innerHTML=t.a.map((a,i)=>`<button onclick="answerQuiz(${i})">${a}</button>`).join("");
+document.getElementById("quiz-score").textContent=`Düzgün cavablar: ${score}`;
+}
+function answerQuiz(i){if(answered)return;answered=true;const t=tests[qi];if(i===t.correct){score++;document.getElementById("quiz-feedback").textContent="Düzgündür! 🎉"}else{document.getElementById("quiz-feedback").textContent="Düzgün cavab: "+t.a[t.correct]}document.getElementById("quiz-score").textContent=`Düzgün cavablar: ${score} / ${qi+1}`}
+function nextQuiz(){qi=(qi+1)%tests.length;if(qi===0)score=0;renderQuiz()}
+renderQuiz();
+</script>
+</body>
+</html>
