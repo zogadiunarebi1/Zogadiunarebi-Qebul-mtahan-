@@ -3,247 +3,214 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZQİ Canlı Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZQİ Quiz</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080808;color:#f5f5f5;font-family:Arial,sans-serif;padding-bottom:85px}
-header{text-align:center;padding:22px 10px}
-.logo{width:95px;height:95px;border:2px solid #d5b15d;border-radius:50%;margin:auto;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#e7c86f;font-size:30px;font-weight:bold}
-.logo small{font-size:10px;letter-spacing:2px}
-h1{font-size:22px;color:#e7c86f;margin:12px 0 5px}
-.subtitle{font-size:11px;letter-spacing:1px}
-main{max-width:650px;margin:auto;padding:12px}
-.panel{background:linear-gradient(145deg,#1a1a1a,#0d0d0d);border:1px solid #725c2c;border-radius:19px;padding:19px;margin-bottom:16px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-h2{font-size:20px;margin:0 0 15px}
-.muted{color:#bbb;line-height:1.6}
-.gold{color:#e7c86f}
-.timer{font-size:24px;color:#e7c86f;font-weight:bold}
-button,input{width:100%;padding:13px;border-radius:10px;font-size:16px;margin-top:10px}
-input{background:#171717;color:white;border:1px solid #75602e}
-button{background:#d0ad56;color:#111;border:0;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.55}
-.option{background:#171717;color:white;border:1px solid #68552d;text-align:left;font-weight:normal}
-.option.chosen{border:2px solid #e7c86f;background:#393018}
-.track{height:6px;background:#333;border-radius:8px;overflow:hidden;margin:15px 0}
-#bar{height:100%;width:100%;background:#d4b45f}
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:360px}
-th,td{padding:11px 7px;border:1px solid #57492c;text-align:left;overflow-wrap:anywhere}
-th{background:#302715;color:#efd78f}
-td{background:#111}
-tr.first td{background:#3b3016;color:#ffe18a}
-.hidden{display:none!important}
-footer{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #6c562a;color:#e7c86f;text-align:center;padding:15px 5px;font-size:11px;letter-spacing:1px}
+body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif;text-align:center;padding:20px}
+.card{max-width:600px;margin:20px auto;background:#151515;border:1px solid #c99b32;border-radius:18px;padding:24px}
+h1,h2{color:#f5c653}
+.logo{font-size:40px;font-weight:900;color:#eac04c}
+button{background:#d9ad42;color:#080808;border:0;border-radius:10px;padding:14px;margin:7px;width:100%;font-size:17px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.45}
+.option{background:#292929;color:white;border:1px solid #555}
+.option:hover{border-color:#eac04c}
+.info{display:flex;justify-content:space-around;gap:10px;flex-wrap:wrap;color:#f5c653}
+#question{font-size:23px;margin:25px 0}
+#status{color:#ccc;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+td,th{padding:10px;border-bottom:1px solid #444}
+th{color:#f5c653}
+.hidden{display:none}
 </style>
 </head>
 <body>
-<header>
- <div class="logo">ZQİ<small>QUIZ</small></div>
- <h1>ZQİ PROFİLİ</h1>
- <div class="subtitle">ZOGADİUNAREBİ QƏBUL İMTAHANI QUIZİ</div>
-</header>
+<div class="card">
+  <div class="logo">ZQİ</div>
+  <h1>QUIZ YARDIM</h1>
+  <p>Zəka və bilik yarışına xoş gəlmisiniz!</p>
+  <p id="status">Başlama vaxtı: 20:40</p>
+  <div id="countdown" class="info"></div>
+  <div id="join">
+    <input id="player" maxlength="20" placeholder="Adını yaz"
+      style="width:100%;padding:14px;border-radius:9px;margin:12px 0">
+    <button onclick="joinQuiz()">Quizə qoşul</button>
+  </div>
+</div>
 
-<main>
-<section class="panel" id="lobby">
- <div class="row"><h2>Canlı Quiz</h2><span class="gold">🏆 Yarış</span></div>
- <p class="muted">10 sual · 60 saniyə · 15 saniyə fasilə · Maksimum 1000 xal</p>
- <label for="username">İstifadəçi adı</label>
- <input id="username" maxlength="30" placeholder="Adını daxil et">
- <div class="row" style="margin-top:20px"><span class="muted">Başlama vaxtı</span><b class="gold">20:30</b></div>
- <div class="row" style="margin-top:15px"><span class="muted">Geri sayım</span><span class="timer" id="clock">--:--:--</span></div>
- <button id="join" onclick="joinQuiz()">Quizə qoşul</button>
- <p class="muted" id="lobbyMsg">Adını yaz və yarışa qoşul.</p>
-</section>
+<div id="game" class="card hidden">
+  <div class="info">
+    <span id="number">Sual 1/10</span>
+    <span id="timer">60 saniyə</span>
+    <span id="score">Xal: 0</span>
+  </div>
+  <h2 id="phase">Sual vaxtı</h2>
+  <div id="question"></div>
+  <div id="options"></div>
+  <p id="feedback"></p>
+</div>
 
-<section class="panel hidden" id="game">
- <div class="row"><b id="qnumber">Sual 1/10</b><span class="timer" id="timer">60 san.</span></div>
- <div class="track"><div id="bar"></div></div>
- <p class="muted" id="topic"></p>
- <h2 id="question"></h2>
- <div id="answers"></div>
- <p id="notice" class="muted"></p>
-</section>
-
-<section class="panel hidden" id="board">
- <div class="row"><h2>🏆 İştirakçıların sıralaması</h2><span class="timer" id="breakTimer">15</span></div>
- <p class="muted" id="lastResult"></p>
- <div class="tablewrap">
- <table><thead><tr><th>#</th><th>İstifadəçi</th><th>Cavab</th><th>Xal</th></tr></thead><tbody id="ranking"></tbody></table>
- </div>
- <p class="muted">Növbəti sual fasilə bitəndə başlayacaq.</p>
-</section>
-
-<section class="panel hidden" id="result">
- <h2 class="gold">🏆 Yarışın nəticəsi</h2>
- <h1 id="winner"></h1>
- <p class="muted" id="summary"></p>
- <div class="tablewrap">
- <table><thead><tr><th>#</th><th>İstifadəçi</th><th>Xal</th></tr></thead><tbody id="finalRanking"></tbody></table>
- </div>
-</section>
-</main>
-<footer>ZOGADİUNAREBİ QƏBUL İMTAHANI QUIZİ</footer>
+<div id="board" class="card">
+  <h2>🏆 Liderlər cədvəli</h2>
+  <p id="boardStatus">Nəticələr suallardan sonra yenilənəcək.</p>
+  <table>
+    <thead><tr><th>Yer</th><th>İştirakçı</th><th>Xal</th></tr></thead>
+    <tbody id="ranking"></tbody>
+  </table>
+</div>
 
 <script>
-const questions=[
- {t:"Funksiyalar",q:"f(x)=x²−2x funksiyasının minimum nöqtəsinin x koordinatı neçədir?",o:["−2","−1","1","2"],a:2},
- {t:"Ədədi silsilələr",q:"2; x+2; 8 ardıcıl ədədi silsilə hədləridirsə, x neçədir?",o:["2","3","4","5"],a:2},
- {t:"Funksiyalar",q:"f(x) tək funksiyadır və f(3)=5-dir. f(−3) neçədir?",o:["5","−5","0","3"],a:1},
- {t:"Həndəsə",q:"10 sm × 6 sm düzbucaqlının küncündən 3 sm tərəfli kvadrat kəsilir. Yeni fiqurun perimetri neçədir?",o:["26 sm","32 sm","38 sm","40 sm"],a:2},
- {t:"Kombinatorika",q:"Bir xətt üzərində 6 nöqtə var. Neçə fərqli nöqtə cütü seçmək olar?",o:["12","15","18","30"],a:1},
- {t:"Ədədi silsilələr",q:"İlk 5 həddin cəmi 15 olan ədədi silsilənin üçüncü həddi neçədir?",o:["2","3","4","5"],a:1},
- {t:"Funksiyalar",q:"f(x)=x³ funksiyası üçün f(−2) neçədir?",o:["8","−8","4","−4"],a:1},
- {t:"Ədədi silsilələr",q:"3; 7; 11; ... ədədi silsiləsinin fərqi neçədir?",o:["2","3","4","5"],a:2},
- {t:"Funksiyalar",q:"f(x)=x² funksiyası hansı növ funksiyadır?",o:["Cüt","Tək","Həm cüt, həm tək","Heç biri"],a:0},
- {t:"Kombinatorika",q:"5 nəfərdən neçə üsulla 2 nəfər seçmək olar?",o:["5","10","15","20"],a:1}
+const START_HOUR = 20;
+const START_MINUTE = 40;
+const THINK_SECONDS = 60;
+const BREAK_SECONDS = 15;
+const MAX_POINTS = 100;
+
+const questions = [
+ {q:"(+7) + (-3) = ?",a:["4","10","-4","-10"],c:0},
+ {q:"(-8) + (-5) = ?",a:["-3","13","-13","3"],c:2},
+ {q:"(+12) - (+7) = ?",a:["19","5","-5","-19"],c:1},
+ {q:"(-6) - (+4) = ?",a:["-2","2","10","-10"],c:3},
+ {q:"(-9) + (+14) = ?",a:["23","-23","5","-5"],c:2},
+ {q:"(+3) × (-6) = ?",a:["18","-18","-9","9"],c:1},
+ {q:"(-24) ÷ (-6) = ?",a:["-4","4","-6","6"],c:1},
+ {q:"Ən böyük ədəd hansıdır?",a:["-8","-2","-5","-11"],c:1},
+ {q:"(-4) × (-7) = ?",a:["-28","11","28","-11"],c:2},
+ {q:"(-15) + (+6) - (-2) = ?",a:["-11","-23","-7","7"],c:0}
 ];
 
-let joined=false,started=false,finished=false;
-let idx=0,score=0,correct=0,selected=null;
-let phase="waiting",deadline=0,interval=null;
-let players=[],startAt=nextStart();
+let playerName="",index=0,points=0,answered=false;
+let phase="waiting",remaining=0,interval=null,questionEnd=0;
+let players=JSON.parse(localStorage.getItem("zqi_players")||"[]");
 
-function nextStart(){
- const d=new Date();
- d.setHours(20,30,0,0);
- if(Date.now()>=d.getTime())d.setDate(d.getDate()+1);
- return d;
+function savePlayers(){
+ const old=players.find(p=>p.name===playerName);
+ if(old) old.score=points;
+ else players.push({name:playerName,score:points});
+ players.sort((a,b)=>b.score-a.score);
+ localStorage.setItem("zqi_players",JSON.stringify(players));
+ renderBoard();
 }
-const $=id=>document.getElementById(id);
-const pad=n=>String(n).padStart(2,"0");
-
-function updateClock(){
- if(started||finished)return;
- const s=Math.max(0,Math.floor((startAt-Date.now())/1000));
- $("clock").textContent=pad(Math.floor(s/3600))+":"+
- pad(Math.floor(s%3600/60))+":"+pad(s%60);
- if(s===0&&joined)begin();
+function renderBoard(){
+ document.getElementById("ranking").innerHTML=players.slice(0,20).map((p,i)=>
+ `<tr><td>${i+1}</td><td>${escapeHTML(p.name)}</td><td>${p.score}</td></tr>`
+ ).join("");
 }
-setInterval(updateClock,250);
-updateClock();
-
+function escapeHTML(s){
+ return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 function joinQuiz(){
- const name=$("username").value.trim();
- if(!name){$("lobbyMsg").textContent="Əvvəlcə adını daxil et.";return}
- if(joined)return;
- joined=true;
- players=[{name,score:0,answer:"—"}];
- $("join").disabled=true;
- $("lobbyMsg").textContent="Yarışa qoşuldun. 20:30-da başlayacaq.";
- if(Date.now()>=startAt.getTime())begin();
+ playerName=document.getElementById("player").value.trim();
+ if(!playerName){alert("Zəhmət olmasa adını yaz!");return}
+ document.getElementById("join").classList.add("hidden");
+ checkStart();
 }
-
-function begin(){
- if(started||finished||!joined)return;
- started=true;
- $("lobby").classList.add("hidden");
- $("game").classList.remove("hidden");
+function startQuiz(){
+ phase="question";
+ index=0;points=0;
+ document.getElementById("game").classList.remove("hidden");
+ document.getElementById("status").textContent="Quiz başladı!";
  showQuestion();
 }
-
 function showQuestion(){
- if(idx>=questions.length){finish();return}
- phase="question";selected=null;
- const q=questions[idx];
- $("qnumber").textContent=`Sual ${idx+1}/10`;
- $("topic").textContent=q.t;
- $("question").textContent=q.q;
- $("timer").textContent="60 san.";
- $("bar").style.width="100%";
- $("notice").textContent="Cavabını seç. Vaxt bitənə qədər növbəti sual açılmayacaq.";
- $("answers").innerHTML="";
- q.o.forEach((v,i)=>{
-  const b=document.createElement("button");
-  b.className="option";
-  b.textContent=String.fromCharCode(65+i)+") "+v;
-  b.onclick=()=>choose(i,b);
-  $("answers").appendChild(b);
+ if(index>=questions.length){finishQuiz();return}
+ answered=false;
+ phase="question";remaining=THINK_SECONDS;
+ document.getElementById("number").textContent=`Sual ${index+1}/10`;
+ document.getElementById("score").textContent=`Xal: ${points}`;
+ document.getElementById("phase").textContent="Cavabını seç!";
+ document.getElementById("question").textContent=questions[index].q;
+ document.getElementById("feedback").textContent="";
+ const box=document.getElementById("options");
+ box.innerHTML="";
+ questions[index].a.forEach((a,i)=>{
+   const b=document.createElement("button");
+   b.className="option";b.textContent="ABCD"[i]+") "+a;
+   b.onclick=()=>answer(i);
+   box.appendChild(b);
  });
- deadline=Date.now()+60000;
- runQuestion();
+ questionEnd=Date.now()+THINK_SECONDS*1000;
+ runClock();
 }
-
-function choose(i,b){
- if(phase!=="question"||selected!==null)return;
- selected=i;
- $("answers").querySelectorAll("button").forEach(x=>x.disabled=true);
- b.classList.add("chosen");
- $("notice").textContent="Cavab qeydə alındı. Vaxtın bitməsini gözlə.";
+function answer(i){
+ if(phase!=="question"||answered)return;
+ answered=true;
+ if(i===questions[index].c){
+   points+=MAX_POINTS;
+   document.getElementById("feedback").textContent="Cavab qəbul edildi! +100 xal";
+ }else{
+   document.getElementById("feedback").textContent="Cavab qəbul edildi!";
+ }
+ document.querySelectorAll("#options button").forEach(b=>b.disabled=true);
+ document.getElementById("score").textContent=`Xal: ${points}`;
+ savePlayers();
 }
-
-function runQuestion(){
+function runClock(){
  clearInterval(interval);
  interval=setInterval(()=>{
-  const left=Math.max(0,Math.ceil((deadline-Date.now())/1000));
-  $("timer").textContent=left+" san.";
-  $("bar").style.width=(left/60*100)+"%";
-  if(left===0){clearInterval(interval);endQuestion()}
- },100);
+   if(phase==="question"){
+     remaining=Math.max(0,Math.ceil((questionEnd-Date.now())/1000));
+     document.getElementById("timer").textContent=remaining+" saniyə";
+     if(remaining<=0){
+       clearInterval(interval);
+       if(!answered){
+         document.getElementById("feedback").textContent="Vaxt bitdi!";
+         document.querySelectorAll("#options button").forEach(b=>b.disabled=true);
+       }
+       savePlayers();
+       startBreak();
+     }
+   }else if(phase==="break"){
+     remaining--;
+     document.getElementById("timer").textContent=remaining+" saniyə";
+     if(remaining<=0){
+       clearInterval(interval);
+       index++;
+       showQuestion();
+     }
+   }
+ },1000);
 }
-
-function endQuestion(){
- if(phase!=="question")return;
- phase="break";
- const q=questions[idx];
- const gain=selected===q.a?100:0;
- if(selected===q.a){score+=gain;correct++}
- players[0].score=score;
- players[0].answer=selected===null?"Cavab verilmədi":q.o[selected];
- $("lastResult").textContent=`Sual ${idx+1}: ${players[0].answer} · Bu sualdan ${gain} xal`;
- $("game").classList.add("hidden");
- $("board").classList.remove("hidden");
+function startBreak(){
+ phase="break";remaining=BREAK_SECONDS;
+ document.getElementById("phase").textContent="15 saniyəlik fasilə";
+ document.getElementById("question").textContent="Liderlər cədvəli yenilənir...";
+ document.getElementById("options").innerHTML="";
  renderBoard();
-
- const end=Date.now()+15000;
- clearInterval(interval);
- interval=setInterval(()=>{
-  const left=Math.max(0,Math.ceil((end-Date.now())/1000));
-  $("breakTimer").textContent=left+" san.";
-  if(left===0){
-   clearInterval(interval);
-   idx++;
-   if(idx>=questions.length){finish();return}
-   $("board").classList.add("hidden");
-   $("game").classList.remove("hidden");
-   showQuestion();
-  }
- },100);
+ document.getElementById("boardStatus").textContent=
+ "Son nəticələr yeniləndi. Növbəti sual az sonra başlayır.";
+ runClock();
 }
-
-function renderBoard(){
- const tbody=$("ranking");
- tbody.innerHTML="";
- [...players].sort((a,b)=>b.score-a.score).forEach((p,i)=>{
-  const tr=document.createElement("tr");
-  if(i===0)tr.className="first";
-  [i+1,p.name,p.answer,p.score].forEach(v=>{
-   const td=document.createElement("td");
-   td.textContent=v;
-   tr.appendChild(td);
-  });
-  tbody.appendChild(tr);
- });
+function finishQuiz(){
+ phase="done";clearInterval(interval);
+ savePlayers();
+ document.getElementById("phase").textContent="Quiz bitdi!";
+ document.getElementById("timer").textContent="0 saniyə";
+ document.getElementById("question").textContent=
+ `${playerName}, nəticən: ${points}/1000 xal`;
+ document.getElementById("options").innerHTML="";
+ document.getElementById("feedback").textContent="İştirak etdiyin üçün təşəkkürlər!";
 }
-
-function finish(){
- clearInterval(interval);
- finished=true;phase="finished";
- $("game").classList.add("hidden");
- $("board").classList.add("hidden");
- $("result").classList.remove("hidden");
- $("winner").textContent=players[0].name+" — "+score+" xal";
- $("summary").textContent=`10 sualdan ${correct} düzgün cavab. Maksimum 1000 xal.`;
- $("finalRanking").innerHTML="";
- const tr=document.createElement("tr");
- tr.className="first";
- [1,players[0].name,score].forEach(v=>{
-  const td=document.createElement("td");
-  td.textContent=v;tr.appendChild(td);
- });
- $("finalRanking").appendChild(tr);
+function checkStart(){
+ const now=new Date();
+ const start=new Date();
+ start.setHours(START_HOUR,START_MINUTE,0,0);
+ if(now>=start){
+   startQuiz();
+ }else{
+   document.getElementById("status").textContent="Quiz 20:40-da başlayacaq.";
+   interval=setInterval(()=>{
+     const diff=start-Date.now();
+     if(diff<=0){clearInterval(interval);startQuiz();return}
+     const h=Math.floor(diff/3600000);
+     const m=Math.floor(diff%3600000/60000);
+     const s=Math.floor(diff%60000/1000);
+     document.getElementById("countdown").textContent=
+       `Başlamağa: ${h} saat ${m} dəqiqə ${s} saniyə`;
+   },250);
+ }
 }
+renderBoard();
 </script>
 </body>
 </html>
