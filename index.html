@@ -106,7 +106,46 @@ const allSubjectQuestions = [
 {"id":78,"subject":"Kimya","q":"Katalizator nə edir?","a":["Həmişə məhsul olur","Reaksiya sürətini dəyişir və ümumilikdə sərf olunmur","Atomları yox edir","Kütlə yaradır"],"c":1,"e":"Katalizator reaksiyanın sürətinə təsir edir."},
 {"id":79,"subject":"Kimya","q":"Dəmirin kimyəvi işarəsi hansıdır?","a":["Ir","Fe","F","D"],"c":1,"e":"Dəmirin simvolu Fe-dir."},
 {"id":80,"subject":"Kimya","q":"Buzun əriməsi hansı dəyişiklikdir?","a":["Kimyəvi","Fiziki","Nüvə","Dəyişiklik deyil"],"c":1,"e":"Buz əridikdə su olur; bu, fiziki dəyişiklikdir."},
+function renderSubjects() {
+  const subjects = [...new Set(
+    allSubjectQuestions.map(q => q.subject)
+  )];
 
+  document.getElementById("subjectButtons").innerHTML =
+    subjects.map(subject => `
+      <div class="item">
+        <div class="emoji">📘</div>
+        <h4>${subject}</h4>
+        <p>${allSubjectQuestions.filter(
+          q => q.subject === subject
+        ).length} sual</p>
+        <button class="primary"
+          onclick="startSubjectQuiz('${subject}')">
+          Testə başla →
+        </button>
+      </div>
+    `).join("");
+}
+
+function startSubjectQuiz(subject) {
+  quizMode = "subject";
+  quiz = allSubjectQuestions.filter(
+    q => q.subject === subject
+  );
+
+  idx = 0;
+  earned = 0;
+
+  document.getElementById("homeView").style.display = "none";
+  document.getElementById("quizView").style.display = "block";
+  document.getElementById("earned").textContent =
+    "⚡ Bu testdə: 0 XP";
+
+  showQuestion();
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+renderSubjects();
 {"id":81,"subject":"İnformatika","q":"Mərkəzi emal qurğusu necə qısaldılır?","a":["CPU","URL","USB","PDF"],"c":0,"e":"CPU mərkəzi prosessor qurğusudur."},
 {"id":82,"subject":"İnformatika","q":"İkilik say sistemində hansı rəqəmlər işlədilir?","a":["0 və 1","1 və 2","0-dan 9-a qədər","A və B"],"c":0,"e":"İkilik sistem yalnız 0 və 1-dən istifadə edir."},
 {"id":83,"subject":"İnformatika","q":"1 bayt neçə bitdir?","a":["2","4","8","16"],"c":2,"e":"1 bayt 8 bitdir."},
