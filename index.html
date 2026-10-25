@@ -9,7 +9,42 @@
 * {
   box-sizing: border-box;
 }
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+  import {
+    getFirestore,
+    doc,
+    setDoc
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
+    authDomain: "zqi-riyaziyyat.firebaseapp.com",
+    projectId: "zqi-riyaziyyat",
+    storageBucket: "zqi-riyaziyyat.firebasestorage.app",
+    messagingSenderId: "228687771538",
+    appId: "1:228687771538:web:4b4c31d993b0614ca6334b",
+    measurementId: "G-MT0Q1DP79N"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  window.zqiFirebase = {
+    auth,
+    db,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    doc,
+    setDoc
+  };
+</script>
 body {
   margin: 0;
   padding: 20px 12px;
