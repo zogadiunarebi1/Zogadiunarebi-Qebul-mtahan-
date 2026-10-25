@@ -1,4 +1,147 @@
-<!DOCTYPE html>
+
+<// ZQI QEYDIYYAT VƏ PROFIL SISTEMI
+// Bu, yalnız həmin brauzerdə işləyən demo sistemidir.
+
+function getUsers() {
+  try {
+    return JSON.parse(
+      localStorage.getItem("zqiUsers") || "{}"
+    );
+  } catch {
+    return {};
+  }
+}
+
+function getCurrentUser() {
+  const email = localStorage.getItem("zqiCurrentUser");
+  if (!email) return null;
+
+  const users = getUsers();
+  return users[email] || null;
+}
+
+function showAuthMessage(message, success = false) {
+  const el = document.getElementById("authMessage");
+  el.textContent = message;
+  el.style.color = success ? "#46d39a" : "#ff7185";
+}
+
+function registerUser() {
+  const name = document.getElementById("regName")
+    .value.trim();
+
+  const email = document.getElementById("regEmail")
+    .value.trim().toLowerCase();
+
+  const password = document.getElementById("regPassword")
+    .value;
+
+  if (name.length < 3) {
+    return showAuthMessage(
+      "İstifadəçi adı ən azı 3 simvol olmalıdır."
+    );
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return showAuthMessage(
+      "Düzgün e-poçt ünvanı daxil et."
+    );
+  }
+
+  if (password.length < 8) {
+    return showAuthMessage(
+      "Şifrə ən azı 8 simvol olmalıdır."
+    );
+  }
+
+  const users = getUsers();
+
+  if (users[email]) {
+    return showAuthMessage(
+      "Bu e-poçtla artıq qeydiyyat var."
+    );
+  }
+
+  users[email] = {
+    name: name,
+    password: password,
+    xp: 0,
+    solved: 0
+  };
+
+  try {
+    localStorage.setItem("zqiUsers", JSON.stringify(users));
+    localStorage.setItem("zqiCurrentUser", email);
+  } catch {
+    return showAuthMessage(
+      "Məlumat saxlamaq mümkün olmadı."
+    );
+  }
+
+  showAuthMessage("Qeydiyyat tamamlandı!", true);
+  renderProfile();
+}
+
+function loginUser() {
+  const email = document.getElementById("loginEmail")
+    .value.trim().toLowerCase();
+
+  const password = document.getElementById("loginPassword")
+    .value;
+
+  const users = getUsers();
+  const user = users[email];
+
+  if (!user || user.password !== password) {
+    return showAuthMessage(
+      "E-poçt və ya şifrə yanlışdır."
+    );
+  }
+
+  localStorage.setItem("zqiCurrentUser", email);
+  showAuthMessage("Giriş uğurludur!", true);
+  renderProfile();
+}
+
+function logoutUser() {
+  localStorage.removeItem("zqiCurrentUser");
+  renderProfile();
+}
+
+function renderProfile() {
+  const user = getCurrentUser();
+
+  document.getElementById("authForms")
+    .classList.toggle("hidden", !!user);
+
+  document.getElementById("profilePanel")
+    .classList.toggle("hidden", !user);
+
+  if (!user) return;
+
+  document.getElementById("profileName").textContent =
+    user.name;
+
+  document.getElementById("profileEmail").textContent =
+    userEmailSafe();
+
+  document.getElementById("profileXP").textContent =
+    user.xp || 0;
+
+  document.getElementById("profileLevel").textContent =
+    Math.floor((user.xp || 0) / 100) + 1;
+
+  document.getElementById("profileSolved").textContent =
+    user.solved || 0;
+}
+
+function userEmailSafe() {
+  const email = localStorage.getItem("zqiCurrentUser");
+  return email || "";
+}
+
+// Səhifə açıldıqda profil vəziyyətini göstər.
+renderProfile();!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
@@ -44,6 +187,78 @@ button {
 }
 
 header {
+<!-- QEYDIYYAT VƏ PROFIL -->
+<section class="section" id="authSection">
+  <h3>👤 ZQİ hesabı</h3>
+
+  <div id="authForms">
+    <div class="cards">
+      <div class="item">
+        <h4>📝 Qeydiyyat</h4>
+
+        <input id="regName" type="text"
+          placeholder="İstifadəçi adı" maxlength="20">
+
+        <input id="regEmail" type="email"
+          placeholder="E-poçt ünvanı">
+
+        <input id="regPassword" type="password"
+          placeholder="Şifrə" minlength="8">
+
+        <button class="primary" onclick="registerUser()">
+          Qeydiyyatdan keç
+        </button>
+      </div>
+
+      <div class="item">
+        <h4>🔑 Hesaba giriş</h4>
+
+        <input id="loginEmail" type="email"
+          placeholder="E-poçt ünvanı">
+
+        <input id="loginPassword" type="password"
+          placeholder="Şifrə">
+
+        <button class="secondary" onclick="loginUser()">
+          Daxil ol
+        </button>
+      </div>
+    </div>
+
+    <p id="authMessage" class="note"></p>
+  </div>
+
+  <div id="profilePanel" class="hidden">
+    <div class="item">
+      <div style="font-size:42px">👤</div>
+      <h2 id="profileName">İstifadəçi</h2>
+      <p id="profileEmail" class="muted"></p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="profileXP">0</strong>
+          <span>XP</span>
+        </div>
+
+        <div class="stat">
+          <strong id="profileLevel">1</strong>
+          <span>Səviyyə</span>
+        </div>
+
+        <div class="stat">
+          <strong id="profileSolved">0</strong>
+          <span>Düzgün cavab</span>
+        </div>
+      </div>
+
+      <button class="secondary"
+        style="margin-top:16px"
+        onclick="logoutUser()">
+        Hesabdan çıx
+      </button>
+    </div>
+  </div>
+</section>
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,6 +298,39 @@ header {
   padding: 12px;
   border-radius: 30px;
   font-weight: bold;
+#authSection input {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #354968;
+  background: #080d19;
+  color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+#authSection input:focus {
+  border-color: #4d8dff;
+}
+
+#authSection input::placeholder {
+  color: #8291ab;
+}
+
+#authSection .item button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+#authSection h2 {
+  margin-bottom: 5px;
+}
+
+.hidden {
+  display: none !important;
+}
 }
 
 .hero {
