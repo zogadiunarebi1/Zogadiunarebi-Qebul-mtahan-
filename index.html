@@ -1,597 +1,217 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQİ Riyaziyyat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canlı Quiz</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f5ff;color:#17213a}
-header{background:#2862e8;color:white;text-align:center;padding:25px 15px}
-header h1{margin:0 0 8px}
-main{max-width:650px;margin:25px auto;padding:0 14px}
-.card{background:white;border-radius:20px;padding:22px;box-shadow:0 5px 25px #0001}
-.tabs{display:flex;gap:10px;margin-bottom:20px}
-.tabs button{flex:1;padding:13px;border:0;border-radius:10px;background:#e8edff;color:#234078;font-weight:bold}
-.tabs button.active{background:#2862e8;color:white}
-form{display:grid;gap:13px}
-label{display:grid;gap:6px;font-weight:bold}
-input,select{width:100%;padding:13px;border:1px solid #d2d8e5;border-radius:10px;font-size:16px;background:white}
-.primary{padding:14px;border:0;border-radius:10px;background:#2862e8;color:white;font-size:16px;font-weight:bold}
-.msg{padding:12px;background:#f3f6ff;border-radius:9px;overflow-wrap:anywhere}
-.hidden{display:none!important}
-.small{font-size:13px;color:#64708a;line-height:1.5}
-footer{text-align:center;padding:25px;color:#68738a}
+body{margin:0;background:#f3f6f9;color:#182335;font-family:Arial,sans-serif}
+header{text-align:center;padding:25px 10px 12px;color:#287da1;font-size:30px;font-weight:bold}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 14px}
+.stat,.card{background:white;border:1px solid #dce5ec;border-radius:24px;box-shadow:0 3px 8px #0002}
+.stat{text-align:center;padding:18px 4px;font-size:14px;font-weight:bold}
+.stat strong{display:block;font-size:27px;margin-top:12px}
+.card{margin:25px 14px;padding:22px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+h2{font-size:22px;margin:5px 0 18px}
+.muted{color:#566578;line-height:1.6}
+.timer{font-size:20px;color:#c75c5c;font-weight:bold}
+.rules{background:#dcecf7;border-radius:20px;padding:18px;margin-top:18px;color:#40566a;line-height:1.65}
+button{border:0;border-radius:12px;padding:14px;background:#287fa4;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6}
+.option{display:block;width:100%;text-align:left;background:#f0f5f9;color:#192638;border:1px solid #d6e0e8;margin:10px 0}
+.option.selected{border:2px solid #287fa4;background:#dcecf7}
+#answers{margin-top:18px}
+#progress{height:7px;background:#dce5ec;border-radius:8px;overflow:hidden;margin:15px 0}
+#bar{height:100%;width:100%;background:#287fa4}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #dce5ec;display:flex;justify-content:space-around;padding:12px 2px 18px}
+nav span{text-align:center;font-size:12px;color:#526174}
+nav b{display:block;font-size:23px;margin-bottom:5px}
+main{padding-bottom:100px}
+.hidden{display:none}
+@media(min-width:700px){main{max-width:700px;margin:auto}.stats{max-width:700px;margin:auto}}
 </style>
 </head>
 <body>
-<header>
-<h1>ZQİ Riyaziyyat</h1>
-<p>Biliklərini addım-addım artır</p>
-</header>
+<header>Canlı Quiz</header>
 
 <main>
-<section class="card">
-<div class="tabs">
-<button id="signupTab" class="active" type="button">Qeydiyyat</button>
-<button id="loginTab" type="button">Giriş</button>
+<div class="stats">
+ <div class="stat">Quiz sayı<strong id="quizCount">70</strong></div>
+ <div class="stat">İlk 10-luq<strong id="top10">36</strong></div>
+ <div class="stat">İlk 3-lük<strong id="top3">8</strong></div>
 </div>
 
-<form id="signupForm">
-<label>Ad<input id="firstName" required></label>
-<label>Soyad<input id="lastName" required></label>
-<label>Sinif
-<select id="grade" required>
-<option value="">Sinif seç</option>
-<option>5-ci sinif</option><option>6-cı sinif</option>
-<option>7-ci sinif</option><option>8-ci sinif</option>
-<option>9-cu sinif</option><option>10-cu sinif</option>
-<option>11-ci sinif</option><option>12-ci sinif</option>
-<option>Abituriyent</option>
-</select>
-</label>
-<label>Yaşadığın yer
-<select id="placeType" required>
-<option value="">Seç</option>
-<option value="city">Marneuli şəhəri</option>
-<option value="village">Kənd</option>
-<option value="other">Başqa yer</option>
-</select>
-</label>
-<label id="villageField" class="hidden">Kəndin adı<input id="village"></label>
-<label id="otherPlaceField" class="hidden">Yaşadığın yer<input id="otherPlace"></label>
-<label>İstifadəçi adı<input id="username" minlength="3" required></label>
-<label>E-poçt<input id="email" type="email" required></label>
-<label>Şifrə<input id="password" type="password" minlength="6" required></label>
-<label>Şifrəni təkrar yaz<input id="confirmPassword" type="password" minlength="6" required></label>
-<button class="primary" type="submit">Qeydiyyatdan keç</button>
-<div id="signupMessage" class="msg" role="status"></div>
-<p class="small">Şifrən Firestore bazasında saxlanılmır.</p>
-</form>
+<section class="card" id="lobby">
+ <div class="row">
+  <h2>Canlı Quiz</h2>
+  <span class="timer" id="countdown">--:--:--</span>
+ </div>
+ <p class="muted" id="lobbyText">Növbəti quizin başlaması gözlənilir.</p>
+ <div class="rules">
+  <b style="font-size:19px;color:#182335">Quiz haqqında</b><br>
+  • Hər gün saat 18:30-da başlayır.<br>
+  • 10 sualdan ibarətdir.<br>
+  • Hər suala cavab üçün 60 saniyə verilir.<br>
+  • Suallar arasında 15 saniyə fasilə olur.<br>
+  • Düzgün cavab maksimum 100 xal verir.<br>
+  • Daha sürətli cavab daha çox xal qazandırır.<br>
+  • Xal nəticələri yarış bitdikdən sonra göstərilir.
+ </div>
+ <p class="muted">Saat cihazının yerli saatına əsaslanır.</p>
+</section>
 
-<form id="loginForm" class="hidden">
-<label>E-poçt<input id="loginEmail" type="email" required></label>
-<label>Şifrə<input id="loginPassword" type="password" required></label>
-<button class="primary" type="submit">Daxil ol</button>
-<div id="loginMessage" class="msg" role="status"></div>
-<button id="logoutButton" class="primary hidden" type="button">Hesabdan çıx</button>
-</form>
+<section class="card hidden" id="game">
+ <div class="row">
+  <b id="qNumber">Sual 1/10</b>
+  <b id="score">0 xal</b>
+ </div>
+ <div id="progress"><div id="bar"></div></div>
+ <div class="row">
+  <span class="muted" id="topic">Ədədi silsilələr</span>
+  <span class="timer" id="timer">60 san.</span>
+ </div>
+ <h2 id="question"></h2>
+ <div id="answers"></div>
+ <p class="muted" id="feedback"></p>
+</section>
+
+<section class="card hidden" id="result">
+ <h2>Quiz başa çatdı!</h2>
+ <h1 id="finalScore">0 xal</h1>
+ <p class="muted" id="finalText"></p>
+ <button onclick="location.reload()">Bağla</button>
 </section>
 </main>
-<footer>ZQİ Riyaziyyat — Biliklərini addım-addım artır</footer>
 
-<script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import {
- getAuth,createUserWithEmailAndPassword,
- signInWithEmailAndPassword,signOut,onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-import {
- getFirestore,doc,setDoc,serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
-const firebaseConfig={
- apiKey:"AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
- authDomain:"zqi-riyaziyyat.firebaseapp.com",
- projectId:"zqi-riyaziyyat",
- storageBucket:"zqi-riyaziyyat.firebasestorage.app",
- messagingSenderId:"228687771538",
- appId:"1:228687771538:web:4b4c31d993b0614ca6334b",
- measurementId:"G-MT0Q1DP79N"
-};
-
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-const $=id=>document.getElementById(id);
-
-function showTab(signup){
- $("signupForm").classList.toggle("hidden",!signup);
- $("loginForm").classList.toggle("hidden",signup);
- $("signupTab").classList.toggle("active",signup);
- $("loginTab").classList.toggle("active",!signup);
-}
-$("signupTab").addEventListener("click",()=>showTab(true));
-$("loginTab").addEventListener("click",()=>showTab(false));
-
-$("placeType").addEventListener("change",()=>{
- const v=$("placeType").value;
- $("villageField").classList.toggle("hidden",v!=="village");
- $("otherPlaceField").classList.toggle("hidden",v!=="other");
- $("village").required=v==="village";
- $("otherPlace").required=v==="other";
-});
-
-function friendlyError(e){
- const errors={
- "auth/email-already-in-use":"Bu e-poçt artıq qeydiyyatdan keçib.",
- "auth/invalid-email":"E-poçt düzgün deyil.",
- "auth/weak-password":"Şifrə ən azı 6 simvol olmalıdır.",
- "auth/invalid-credential":"E-poçt və ya şifrə yanlışdır.",
- "auth/too-many-requests":"Çox cəhd edildi. Sonra yenidən yoxla.",
- "auth/network-request-failed":"İnternet bağlantısını yoxla.",
- "permission-denied":"Firestore icazəsi yoxdur. Təhlükəsizlik qaydalarını yoxlamaq lazımdır."
- };
- return errors[e.code]||"Xəta baş verdi: "+(e.code||"yenidən cəhd et");
-}
-
-$("signupForm").addEventListener("submit",async e=>{
- e.preventDefault();
- $("signupMessage").textContent="Qeydiyyat aparılır...";
- if($("password").value!==$("confirmPassword").value){
-  $("signupMessage").textContent="Şifrələr eyni deyil.";
-  return;
- }
- const type=$("placeType").value;
- const place=type==="city"?"Marneuli şəhəri":
-  type==="village"?$("village").value.trim():$("otherPlace").value.trim();
-
- try{
-  const email=$("email").value.trim();
-  const cred=await createUserWithEmailAndPassword(auth,email,$("password").value);
-  await setDoc(doc(db,"users",cred.user.uid),{
-   firstName:$("firstName").value.trim(),
-   lastName:$("lastName").value.trim(),
-   name:$("firstName").value.trim()+" "+$("lastName").value.trim(),
-   username:$("username").value.trim(),
-   email:email,
-   grade:$("grade").value,
-   place:place,
-   createdAt:serverTimestamp()
-  });
-  $("signupMessage").textContent="Qeydiyyat uğurla tamamlandı!";
-  $("signupForm").reset();
-  $("villageField").classList.add("hidden");
-  $("otherPlaceField").classList.add("hidden");
- }catch(err){
-  console.error(err);
-  $("signupMessage").textContent=friendlyError(err);
- }
-});
-
-$("loginForm").addEventListener("submit",async e=>{
- e.preventDefault();
- $("loginMessage").textContent="Giriş edilir...";
- try{
-  await signInWithEmailAndPassword(
-   auth,$("loginEmail").value.trim(),$("loginPassword").value
-  );
-  $("loginMessage").textContent="Giriş uğurludur.";
- }catch(err){
-  $("loginMessage").textContent=friendlyError(err);
- }
-});
-
-$("logoutButton").addEventListener("click",async()=>{
- await signOut(auth);
- $("loginMessage").textContent="Hesabdan çıxıldı.";
-});
-
-onAuthStateChanged(auth,user=>{
- $("logoutButton").classList.toggle("hidden",!user);
- if(user&&!$("loginForm").classList.contains("hidden")){
-  $("loginMessage").textContent="Daxil olmusunuz: "+user.email;
- }
-});
-</script>
-
-<style>
-#studentDashboard { font-family:Arial,sans-serif; color:#17213a; padding:16px; background:#f0f4ff; }
-#studentDashboard * { box-sizing:border-box; }
-.dash-top { background:#fff; padding:18px; border-radius:18px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 3px 15px #182b5010; }
-.dash-brand { color:#2862e8; font-size:23px; font-weight:bold; }
-.dash-welcome { margin:20px 0; padding:24px 20px; color:white; border-radius:20px; background:linear-gradient(130deg,#2862e8,#57a7f5); }
-.dash-welcome h2 { margin:0 0 10px; font-size:25px; }
-.dash-welcome p { line-height:1.5; }
-.dash-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-bottom:20px; }
-.dash-stat { background:white; border-radius:15px; padding:16px; box-shadow:0 3px 12px #182b5008; }
-.dash-stat strong { display:block; color:#2862e8; font-size:23px; margin-top:8px; }
-.dash-nav { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; margin:18px 0; }
-.dash-nav button { border:0; border-radius:12px; background:white; padding:12px 3px; color:#34415d; font-size:12px; font-weight:bold; }
-.dash-nav button.active { background:#2862e8; color:white; }
-.dash-panel { background:white; padding:18px; border-radius:18px; margin-bottom:16px; }
-.dash-panel h3 { margin:0 0 15px; }
-.dash-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid #edf0f7; }
-.dash-item:last-child { border-bottom:0; }
-.dash-icon { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:#e5edff; font-size:22px; flex-shrink:0; }
-.dash-item div:nth-child(2) { flex:1; }
-.dash-item small { display:block; color:#75819a; margin-top:5px; }
-.dash-action { border:0; border-radius:9px; padding:10px 13px; background:#2862e8; color:white; font-weight:bold; }
-.dash-exit { width:100%; border:0; border-radius:12px; padding:14px; background:#e8edff; color:#234078; font-size:16px; font-weight:bold; margin:5px 0 15px; }
-.dash-hidden { display:none !important; }
-@media(min-width:650px) {
- #studentDashboard { max-width:900px; margin:auto; }
- .dash-stats { grid-template-columns:repeat(4,minmax(0,1fr)); }
-}
-</style>
-
-<div id="studentDashboard" class="dash-hidden">
-  <div class="dash-top">
-    <div class="dash-brand">🎓 Hədəf</div>
-    <span id="dashUserEmail" style="font-size:12px;overflow-wrap:anywhere"></span>
-  </div>
-
-  <div class="dash-nav">
-    <button class="active" data-page="home">🏠 Əsas</button>
-    <button data-page="learn">📚 Öyrənmə</button>
-    <button data-page="duel">⚔️ Duel</button>
-    <button data-page="profile">👤 Profil</button>
-  </div>
-
-  <section class="dash-page" id="dash-home">
-    <div class="dash-welcome">
-      <h2>Gələcəyinə addım at!</h2>
-      <p>Öyrən, məşq et və biliklərini addım-addım artır.</p>
-      <button class="dash-action" data-goto="learn">Öyrənməyə başla →</button>
-    </div>
-
-    <div class="dash-stats">
-      <div class="dash-stat">⭐ Ümumi xal<strong>0</strong></div>
-      <div class="dash-stat">📘 Riyaziyyat<strong>0 sual</strong></div>
-      <div class="dash-stat">📖 Verbal<strong>0 sual</strong></div>
-      <div class="dash-stat">🎯 Məşq<strong>Başla</strong></div>
-    </div>
-
-    <div class="dash-panel">
-      <h3>Gündəlik tapşırıqlar</h3>
-      <div class="dash-item">
-        <div class="dash-icon">➗</div>
-        <div>Riyaziyyat<small>Müsbət və mənfi ədədlər</small></div>
-        <button class="dash-action" data-goto="learn">Başla</button>
-      </div>
-      <div class="dash-item">
-        <div class="dash-icon">📚</div>
-        <div>Verbal<small>Oxu və anlama</small></div>
-        <button class="dash-action" data-goto="learn">Bax</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="dash-page dash-hidden" id="dash-learn">
-    <div class="dash-panel">
-      <h3>📚 Öyrənmə bölməsi</h3>
-      <p>Riyaziyyat mövzuları</p>
-      <div class="dash-item">
-        <div class="dash-icon">➕</div>
-        <div>Müsbət və mənfi ədədlər<small>Qayda və izahlı suallar</small></div>
-        <button class="dash-action" id="dashNumbers">Aç</button>
-      </div>
-      <div class="dash-item">
-        <div class="dash-icon">📐</div>
-        <div>Cəbr<small>Bu bölmə sonradan əlavə ediləcək</small></div>
-      </div>
-      <div class="dash-item">
-        <div class="dash-icon">📏</div>
-        <div>Həndəsə<small>Bu bölmə sonradan əlavə ediləcək</small></div>
-      </div>
-      <div id="dashTopicMessage" class="dash-hidden" style="background:#eef3ff;padding:14px;border-radius:12px;margin-top:14px">
-        Müsbət və mənfi ədədlər mövzusunun dərs səhifəsini növbəti mərhələdə bağlayacağıq.
-      </div>
-    </div>
-  </section>
-
-  <section class="dash-page dash-hidden" id="dash-duel">
-    <div class="dash-panel">
-      <h3>⚔️ Duel bölməsi</h3>
-      <p>Bilik yarışları bölməsi hazırlanır.</p>
-      <div class="dash-item"><div class="dash-icon">➗</div><div>Riyaziyyat dueli<small>Tezliklə</small></div></div>
-      <div class="dash-item"><div class="dash-icon">📖</div><div>Verbal dueli<small>Tezliklə</small></div></div>
-    </div>
-  </section>
-
-  <section class="dash-page dash-hidden" id="dash-profile">
-    <div class="dash-panel">
-      <h3>👤 Profil</h3>
-      <p>Hesabın: <strong id="dashProfileEmail"></strong></p>
-      <p>Ümumi xal: <strong>0</strong></p>
-      <p class="small">Nəticələr və irəliləyiş funksiyaları növbəti mərhələdə əlavə ediləcək.</p>
-    </div>
-    <button id="dashLogout" class="dash-exit">Hesabdan çıx</button>
-  </section>
-</div>
-
-<script type="module">
-import { getApps } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
-const app = getApps()[0];
-if (app) {
-  const auth = getAuth(app);
-  const dashboard = document.getElementById("studentDashboard");
-  const oldCard = document.querySelector("main .card");
-
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      dashboard.classList.remove("dash-hidden");
-      if (oldCard) oldCard.classList.add("dash-hidden");
-      document.getElementById("dashUserEmail").textContent = user.email || "";
-      document.getElementById("dashProfileEmail").textContent = user.email || "";
-    } else {
-      dashboard.classList.add("dash-hidden");
-      if (oldCard) oldCard.classList.remove("dash-hidden");
-    }
-  });
-
-  document.querySelectorAll("#studentDashboard [data-page]").forEach(button => {
-    button.addEventListener("click", () => showPage(button.dataset.page));
-  });
-
-  document.querySelectorAll("#studentDashboard [data-goto]").forEach(button => {
-    button.addEventListener("click", () => showPage(button.dataset.goto));
-  });
-
-  function showPage(page) {
-    document.querySelectorAll("#studentDashboard .dash-page").forEach(section => {
-      section.classList.add("dash-hidden");
-    });
-    const selected = document.getElementById("dash-" + page);
-    if (selected) selected.classList.remove("dash-hidden");
-
-    document.querySelectorAll("#studentDashboard [data-page]").forEach(button => {
-      button.classList.toggle("active", button.dataset.page === page);
-    });
-  }
-
-  document.getElementById("dashNumbers").addEventListener("click", () => {
-    document.getElementById("dashTopicMessage").classList.toggle("dash-hidden");
-  });
-
-  document.getElementById("dashLogout").addEventListener("click", async () => {
-    await signOut(auth);
-    showPage("home");
-  });
-}
-</script>
-
-<!DOCTYPE html>
-<html lang="az">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canlı Riyaziyyat Quiz</title>
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;font-family:Arial,sans-serif;
-  background:#101426;color:white;padding:20px;
-}
-.container{
-  max-width:650px;margin:25px auto;padding:25px;
-  background:#1b2239;border-radius:20px;
-  border:1px solid #343e5d;
-}
-h1{text-align:center;color:#8ea2ff}
-.sub{text-align:center;color:#c1c9e5}
-#clock{text-align:center;font-size:30px;margin:20px 0}
-.info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.info span{background:#29324e;padding:10px;border-radius:9px}
-#question{font-size:22px;line-height:1.5;margin:25px 0}
-button{
-  width:100%;padding:14px;margin:7px 0;
-  border:0;border-radius:10px;font-size:16px;
-  cursor:pointer;background:#303b5c;color:white;
-}
-button:hover{background:#465582}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:#657cff}
-#status{text-align:center;margin:18px 0;color:#b7c5ff}
-#message{text-align:center;min-height:24px}
-.bar{height:9px;background:#343e5d;border-radius:9px;overflow:hidden;margin-top:15px}
-#progress{height:100%;width:100%;background:#8ea2ff}
-.hidden{display:none}
-</style>
-</head>
-<body>
-<div class="container">
-  <h1>⚡ Riyaziyyat Quiz</h1>
-  <p class="sub">10 sual · Sürət yarışı · Maksimum 1000 xal</p>
-
-  <div id="waiting">
-    <h2 style="text-align:center">Yarışa geri sayım</h2>
-    <div id="clock">--:--:--</div>
-    <p class="sub">Yarış hər gün saat 21:00-da başlayır.</p>
-  </div>
-
-  <div id="game" class="hidden">
-    <div class="info">
-      <span id="number">Sual 1/10</span>
-      <span id="score">Xal: 0</span>
-      <span id="timer">60 saniyə</span>
-    </div>
-    <div class="bar"><div id="progress"></div></div>
-    <div id="question"></div>
-    <div id="answers"></div>
-    <p id="status"></p>
-    <p id="message"></p>
-  </div>
-
-  <div id="finished" class="hidden">
-    <h2 style="text-align:center">🏁 Yarış bitdi!</h2>
-    <h1 id="finalScore"></h1>
-    <p id="finalText" class="sub"></p>
-    <p class="sub">Düzgün cavablar açıqlanmır.</p>
-  </div>
-</div>
+<nav>
+ <span><b>🏠</b>Əsas</span>
+ <span><b>📚</b>Öyrənmə</span>
+ <span><b>📝</b>İmtahan</span>
+ <span><b>⚔️</b>Duel</span>
+ <span><b>🏆</b>Quiz</span>
+ <span><b>👤</b>Profil</span>
+</nav>
 
 <script>
 const questions = [
- {q:"(-5) + 8 = ?", a:["-13","3","-3","13"], c:1},
- {q:"(-7) + (-4) = ?", a:["11","-3","-11","3"], c:2},
- {q:"9 - 14 = ?", a:["5","-5","23","-23"], c:1},
- {q:"(-6) × 3 = ?", a:["18","-9","-18","9"], c:2},
- {q:"(-24) ÷ (-6) = ?", a:["-4","4","-18","18"], c:1},
- {q:"(-3) × (-5) = ?", a:["-15","8","-8","15"], c:3},
- {q:"12 + (-17) = ?", a:["29","-29","5","-5"], c:3},
- {q:"(-20) - (-8) = ?", a:["-28","-12","12","28"], c:1},
- {q:"(-4) × 6 + 10 = ?", a:["-34","-14","14","34"], c:1},
- {q:"(-36) ÷ 4 + 7 = ?", a:["16","-16","-2","2"], c:2}
+ {t:"Ədədi silsilələr",q:"2; x+2; 8 ədədləri ardıcıl ədədi silsilə hədləridirsə, x neçədir?",o:["2","3","4","5"],a:1},
+ {t:"Ədədi silsilələr",q:"Ədədi silsilənin ilk 5 həddinin cəmi 15-dir. Üçüncü hədd neçədir?",o:["2","3","4","5"],a:1},
+ {t:"Ədədi silsilələr",q:"a₄ + 2a₆ + a₈ = 4 olarsa, S₁₁ neçədir?",o:["8","10","11","12"],a:2},
+ {t:"Ədədi silsilələr",q:"a; 7; b; 19 ardıcıllığı ədədi silsilədirsə, a və b hansıdır?",o:["a=3, b=11","a=2, b=14","a=1, b=13","a=5, b=15"],a:2},
+ {t:"Ədədi silsilələr",q:"Sₙ = 8n² + 3n olarsa, n-ci həddi tapın.",o:["16n+5","8n−3","16n−5","8n+3"],a:2},
+ {t:"Ədədi silsilələr",q:"25-dən başlayaraq neçə ardıcıl natural ədədin cəmi 196-dır?",o:["5","6","7","8"],a:2},
+ {t:"Ədədi silsilələr",q:"32-dən başlayaraq neçə ardıcıl natural ədədin cəmi 170-dir?",o:["3","4","5","6"],a:2},
+ {t:"Funksiyalar",q:"f(x) dövrü 3 olan funksiyadır. f(1)=7 olarsa, 4f(10)−3f(−5) neçədir?",o:["0","7","14","28"],a:1},
+ {t:"Funksiyalar",q:"f(x)=x²−2x funksiyasının minimum nöqtəsinin x koordinatı neçədir?",o:["−2","−1","1","2"],a:2},
+ {t:"Həndəsə",q:"Düzbucaqlının ölçüləri 10 sm və 6 sm-dir. Küncdən 3 sm tərəfli kvadrat kəsilir. Alınan fiqurun perimetri neçədir?",o:["26 sm","28 sm","32 sm","38 sm"],a:3}
 ];
 
-let index=0, total=0, correct=0;
-let remaining=60, interval=null, phase="waiting";
-let phaseEnd=0, answered=false, dailyKey="";
+let idx=0, points=0, right=0, answered=false;
+let phase="lobby", end=0, tick=null;
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
 
-function getNextStart(){
-  const now=new Date(), start=new Date(now);
-  start.setHours(21,0,0,0);
-  if(now>=start) start.setDate(start.getDate()+1);
-  return start;
+function nextStart(){
+ const d=new Date();
+ d.setHours(18,30,0,0);
+ if(Date.now()>=d.getTime()) d.setDate(d.getDate()+1);
+ return d;
 }
+let start=nextStart();
 
-let startAt=getNextStart();
-
-function updateClock(){
-  if(phase!=="waiting")return;
-  const ms=startAt-Date.now();
-  if(ms<=0){
-    startQuiz();
-    return;
-  }
-  const s=Math.floor(ms/1000);
-  $("clock").textContent=
-    pad(Math.floor(s/3600))+":"+pad(Math.floor(s%3600/60))+":"+pad(s%60);
+function showClock(){
+ if(phase!=="lobby")return;
+ let ms=start-Date.now();
+ if(ms<=0){begin();return}
+ let s=Math.floor(ms/1000);
+ $("countdown").textContent=pad(s/3600|0)+":"+pad(s%3600/60|0)+":"+pad(s%60);
 }
-
-function startQuiz(){
-  const now=new Date();
-  dailyKey="quiz-"+now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
-
-  // Eyni brauzerdə həmin gün təkrar başlamağın qarşısını alır.
-  if(localStorage.getItem(dailyKey)){
-    phase="finished";
-    $("waiting").classList.add("hidden");
-    $("finished").classList.remove("hidden");
-    $("finalScore").textContent="Bugünkü yarış tamamlanıb";
-    $("finalText").textContent="Növbəti yarış sabah saat 21:00-da başlayacaq.";
-    return;
-  }
-
-  phase="question";
-  $("waiting").classList.add("hidden");
-  $("game").classList.remove("hidden");
-  showQuestion();
+function begin(){
+ if(phase!=="lobby")return;
+ const key="quiz-completed-"+new Date().toLocaleDateString();
+ if(localStorage.getItem(key)){
+  $("lobbyText").textContent="Bu cihazda bugünkü quiz artıq tamamlanıb. Sabah yenidən qoşul!";
+  return;
+ }
+ phase="question";
+ $("lobby").classList.add("hidden");
+ $("game").classList.remove("hidden");
+ renderQuestion();
 }
-
-function showQuestion(){
-  if(index>=questions.length){finishQuiz();return;}
-  phase="question";
-  answered=false;
-  remaining=60;
-  $("number").textContent=`Sual ${index+1}/10`;
-  $("score").textContent=`Xal: ${total}`;
-  $("timer").textContent="60 saniyə";
-  $("progress").style.width="100%";
-  $("message").textContent="";
-  $("status").textContent="Cavabını seç!";
-  $("question").textContent=questions[index].q;
-  $("answers").innerHTML="";
-
-  questions[index].a.forEach((answer,i)=>{
-    const btn=document.createElement("button");
-    btn.textContent=answer;
-    btn.onclick=()=>chooseAnswer(i);
-    $("answers").appendChild(btn);
-  });
-
-  phaseEnd=Date.now()+60000;
-  runTimer();
+function renderQuestion(){
+ if(idx>=questions.length){finish();return}
+ phase="question";answered=false;
+ const q=questions[idx];
+ $("qNumber").textContent=`Sual ${idx+1}/10`;
+ $("topic").textContent=q.t;
+ $("question").textContent=q.q;
+ $("timer").textContent="60 san.";
+ $("feedback").textContent="Cavabını seç.";
+ $("answers").innerHTML="";
+ q.o.forEach((v,i)=>{
+  const b=document.createElement("button");
+  b.className="option";b.textContent=String.fromCharCode(65+i)+") "+v;
+  b.onclick=()=>answer(i);
+  $("answers").appendChild(b);
+ });
+ end=Date.now()+60000;
+ run();
 }
-
-function runTimer(){
-  clearInterval(interval);
-  interval=setInterval(()=>{
-    const left=Math.max(0,Math.ceil((phaseEnd-Date.now())/1000));
-
-    if(phase==="question"){
-      $("timer").textContent=left+" saniyə";
-      $("progress").style.width=(left/60*100)+"%";
-      if(left<=0) endQuestion("Vaxt bitdi. Xal qazanmadın.");
-    }else if(phase==="break"){
-      $("status").textContent=`Növbəti suala ${left} saniyə`;
-      if(left<=0){
-        clearInterval(interval);
-        showQuestion();
-      }
-    }
-  },100);
+function answer(choice){
+ if(phase!=="question"||answered)return;
+ answered=true;
+ const elapsed=(60000-(end-Date.now()))/1000;
+ if(choice===questions[idx].a){
+  const gained=Math.max(1,Math.ceil(100*(1-elapsed/60)));
+  points+=gained;right++;
+  $("feedback").textContent=`Düzgün cavab! +${gained} xal`;
+ }else{
+  $("feedback").textContent="Yanlış cavab. Düzgün cavab göstərilmir.";
+ }
+ $("score").textContent=points+" xal";
+ $("answers").querySelectorAll("button").forEach(b=>b.disabled=true);
+ nextPhase();
 }
-
-function chooseAnswer(choice){
-  if(phase!=="question"||answered)return;
-  answered=true;
-
-  const elapsed=60-Math.max(0,(phaseEnd-Date.now())/1000);
-  if(choice===questions[index].c){
-    const points=Math.max(1,Math.ceil(100*(1-elapsed/60)));
-    total+=points;
-    correct++;
-    $("status").textContent=`Düzgün cavab! +${points} xal`;
-  }else{
-    $("status").textContent="Yanlış cavab. Xal qazanmadın.";
-  }
-
-  $("score").textContent=`Xal: ${total}`;
-  endQuestion(null);
-}
-
-function endQuestion(message){
-  if(phase!=="question")return;
-  phase="transition";
-  clearInterval(interval);
-
-  if(message)$("status").textContent=message;
+function nextPhase(){
+ clearInterval(tick);
+ if(phase==="question"&&!answered){
+  $("feedback").textContent="Vaxt bitdi. Xal qazanmadın.";
   $("answers").querySelectorAll("button").forEach(b=>b.disabled=true);
-  index++;
-
-  if(index>=questions.length){
-    setTimeout(finishQuiz,1000);
-  }else{
-    phase="break";
-    phaseEnd=Date.now()+15000;
-    $("message").textContent="15 saniyəlik fasilə";
-    runTimer();
+ }
+ idx++;
+ if(idx>=questions.length){phase="break";setTimeout(finish,1000);return}
+ phase="break";end=Date.now()+15000;
+ $("feedback").textContent="Növbəti suala 15 saniyəlik fasilə.";
+ run();
+}
+function run(){
+ clearInterval(tick);
+ tick=setInterval(()=>{
+  const left=Math.max(0,Math.ceil((end-Date.now())/1000));
+  if(phase==="question"){
+   $("timer").textContent=left+" san.";
+   $("bar").style.width=(left/60*100)+"%";
+   if(left===0)nextPhase();
+  }else if(phase==="break"){
+   $("timer").textContent=left+" san.";
+   $("bar").style.width=(left/15*100)+"%";
+   if(left===0){clearInterval(tick);renderQuestion()}
   }
+ },200);
 }
-
-function finishQuiz(){
-  clearInterval(interval);
-  phase="finished";
-  localStorage.setItem(dailyKey,"done");
-  $("game").classList.add("hidden");
-  $("waiting").classList.add("hidden");
-  $("finished").classList.remove("hidden");
-  $("finalScore").textContent=total+" / 1000 xal";
-  $("finalText").textContent=`10 sualdan ${correct} düzgün cavab verdin.`;
+function finish(){
+ clearInterval(tick);phase="finished";
+ localStorage.setItem("quiz-completed-"+new Date().toLocaleDateString(),"1");
+ $("game").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ $("finalScore").textContent=points+" / 1000 xal";
+ $("finalText").textContent=`10 sualdan ${right} düzgün cavab verdin.`;
 }
-
-setInterval(updateClock,250);
-updateClock();
+showClock();
+setInterval(showClock,500);
 </script>
-</body>
-</html>
-
-
 </body>
 </html>
