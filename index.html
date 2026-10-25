@@ -194,5 +194,174 @@ onAuthStateChanged(auth,user=>{
  }
 });
 </script>
+
+<style>
+#studentDashboard { font-family:Arial,sans-serif; color:#17213a; padding:16px; background:#f0f4ff; }
+#studentDashboard * { box-sizing:border-box; }
+.dash-top { background:#fff; padding:18px; border-radius:18px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 3px 15px #182b5010; }
+.dash-brand { color:#2862e8; font-size:23px; font-weight:bold; }
+.dash-welcome { margin:20px 0; padding:24px 20px; color:white; border-radius:20px; background:linear-gradient(130deg,#2862e8,#57a7f5); }
+.dash-welcome h2 { margin:0 0 10px; font-size:25px; }
+.dash-welcome p { line-height:1.5; }
+.dash-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-bottom:20px; }
+.dash-stat { background:white; border-radius:15px; padding:16px; box-shadow:0 3px 12px #182b5008; }
+.dash-stat strong { display:block; color:#2862e8; font-size:23px; margin-top:8px; }
+.dash-nav { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; margin:18px 0; }
+.dash-nav button { border:0; border-radius:12px; background:white; padding:12px 3px; color:#34415d; font-size:12px; font-weight:bold; }
+.dash-nav button.active { background:#2862e8; color:white; }
+.dash-panel { background:white; padding:18px; border-radius:18px; margin-bottom:16px; }
+.dash-panel h3 { margin:0 0 15px; }
+.dash-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid #edf0f7; }
+.dash-item:last-child { border-bottom:0; }
+.dash-icon { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:#e5edff; font-size:22px; flex-shrink:0; }
+.dash-item div:nth-child(2) { flex:1; }
+.dash-item small { display:block; color:#75819a; margin-top:5px; }
+.dash-action { border:0; border-radius:9px; padding:10px 13px; background:#2862e8; color:white; font-weight:bold; }
+.dash-exit { width:100%; border:0; border-radius:12px; padding:14px; background:#e8edff; color:#234078; font-size:16px; font-weight:bold; margin:5px 0 15px; }
+.dash-hidden { display:none !important; }
+@media(min-width:650px) {
+ #studentDashboard { max-width:900px; margin:auto; }
+ .dash-stats { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+</style>
+
+<div id="studentDashboard" class="dash-hidden">
+  <div class="dash-top">
+    <div class="dash-brand">🎓 Hədəf</div>
+    <span id="dashUserEmail" style="font-size:12px;overflow-wrap:anywhere"></span>
+  </div>
+
+  <div class="dash-nav">
+    <button class="active" data-page="home">🏠 Əsas</button>
+    <button data-page="learn">📚 Öyrənmə</button>
+    <button data-page="duel">⚔️ Duel</button>
+    <button data-page="profile">👤 Profil</button>
+  </div>
+
+  <section class="dash-page" id="dash-home">
+    <div class="dash-welcome">
+      <h2>Gələcəyinə addım at!</h2>
+      <p>Öyrən, məşq et və biliklərini addım-addım artır.</p>
+      <button class="dash-action" data-goto="learn">Öyrənməyə başla →</button>
+    </div>
+
+    <div class="dash-stats">
+      <div class="dash-stat">⭐ Ümumi xal<strong>0</strong></div>
+      <div class="dash-stat">📘 Riyaziyyat<strong>0 sual</strong></div>
+      <div class="dash-stat">📖 Verbal<strong>0 sual</strong></div>
+      <div class="dash-stat">🎯 Məşq<strong>Başla</strong></div>
+    </div>
+
+    <div class="dash-panel">
+      <h3>Gündəlik tapşırıqlar</h3>
+      <div class="dash-item">
+        <div class="dash-icon">➗</div>
+        <div>Riyaziyyat<small>Müsbət və mənfi ədədlər</small></div>
+        <button class="dash-action" data-goto="learn">Başla</button>
+      </div>
+      <div class="dash-item">
+        <div class="dash-icon">📚</div>
+        <div>Verbal<small>Oxu və anlama</small></div>
+        <button class="dash-action" data-goto="learn">Bax</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="dash-page dash-hidden" id="dash-learn">
+    <div class="dash-panel">
+      <h3>📚 Öyrənmə bölməsi</h3>
+      <p>Riyaziyyat mövzuları</p>
+      <div class="dash-item">
+        <div class="dash-icon">➕</div>
+        <div>Müsbət və mənfi ədədlər<small>Qayda və izahlı suallar</small></div>
+        <button class="dash-action" id="dashNumbers">Aç</button>
+      </div>
+      <div class="dash-item">
+        <div class="dash-icon">📐</div>
+        <div>Cəbr<small>Bu bölmə sonradan əlavə ediləcək</small></div>
+      </div>
+      <div class="dash-item">
+        <div class="dash-icon">📏</div>
+        <div>Həndəsə<small>Bu bölmə sonradan əlavə ediləcək</small></div>
+      </div>
+      <div id="dashTopicMessage" class="dash-hidden" style="background:#eef3ff;padding:14px;border-radius:12px;margin-top:14px">
+        Müsbət və mənfi ədədlər mövzusunun dərs səhifəsini növbəti mərhələdə bağlayacağıq.
+      </div>
+    </div>
+  </section>
+
+  <section class="dash-page dash-hidden" id="dash-duel">
+    <div class="dash-panel">
+      <h3>⚔️ Duel bölməsi</h3>
+      <p>Bilik yarışları bölməsi hazırlanır.</p>
+      <div class="dash-item"><div class="dash-icon">➗</div><div>Riyaziyyat dueli<small>Tezliklə</small></div></div>
+      <div class="dash-item"><div class="dash-icon">📖</div><div>Verbal dueli<small>Tezliklə</small></div></div>
+    </div>
+  </section>
+
+  <section class="dash-page dash-hidden" id="dash-profile">
+    <div class="dash-panel">
+      <h3>👤 Profil</h3>
+      <p>Hesabın: <strong id="dashProfileEmail"></strong></p>
+      <p>Ümumi xal: <strong>0</strong></p>
+      <p class="small">Nəticələr və irəliləyiş funksiyaları növbəti mərhələdə əlavə ediləcək.</p>
+    </div>
+    <button id="dashLogout" class="dash-exit">Hesabdan çıx</button>
+  </section>
+</div>
+
+<script type="module">
+import { getApps } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const app = getApps()[0];
+if (app) {
+  const auth = getAuth(app);
+  const dashboard = document.getElementById("studentDashboard");
+  const oldCard = document.querySelector("main .card");
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      dashboard.classList.remove("dash-hidden");
+      if (oldCard) oldCard.classList.add("dash-hidden");
+      document.getElementById("dashUserEmail").textContent = user.email || "";
+      document.getElementById("dashProfileEmail").textContent = user.email || "";
+    } else {
+      dashboard.classList.add("dash-hidden");
+      if (oldCard) oldCard.classList.remove("dash-hidden");
+    }
+  });
+
+  document.querySelectorAll("#studentDashboard [data-page]").forEach(button => {
+    button.addEventListener("click", () => showPage(button.dataset.page));
+  });
+
+  document.querySelectorAll("#studentDashboard [data-goto]").forEach(button => {
+    button.addEventListener("click", () => showPage(button.dataset.goto));
+  });
+
+  function showPage(page) {
+    document.querySelectorAll("#studentDashboard .dash-page").forEach(section => {
+      section.classList.add("dash-hidden");
+    });
+    const selected = document.getElementById("dash-" + page);
+    if (selected) selected.classList.remove("dash-hidden");
+
+    document.querySelectorAll("#studentDashboard [data-page]").forEach(button => {
+      button.classList.toggle("active", button.dataset.page === page);
+    });
+  }
+
+  document.getElementById("dashNumbers").addEventListener("click", () => {
+    document.getElementById("dashTopicMessage").classList.toggle("dash-hidden");
+  });
+
+  document.getElementById("dashLogout").addEventListener("click", async () => {
+    await signOut(auth);
+    showPage("home");
+  });
+}
+</script>
+
 </body>
 </html>
