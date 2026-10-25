@@ -2,277 +2,147 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZQİ Riyaziyyat | Admin Paneli</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f6fc;
-  color: #172033;
-}
-
-header {
-  background: #163a72;
-  color: white;
-  padding: 22px 18px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 23px;
-}
-
-header p {
-  margin: 7px 0 0;
-  color: #dbeafe;
-  font-size: 13px;
-}
-
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px 14px;
-}
-
-.card {
-  background: white;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 17px;
-  box-shadow: 0 3px 14px #163a7210;
-}
-
-.card h2 {
-  margin-top: 0;
-  font-size: 19px;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.stat-number {
-  font-size: 27px;
-  font-weight: bold;
-  color: #2563eb;
-  margin-top: 9px;
-}
-
-.muted {
-  color: #667085;
-  font-size: 13px;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin: 5px 0 12px;
-  border: 1px solid #d0d9e8;
-  border-radius: 9px;
-  background: white;
-  font-size: 14px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 12px 9px;
-  border-bottom: 1px solid #e8edf5;
-  text-align: left;
-  font-size: 13px;
-}
-
-th {
-  background: #f8faff;
-}
-
-.table-wrap {
-  overflow-x: auto;
-}
-
-.notice {
-  background: #fff4d8;
-  color: #754900;
-  border-radius: 10px;
-  padding: 13px;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-bottom: 17px;
-}
-
-@media (max-width: 600px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  header h1 {
-    font-size: 20px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5ff;color:#17213a}
+header{background:#163a72;color:white;padding:22px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:24px}
+main{max-width:1000px;margin:24px auto;padding:0 14px}
+.card{background:white;border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 5px 20px #0001}
+form{display:grid;gap:12px;max-width:440px}
+label{display:grid;gap:6px;font-weight:bold}
+input{padding:13px;border:1px solid #ccd5e5;border-radius:9px;font-size:16px}
+button{padding:13px 16px;background:#245fe8;color:white;border:0;border-radius:9px;font-size:16px;font-weight:bold}
+.msg{padding:12px;border-radius:9px;background:#f1f5ff;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:11px;border-bottom:1px solid #e1e6ef;font-size:14px}
+th{background:#f1f5ff}
+.stats{font-size:18px;font-weight:bold}
+.note{font-size:14px;line-height:1.5;color:#7a4b00}
 </style>
 </head>
-
 <body>
-
 <header>
-  <h1>ZQİ Riyaziyyat</h1>
-  <p>Admin paneli · Qeydiyyatların idarə edilməsi</p>
+<h1>ZQİ Riyaziyyat</h1>
+<p>Administrator paneli</p>
 </header>
 
 <main>
+<section id="loginCard" class="card">
+<h2>Admin girişi</h2>
+<form id="loginForm">
+<label>E-poçt<input id="email" type="email" required></label>
+<label>Şifrə<input id="password" type="password" required></label>
+<button type="submit">Daxil ol</button>
+</form>
+<p id="loginMessage" class="msg">Admin hesabınla daxil ol.</p>
+<p class="note">Təhlükəsizlik üçün admin icazəsi Firebase Firestore qaydalarında ayrıca UID ilə məhdudlaşdırılmalıdır.</p>
+</section>
 
-  <div class="notice">
-    Bu panel hazırda nümunədir və real qeydiyyatları göstərmir.
-    İstifadəçilərin məlumatlarını görmək üçün sayta təhlükəsiz
-    giriş sistemi və verilənlər bazası qoşulmalıdır.
-  </div>
+<section id="dashboard" class="hidden">
+<div class="card">
+<p class="stats">Şagird sayı: <span id="count">0</span></p>
+<p id="status" class="msg">Məlumatlar gözlənilir.</p>
+<button id="refresh" type="button">Siyahını yenilə</button>
+<button id="logout" type="button">Hesabdan çıx</button>
+</div>
 
-  <section class="stats">
-    <div class="card">
-      <div class="muted">Ümumi qeydiyyat</div>
-      <div class="stat-number" id="total">0</div>
-    </div>
-
-    <div class="card">
-      <div class="muted">Şagirdlər</div>
-      <div class="stat-number" id="students">0</div>
-    </div>
-
-    <div class="card">
-      <div class="muted">Abituriyentlər</div>
-      <div class="stat-number" id="applicants">0</div>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Qeydiyyatları axtar</h2>
-
-    <input
-      id="search"
-      type="search"
-      placeholder="Ad, soyad və ya istifadəçi adı..."
-    >
-
-    <select id="gradeFilter">
-      <option value="">Bütün siniflər</option>
-      <option>5-ci sinif</option>
-      <option>6-cı sinif</option>
-      <option>7-ci sinif</option>
-      <option>8-ci sinif</option>
-      <option>9-cu sinif</option>
-      <option>10-cu sinif</option>
-      <option>11-ci sinif</option>
-      <option>12-ci sinif</option>
-      <option>Abituriyent</option>
-    </select>
-  </section>
-
-  <section class="card">
-    <h2>İstifadəçilər</h2>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Ad, soyad</th>
-            <th>İstifadəçi adı</th>
-            <th>Sinif</th>
-            <th>Yaşadığı yer</th>
-            <th>E-poçt</th>
-          </tr>
-        </thead>
-
-        <tbody id="userRows"></tbody>
-      </table>
-    </div>
-
-    <p id="empty" class="muted">
-      Hələ göstəriləcək qeydiyyat yoxdur.
-    </p>
-  </section>
-
-  <p class="muted">
-    Təhlükəsizlik: şifrələri admin panelində göstərmək olmaz.
-    İstifadəçi məlumatlarına yalnız səlahiyyətli admin daxil olmalıdır.
-  </p>
-
+<div class="card">
+<h2>Qeydiyyatdan keçən şagirdlər</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Ad, soyad</th>
+<th>İstifadəçi adı</th>
+<th>Sinif</th>
+<th>Yaşadığı yer</th>
+<th>E-poçt</th>
+</tr>
+</thead>
+<tbody id="rows"></tbody>
+</table>
+</div>
+</div>
+</section>
 </main>
 
-<script>
-/*
-  Hazırda real məlumat bazası qoşulmayıb.
-  Bu siyahı boşdur; ona görə istifadəçi sayı 0 görünür.
-*/
-const users = [];
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {getFirestore,collection,getDocs} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-const search = document.getElementById("search");
-const gradeFilter = document.getElementById("gradeFilter");
-const userRows = document.getElementById("userRows");
-const empty = document.getElementById("empty");
+const firebaseConfig={
+apiKey:"AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
+authDomain:"zqi-riyaziyyat.firebaseapp.com",
+projectId:"zqi-riyaziyyat",
+storageBucket:"zqi-riyaziyyat.firebasestorage.app",
+messagingSenderId:"228687771538",
+appId:"1:228687771538:web:4b4c31d993b0614ca6334b",
+measurementId:"G-MT0Q1DP79N"
+};
 
-function renderUsers() {
-  const query = search.value.trim().toLowerCase();
-  const selectedGrade = gradeFilter.value;
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
 
-  const filtered = users.filter(user => {
-    const text = (
-      user.name + " " +
-      user.username + " " +
-      user.email + " " +
-      user.place
-    ).toLowerCase();
-
-    return text.includes(query) &&
-      (!selectedGrade || user.grade === selectedGrade);
-  });
-
-  userRows.replaceChildren();
-
-  filtered.forEach(user => {
-    const row = document.createElement("tr");
-
-    [
-      user.name,
-      user.username,
-      user.grade,
-      user.place,
-      user.email
-    ].forEach(value => {
-      const cell = document.createElement("td");
-      cell.textContent = value;
-      row.appendChild(cell);
-    });
-
-    userRows.appendChild(row);
-  });
-
-  empty.style.display = filtered.length ? "none" : "block";
-
-  document.getElementById("total").textContent = users.length;
-
-  document.getElementById("students").textContent =
-    users.filter(user => user.grade !== "Abituriyent").length;
-
-  document.getElementById("applicants").textContent =
-    users.filter(user => user.grade === "Abituriyent").length;
+function errorText(e){
+if(e.code==="auth/invalid-credential")return "E-poçt və ya şifrə yanlışdır.";
+if(e.code==="permission-denied")return "İcazə yoxdur. Admin UID-si Firestore Rules bölməsində qurulmalıdır.";
+return "Xəta baş verdi: "+(e.code||e.message);
 }
 
-search.addEventListener("input", renderUsers);
-gradeFilter.addEventListener("change", renderUsers);
+$("loginForm").addEventListener("submit",async e=>{
+e.preventDefault();
+$("loginMessage").textContent="Giriş edilir...";
+try{
+await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);
+}catch(err){
+$("loginMessage").textContent=errorText(err);
+}
+});
 
-renderUsers();
+async function loadStudents(){
+$("status").textContent="Şagirdlər yüklənir...";
+try{
+const snapshot=await getDocs(collection(db,"users"));
+$("rows").replaceChildren();
+snapshot.forEach(item=>{
+const u=item.data();
+const tr=document.createElement("tr");
+[
+u.name||((u.firstName||"")+" "+(u.lastName||"")),
+u.username||"",
+u.grade||"",
+u.place||"",
+u.email||""
+].forEach(value=>{
+const td=document.createElement("td");
+td.textContent=value;
+tr.appendChild(td);
+});
+$("rows").appendChild(tr);
+});
+$("count").textContent=snapshot.size;
+$("status").textContent="Siyahı yeniləndi.";
+}catch(err){
+$("status").textContent=errorText(err);
+}
+}
+
+onAuthStateChanged(auth,user=>{
+$("loginCard").classList.toggle("hidden",!!user);
+$("dashboard").classList.toggle("hidden",!user);
+if(user)loadStudents();
+});
+
+$("refresh").addEventListener("click",loadStudents);
+$("logout").addEventListener("click",()=>signOut(auth));
 </script>
-
 </body>
 </html>
