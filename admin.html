@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZQİ Riyaziyyat | Admin Paneli</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f6fc;
+  color: #172033;
+}
+
+header {
+  background: #163a72;
+  color: white;
+  padding: 22px 18px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 23px;
+}
+
+header p {
+  margin: 7px 0 0;
+  color: #dbeafe;
+  font-size: 13px;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px 14px;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 17px;
+  box-shadow: 0 3px 14px #163a7210;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 19px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-number {
+  font-size: 27px;
+  font-weight: bold;
+  color: #2563eb;
+  margin-top: 9px;
+}
+
+.muted {
+  color: #667085;
+  font-size: 13px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0 12px;
+  border: 1px solid #d0d9e8;
+  border-radius: 9px;
+  background: white;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 9px;
+  border-bottom: 1px solid #e8edf5;
+  text-align: left;
+  font-size: 13px;
+}
+
+th {
+  background: #f8faff;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.notice {
+  background: #fff4d8;
+  color: #754900;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 17px;
+}
+
+@media (max-width: 600px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>ZQİ Riyaziyyat</h1>
+  <p>Admin paneli · Qeydiyyatların idarə edilməsi</p>
+</header>
+
+<main>
+
+  <div class="notice">
+    Bu panel hazırda nümunədir və real qeydiyyatları göstərmir.
+    İstifadəçilərin məlumatlarını görmək üçün sayta təhlükəsiz
+    giriş sistemi və verilənlər bazası qoşulmalıdır.
+  </div>
+
+  <section class="stats">
+    <div class="card">
+      <div class="muted">Ümumi qeydiyyat</div>
+      <div class="stat-number" id="total">0</div>
+    </div>
+
+    <div class="card">
+      <div class="muted">Şagirdlər</div>
+      <div class="stat-number" id="students">0</div>
+    </div>
+
+    <div class="card">
+      <div class="muted">Abituriyentlər</div>
+      <div class="stat-number" id="applicants">0</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Qeydiyyatları axtar</h2>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="Ad, soyad və ya istifadəçi adı..."
+    >
+
+    <select id="gradeFilter">
+      <option value="">Bütün siniflər</option>
+      <option>5-ci sinif</option>
+      <option>6-cı sinif</option>
+      <option>7-ci sinif</option>
+      <option>8-ci sinif</option>
+      <option>9-cu sinif</option>
+      <option>10-cu sinif</option>
+      <option>11-ci sinif</option>
+      <option>12-ci sinif</option>
+      <option>Abituriyent</option>
+    </select>
+  </section>
+
+  <section class="card">
+    <h2>İstifadəçilər</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ad, soyad</th>
+            <th>İstifadəçi adı</th>
+            <th>Sinif</th>
+            <th>Yaşadığı yer</th>
+            <th>E-poçt</th>
+          </tr>
+        </thead>
+
+        <tbody id="userRows"></tbody>
+      </table>
+    </div>
+
+    <p id="empty" class="muted">
+      Hələ göstəriləcək qeydiyyat yoxdur.
+    </p>
+  </section>
+
+  <p class="muted">
+    Təhlükəsizlik: şifrələri admin panelində göstərmək olmaz.
+    İstifadəçi məlumatlarına yalnız səlahiyyətli admin daxil olmalıdır.
+  </p>
+
+</main>
+
+<script>
+/*
+  Hazırda real məlumat bazası qoşulmayıb.
+  Bu siyahı boşdur; ona görə istifadəçi sayı 0 görünür.
+*/
+const users = [];
+
+const search = document.getElementById("search");
+const gradeFilter = document.getElementById("gradeFilter");
+const userRows = document.getElementById("userRows");
+const empty = document.getElementById("empty");
+
+function renderUsers() {
+  const query = search.value.trim().toLowerCase();
+  const selectedGrade = gradeFilter.value;
+
+  const filtered = users.filter(user => {
+    const text = (
+      user.name + " " +
+      user.username + " " +
+      user.email + " " +
+      user.place
+    ).toLowerCase();
+
+    return text.includes(query) &&
+      (!selectedGrade || user.grade === selectedGrade);
+  });
+
+  userRows.replaceChildren();
+
+  filtered.forEach(user => {
+    const row = document.createElement("tr");
+
+    [
+      user.name,
+      user.username,
+      user.grade,
+      user.place,
+      user.email
+    ].forEach(value => {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
+
+    userRows.appendChild(row);
+  });
+
+  empty.style.display = filtered.length ? "none" : "block";
+
+  document.getElementById("total").textContent = users.length;
+
+  document.getElementById("students").textContent =
+    users.filter(user => user.grade !== "Abituriyent").length;
+
+  document.getElementById("applicants").textContent =
+    users.filter(user => user.grade === "Abituriyent").length;
+}
+
+search.addEventListener("input", renderUsers);
+gradeFilter.addEventListener("change", renderUsers);
+
+renderUsers();
+</script>
+
+</body>
+</html>
