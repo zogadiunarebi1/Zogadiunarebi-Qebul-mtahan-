@@ -1,1 +1,823 @@
-zqi_site.html
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZQİ — Zogadiunarebi Qəbul İmtahanı</title>
+
+<style>
+:root {
+  --bg: #080d19;
+  --panel: #111a2d;
+  --blue: #4d8dff;
+  --cyan: #44e0d0;
+  --gold: #ffd166;
+  --text: #f3f6ff;
+  --muted: #a7b4cc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top right, #17284a, #080d19 65%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 12px;
+  padding: 13px 17px;
+}
+
+.app {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.logo {
+  background: linear-gradient(135deg, #4d8dff, #765cff);
+  padding: 15px;
+  border-radius: 15px;
+  font-weight: 900;
+  font-size: 21px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.brand p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.xp-pill {
+  background: #1c2941;
+  color: var(--gold);
+  border: 1px solid #354765;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+.hero {
+  background: linear-gradient(120deg, #172b4c, #20254b);
+  border: 1px solid #314668;
+  border-radius: 25px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.hero h2 {
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.15;
+}
+
+.hero p {
+  color: #c4d0e6;
+  line-height: 1.7;
+}
+
+.primary {
+  background: linear-gradient(135deg, #4d8dff, #6c67ff);
+  color: white;
+}
+
+.secondary {
+  background: #22314d;
+  color: white;
+  border: 1px solid #354968;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.stat {
+  background: #0a1324;
+  border: 1px solid #304565;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 23px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+.section {
+  background: #0e1728;
+  border: 1px solid #273653;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section h3 {
+  margin-top: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.item {
+  background: var(--panel);
+  border: 1px solid #263653;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.item .emoji {
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.item h4 {
+  margin: 0 0 8px;
+}
+
+.item p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.item button {
+  width: 100%;
+  font-size: 13px;
+}
+
+.progress {
+  height: 9px;
+  background: #26344d;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress div {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  transition: width .3s;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #26344a;
+}
+
+.rank-name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.rank-xp {
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+#quizView {
+  display: none;
+}
+
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.timer {
+  background: #342a18;
+  color: var(--gold);
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.question {
+  font-size: 23px;
+  line-height: 1.5;
+  margin: 25px 0;
+}
+
+.answers {
+  display: grid;
+  gap: 12px;
+}
+
+.answer {
+  width: 100%;
+  text-align: left;
+  color: white;
+  background: #17233a;
+  border: 1px solid #344661;
+}
+
+.answer:hover:not(:disabled) {
+  border-color: var(--blue);
+}
+
+.answer.correct {
+  background: #123a34;
+  border-color: #46d39a;
+}
+
+.answer.wrong {
+  background: #40202e;
+  border-color: #ff7185;
+}
+
+.answer:disabled {
+  cursor: default;
+}
+
+.feedback {
+  margin-top: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+footer {
+  text-align: center;
+  color: #8291ab;
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 25px 0;
+}
+
+footer strong {
+  color: #c7d6f3;
+}
+
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .app {
+    padding: 12px;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 430px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 7px;
+  }
+
+  .stat {
+    padding: 10px;
+  }
+
+  .stat strong {
+    font-size: 19px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="brand">
+    <div class="logo">ZQİ</div>
+    <div>
+      <h1>Zogadiunarebi Qəbul İmtahanı</h1>
+      <p>Öyrən • Məşq et • İnkişaf et</p>
+    </div>
+  </div>
+
+  <div class="xp-pill">⚡ <span id="topXP">0</span> XP</div>
+</header>
+
+<main id="homeView">
+
+<section class="hero">
+  <div class="eyebrow">QƏBUL HAZIRLIĞI PLATFORMASI</div>
+  <h2>Biliklərini yoxla.<br>Hədəfinə yaxınlaş!</h2>
+  <p>
+    Mövzuları öyrən, testləri həll et, quizlərdə iştirak et,
+    XP qazan və səviyyəni yüksəlt!
+  </p>
+
+  <button class="primary" onclick="startQuiz('daily')">
+    🚀 Quizə başla
+  </button>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="heroXP">0</strong>
+      <span>Toplam XP</span>
+    </div>
+    <div class="stat">
+      <strong id="heroLevel">1</strong>
+      <span>Səviyyə</span>
+    </div>
+    <div class="stat">
+      <strong id="heroSolved">0</strong>
+      <span>Düzgün cavab</span>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+
+<div>
+<section class="section">
+  <h3>📚 Mövzular və testlər</h3>
+
+  <div class="cards">
+
+    <div class="item">
+      <div class="emoji">➕</div>
+      <h4>Müsbət və mənfi ədədlər</h4>
+      <p>Toplama, çıxma, vurma və bölmə testləri.</p>
+      <button class="secondary" onclick="startQuiz('numbers')">
+        Testə başla →
+      </button>
+    </div>
+
+    <div class="item">
+      <div class="emoji">🧠</div>
+      <h4>Məntiq</h4>
+      <p>Ardıcıllıq və məntiq tapşırıqları.</p>
+      <button class="secondary" onclick="startQuiz('logic')">
+        Testə başla →
+      </button>
+    </div>
+
+    <div class="item">
+      <div class="emoji">⚡</div>
+      <h4>Gündəlik quiz</h4>
+      <p>10 sual, hər suala 60 saniyə.</p>
+      <button class="primary" onclick="startQuiz('daily')">
+        Quizə başla →
+      </button>
+    </div>
+
+    <div class="item">
+      <div class="emoji">🎯</div>
+      <h4>Sürətli məşq</h4>
+      <p>Vaxt məhdudiyyəti olmadan məşq et.</p>
+      <button class="secondary" onclick="startQuiz('quick')">
+        Məşq et →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h3>🏅 XP və səviyyə</h3>
+
+  <div style="display:flex;justify-content:space-between;gap:10px">
+    <strong id="levelName">Başlanğıc</strong>
+    <span class="muted" id="nextXP">100 XP növbəti səviyyəyə</span>
+  </div>
+
+  <div class="progress">
+    <div id="xpBar"></div>
+  </div>
+
+  <p class="note">
+    Hər düzgün cavab +10 XP qazandırır.
+    XP və nəticələr bu cihazın brauzerində saxlanılır.
+  </p>
+</section>
+</div>
+
+<aside>
+<section class="section">
+  <h3>🏆 Liderlər cədvəli</h3>
+  <div id="leaderboard"></div>
+  <p class="note">
+    Nümunə iştirakçılar göstərilir. Real iştirakçılar üçün
+    ortaq verilənlər bazası lazımdır.
+  </p>
+</section>
+
+<section class="section">
+  <h3>📌 Quiz qaydaları</h3>
+  <p class="note">
+    • Gündəlik quiz 10 sualdır.<br>
+    • Hər suala 60 saniyə verilir.<br>
+    • Düzgün cavab +10 XP qazandırır.<br>
+    • Vaxt bitərsə, sual səhv sayılır.<br>
+    • Quiz bitdikdə nəticən göstərilir.
+  </p>
+</section>
+</aside>
+
+</div>
+</main>
+
+<section id="quizView" class="section">
+  <div class="quiz-top">
+    <button class="secondary" onclick="goHome()">← Ana səhifə</button>
+    <span class="muted" id="questionCount">Sual 1/10</span>
+    <div class="timer">⏱ <span id="timer">60</span> san.</div>
+  </div>
+
+  <div class="progress">
+    <div id="questionBar"></div>
+  </div>
+
+  <div class="eyebrow" id="quizCategory">GÜNDƏLİK QUIZ</div>
+  <h2 class="question" id="questionText">Sual</h2>
+  <div class="answers" id="answers"></div>
+  <div class="feedback" id="feedback"></div>
+
+  <div class="quiz-actions">
+    <span class="muted" id="earned">⚡ Bu quizdə: 0 XP</span>
+    <button class="primary hidden" id="nextBtn" onclick="nextQuestion()">
+      Növbəti →
+    </button>
+  </div>
+</section>
+
+<footer>
+  ZQİ — Zogadiunarebi Qəbul İmtahanı<br>
+  <strong>Hazırladı: Haldun Məmmədov</strong>
+</footer>
+
+</div>
+
+<script>
+const questionBank = {
+  numbers: [
+    {q:"−3 + 7 = ?",a:["−10","−4","4","10"],c:2,e:"−3 üzərinə 7 gəldikdə 4 alınır."},
+    {q:"−5 − 4 = ?",a:["−9","−1","1","9"],c:0,e:"−5 − 4 = −9."},
+    {q:"Hansı ədəd daha böyükdür?",a:["−8","−2","−10","−15"],c:1,e:"Sıfıra yaxın mənfi ədəd daha böyükdür."},
+    {q:"6 + (−9) = ?",a:["15","3","−3","−15"],c:2,e:"9 − 6 = 3. Böyük modul mənfi olduğuna görə cavab −3-dür."},
+    {q:"−4 × 3 = ?",a:["12","−12","7","−7"],c:1,e:"Mənfi ilə müsbətin hasili mənfidir."},
+    {q:"−18 ÷ (−3) = ?",a:["−6","6","−15","15"],c:1,e:"İki mənfi ədədin bölünməsi müsbət nəticə verir."},
+    {q:"−2 + (−6) = ?",a:["8","−4","4","−8"],c:3,e:"Modulları toplayırıq və mənfi işarəni saxlayırıq."},
+    {q:"0 − (−5) = ?",a:["−5","0","5","−10"],c:2,e:"Mənfi ədədi çıxmaq onun əksini toplamaqdır."},
+    {q:"Hansı müqayisə doğrudur?",a:["−7 > −3","−7 = −3","−7 < −3","Heç biri"],c:2,e:"−7 ədəd oxunda −3-dən soldadır."},
+    {q:"−2 × (−4) = ?",a:["−8","8","−6","6"],c:1,e:"İki mənfi ədədin hasili müsbətdir."},
+    {q:"12 + (−15) = ?",a:["27","−27","3","−3"],c:3,e:"15 − 12 = 3. Cavab −3-dür."}
+  ],
+
+  logic: [
+    {q:"Ardıcıllığı tamamla: 2, 4, 6, 8, ...",a:["9","10","11","12"],c:1,e:"Hər dəfə 2 artırılır."},
+    {q:"3, 6, 12, 24, ...",a:["30","36","42","48"],c:3,e:"Hər ədəd 2-yə vurulur."},
+    {q:"5 qələm 10 manatdırsa, 1 qələm neçə manatdır?",a:["1","2","5","10"],c:1,e:"10 ÷ 5 = 2 manat."},
+    {q:"Artıq olanı seç.",a:["Üçbucaq","Kvadrat","Dairə","Alma"],c:3,e:"Alma həndəsi fiqur deyil."},
+    {q:"Bu gün bazar ertəsidirsə, 3 gün sonra hansı gündür?",a:["Çərşənbə axşamı","Çərşənbə","Cümə axşamı","Cümə"],c:2,e:"Üç gün sonra cümə axşamıdır."},
+    {q:"1, 4, 9, 16, ...",a:["20","24","25","36"],c:2,e:"Bunlar kvadrat ədədlərdir. Növbəti 5² = 25."},
+    {q:"Bir saatda neçə dəqiqə var?",a:["30","45","60","100"],c:2,e:"Bir saat 60 dəqiqədir."},
+    {q:"8-in yarısına 3 əlavə etsək, neçə edər?",a:["4","7","8","11"],c:1,e:"8 ÷ 2 = 4, sonra 4 + 3 = 7."},
+    {q:"Hansı ədəd cütdür?",a:["13","17","21","28"],c:3,e:"28 iki yerə qalıqsız bölünür."},
+    {q:"10, 20, 30, ...",a:["35","40","45","50"],c:1,e:"Hər dəfə 10 artırılır."}
+  ]
+};
+
+const $ = id => document.getElementById(id);
+
+let state = {xp:0,solved:0};
+
+try {
+  const saved = JSON.parse(localStorage.getItem("zqiProgress") || "{}");
+  state.xp = Number(saved.xp) || 0;
+  state.solved = Number(saved.solved) || 0;
+} catch(e) {}
+
+let quiz = [];
+let idx = 0;
+let earned = 0;
+let answered = false;
+let timerId = null;
+let remaining = 60;
+let quizMode = "daily";
+
+function save() {
+  try {
+    localStorage.setItem("zqiProgress", JSON.stringify(state));
+  } catch(e) {}
+}
+
+function level() {
+  return Math.floor(state.xp / 100) + 1;
+}
+
+function updateUI() {
+  $("topXP").textContent = state.xp;
+  $("heroXP").textContent = state.xp;
+  $("heroLevel").textContent = level();
+  $("heroSolved").textContent = state.solved;
+
+  const currentLevel = level();
+  const inLevel = state.xp % 100;
+
+  $("levelName").textContent =
+    currentLevel >= 10 ? "Zirvə axtaran" :
+    currentLevel >= 5 ? "İrəliləyən" :
+    currentLevel >= 3 ? "Həvəsli öyrənən" :
+    "Başlanğıc";
+
+  $("nextXP").textContent =
+    (100 - inLevel) + " XP növbəti səviyyəyə";
+
+  $("xpBar").style.width = inLevel + "%";
+
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const people = [
+    {name:"Sən",xp:state.xp,self:true},
+    {name:"Nümunə iştirakçı A",xp:120,medal:"🥇"},
+    {name:"Nümunə iştirakçı B",xp:80,medal:"🥈"},
+    {name:"Nümunə iştirakçı C",xp:50,medal:"🥉"}
+  ].sort((a,b) => b.xp - a.xp);
+
+  $("leaderboard").innerHTML = people.map(p => `
+    <div class="rank">
+      <div>${p.self ? "🎓" : p.medal}</div>
+      <div class="rank-name">
+        ${p.name}
+        ${p.self ? '<div class="muted">Sənin profilin</div>' : ''}
+      </div>
+      <div class="rank-xp">${p.xp} XP</div>
+    </div>
+  `).join("");
+}
+
+function startQuiz(mode) {
+  quizMode = mode;
+
+  if (mode === "numbers") {
+    quiz = [...questionBank.numbers];
+  } else if (mode === "logic") {
+    quiz = [...questionBank.logic];
+  } else {
+    quiz = [
+      ...questionBank.numbers.slice(0,5),
+      ...questionBank.logic.slice(0,5)
+    ];
+  }
+
+  if (mode === "daily" || mode === "quick") {
+    quiz.sort(() => Math.random() - 0.5);
+  }
+
+  quiz = quiz.slice(0,10);
+  idx = 0;
+  earned = 0;
+
+  $("homeView").style.display = "none";
+  $("quizView").style.display = "block";
+  $("earned").textContent = "⚡ Bu quizdə: 0 XP";
+
+  showQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showQuestion() {
+  clearInterval(timerId);
+  answered = false;
+  remaining = quizMode === "quick" ? 0 : 60;
+
+  $("questionCount").textContent =
+    `Sual ${idx + 1}/${quiz.length}`;
+
+  $("questionBar").style.width =
+    (idx / quiz.length * 100) + "%";
+
+  $("quizCategory").textContent =
+    quizMode === "numbers" ? "MÜSBƏT VƏ MƏNFİ ƏDƏDLƏR" :
+    quizMode === "logic" ? "MƏNTİQ TESTİ" :
+    quizMode === "quick" ? "SÜRƏTLİ MƏŞQ" :
+    "GÜNDƏLİK QUIZ";
+
+  const q = quiz[idx];
+
+  $("questionText").textContent = q.q;
+  $("feedback").textContent = "";
+  $("nextBtn").classList.add("hidden");
+  $("nextBtn").textContent = "Növbəti →";
+
+  $("answers").innerHTML = q.a.map((a,i) => `
+    <button class="answer" onclick="chooseAnswer(${i})">
+      ${String.fromCharCode(65+i)}. ${a}
+    </button>
+  `).join("");
+
+  $("timer").textContent =
+    quizMode === "quick" ? "∞" : remaining;
+
+  if (quizMode !== "quick") {
+    timerId = setInterval(() => {
+      remaining--;
+      $("timer").textContent = remaining;
+
+      if (remaining <= 0) {
+        clearInterval(timerId);
+        if (!answered) timeOut();
+      }
+    },1000);
+  }
+}
+
+function chooseAnswer(choice) {
+  if (answered) return;
+
+  answered = true;
+  clearInterval(timerId);
+
+  const q = quiz[idx];
+  const buttons = [...$("answers").querySelectorAll("button")];
+
+  buttons.forEach((button,i) => {
+    button.disabled = true;
+
+    if (i === q.c) button.classList.add("correct");
+    if (i === choice && i !== q.c) button.classList.add("wrong");
+  });
+
+  if (choice === q.c) {
+    state.xp += 10;
+    state.solved++;
+    earned += 10;
+
+    save();
+    updateUI();
+
+    $("feedback").textContent =
+      "✅ Düzgün cavab! +10 XP. " + q.e;
+  } else {
+    $("feedback").textContent =
+      "❌ Düzgün cavab: " + q.a[q.c] + ". " + q.e;
+  }
+
+  $("earned").textContent = "⚡ Bu quizdə: " + earned + " XP";
+  $("nextBtn").classList.remove("hidden");
+
+  if (idx === quiz.length - 1) {
+    $("nextBtn").textContent = "Nəticəni gör →";
+  }
+}
+
+function timeOut() {
+  answered = true;
+
+  const q = quiz[idx];
+  const buttons = [...$("answers").querySelectorAll("button")];
+
+  buttons.forEach((button,i) => {
+    button.disabled = true;
+    if (i === q.c) button.classList.add("correct");
+  });
+
+  $("feedback").textContent =
+    "⏰ Vaxt bitdi. Düzgün cavab: " + q.a[q.c] + ". " + q.e;
+
+  $("nextBtn").classList.remove("hidden");
+
+  if (idx === quiz.length - 1) {
+    $("nextBtn").textContent = "Nəticəni gör →";
+  }
+}
+
+function nextQuestion() {
+  if (!answered) return;
+
+  clearInterval(timerId);
+
+  if (idx < quiz.length - 1) {
+    idx++;
+    showQuestion();
+    return;
+  }
+
+  $("questionBar").style.width = "100%";
+  $("questionText").textContent = "Quiz tamamlandı! 🎉";
+
+  $("answers").innerHTML = `
+    <div class="item">
+      <div class="emoji">🏆</div>
+      <h4>Nəticən: ${earned} XP</h4>
+      <p>
+        ${quiz.length} sualdan ${earned / 10} düzgün cavab.
+        Davam et və daha çox XP qazan!
+      </p>
+      <button class="primary" onclick="goHome()">
+        Ana səhifəyə qayıt
+      </button>
+    </div>
+  `;
+
+  $("feedback").textContent =
+    "Toplam XP: " + state.xp + " · Səviyyə " + level();
+
+  $("nextBtn").classList.add("hidden");
+  $("timer").textContent = "—";
+}
+
+function goHome() {
+  clearInterval(timerId);
+
+  $("quizView").style.display = "none";
+  $("homeView").style.display = "block";
+
+  updateUI();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+updateUI();
+</script>
+</body>
+</html>
