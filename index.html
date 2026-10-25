@@ -2,460 +2,196 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZQİ Riyaziyyat</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
-  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-  import {
-    getFirestore,
-    doc,
-    setDoc
-  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
-    authDomain: "zqi-riyaziyyat.firebaseapp.com",
-    projectId: "zqi-riyaziyyat",
-    storageBucket: "zqi-riyaziyyat.firebasestorage.app",
-    messagingSenderId: "228687771538",
-    appId: "1:228687771538:web:4b4c31d993b0614ca6334b",
-    measurementId: "G-MT0Q1DP79N"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  window.zqiFirebase = {
-    auth,
-    db,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    doc,
-    setDoc
-  };
-</script>
-body {
-  margin: 0;
-  padding: 20px 12px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #eaf2ff, #f8fbff);
-  color: #172033;
-}
-
-.card {
-  width: 100%;
-  max-width: 520px;
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 35px #2563eb20;
-}
-
-.brand {
-  text-align: center;
-}
-
-.logo {
-  width: 58px;
-  height: 58px;
-  margin: auto auto 10px;
-  display: grid;
-  place-items: center;
-  border-radius: 17px;
-  background: #2563eb;
-  color: white;
-  font-size: 21px;
-  font-weight: bold;
-}
-
-h1 {
-  color: #163a72;
-  font-size: 25px;
-  margin: 0;
-}
-
-.subtitle {
-  color: #667085;
-  font-size: 14px;
-}
-
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin: 22px 0;
-  padding: 5px;
-  background: #f0f4fb;
-  border-radius: 12px;
-}
-
-.tab {
-  flex: 1;
-  padding: 12px;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.tab.active {
-  background: white;
-  color: #2563eb;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.field {
-  margin-bottom: 14px;
-}
-
-label {
-  display: block;
-  margin-bottom: 7px;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #d0d9e8;
-  border-radius: 10px;
-  background: white;
-  font-size: 15px;
-}
-
-input:focus, select:focus {
-  outline: 2px solid #bfdbfe;
-  border-color: #2563eb;
-}
-
-button.primary {
-  width: 100%;
-  padding: 14px;
-  margin-top: 4px;
-  border: 0;
-  border-radius: 11px;
-  background: #2563eb;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.message {
-  display: none;
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #fff7e6;
-  color: #8a4b08;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.foot {
-  margin-top: 18px;
-  text-align: center;
-  color: #667085;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-@media (max-width: 460px) {
-  .card {
-    padding: 20px 16px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f5ff;color:#17213a}
+header{background:#2862e8;color:white;text-align:center;padding:25px 15px}
+header h1{margin:0 0 8px}
+main{max-width:650px;margin:25px auto;padding:0 14px}
+.card{background:white;border-radius:20px;padding:22px;box-shadow:0 5px 25px #0001}
+.tabs{display:flex;gap:10px;margin-bottom:20px}
+.tabs button{flex:1;padding:13px;border:0;border-radius:10px;background:#e8edff;color:#234078;font-weight:bold}
+.tabs button.active{background:#2862e8;color:white}
+form{display:grid;gap:13px}
+label{display:grid;gap:6px;font-weight:bold}
+input,select{width:100%;padding:13px;border:1px solid #d2d8e5;border-radius:10px;font-size:16px;background:white}
+.primary{padding:14px;border:0;border-radius:10px;background:#2862e8;color:white;font-size:16px;font-weight:bold}
+.msg{padding:12px;background:#f3f6ff;border-radius:9px;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.small{font-size:13px;color:#64708a;line-height:1.5}
+footer{text-align:center;padding:25px;color:#68738a}
 </style>
 </head>
-
 <body>
-<main class="card">
+<header>
+<h1>ZQİ Riyaziyyat</h1>
+<p>Biliklərini addım-addım artır</p>
+</header>
 
-  <div class="brand">
-    <div class="logo">ZQİ</div>
-    <h1>ZQİ Riyaziyyat</h1>
-    <p class="subtitle">Öyrənməyə elə buradan başla</p>
-  </div>
+<main>
+<section class="card">
+<div class="tabs">
+<button id="signupTab" class="active" type="button">Qeydiyyat</button>
+<button id="loginTab" type="button">Giriş</button>
+</div>
 
-  <div class="tabs">
-    <button class="tab active" id="signupTab" type="button">
-      Qeydiyyat
-    </button>
-    <button class="tab" id="loginTab" type="button">
-      Giriş et
-    </button>
-  </div>
+<form id="signupForm">
+<label>Ad<input id="firstName" required></label>
+<label>Soyad<input id="lastName" required></label>
+<label>Sinif
+<select id="grade" required>
+<option value="">Sinif seç</option>
+<option>5-ci sinif</option><option>6-cı sinif</option>
+<option>7-ci sinif</option><option>8-ci sinif</option>
+<option>9-cu sinif</option><option>10-cu sinif</option>
+<option>11-ci sinif</option><option>12-ci sinif</option>
+<option>Abituriyent</option>
+</select>
+</label>
+<label>Yaşadığın yer
+<select id="placeType" required>
+<option value="">Seç</option>
+<option value="city">Marneuli şəhəri</option>
+<option value="village">Kənd</option>
+<option value="other">Başqa yer</option>
+</select>
+</label>
+<label id="villageField" class="hidden">Kəndin adı<input id="village"></label>
+<label id="otherPlaceField" class="hidden">Yaşadığın yer<input id="otherPlace"></label>
+<label>İstifadəçi adı<input id="username" minlength="3" required></label>
+<label>E-poçt<input id="email" type="email" required></label>
+<label>Şifrə<input id="password" type="password" minlength="6" required></label>
+<label>Şifrəni təkrar yaz<input id="confirmPassword" type="password" minlength="6" required></label>
+<button class="primary" type="submit">Qeydiyyatdan keç</button>
+<div id="signupMessage" class="msg" role="status"></div>
+<p class="small">Şifrən Firestore bazasında saxlanılmır.</p>
+</form>
 
-  <form id="signupForm">
-
-    <div class="grid">
-      <div class="field">
-        <label for="firstName">Ad</label>
-        <input id="firstName" placeholder="Adın" required>
-      </div>
-
-      <div class="field">
-        <label for="lastName">Soyad</label>
-        <input id="lastName" placeholder="Soyadın" required>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="field">
-        <label for="grade">Sinif</label>
-        <select id="grade" required>
-          <option value="">Sinifini seç</option>
-          <option>5-ci sinif</option>
-          <option>6-cı sinif</option>
-          <option>7-ci sinif</option>
-          <option>8-ci sinif</option>
-          <option>9-cu sinif</option>
-          <option>10-cu sinif</option>
-          <option>11-ci sinif</option>
-          <option>12-ci sinif</option>
-          <option>Abituriyent</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="placeType">Yaşadığın yer</label>
-        <select id="placeType" required>
-          <option value="">Yer növünü seç</option>
-          <option value="city">Marneuli şəhəri</option>
-          <option value="village">Marneuli bələdiyyəsinin kəndi</option>
-          <option value="other">Başqa yer</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field hidden" id="villageField">
-      <label for="village">Kəndini seç</label>
-      <select id="village">
-        <option value="">Kənd seç</option>
-        <option>Ağməmmədli</option>
-        <option>Ağqula</option>
-        <option>Ağlələlə</option>
-        <option>Ağləlalo</option>
-        <option>Ağlomahmudlu</option>
-        <option>Ağxərpi</option>
-        <option>Alavari</option>
-        <option>Algeti</option>
-        <option>Ambarovka</option>
-        <option>Araplı</option>
-        <option>Azizkəndi</option>
-        <option>Baydar</option>
-        <option>Baytallı</option>
-        <option>Beytarafçı</option>
-        <option>Böyük Muğanlı</option>
-        <option>Burdazori</option>
-        <option>Burma</option>
-        <option>Candar</option>
-        <option>Çanaxçı</option>
-        <option>Daştəpə</option>
-        <option>Dəmyə</option>
-        <option>Dəmyə-Görarxı</option>
-        <option>Didi Muğanlı</option>
-        <option>Didi Beqləri</option>
-        <option>Enikənd</option>
-        <option>Gajisakəndi</option>
-        <option>Güllübağ</option>
-        <option>Hacıisakəndi</option>
-        <option>İlmazlı</option>
-        <option>İmir</option>
-        <option>İmirçala</option>
-        <option>Jankhoşi</option>
-        <option>Kapanaxçı</option>
-        <option>Qaçağan</option>
-        <option>Kasumlo</option>
-        <option>Keşəli</option>
-        <option>Kirac-Muğanlı</option>
-        <option>Kirixlo</option>
-        <option>Kirovka (Mameyi)</option>
-        <option>Kurtlar</option>
-        <option>Kuşçu</option>
-        <option>Kutliari</option>
-        <option>Qasımlı</option>
-        <option>Qızılhacılı</option>
-        <option>Qullar</option>
-        <option>Aşağı Saral</option>
-        <option>Yuxarı Saral</option>
-        <option>Lejbadin</option>
-        <option>Maradisi</option>
-        <option>Meore Kesalo</option>
-        <option>Metsamula</option>
-        <option>Molaogli</option>
-        <option>Norgiuli</option>
-        <option>Ofreti</option>
-        <option>Patara Beqləri</option>
-        <option>Pirveli Kesalo</option>
-        <option>Sabirkənd</option>
-        <option>Sadaxlı</option>
-        <option>Saimerlo</option>
-        <option>Seidgocolo</option>
-        <option>Sioni</option>
-        <option>Şaumyan</option>
-        <option>Şulaveri</option>
-        <option>Takalo</option>
-        <option>Tamarisi</option>
-        <option>Təzəkənd</option>
-        <option>Tetri-Sopeli</option>
-        <option>Tserakvi</option>
-        <option>Tsereteli</option>
-        <option>Tsitelsofeli</option>
-        <option>Tsofi</option>
-        <option>Ulaşlı</option>
-        <option>Verxviani</option>
-        <option>Xancığazlı</option>
-        <option>Xocorni</option>
-        <option>Yeni Dioknisi</option>
-        <option>Yenikənd</option>
-        <option>Digər kənd</option>
-      </select>
-    </div>
-
-    <div class="field hidden" id="otherPlaceField">
-      <label for="otherPlace">Yaşadığın yerin adı</label>
-      <input id="otherPlace" placeholder="Şəhər və ya kənd">
-    </div>
-
-    <div class="field">
-      <label for="username">İstifadəçi adı</label>
-      <input id="username" placeholder="İstifadəçi adın"
-             minlength="3" required>
-    </div>
-
-    <div class="field">
-      <label for="email">E-poçt</label>
-      <input id="email" type="email" placeholder="example@mail.com"
-             required>
-    </div>
-
-    <div class="grid">
-      <div class="field">
-        <label for="password">Şifrə</label>
-        <input id="password" type="password"
-               placeholder="Ən azı 8 simvol" minlength="8" required>
-      </div>
-
-      <div class="field">
-        <label for="confirmPassword">Şifrəni təkrar yaz</label>
-        <input id="confirmPassword" type="password"
-               placeholder="Şifrəni təkrar yaz" minlength="8" required>
-      </div>
-    </div>
-
-    <button class="primary" type="submit">Qeydiyyatdan keç</button>
-    <div class="message" id="signupMessage"></div>
-  </form>
-
-  <form id="loginForm" class="hidden">
-    <div class="field">
-      <label for="loginEmail">E-poçt və ya istifadəçi adı</label>
-      <input id="loginEmail" required>
-    </div>
-
-    <div class="field">
-      <label for="loginPassword">Şifrə</label>
-      <input id="loginPassword" type="password" required>
-    </div>
-
-    <button class="primary" type="submit">Giriş et</button>
-    <div class="message" id="loginMessage"></div>
-  </form>
-
-  <p class="foot">
-    ZQİ Riyaziyyat — biliklərini addım-addım artır.
-  </p>
+<form id="loginForm" class="hidden">
+<label>E-poçt<input id="loginEmail" type="email" required></label>
+<label>Şifrə<input id="loginPassword" type="password" required></label>
+<button class="primary" type="submit">Daxil ol</button>
+<div id="loginMessage" class="msg" role="status"></div>
+<button id="logoutButton" class="primary hidden" type="button">Hesabdan çıx</button>
+</form>
+</section>
 </main>
+<footer>ZQİ Riyaziyyat — Biliklərini addım-addım artır</footer>
 
-<script>
-const signupTab = document.getElementById("signupTab");
-const loginTab = document.getElementById("loginTab");
-const signupForm = document.getElementById("signupForm");
-const loginForm = document.getElementById("loginForm");
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {
+ getAuth,createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,signOut,onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {
+ getFirestore,doc,setDoc,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-function showForm(signup) {
-  signupForm.classList.toggle("hidden", !signup);
-  loginForm.classList.toggle("hidden", signup);
-  signupTab.classList.toggle("active", signup);
-  loginTab.classList.toggle("active", !signup);
+const firebaseConfig={
+ apiKey:"AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
+ authDomain:"zqi-riyaziyyat.firebaseapp.com",
+ projectId:"zqi-riyaziyyat",
+ storageBucket:"zqi-riyaziyyat.firebasestorage.app",
+ messagingSenderId:"228687771538",
+ appId:"1:228687771538:web:4b4c31d993b0614ca6334b",
+ measurementId:"G-MT0Q1DP79N"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
+
+function showTab(signup){
+ $("signupForm").classList.toggle("hidden",!signup);
+ $("loginForm").classList.toggle("hidden",signup);
+ $("signupTab").classList.toggle("active",signup);
+ $("loginTab").classList.toggle("active",!signup);
+}
+$("signupTab").addEventListener("click",()=>showTab(true));
+$("loginTab").addEventListener("click",()=>showTab(false));
+
+$("placeType").addEventListener("change",()=>{
+ const v=$("placeType").value;
+ $("villageField").classList.toggle("hidden",v!=="village");
+ $("otherPlaceField").classList.toggle("hidden",v!=="other");
+ $("village").required=v==="village";
+ $("otherPlace").required=v==="other";
+});
+
+function friendlyError(e){
+ const errors={
+ "auth/email-already-in-use":"Bu e-poçt artıq qeydiyyatdan keçib.",
+ "auth/invalid-email":"E-poçt düzgün deyil.",
+ "auth/weak-password":"Şifrə ən azı 6 simvol olmalıdır.",
+ "auth/invalid-credential":"E-poçt və ya şifrə yanlışdır.",
+ "auth/too-many-requests":"Çox cəhd edildi. Sonra yenidən yoxla.",
+ "auth/network-request-failed":"İnternet bağlantısını yoxla.",
+ "permission-denied":"Firestore icazəsi yoxdur. Təhlükəsizlik qaydalarını yoxlamaq lazımdır."
+ };
+ return errors[e.code]||"Xəta baş verdi: "+(e.code||"yenidən cəhd et");
 }
 
-signupTab.addEventListener("click", () => showForm(true));
-loginTab.addEventListener("click", () => showForm(false));
+$("signupForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ $("signupMessage").textContent="Qeydiyyat aparılır...";
+ if($("password").value!==$("confirmPassword").value){
+  $("signupMessage").textContent="Şifrələr eyni deyil.";
+  return;
+ }
+ const type=$("placeType").value;
+ const place=type==="city"?"Marneuli şəhəri":
+  type==="village"?$("village").value.trim():$("otherPlace").value.trim();
 
-const placeType = document.getElementById("placeType");
-const villageField = document.getElementById("villageField");
-const village = document.getElementById("village");
-const otherPlaceField = document.getElementById("otherPlaceField");
-const otherPlace = document.getElementById("otherPlace");
-
-placeType.addEventListener("change", () => {
-  const isVillage = placeType.value === "village";
-  const isOther = placeType.value === "other";
-
-  villageField.classList.toggle("hidden", !isVillage);
-  otherPlaceField.classList.toggle("hidden", !isOther);
-
-  village.required = isVillage;
-  otherPlace.required = isOther;
+ try{
+  const email=$("email").value.trim();
+  const cred=await createUserWithEmailAndPassword(auth,email,$("password").value);
+  await setDoc(doc(db,"users",cred.user.uid),{
+   firstName:$("firstName").value.trim(),
+   lastName:$("lastName").value.trim(),
+   name:$("firstName").value.trim()+" "+$("lastName").value.trim(),
+   username:$("username").value.trim(),
+   email:email,
+   grade:$("grade").value,
+   place:place,
+   createdAt:serverTimestamp()
+  });
+  $("signupMessage").textContent="Qeydiyyat uğurla tamamlandı!";
+  $("signupForm").reset();
+  $("villageField").classList.add("hidden");
+  $("otherPlaceField").classList.add("hidden");
+ }catch(err){
+  console.error(err);
+  $("signupMessage").textContent=friendlyError(err);
+ }
 });
 
-signupForm.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const password = document.getElementById("password").value;
-  const confirmPassword =
-    document.getElementById("confirmPassword").value;
-  const message = document.getElementById("signupMessage");
-
-  message.style.display = "block";
-
-  if (password !== confirmPassword) {
-    message.textContent = "Şifrələr eyni deyil. Yenidən yoxla.";
-    return;
-  }
-
-  message.textContent =
-    "Forma düzgün doldurulub. Real qeydiyyat üçün təhlükəsiz hesab sistemi qoşulmalıdır.";
+$("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ $("loginMessage").textContent="Giriş edilir...";
+ try{
+  await signInWithEmailAndPassword(
+   auth,$("loginEmail").value.trim(),$("loginPassword").value
+  );
+  $("loginMessage").textContent="Giriş uğurludur.";
+ }catch(err){
+  $("loginMessage").textContent=friendlyError(err);
+ }
 });
 
-loginForm.addEventListener("submit", event => {
-  event.preventDefault();
+$("logoutButton").addEventListener("click",async()=>{
+ await signOut(auth);
+ $("loginMessage").textContent="Hesabdan çıxıldı.";
+});
 
-  const message = document.getElementById("loginMessage");
-  message.style.display = "block";
-  message.textContent =
-    "Giriş sistemi hələ qoşulmayıb. Real giriş üçün autentifikasiya sistemi lazımdır.";
+onAuthStateChanged(auth,user=>{
+ $("logoutButton").classList.toggle("hidden",!user);
+ if(user&&!$("loginForm").classList.contains("hidden")){
+  $("loginMessage").textContent="Daxil olmusunuz: "+user.email;
+ }
 });
 </script>
 </body>
