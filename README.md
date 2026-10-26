@@ -1,350 +1,239 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQİ — Qəbul İmtahanı</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZQİ Quiz</title>
 <style>
-:root{--bg:#080808;--panel:#141414;--gold:#e8c66a;--line:#514122;--muted:#bbb}
+:root{--g:#e8c45e;--p:#151720;--l:#30333e;--m:#a4a8b4}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
-header,main,footer{max-width:1100px;margin:auto;padding:18px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo{background:linear-gradient(135deg,#f4dc8b,#a77b22);color:#111;font-size:24px;font-weight:900;padding:15px;border-radius:14px}
-h1{font-size:20px}h2{font-size:30px}
-button{padding:12px;border:1px solid var(--line);border-radius:10px;background:#211b0e;color:white;font-weight:bold;cursor:pointer}
-button.gold{background:linear-gradient(135deg,#f2d982,#b88b2c);color:#111}
-input{width:100%;padding:12px;margin:7px 0 12px;background:#090909;border:1px solid var(--line);border-radius:9px;color:white}
-nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px}
-nav button{flex:1}
-.panel,.hero,.card{background:var(--panel);border:1px solid #40341c;border-radius:17px;padding:19px;margin-bottom:15px}
-.hero{background:linear-gradient(130deg,#241d0d,#101010);padding:28px}
-.goldtext{color:var(--gold)}
-.muted{color:var(--muted);line-height:1.6}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.card p{color:var(--muted);font-size:13px;line-height:1.5}
-.card button{width:100%}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.stat{background:#080808;border:1px solid var(--line);padding:13px;border-radius:10px}
-.stat strong{display:block;color:var(--gold);font-size:22px}
-.stat span{font-size:12px;color:var(--muted)}
-.bar{height:8px;background:#332b1b;border-radius:9px;overflow:hidden;margin:12px 0}
-.bar div{height:100%;background:var(--gold);width:0}
-.answer{display:block;width:100%;text-align:left;margin:9px 0}
-.correct{background:#12402c;border-color:#47d99a}
-.wrong{background:#421820;border-color:#ff7185}
-.rank{display:flex;justify-content:space-between;gap:12px;padding:12px;border-bottom:1px solid #332b1b}
+body{margin:0;background:radial-gradient(ellipse at top,#282216,#090a0e 60%);color:#fafafa;font:16px system-ui}
+.wrap{max-width:780px;margin:auto;padding:18px 13px 40px}
+header{display:flex;gap:12px;align-items:center;margin:10px 0 22px}
+.logo{border:2px solid var(--g);color:var(--g);font-weight:1000;font-size:23px;border-radius:15px;padding:13px 9px}
+h1{font-size:clamp(21px,5vw,31px);margin:0}
+h2{font-size:19px;margin:0 0 14px}
+.muted,.note{color:var(--m);font-size:13px;line-height:1.5}
+.panel{background:var(--p);border:1px solid var(--l);border-radius:17px;padding:17px;margin:13px 0}
+.pill{color:var(--g);font-size:12px;margin-top:6px}
+label{display:block;font-size:13px;margin:8px 0}
+input{width:100%;padding:13px;border-radius:10px;background:#090a0e;border:1px solid var(--l);color:white;font-size:16px}
+button{border:0;border-radius:11px;padding:13px;font-size:15px;font-weight:800;cursor:pointer}
+button:disabled{opacity:.45}
+.primary{background:linear-gradient(90deg,#d8ad42,#ffe59a);color:#17130a}
+.secondary{background:#292c36;color:white;border:1px solid #454956}
+.full{width:100%;margin-top:12px}
 .hidden{display:none!important}
-footer{text-align:center;color:#888;font-size:12px;line-height:1.8}
-@media(max-width:650px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:15px}.hero{padding:20px}}
-@media(max-width:400px){.grid{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{text-align:center;background:#0b0c11;border:1px solid var(--l);border-radius:12px;padding:10px}
+.stat b{display:block;color:#ffe49a;font-size:21px}
+.stat span{font-size:11px;color:var(--m)}
+.timerbar{height:7px;background:#343640;border-radius:9px;margin:13px 0;overflow:hidden}
+.fill{height:100%;background:var(--g);width:100%}
+.meta{display:flex;justify-content:space-between;color:var(--m);font-size:13px}
+.question{font-size:clamp(20px,4vw,26px);font-weight:800;margin:18px 0}
+.answers{display:grid;gap:9px}
+.answer{width:100%;text-align:left;display:flex;gap:10px;align-items:center;background:#0b0c11;color:white;border:1px solid #383b47}
+.answer.sel{border-color:var(--g);background:#2a2415}
+.answer.correct{border-color:#40d69a}
+.answer.wrong{border-color:#ff6577}
+.letter{background:#282b35;padding:5px 9px;border-radius:7px;color:#ffe49a}
+table{width:100%;border-collapse:collapse}
+td,th{text-align:left;border-bottom:1px solid #30333d;padding:10px 5px;font-size:13px}
+th{color:var(--m)}
+.rank{color:#ffe49a;font-weight:900}
+.people{display:flex;gap:7px;flex-wrap:wrap}
+.person{border:1px solid #383b47;background:#0b0c11;border-radius:30px;padding:8px 10px;font-size:12px}
+footer{text-align:center;color:#818694;font-size:12px;margin-top:22px}
+footer b{color:#ffe49a}
 </style>
 </head>
 <body>
-
+<div class="wrap">
 <header>
- <div style="display:flex;align-items:center;gap:12px">
-  <div class="logo">ZQİ</div>
-  <div><h1>Zogadiunarebi Qəbul İmtahanı</h1><span class="muted">Öyrən • Məşq et • İnkişaf et</span></div>
- </div>
- <b class="goldtext">⚡ <span id="topXP">0</span> XP</b>
+<div class="logo">ZQİ</div>
+<div>
+<h1>Zogadiunarebi Qəbul İmtahanı</h1>
+<div class="muted">Riyaziyyat • Sürətli quiz</div>
+<div class="pill">⏱ Hər suala 60 saniyə</div>
+</div>
 </header>
 
-<nav>
- <button onclick="show('home')">🏠 Ana səhifə</button>
- <button onclick="show('subjects')">📚 Fənlər</button>
- <button onclick="daily()">⚡ Quiz</button>
- <button onclick="show('profile')">👤 Profil</button>
- <button onclick="show('leaders')">🏆 Reytinq</button>
- <button onclick="show('admin')">🛠️ Admin</button>
-</nav>
-
-<main>
-<section id="maintenance" class="hero hidden">
- <h2 class="goldtext">⚙️ Texniki işlər gedir</h2>
- <p class="muted">Zogadiunarebi Qəbul İmtahanı platformasında yenilənmə işləri aparılır. Admin işləri tamamladıqdan sonra saytı yenidən aktiv edəcək.</p>
- <p>Əlaqə: <a class="goldtext" href="tel:+995555936547">+995 555 93 65 47</a></p>
+<section class="panel" id="join">
+<h2>Quizə qoşul</h2>
+<label for="name">Adın və ya istifadəçi adın</label>
+<input id="name" maxlength="24" placeholder="Məsələn: Haldun">
+<button class="primary full" id="start">İştirak et və başla</button>
+<p class="note">10 sual • Cavabını seç və “Cavabı göndər” düyməsinə bas.</p>
 </section>
 
-<section id="home">
- <div class="hero">
-  <p class="goldtext">QƏBUL HAZIRLIĞI PLATFORMASI</p>
-  <h2>Biliklərini yoxla.<br><span class="goldtext">Hədəfinə yaxınlaş!</span></h2>
-  <p class="muted">Testləri həll et, quizlərdə iştirak et, XP qazan və səviyyəni yüksəlt.</p>
-  <button class="gold" onclick="daily()">🚀 Quizə başla</button>
-  <div class="stats" style="margin-top:20px">
-   <div class="stat"><strong id="myXP">0</strong><span>Toplam XP</span></div>
-   <div class="stat"><strong id="myLevel">1</strong><span>Səviyyə</span></div>
-   <div class="stat"><strong id="myCorrect">0</strong><span>Düzgün cavab</span></div>
-  </div>
- </div>
- <div class="panel">
-  <h3>🏅 Səviyyə göstəricisi</h3>
-  <div class="bar"><div id="xpBar"></div></div>
-  <p class="muted" id="levelText">100 XP növbəti səviyyəyə</p>
- </div>
- <div class="panel">
-  <h3>🕣 Gündəlik quiz</h3>
-  <p class="muted">Planlaşdırılmış vaxt: <b id="quizTimeText">20:30</b>. Quizə aşağıdakı düymə ilə məşq üçün istənilən vaxt başlaya bilərsən.</p>
-  <button class="gold" onclick="daily()">Quizə başla</button>
- </div>
- <div class="panel"><h3>📚 Fənlər</h3><div class="grid" id="homeSubjects"></div></div>
+<section class="panel hidden" id="quiz">
+<div class="stats">
+<div class="stat"><b id="count">1/10</b><span>Sual</span></div>
+<div class="stat"><b id="time">60</b><span>Saniyə</span></div>
+<div class="stat"><b id="score">0</b><span>Xal</span></div>
+</div>
+<div class="timerbar"><div class="fill" id="fill"></div></div>
+<div class="meta"><span>Riyaziyyat</span><span id="picked">Cavab seçilməyib</span></div>
+<div class="question" id="q"></div>
+<div class="answers" id="answers"></div>
+<button class="primary full" id="send" disabled>Cavabı göndər</button>
+<button class="secondary full hidden" id="next">Növbəti sual</button>
+<p class="note" id="feedback"></p>
 </section>
 
-<section id="subjects" class="hidden">
- <div class="panel"><h2>📚 Bütün fənlər</h2><div class="grid" id="allSubjects"></div></div>
+<section class="panel hidden" id="result">
+<h2>Quiz tamamlandı!</h2>
+<div class="stats">
+<div class="stat"><b id="finalScore">0</b><span>Xal</span></div>
+<div class="stat"><b id="finalCorrect">0/10</b><span>Düzgün cavab</span></div>
+<div class="stat"><b id="finalTime">0</b><span>Sərf olunan saniyə</span></div>
+</div>
+<button class="primary full" id="again">Yenidən başla</button>
 </section>
 
-<section id="quiz" class="hidden">
- <div class="panel">
-  <button onclick="show('subjects')">← Fənlərə qayıt</button>
-  <p class="goldtext" id="subjectName">QUIZ</p>
-  <div class="bar"><div id="quizBar"></div></div>
-  <div style="display:flex;justify-content:space-between;gap:12px">
-   <span id="qNumber" class="muted">Sual 1</span>
-   <b class="goldtext">⏱ <span id="timer">60</span></b>
-  </div>
-  <h2 id="question"></h2>
-  <div id="answers"></div>
-  <p id="explanation" class="muted"></p>
-  <button id="next" class="gold hidden" onclick="nextQuestion()">Növbəti →</button>
- </div>
+<section class="panel">
+<h2>🏆 Liderlik cədvəli</h2>
+<p class="note">Bu versiyada nəticələr yalnız həmin brauzerdə saxlanılır. Ortaq liderlik cədvəli üçün Firebase lazımdır.</p>
+<div style="overflow:auto">
+<table>
+<thead><tr><th>Yer</th><th>İştirakçı</th><th>Düzgün</th><th>Xal</th></tr></thead>
+<tbody id="leaders"><tr><td colspan="4" class="note">Hələ nəticə yoxdur.</td></tr></tbody>
+</table>
+</div>
 </section>
 
-<section id="profile" class="hidden">
- <div class="panel">
-  <h2>👤 Profil və qeydiyyat</h2>
-  <div id="registerArea" class="grid">
-   <div class="card"><h3>Qeydiyyat</h3>
-    <input id="regName" placeholder="İstifadəçi adı">
-    <input id="regEmail" type="email" placeholder="E-poçt">
-    <input id="regPass" type="password" placeholder="Şifrə">
-    <button class="gold" onclick="register()">Qeydiyyatdan keç</button>
-   </div>
-   <div class="card"><h3>Hesaba giriş</h3>
-    <input id="loginEmail" type="email" placeholder="E-poçt">
-    <input id="loginPass" type="password" placeholder="Şifrə">
-    <button onclick="login()">Daxil ol</button>
-   </div>
-  </div>
-  <p id="authMessage" class="muted"></p>
-  <div id="profileInfo" class="hidden card">
-   <div style="font-size:35px">🎓</div>
-   <h2 id="profileName"></h2>
-   <p id="profileEmail" class="muted"></p>
-   <div class="stats">
-    <div class="stat"><strong id="profileXP">0</strong><span>XP</span></div>
-    <div class="stat"><strong id="profileLevel">1</strong><span>Səviyyə</span></div>
-    <div class="stat"><strong id="profileCorrect">0</strong><span>Düzgün cavab</span></div>
-   </div>
-   <button style="margin-top:14px" onclick="logout()">Çıxış</button>
-  </div>
-  <p class="muted">Bu ilkin versiyada məlumatlar yalnız bu brauzerdə saxlanılır. Həqiqi hesab təhlükəsizliyi üçün server əsaslı qeydiyyat lazımdır.</p>
- </div>
+<section class="panel">
+<h2>👥 İştirak edənlər</h2>
+<div class="people" id="people"><span class="note">Hələ iştirakçı yoxdur.</span></div>
 </section>
 
-<section id="leaders" class="hidden">
- <div class="panel"><h2>🏆 Liderlər cədvəli</h2><div id="leaderboard"></div>
- <p class="muted">Bu demo reytinq yalnız bu brauzerdəki profilləri göstərir; ortaq canlı reytinq deyil.</p></div>
-</section>
-
-<section id="admin" class="hidden">
- <div class="panel">
-  <h2>🛠️ Admin paneli</h2>
-  <p class="muted">Demo parol: <b>ZQI2026</b>. Bu parol təhlükəsiz deyil; ictimai saytda real admin üçün server yoxlaması qurulmalıdır.</p>
-  <div id="adminLogin">
-   <input id="adminPass" type="password" placeholder="Admin parolu">
-   <button class="gold" onclick="adminEnter()">Daxil ol</button>
-  </div>
-  <div id="adminControls" class="hidden">
-   <h3>Saytın vəziyyəti</h3>
-   <p id="adminStatus" class="muted"></p>
-   <button class="gold" onclick="toggleMaintenance()">Texniki fasiləni dəyiş</button>
-   <h3 style="margin-top:25px">Quiz vaxtı</h3>
-   <input id="timeSetting" type="time" value="20:30">
-   <button onclick="saveTime()">Vaxtı yadda saxla</button>
-   <p id="adminMessage" class="muted"></p>
-  </div>
- </div>
-</section>
-</main>
-
-<footer>
- Zogadiunarebi Qəbul İmtahanı<br>
- <strong class="goldtext">Hazırladı: Haldun Məmmədov</strong><br>
- Əlaqə: +995 555 93 65 47
-</footer>
+<footer>Hazırladı: <b>Haldun Məmmədov</b> • ZQİ</footer>
+</div>
 
 <script>
-const subjects = {
-"Riyaziyyat":[
+const qs=[
 ["12 + 8 = ?",["18","20","22","24"],1,"12 + 8 = 20."],
-["−5 + 9 = ?",["−14","−4","4","14"],2,"9 − 5 = 4."],
-["7 × 8 = ?",["54","56","64","48"],1,"7 × 8 = 56."],
-["144 ÷ 12 = ?",["10","11","12","14"],2,"Cavab 12-dir."],
-["3² + 4 = ?",["10","12","13","14"],2,"9 + 4 = 13."],
-["200-ün 25%-i?",["25","40","50","75"],2,"200 × 0,25 = 50."],
-["x + 7 = 19. x = ?",["10","11","12","13"],2,"19 − 7 = 12."],
-["5 sm və 8 sm tərəfli düzbucaqlının sahəsi?",["13","26","40","80"],2,"5 × 8 = 40 sm²."],
-["1/2 + 1/4 = ?",["2/6","3/4","1/6","1"],1,"2/4 + 1/4 = 3/4."],
-["Üçbucağın bucaqlarının cəmi?",["90°","180°","270°","360°"],1,"180°."]
-],
-"Məntiq":[
-["2, 4, 6, 8, ...",["9","10","11","12"],1,"Hər dəfə 2 artırılır."],
-["3, 6, 12, 24, ...",["30","36","42","48"],3,"Hər dəfə 2-yə vurulur."],
-["Artıq olanı seç.",["Üçbucaq","Kvadrat","Dairə","Alma"],3,"Alma həndəsi fiqur deyil."],
-["Bir saat neçə dəqiqədir?",["30","45","60","100"],2,"60 dəqiqə."],
-["1, 4, 9, 16, ...",["20","24","25","36"],2,"5² = 25."],
-["Bütün güllər bitkidir. Qızılgül güldür. Nəticə?",["Qızılgül bitkidir","Bütün bitkilər güldür","Qızılgül heyvandır","Nəticə yoxdur"],0,"Qızılgül bitkidir."],
-["Bazar ertəsindən 3 gün sonra?",["Çərşənbə axşamı","Çərşənbə","Cümə axşamı","Cümə"],2,"Cümə axşamı."],
-["5 qələm 10 manatdır. 2 qələm?",["2","4","5","8"],1,"Bir qələm 2 manatdır."],
-["Hansı ədəd cütdür?",["13","17","21","28"],3,"28 cütdür."],
-["20, 17, 14, 11, ...",["9","8","7","6"],1,"Hər dəfə 3 çıxılır."]
-],
-"Azərbaycan dili":[
-["İsim hansı suala cavab verir?",["Necə?","Nə edir?","Kim? nə?","Neçə?"],2,"İsim əşyanın adını bildirir."],
-["“Gözəl” hansı nitq hissəsidir?",["İsim","Sifət","Feil","Say"],1,"Sifət əlamət bildirir."],
-["“Qaçır” hansı nitq hissəsidir?",["Feil","Əvəzlik","Zərf","İsim"],0,"Feil hərəkət bildirir."],
-["“Kitablar” sözündə cəm şəkilçisi?",["-çı","-lıq","-lar","-dan"],2,"-lar cəm şəkilçisidir."],
-["Düzgün yazılışı seç.",["Məktəb","Məktəp","Məgtəb","Məktəbb"],0,"Düzgün yazılış məktəbdir."],
-["“Sürətlə qaçdı” ifadəsində sürətlə?",["İsim","Sifət","Zərf","Say"],2,"Zərf hərəkətin tərzini bildirir."],
-["Sual cümləsinin işarəsi?",["Nöqtə","Vergül","Sual işarəsi","İki nöqtə"],2,"Sual işarəsi."],
-["“Mən məktəbə gedirəm.” Mübtəda?",["Məktəbə","Gedirəm","Mən","Məktəb"],2,"Mübtəda mən sözüdür."],
-["Hansı söz əvəzlikdir?",["Mən","Masa","Yaşıl","Oxumaq"],0,"Mən şəxs əvəzliyidir."],
-["“Ağıllı” sözünün əksi?",["Zəkalı","Düşüncəli","Ağılsız","Çalışqan"],2,"Ağılsız."]
-],
-"Tarix":[
-["Azərbaycan Xalq Cümhuriyyəti nə vaxt elan olunub?",["28 may 1914","28 may 1918","28 may 1920","18 oktyabr 1991"],1,"28 may 1918."],
-["Müstəqilliyin bərpası aktı nə vaxt qəbul edilib?",["28 may 1918","18 oktyabr 1991","9 may 1945","20 yanvar 1990"],1,"18 oktyabr 1991."],
-["İkinci Dünya müharibəsi?",["1914–1918","1939–1945","1945–1950","1929–1933"],1,"1939–1945."],
-["Qədim Misir hansı çayın vadisində yaranıb?",["Amazon","Nil","Dunay","Volqa"],1,"Nil çayı."],
-["İpək yolu nə üçün əhəmiyyətli idi?",["Yalnız müharibə","Ticarət və mədəni əlaqələr","Əkinçilik","Hava müşahidəsi"],1,"Ticarət və mədəni mübadilə."],
-["Bakı hansı dənizin sahilindədir?",["Qara","Aralıq","Xəzər","Baltik"],2,"Xəzər dənizi."],
-["Azərbaycan müstəqilliyini hansı ildə bərpa edib?",["1988","1990","1991","1995"],2,"1991-ci ildə."],
-["Qalalar əsasən nə üçün tikilirdi?",["Müdafiə","Səyahət","Saat ölçmək","Əkinçilik"],0,"Müdafiə üçün."],
-["Tarixi mənbəyə nümunə?",["Qədim yazılı sənəd","Hava proqnozu","Təxmin","Düstur"],0,"Qədim yazılı sənəd."],
-["Arxeologiya nəyi öyrənir?",["Göy cisimləri","Maddi qalıqlar","İrsiyyət","Atmosfer"],1,"Keçmiş cəmiyyətlərin maddi qalıqları."]
-],
-"Coğrafiya":[
-["Ən böyük okean?",["Atlantik","Hind","Sakit","Şimal Buzlu"],2,"Sakit okean."],
-["Azərbaycanın paytaxtı?",["Gəncə","Şəki","Bakı","Lənkəran"],2,"Bakı."],
-["Yerin təbii peyki?",["Mars","Ay","Günəş","Venera"],1,"Ay."],
-["Xəritədə şimal adətən harada göstərilir?",["Aşağı","Yuxarı","Sağ","Sol"],1,"Yuxarıda."],
-["Ekvator hansı yarımkürələri ayırır?",["Şərq-qərb","Şimal-cənub","Quru-su","Dağ-düzən"],1,"Şimal və cənub."],
-["Ən böyük qitə?",["Afrika","Avropa","Asiya","Avstraliya"],2,"Asiya."],
-["Xəzər hansı tip su hövzəsidir?",["Okean","Qapalı daxili hövzə","Çay","Buzlaq"],1,"Qapalı daxili su hövzəsi."],
-["Vulkanın səthə çıxardığı ərimiş süxur?",["Lava","Qar","Su","Oksigen"],0,"Lava."],
-["Atmosfer nədir?",["Su qatı","Yeri əhatə edən qaz qatı","Nüvə","Bitki örtüyü"],1,"Qaz qatı."],
-["Kompas nəyi müəyyən edir?",["Temperatur","İstiqamət","Kütlə","Vaxt"],1,"İstiqamət."]
-],
-"Biologiya":[
-["Fotosintez hansı orqanoiddə gedir?",["Nüvə","Xloroplast","Mitoxondri","Ribosom"],1,"Xloroplast."],
-["Qanı dövr etdirən orqan?",["Ağciyər","Mədə","Ürək","Qaraciyər"],2,"Ürək."],
-["Nəfəsalma üçün vacib qaz?",["Karbon qazı","Oksigen","Helium","Hidrogen"],1,"Oksigen."],
-["Bitki suyu əsasən hansı orqanla alır?",["Çiçək","Yarpaq","Kök","Meyvə"],2,"Kök."],
-["İrsiyyət məlumatını daşıyan molekul?",["DNT","Su","Qlükoza","Yağ"],0,"DNT."],
-["Yetkin insanın skeletində təxminən neçə sümük var?",["106","206","306","406"],1,"Adətən 206."],
-["Hansı canlı məməlidir?",["Qurbağa","Kəpənək","Delfin","Alabalıq"],2,"Delfin."],
-["Qida zəncirində bitkilər?",["İstehsalçı","Parçalayıcı","İstehlakçı","Yırtıcı"],0,"İstehsalçıdır."],
-["İnsanda həzm harada başlayır?",["Mədə","Ağız boşluğu","Nazik bağırsaq","Qaraciyər"],1,"Ağız boşluğunda."],
-["Ekosistem nəyi əhatə edir?",["Yalnız heyvanlar","Canlılar və cansız mühit","Yalnız bitkilər","Yalnız torpaq"],1,"Canlılar və cansız mühit."]
-],
-"Fizika":[
-["Qüvvənin SI vahidi?",["Coul","Nyuton","Vatt","Paskal"],1,"Nyuton."],
-["Orta sürət necə hesablanır?",["Zaman/yol","Yol/zaman","Kütlə×həcm","Qüvvə/temperatur"],1,"Yol bölünsün zamana."],
-["Normal təzyiqdə su neçə °C-də qaynayır?",["0","50","100","150"],2,"Təxminən 100°C."],
-["Cərəyan şiddətinin vahidi?",["Amper","Volt","Om","Vatt"],0,"Amper."],
-["İşığın vakuumdakı sürəti?",["300 km/s","3 000 km/s","300 000 km/s","30 km/s"],2,"Təxminən 300 000 km/s."],
-["Enerjinin SI vahidi?",["Nyuton","Coul","Amper","Metr"],1,"Coul."],
-["Cisimlərin Yerə düşməsinə nə səbəb olur?",["Sürtünmə","Cazibə","Elektrik","Elastiklik"],1,"Cazibə."],
-["Səs vakuumda yayıla bilər?",["Bəli","Xeyr, maddi mühit lazımdır","Yalnız gecə","Yalnız istidə"],1,"Səs maddi mühit tələb edir."],
-["Gərginliyin vahidi?",["Volt","Amper","Om","Coul"],0,"Volt."],
-["Sıxlıq düsturu?",["Kütlə/həcm","Həcm/zaman","Yol×zaman","Qüvvə×məsafə"],0,"Sıxlıq = kütlə/həcm."]
-],
-"Kimya":[
-["Suyun formulu?",["CO₂","H₂O","O₂","NaCl"],1,"H₂O."],
-["Oksigenin işarəsi?",["Ox","O","Og","Om"],1,"O."],
-["25°C-də pH 7 olan məhlul?",["Turş","Qələvi","Neytral","Duzlu"],2,"Neytral."],
-["Mətbəx duzunun formulu?",["NaCl","HCl","KOH","CO₂"],0,"NaCl."],
-["Atom nüvəsində hansı hissəciklər var?",["Yalnız elektron","Proton və neytron","Foton","Molekul"],1,"Protonlar və neytronlar; hidrogen-1 istisnadır."],
-["Dövri cədvəl hansı ardıcıllığa əsaslanır?",["Rəng","Atom nömrəsi","Qaynama adı","Ölkə"],1,"Atom nömrəsi."],
-["Karbon qazının formulu?",["CO","CO₂","CaO","C₂O"],1,"CO₂."],
-["Katalizator nə edir?",["Həmişə məhsul olur","Reaksiya sürətinə təsir edir","Atomları yox edir","Kütlə yaradır"],1,"Reaksiyanın sürətini dəyişir."],
-["Dəmirin işarəsi?",["Ir","Fe","F","D"],1,"Fe."],
-["Buzun əriməsi hansı dəyişiklikdir?",["Kimyəvi","Fiziki","Nüvə","Dəyişiklik deyil"],1,"Fiziki dəyişiklik."]
-],
-"İnformatika":[
-["Mərkəzi emal qurğusu?",["CPU","URL","USB","PDF"],0,"CPU."],
-["İkilik say sistemində hansı rəqəmlər var?",["0 və 1","1 və 2","0–9","A və B"],0,"0 və 1."],
-["1 bayt neçə bitdir?",["2","4","8","16"],2,"8 bit."],
-["Veb səhifə strukturu üçün dil?",["HTML","SQL","C++","PNG"],0,"HTML."],
-["Güclü şifrə necə olmalıdır?",["123456","Ad və doğum ili","Uzun və unikal","Hər yerdə eyni"],2,"Uzun və unikal şifrə."],
-["Əməliyyat sistemi nə edir?",["Şəkil çəkir","Resursları idarə edir","Yalnız internet verir","Yalnız mətn yazır"],1,"Kompüter resurslarını idarə edir."],
-["Elektron cədvəldə sətir-sütun kəsişməsi?",["Fayl","Xana","Qovluq","Slayd"],1,"Xana."],
-["URL nəyi göstərir?",["Veb ünvanı","Temperatur","Şifrə uzunluğu","Ekran ölçüsü"],0,"Veb resursun ünvanı."],
-["Uzunmüddətli saxlama qurğuları?",["Yalnız RAM","SSD və HDD","Prosessor","Klaviatura"],1,"SSD və HDD."],
-["Fişinq nədir?",["Kompüteri təmizləmək","Aldadaraq məxfi məlumatı almaq","Fayl sıxışdırmaq","Ekran parlaqlığı"],1,"Məlumat oğurlama cəhdi."]
-],
-"İngilis dili":[
-["“Book” sözünün mənası?",["Qələm","Kitab","Masa","Məktəb"],1,"Book — kitab."],
-["She ___ a student.",["am","are","is","be"],2,"She is."],
-["Child sözünün cəmi?",["childs","children","childes","childrens"],1,"Children."],
-["Good sözünün əksi?",["Nice","Best","Bad","Fine"],2,"Bad."],
-["Düzgün cümlə hansıdır?",["He go to school.","He goes to school.","He going school.","He gone to school."],1,"He goes to school."],
-["Yesterday hansı zamanı bildirir?",["Gələcək","Keçmiş","İndiki davam edən","Əmr"],1,"Keçmiş."],
-["I have two ___.",["book","books","bookes","booking"],1,"Books."],
-["Where nəyi soruşur?",["Vaxt","Yer","Səbəb","Miqdar"],1,"Harada/hara."],
-["___ apple",["a","an","thee","always no article"],1,"An apple."],
-["They are playing hansı zamandır?",["Present Simple","Past Simple","Present Continuous","Future Simple"],2,"Present Continuous."]
-]
+["−5 + 9 = ?",["−14","−4","4","14"],2,"−5 + 9 = 4."],
+["|x − 2| + 1 = 9 tənliyinin həlləri hansıdır?",["x = 10 və ya x = −6","x = 8 və ya x = −8","x = 6 və ya x = −10","Yalnız x = 10"],0,"|x−2|=8. Deməli x=10 və ya x=−6."],
+["21 − |x + 7| = 5 tənliyinin həlləri hansıdır?",["x = 9 və ya x = −23","x = 16 və ya x = −16","x = 5 və ya x = −5","Yalnız x = 9"],0,"|x+7|=16. Buna görə x=9 və ya x=−23."],
+["|7 − x| = 5 tənliyinin həlləri hansıdır?",["x = 2 və ya x = 12","x = −2 və ya x = 5","x = 7 və ya x = 5","Yalnız x = 2"],0,"x=2 və ya x=12."],
+["|2x + 1| = 13 tənliyinin həlləri hansıdır?",["x = 6 və ya x = −7","x = 7 və ya x = −6","x = 5 və ya x = −5","Yalnız x = 6"],0,"x=6 və ya x=−7."],
+["2|x| = 10 olarsa, x hansı qiymətləri alır?",["−5 və 5","−10 və 10","Yalnız 5","−5 və 10"],0,"x=−5 və ya x=5."],
+["3|x| = 12 olarsa, x hansı qiymətləri alır?",["−4 və 4","−12 və 12","Yalnız 4","−3 və 3"],0,"x=−4 və ya x=4."],
+["|x| − 1 = 3 tənliyinin həlləri hansıdır?",["−4 və 4","−2 və 2","Yalnız 4","−3 və 3"],0,"x=−4 və ya x=4."],
+["7 − |x| = 5 tənliyinin həlləri hansıdır?",["−2 və 2","−5 və 5","Yalnız 2","−7 və 7"],0,"x=−2 və ya x=2."]
+];
+
+let name="",i=0,sel=null,score=0,correct=0,left=60,elapsed=0,locked=false,timer;
+const $=id=>document.getElementById(id);
+
+function read(k){
+ try{return JSON.parse(localStorage.getItem(k)||"[]")}
+ catch(e){return []}
+}
+function write(k,v){
+ localStorage.setItem(k,JSON.stringify(v))
+}
+function esc(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))
+}
+function tables(){
+ let r=read("zqiQuizResults");
+ r.sort((a,b)=>b.score-a.score||b.correct-a.correct||a.elapsed-b.elapsed);
+ $("leaders").innerHTML=r.length?r.slice(0,30).map((x,j)=>
+ `<tr><td class="rank">${["🥇","🥈","🥉"][j]||j+1}</td><td>${esc(x.name)}</td><td>${x.correct}/10</td><td><b>${x.score}</b></td></tr>`
+ ).join(""):'<tr><td colspan="4" class="note">Hələ nəticə yoxdur.</td></tr>';
+ let p=read("zqiQuizPeople");
+ $("people").innerHTML=p.length?p.map(x=>`<span class="person">👤 ${esc(x)}</span>`).join(""):'<span class="note">Hələ iştirakçı yoxdur.</span>';
+}
+function start(){
+ name=$("name").value.trim();
+ if(!name){alert("Əvvəl adını yaz.");return}
+ let p=read("zqiQuizPeople");
+ if(!p.includes(name)){p.push(name);write("zqiQuizPeople",p)}
+ i=0;score=0;correct=0;elapsed=0;
+ $("join").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("quiz").classList.remove("hidden");
+ show();tables();
+}
+function show(){
+ clearInterval(timer);
+ sel=null;locked=false;left=60;
+ $("count").textContent=`${i+1}/10`;
+ $("time").textContent=60;
+ $("score").textContent=score;
+ $("fill").style.width="100%";
+ $("picked").textContent="Cavab seçilməyib";
+ $("feedback").textContent="";
+ $("send").disabled=true;
+ $("send").classList.remove("hidden");
+ $("next").classList.add("hidden");
+ $("q").textContent=qs[i][0];
+ $("answers").innerHTML=qs[i][1].map((a,j)=>
+ `<button class="answer" data-n="${j}"><span class="letter">${"ABCD"[j]}</span>${a}</button>`
+ ).join("");
+ document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{
+  if(locked)return;
+  sel=+b.dataset.n;
+  document.querySelectorAll(".answer").forEach(x=>x.classList.toggle("sel",x===b));
+  $("send").disabled=false;
+  $("picked").textContent="Cavab seçildi";
+ });
+ timer=setInterval(()=>{
+  left--;elapsed++;
+  $("time").textContent=left;
+  $("fill").style.width=left/60*100+"%";
+  if(left<=0){clearInterval(timer);submit(true)}
+ },1000);
+}
+function submit(timeout=false){
+ if(locked||(!timeout&&sel===null))return;
+ locked=true;clearInterval(timer);
+ let q=qs[i],ok=sel===q[2];
+ if(ok){correct++;score+=10+Math.max(0,left)}
+ document.querySelectorAll(".answer").forEach((b,j)=>{
+  b.disabled=true;
+  if(j===q[2])b.classList.add("correct");
+  else if(j===sel)b.classList.add("wrong");
+ });
+ $("feedback").textContent=(timeout?"Vaxt bitdi. ":ok?"Düzgün cavab! ":"Düzgün cavab deyil. ")+q[3];
+ $("score").textContent=score;
+ $("send").classList.add("hidden");
+ $("next").classList.remove("hidden");
+ $("next").textContent=i===9?"Nəticəni göstər":"Növbəti sual";
+}
+function next(){
+ if(!locked)return;
+ if(i<9){i++;show()}
+ else finish();
+}
+function finish(){
+ clearInterval(timer);
+ $("quiz").classList.add("hidden");
+ $("result").classList.remove("hidden");
+ $("finalScore").textContent=score;
+ $("finalCorrect").textContent=correct+"/10";
+ $("finalTime").textContent=elapsed;
+ let r=read("zqiQuizResults");
+ let n=r.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
+ let obj={name,score,correct,elapsed};
+ if(n<0)r.push(obj);
+ else if(score>r[n].score)r[n]=obj;
+ write("zqiQuizResults",r);
+ tables();
+}
+$("start").onclick=start;
+$("send").onclick=()=>submit();
+$("next").onclick=next;
+$("again").onclick=()=>{
+ $("result").classList.add("hidden");
+ $("join").classList.remove("hidden");
+ $("name").value=name;
 };
-
-let xp=Number(localStorage.getItem("zqiXP")||0);
-let correct=Number(localStorage.getItem("zqiCorrect")||0);
-let users=JSON.parse(localStorage.getItem("zqiUsers")||"{}");
-let active=localStorage.getItem("zqiActive")||"";
-let maintenance=localStorage.getItem("zqiMaintenance")==="true";
-let quizTime=localStorage.getItem("zqiTime")||"20:30";
-let current=[],index=0,earned=0,answered=false,timerId=null,seconds=60;
-
-function saveProgress(){
- localStorage.setItem("zqiXP",xp);
- localStorage.setItem("zqiCorrect",correct);
- if(active&&users[active]){users[active].xp=xp;users[active].correct=correct;localStorage.setItem("zqiUsers",JSON.stringify(users))}
- update();
-}
-function update(){
- let level=Math.floor(xp/100)+1;
- document.getElementById("topXP").textContent=xp;
- document.getElementById("myXP").textContent=xp;
- document.getElementById("myLevel").textContent=level;
- document.getElementById("myCorrect").textContent=correct;
- document.getElementById("xpBar").style.width=(xp%100)+"%";
- document.getElementById("levelText").textContent=(100-xp%100)+" XP növbəti səviyyəyə";
- document.getElementById("quizTimeText").textContent=quizTime;
- document.getElementById("maintenance").classList.toggle("hidden",!maintenance);
- document.querySelectorAll("nav button").forEach(b=>b.disabled=maintenance);
- document.querySelectorAll("main > section").forEach(s=>{if(s.id!=="maintenance")s.classList.toggle("hidden",maintenance||!s.classList.contains("selected"))});
- renderProfile();renderLeaders();
-}
-function show(id){
- clearInterval(timerId);
- document.querySelectorAll("main > section").forEach(s=>{s.classList.remove("selected");if(s.id!== "maintenance")s.classList.add("hidden")});
- document.getElementById(id).classList.remove("hidden");
- document.getElementById(id).classList.add("selected");
- if(maintenance&&id!=="admin")return;
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function buildSubjects(target){
- document.getElementById(target).innerHTML=Object.keys(subjects).map(s=>`
- <div class="card"><div style="font-size:25px">📘</div><h3>${s}</h3>
- <p>10 sual • Düzgün cavab +10 XP</p>
- <button class="gold" onclick="startSubject('${s}')">Testə başla →</button></div>`).join("");
-}
-function daily(){current=Object.entries(subjects).flatMap(([subject,qs])=>qs.map(q=>({subject,q:q[0],a:q[1],c:q[2],e:q[3]}))).sort(()=>Math.random()-.5).slice(0,10);begin("Gündəlik quiz")}
-function startSubject(s){current=subjects[s].map(q=>({subject:s,q:q[0],a:q[1],c:q[2],e:q[3]}));begin(s)}
-function begin(name){index=0;earned=0;show("quiz");document.getElementById("subjectName").textContent=name;nextQuestionDisplay()}
-function nextQuestionDisplay(){
- clearInterval(timerId);answered=false;seconds=60;
- let q=current[index];
- document.getElementById("qNumber").textContent=`Sual ${index+1}/${curren
+tables();
+</script>
+</body>
+</html>
