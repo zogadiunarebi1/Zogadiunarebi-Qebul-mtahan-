@@ -1,433 +1,347 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQİ | Canlı Quiz</title>
-<style>
-:root{--gold:#d6ad54;--bg:#0c0c10;--card:#191920;--text:#f5f5f5;--muted:#a6a6b5}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{text-align:center;padding:24px 12px;border-bottom:1px solid #34313a}.logo{color:var(--gold);font-size:29px;font-weight:900;letter-spacing:3px}header p{color:var(--muted);margin-bottom:0}
-main{max-width:760px;margin:auto;padding:16px}.card{background:var(--card);border:1px solid #35313b;border-radius:18px;padding:20px;margin-bottom:18px}h2{margin-top:0}.gold{color:var(--gold)}
-#clock{text-align:center;font-size:30px;font-weight:bold;color:var(--gold);margin:15px 0}#status{text-align:center;color:var(--muted)}
-input[type="text"],input[type="tel"],input[type="number"]{width:100%;padding:13px;margin:8px 0;border-radius:10px;border:1px solid #4a4653;background:#101015;color:white;font-size:16px}
-button{border:0;border-radius:10px;padding:13px 17px;background:var(--gold);color:#17120a;font-weight:bold;font-size:16px;cursor:pointer;margin:4px 0}button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#302d36;color:#fff;border:1px solid #4a4653}
-#options{display:grid;gap:10px;margin:18px 0}.option{display:flex;gap:12px;align-items:center;padding:14px;background:#22222b;border:1px solid #45414d;border-radius:12px;cursor:pointer}.option:has(input:checked){border-color:var(--gold);background:#30291b}
-#leaderboard{display:grid;gap:9px}.player{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:13px;border-radius:10px;background:#22222b}.player:first-child{border:1px solid var(--gold)}.rank{color:var(--gold);font-weight:bold;min-width:35px}.points{color:#f0b8d7;font-weight:bold}.small{color:var(--muted);font-size:13px}#notice{margin-top:12px;line-height:1.5;overflow-wrap:anywhere}.hidden{display:none!important}.hint{padding:10px;background:#25212a;border-radius:10px;line-height:1.5}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZQİ — Hesabım</title>
+
+  <style>
+    :root {
+      --gold: #d8ad52;
+      --bg: #090909;
+      --panel: #141414;
+      --text: #f5f5f5;
+      --muted: #999;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #292929;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    header span {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    main {
+      width: min(430px, 92%);
+      margin: 45px auto;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 26px;
+    }
+
+    h1 {
+      font-size: 25px;
+      margin: 0 0 8px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin: 15px 0 8px;
+      color: #ddd;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: 1px solid #333;
+      background: #0b0b0b;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--gold);
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover { opacity: .9; }
+
+    .secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid #5c4926;
+      margin-top: 10px;
+    }
+
+    .switch {
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .switch a {
+      color: var(--gold);
+      cursor: pointer;
+    }
+
+    .hidden { display: none !important; }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      margin: 8px auto 18px;
+      border-radius: 50%;
+      background: #252015;
+      border: 2px solid var(--gold);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 34px;
+      font-weight: bold;
+    }
+
+    .profile-head { text-align: center; }
+
+    .profile-head h1 { margin-bottom: 7px; }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #51401e;
+      border-radius: 20px;
+      color: var(--gold);
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      padding: 14px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .info small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .info strong {
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: var(--gold);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      padding: 20px;
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="logo">ZQİ</div><h1>Canlı Quiz</h1><p>Zogadiunarebi Qəbul İmtahanı</p></header>
-<main>
-  <section class="card">
-    <h2>📱 Telefonla qeydiyyat</h2>
-    <p class="small">Nömrəni ölkə kodu ilə yaz. Məsələn: +9955XXXXXXXX və ya +994XXXXXXXXX</p>
-    <div id="phoneStep">
-      <label for="phoneNumber">Telefon nömrəsi</label>
-      <input id="phoneNumber" type="tel" autocomplete="tel" placeholder="+995..." />
-      <div id="recaptcha-container"></div>
-      <button id="sendCodeBtn">SMS kodu göndər</button>
-    </div>
-    <div id="codeStep" class="hidden">
-      <label for="smsCode">SMS təsdiq kodu</label>
-      <input id="smsCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="SMS kodunu daxil et" />
-      <button id="verifyCodeBtn">Kodu təsdiqlə</button>
-      <button id="changePhoneBtn" class="secondary">Nömrəni dəyiş</button>
-    </div>
-    <div id="profileStep" class="hidden">
-      <p class="hint">✅ Telefon təsdiqləndi. İndi quizdə görünəcək istifadəçi adını yaz.</p>
-      <label for="nickname">İstifadəçi adı</label>
-      <input id="nickname" type="text" maxlength="30" placeholder="İstifadəçi adını yaz" />
-      <button id="joinBtn">Quizə qoşul</button>
-    </div>
-    <p id="notice" role="status" aria-live="polite"></p>
-    <p class="small">SMS göndərilməsi Firebase limitlərindən və telefon operatorundan asılıdır. Yeni layihələrdə gündəlik SMS limiti ola bilər.</p>
-  </section>
+  <header>
+    <div class="logo">ZQİ</div>
+    <span>Zogadiunarebi Qəbul İmtahanı</span>
+  </header>
 
-  <section class="card">
-    <h2 id="phaseTitle">Quizə xoş gəlmisən!</h2>
-    <div id="clock">--:--</div>
-    <p id="status">Firebase bağlantısı gözlənilir...</p>
-    <p id="questionCounter"></p>
-    <h3 id="questionText">Quiz saat 20:40-da başlayacaq.</h3>
-    <div id="options"></div>
-    <button id="submitBtn" disabled>Cavabı göndər</button>
-    <p id="answerStatus" class="small"></p>
-  </section>
+  <main>
+    <!-- QEYDIYYAT -->
+    <section id="register" class="panel">
+      <h1>Hesab yarat</h1>
+      <p class="sub">ZQİ platformasına xoş gəlmisən!</p>
 
-  <section class="card">
-    <h2>🏆 İştirakçıların sıralaması</h2>
-    <p class="small">Xallar real vaxtda yenilənir.</p>
-    <div id="leaderboard">Sıralama yüklənir...</div>
-  </section>
-</main>
+      <form id="registerForm">
+        <label for="fullName">Ad və soyad</label>
+        <input id="fullName" required maxlength="80"
+          autocomplete="name" placeholder="Adın və soyadın">
 
-<script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getFirestore,collection,doc,getDoc,setDoc,onSnapshot,runTransaction,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {getAuth,RecaptchaVerifier,signInWithPhoneNumber} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        <label for="username">İstifadəçi adı</label>
+        <input id="username" required minlength="3" maxlength="24"
+          autocomplete="username" placeholder="İstifadəçi adı">
 
-const firebaseConfig={
-  apiKey:"AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
-  authDomain:"zqi-riyaziyyat.firebaseapp.com",
-  projectId:"zqi-riyaziyyat",
-  storageBucket:"zqi-riyaziyyat.firebasestorage.app",
-  messagingSenderId:"228687771538",
-  appId:"1:228687771538:web:4b4c31d993b0614ca6334b",
-  measurementId:"G-MT0Q1DP79N"
-};
+        <label for="email">E-poçt</label>
+        <input id="email" type="email" required
+          autocomplete="email" placeholder="example@email.com">
 
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
-const auth=getAuth(app);
-const $=id=>document.getElementById(id);
+        <label for="password">Şifrə</label>
+        <input id="password" type="password" required minlength="8"
+          autocomplete="new-password" placeholder="Ən azı 8 simvol">
 
-const questions=[
- {q:"(-5) + 8 = ?",a:["-13","3","-3","13"],c:1},
- {q:"(-7) - 4 = ?",a:["-3","11","-11","3"],c:2},
- {q:"6 × (-3) = ?",a:["18","-18","-9","9"],c:1},
- {q:"(-24) ÷ (-6) = ?",a:["-4","4","-18","18"],c:1},
- {q:"(-9) + (-6) = ?",a:["-3","15","-15","3"],c:2},
- {q:"12 - 19 = ?",a:["7","-7","31","-31"],c:1},
- {q:"(-4) × (-5) = ?",a:["-20","9","20","-9"],c:2},
- {q:"(-30) ÷ 5 = ?",a:["6","-6","25","-25"],c:1},
- {q:"(-2) + 10 - 3 = ?",a:["5","-5","11","9"],c:0},
- {q:"(-8) × 2 + 5 = ?",a:["21","-21","-11","11"],c:2}
-];
+        <label for="confirmPassword">Şifrəni təsdiqlə</label>
+        <input id="confirmPassword" type="password" required
+          minlength="8" autocomplete="new-password"
+          placeholder="Şifrəni yenidən yaz">
 
-const QUESTION_MS=60000;
-const BREAK_MS=15000;
-const CYCLE_MS=QUESTION_MS+BREAK_MS;
-const TOTAL_MS=questions.length*QUESTION_MS+(questions.length-1)*BREAK_MS;
+        <button type="submit">Qeydiyyatdan keç</button>
+      </form>
 
-let user=null,joined=false,sessionId="",startTime=0,currentQuestion=-1;
-let answered=[],selectedIndex=null,submitting=false,scores=[],stopScores=null;
-let confirmationResult=null,recaptchaVerifier=null;
+      <div id="registerMessage" class="message" role="status"></div>
 
-function pad(n){return String(n).padStart(2,"0")}
-function dateKey(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
-function todayAt2040(){const d=new Date();d.setHours(20,40,0,0);return d}
+      <p class="switch">
+        Artıq hesabın var?
+        <a id="showLogin">Daxil ol</a>
+      </p>
+    </section>
 
-function getSession(){
-  const now=Date.now();
-  let start=todayAt2040();
-  if(now>=start.getTime()+TOTAL_MS)start.setDate(start.getDate()+1);
-  return{start:start.getTime(),id:dateKey(start)};
-}
+    <!-- GIRIS -->
+    <section id="login" class="panel hidden">
+      <h1>Hesabına daxil ol</h1>
+      <p class="sub">Davam etmək üçün məlumatlarını daxil et.</p>
 
-function showNotice(text){$("notice").textContent=text}
-function setHidden(id,hidden){$(id).classList.toggle("hidden",hidden)}
+      <form id="loginForm">
+        <label for="loginEmail">E-poçt</label>
+        <input id="loginEmail" type="email" required
+          autocomplete="email" placeholder="E-poçt ünvanın">
 
-function setupRecaptcha(){
-  if(recaptchaVerifier)return recaptchaVerifier;
-  recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{
-    size:"normal",
-    callback:()=>showNotice("Robot yoxlaması tamamlandı. SMS kodunu göndərə bilərsən."),
-    "expired-callback":()=>showNotice("Robot yoxlamasının vaxtı bitdi. Yenidən yoxla.")
-  });
-  return recaptchaVerifier;
-}
+        <label for="loginPassword">Şifrə</label>
+        <input id="loginPassword" type="password" required
+          autocomplete="current-password" placeholder="Şifrən">
 
-async function sendCode(){
-  const phone=$("phoneNumber").value.trim();
-  if(!/^\+[1-9]\d{7,14}$/.test(phone)){
-    showNotice("Nömrəni beynəlxalq formatda yaz. Məsələn: +9955XXXXXXXX");
-    return;
-  }
+        <button type="submit">Daxil ol</button>
+      </form>
 
-  $("sendCodeBtn").disabled=true;
-  try{
-    const verifier=setupRecaptcha();
-    confirmationResult=await signInWithPhoneNumber(auth,phone,verifier);
-    setHidden("phoneStep",true);
-    setHidden("codeStep",false);
-    showNotice("SMS kodu göndərildi. Mesajı yoxla.");
-  }catch(e){
-    console.error(e);
-    showNotice("SMS göndərilmədi: "+friendlyAuthError(e));
-    if(recaptchaVerifier){
-      try{await recaptchaVerifier.clear()}catch{}
-      recaptchaVerifier=null;
-      $("recaptcha-container").replaceChildren();
-    }
-  }finally{
-    $("sendCodeBtn").disabled=false;
-  }
-}
+      <div id="loginMessage" class="message" role="status"></div>
 
-async function verifyCode(){
-  const code=$("smsCode").value.trim();
-  if(!confirmationResult){showNotice("Əvvəlcə SMS kodu istə.");return}
-  if(code.length<4){showNotice("SMS-də gələn kodu daxil et.");return}
+      <p class="switch">
+        Hesabın yoxdur?
+        <a id="showRegister">Qeydiyyatdan keç</a>
+      </p>
+    </section>
 
-  $("verifyCodeBtn").disabled=true;
-  try{
-    const result=await confirmationResult.confirm(code);
-    user=result.user;
-    setHidden("codeStep",true);
-    setHidden("profileStep",false);
-    showNotice("Telefon təsdiqləndi. İndi istifadəçi adını yaz.");
-  }catch(e){
-    console.error(e);
-    showNotice("Kod düzgün deyil və ya vaxtı bitib. Yenidən yoxla.");
-  }finally{
-    $("verifyCodeBtn").disabled=false;
-  }
-}
+    <!-- PROFIL -->
+    <section id="profile" class="panel hidden">
+      <div class="profile-head">
+        <div class="avatar" id="avatar">Z</div>
+        <h1 id="profileName">İstifadəçi</h1>
+        <p class="sub">ZQİ hesabın</p>
+        <span class="tag">Üzv</span>
+      </div>
 
-function friendlyAuthError(e){
-  const code=e?.code||"";
-  if(code.includes("invalid-phone-number"))return"Telefon nömrəsi yanlışdır.";
-  if(code.includes("too-many-requests"))return"Çox cəhd edildi. Bir az sonra yenidən yoxla.";
-  if(code.includes("quota-exceeded"))return"Firebase SMS limiti dolub.";
-  if(code.includes("captcha-check-failed"))return"Robot yoxlaması alınmadı. Yenidən cəhd et.";
-  return e?.message||"Firebase ayarlarını yoxla.";
-}
+      <div class="info">
+        <small>İstifadəçi adı</small>
+        <strong id="profileUsername"></strong>
+      </div>
 
-async function joinQuiz(){
-  const name=$("nickname").value.trim();
-  if(!user||!user.phoneNumber){
-    showNotice("Əvvəl telefon nömrəni SMS kodu ilə təsdiqlə.");
-    return;
-  }
-  if(name.length<2){
-    showNotice("Ən azı 2 simvoldan ibarət istifadəçi adı yaz.");
-    return;
-  }
+      <div class="info">
+        <small>Ad və soyad</small>
+        <strong id="profileFullName"></strong>
+      </div>
 
-  try{
-    const session=getSession();
-    sessionId=session.id;
-    startTime=session.start;
-    const ref=doc(db,"quizScores",user.uid);
-    const snap=await getDoc(ref);
-    const old=snap.exists()?snap.data():{};
+      <div class="info">
+        <small>E-poçt</small>
+        <strong id="profileEmail"></strong>
+      </div>
 
-    if(old.sessionId!==sessionId){
-      await setDoc(ref,{
-        uid:user.uid,name,score:0,answered:[],sessionId,
-        updatedAt:serverTimestamp()
+      <button id="logout" class="secondary">Hesabdan çıxış</button>
+      <p id="profileMessage" class="message" role="status"></p>
+    </section>
+  </main>
+
+  <footer>© ZQİ — Zogadiunarebi Qəbul İmtahanı</footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    function showPage(page) {
+      ["register", "login", "profile"].forEach(id => {
+        $(id).classList.toggle("hidden", id !== page);
       });
-      answered=[];
-    }else{
-      answered=Array.isArray(old.answered)?old.answered:[];
-      await setDoc(ref,{name,updatedAt:serverTimestamp()},{merge:true});
     }
 
-    joined=true;
-    $("nickname").disabled=true;
-    $("joinBtn").disabled=true;
-    showNotice("Uğurla qoşuldun! Quiz saat 20:40-da başlayacaq.");
+    $("showLogin").onclick = () => showPage("login");
+    $("showRegister").onclick = () => showPage("register");
 
-    if(stopScores)stopScores();
-    stopScores=onSnapshot(collection(db,"quizScores"),snap=>{
-      scores=snap.docs.map(d=>d.data())
-        .filter(s=>s.sessionId===sessionId)
-        .sort((a,b)=>(b.score||0)-(a.score||0));
-      renderLeaderboard();
-    },err=>showNotice("Sıralama xətası: "+err.message));
+    function getDemoAccount() {
+      try {
+        return JSON.parse(sessionStorage.getItem("zqi_demo_account"));
+      } catch {
+        return null;
+      }
+    }
 
-    renderLeaderboard();
-    updateQuiz();
-  }catch(e){
-    console.error(e);
-    showNotice("Qoşulmaq alınmadı. Firebase Firestore Rules icazələrini yoxlamaq lazımdır. "+(e.code||""));
-  }
-}
+    function showProfile(account) {
+      $("profileName").textContent = account.fullName;
+      $("profileFullName").textContent = account.fullName;
+      $("profileUsername").textContent = "@" + account.username;
+      $("profileEmail").textContent = account.email;
+      $("avatar").textContent =
+        account.fullName.trim().charAt(0).toUpperCase() || "Z";
+      showPage("profile");
+    }
 
-function renderLeaderboard(){
-  const board=$("leaderboard");
-  board.replaceChildren();
-  if(!scores.length){board.textContent="Hələ iştirakçı yoxdur.";return}
+    $("registerForm").addEventListener("submit", event => {
+      event.preventDefault();
 
-  scores.forEach((s,i)=>{
-    const row=document.createElement("div");
-    row.className="player";
-    const rank=document.createElement("span");
-    rank.className="rank";
-    rank.textContent=i===0?"🥇 1":i===1?"🥈 2":i===2?"🥉 3":`${i+1}.`;
-    const name=document.createElement("span");
-    name.textContent=s.name||"İştirakçı";
-    name.style.flex="1";
-    const points=document.createElement("span");
-    points.className="points";
-    points.textContent=`${s.score||0} xal`;
-    row.append(rank,name,points);
-    board.appendChild(row);
-  });
-}
+      const fullName = $("fullName").value.trim();
+      const username = $("username").value.trim();
+      const email = $("email").value.trim();
+      const password = $("password").value;
+      const confirm = $("confirmPassword").value;
 
-function clearOptions(){
-  $("options").replaceChildren();
-  selectedIndex=null;
-}
+      if (password !== confirm) {
+        $("registerMessage").textContent = "Şifrələr eyni deyil.";
+        return;
+      }
 
-function updateQuiz(){
-  if(!joined)return;
-  const elapsed=Date.now()-startTime;
-
-  if(elapsed<0){
-    $("phaseTitle").textContent="ZQİ Canlı Quiz";
-    $("status").textContent="Başlama vaxtına qalan müddət";
-    $("clock").textContent=formatTime(-elapsed);
-    $("questionText").textContent="Quiz saat 20:40-da başlayacaq.";
-    $("questionCounter").textContent="";
-    $("submitBtn").disabled=true;
-    clearOptions();
-    return;
-  }
-
-  if(elapsed>=TOTAL_MS){
-    $("phaseTitle").textContent="Quiz tamamlandı!";
-    $("status").textContent="Yekun nəticələr";
-    $("clock").textContent="00:00";
-    $("questionText").textContent="Bütün suallar bitdi. Yekun sıralama aşağıdadır.";
-    $("questionCounter").textContent="";
-    $("submitBtn").disabled=true;
-    clearOptions();
-    return;
-  }
-
-  const qIndex=Math.min(questions.length-1,Math.floor(elapsed/CYCLE_MS));
-  const inCycle=elapsed-qIndex*CYCLE_MS;
-  const isBreak=qIndex<questions.length-1&&inCycle>=QUESTION_MS;
-
-  if(isBreak){
-    $("phaseTitle").textContent="Fasilə";
-    $("status").textContent="Növbəti sual fasilədən sonra başlayacaq.";
-    $("clock").textContent=formatTime(BREAK_MS-(inCycle-QUESTION_MS));
-    $("questionText").textContent="Növbəti suala hazırlaş!";
-    $("questionCounter").textContent=`Sual ${qIndex+1} tamamlandı / ${questions.length}`;
-    $("submitBtn").disabled=true;
-    clearOptions();
-    $("answerStatus").textContent="";
-    currentQuestion=-1;
-    return;
-  }
-
-  if(currentQuestion!==qIndex){
-    currentQuestion=qIndex;
-    selectedIndex=null;
-    renderQuestion(qIndex);
-  }
-
-  const remaining=Math.max(0,QUESTION_MS-inCycle);
-  $("phaseTitle").textContent="Canlı Quiz";
-  $("status").textContent="Cavabını seç və göndər. Vaxt bitənədək gözlə.";
-  $("clock").textContent=formatTime(remaining);
-  $("questionCounter").textContent=`Sual ${qIndex+1} / ${questions.length}`;
-
-  const hasAnswered=answered.includes(qIndex);
-  $("submitBtn").disabled=!joined||hasAnswered||selectedIndex===null||submitting||remaining<=0;
-
-  if(hasAnswered)$("answerStatus").textContent="Cavabın göndərilib. Növbəti sual üçün 60 saniyənin tamamlanmasını gözlə.";
-  else if(remaining<=0)$("answerStatus").textContent="Vaxt bitdi.";
-}
-
-function formatTime(ms){
-  const sec=Math.max(0,Math.ceil(ms/1000));
-  return`${pad(Math.floor(sec/60))}:${pad(sec%60)}`;
-}
-
-function renderQuestion(index){
-  const item=questions[index];
-  $("questionText").textContent=item.q;
-  $("answerStatus").textContent=answered.includes(index)?"Bu sualı artıq cavablandırmısan.":"";
-  clearOptions();
-
-  item.a.forEach((answer,i)=>{
-    const label=document.createElement("label");
-    label.className="option";
-    const radio=document.createElement("input");
-    radio.type="radio";
-    radio.name="answer";
-    radio.value=i;
-    radio.addEventListener("change",()=>{
-      selectedIndex=i;
-      $("submitBtn").disabled=answered.includes(index)||submitting;
-    });
-    const text=document.createElement("span");
-    text.textContent=answer;
-    label.append(radio,text);
-    $("options").appendChild(label);
-  });
-}
-
-async function submitAnswer(){
-  if(!joined||!user||currentQuestion<0||selectedIndex===null||submitting)return;
-  const index=currentQuestion;
-  const elapsed=Date.now()-startTime-index*CYCLE_MS;
-
-  if(elapsed<0||elapsed>=QUESTION_MS){
-    $("answerStatus").textContent="Cavab göndərmək üçün vaxt bitib.";
-    return;
-  }
-
-  submitting=true;
-  $("submitBtn").disabled=true;
-
-  try{
-    const ref=doc(db,"quizScores",user.uid);
-    const choice=selectedIndex;
-    const correct=choice===questions[index].c;
-    const points=correct?Math.max(1,Math.ceil(((QUESTION_MS-elapsed)/QUESTION_MS)*10)):0;
-
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(ref);
-      if(!snap.exists())throw new Error("İştirakçı tapılmadı.");
-      const data=snap.data();
-      if(data.sessionId!==sessionId)throw new Error("Quiz sessiyası dəyişib.");
-      const previous=Array.isArray(data.answered)?data.answered:[];
-      if(previous.includes(index))throw new Error("Bu suala artıq cavab göndərilib.");
-      tx.update(ref,{
-        score:(data.score||0)+points,
-        answered:[...previous,index],
-        updatedAt:serverTimestamp()
-      });
+      $("registerMessage").textContent =
+        "Görünüş hazırdır, lakin real qeydiyyat üçün Firebase bağlantısı lazımdır.";
     });
 
-    answered.push(index);
-    $("answerStatus").textContent=correct
-      ?`Düzgün cavab! +${points} xal. Növbəti suala qədər gözlə.`
-      :"Cavab yanlışdır. Növbəti suala qədər gözlə.";
-  }catch(e){
-    console.error(e);
-    $("answerStatus").textContent="Cavab göndərilmədi. Firebase Rules icazələrini yoxlamaq lazımdır.";
-  }finally{
-    submitting=false;
-    updateQuiz();
-  }
-}
+    $("loginForm").addEventListener("submit", event => {
+      event.preventDefault();
+      $("loginMessage").textContent =
+        "Giriş hələ aktiv deyil. Növbəti mərhələdə Firebase qoşacağıq.";
+    });
 
-function resetPhone(){
-  confirmationResult=null;
-  setHidden("phoneStep",false);
-  setHidden("codeStep",true);
-  setHidden("profileStep",true);
-  showNotice("Telefon nömrəsini yenidən daxil et.");
-  if(recaptchaVerifier){
-    try{recaptchaVerifier.clear()}catch{}
-    recaptchaVerifier=null;
-  }
-  $("recaptcha-container").replaceChildren();
-}
-
-$("sendCodeBtn").addEventListener("click",sendCode);
-$("verifyCodeBtn").addEventListener("click",verifyCode);
-$("changePhoneBtn").addEventListener("click",resetPhone);
-$("joinBtn").addEventListener("click",joinQuiz);
-$("submitBtn").addEventListener("click",submitAnswer);
-
-setInterval(()=>{
-  if(!joined){
-    const session=getSession();
-    const remaining=session.start-Date.now();
-    $("clock").textContent=formatTime(remaining);
-    $("status").textContent="Başlanğıc vaxtı: 20:40";
-  }else{
-    updateQuiz();
-  }
-},250);
-</script>
+    $("logout").addEventListener("click", () => {
+      showPage("login");
+    });
+  </script>
 </body>
 </html>
