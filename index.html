@@ -285,63 +285,175 @@
 
   <footer>© ZQİ — Zogadiunarebi Qəbul İmtahanı</footer>
 
-  <script>
-    const $ = id => document.getElementById(id);
 
-    function showPage(page) {
-      ["register", "login", "profile"].forEach(id => {
-        $(id).classList.toggle("hidden", id !== page);
-      });
-    }
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 
-    $("showLogin").onclick = () => showPage("login");
-    $("showRegister").onclick = () => showPage("register");
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-    function getDemoAccount() {
-      try {
-        return JSON.parse(sessionStorage.getItem("zqi_demo_account"));
-      } catch {
-        return null;
-      }
-    }
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-    function showProfile(account) {
-      $("profileName").textContent = account.fullName;
-      $("profileFullName").textContent = account.fullName;
-      $("profileUsername").textContent = "@" + account.username;
-      $("profileEmail").textContent = account.email;
-      $("avatar").textContent =
-        account.fullName.trim().charAt(0).toUpperCase() || "Z";
-      showPage("profile");
-    }
+const firebaseConfig = {
+  apiKey: "AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
+  authDomain: "zqi-riyaziyyat.firebaseapp.com",
+  projectId: "zqi-riyaziyyat",
+  storageBucket: "zqi-riyaziyyat.firebasestorage.app",
+  messagingSenderId: "228687771538",
+  appId: "1:228687771538:web:4b4c31d993b0614ca6334b",
+  measurementId: "G-MT0Q1DP79N"
+};
 
-    $("registerForm").addEventListener("submit", event => {
-      event.preventDefault();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-      const fullName = $("fullName").value.trim();
-      const username = $("username").value.trim();
-      const email = $("email").value.trim();
-      const password = $("password").value;
-      const confirm = $("confirmPassword").value;
+const $ = id => document.getElementById(id);
 
-      if (password !== confirm) {
-        $("registerMessage").textContent = "Şifrələr eyni deyil.";
-        return;
-      }
+function showPage(page) {
+  ["register", "login", "profile"].forEach(id => {
+    $(id).classList.toggle("hidden", id !== page);
+  });
+}
 
-      $("registerMessage").textContent =
-        "Görünüş hazırdır, lakin real qeydiyyat üçün Firebase bağlantısı lazımdır.";
+function message(id, text) {
+  $(id).textContent = text;
+}
+
+function errorText(error) {
+  const errors = {
+    "auth/email-already-in-use": "Bu e-poçt artıq qeydiyyatdan keçib.",
+    "auth/invalid-email": "E-poçt ünvanı düzgün deyil.",
+    "auth/weak-password": "Şifrə ən azı 6 simvol olmalıdır.",
+    "auth/invalid-credential": "E-poçt və ya şifrə yanlışdır.",
+    "auth/network-request-failed": "İnternet bağlantısını yoxla.",
+    "permission-denied": "Firestore Rules qaydalarını yoxlamaq lazımdır."
+  };
+
+  return errors[error.code] || "Xəta: " + error.message;
+}
+
+$("showLogin").onclick = () => showPage("login");
+$("showRegister").onclick = () => showPage("register");
+
+// QEYDIYYAT
+$("registerForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const fullName = $("fullName").value.trim();
+  const username = $("username").value.trim();
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const confirm = $("confirmPassword").value;
+
+  if (!fullName || !username || !email) {
+    message("registerMessage", "Bütün xanaları doldur.");
+    return;
+  }
+
+  if (!/^[a-zA-Z0-9_]{3,24}$/.test(username)) {
+    message("registerMessage", "İstifadəçi adı 3–24 simvol olmalıdır.");
+    return;
+  }
+
+  if (password.length < 8) {
+    message("registerMessage", "Şifrə ən azı 8 simvol olmalıdır.");
+    return;
+  }
+
+  if (password !== confirm) {
+    message("registerMessage", "Şifrələr eyni deyil.");
+    return;
+  }
+
+  try {
+    message("registerMessage", "Hesab yaradılır...");
+
+    const credential = await createUserWithEmailAndPassword(
+      auth, email, password
+    );
+
+    await updateProfile(credential.user, {
+      displayName: fullName
     });
 
-    $("loginForm").addEventListener("submit", event => {
-      event.preventDefault();
-      $("loginMessage").textContent =
-        "Giriş hələ aktiv deyil. Növbəti mərhələdə Firebase qoşacağıq.";
+    await setDoc(doc(db, "users", credential.user.uid), {
+      name: fullName,
+      username: username,
+      email: credential.user.email,
+      createdAt: serverTimestamp()
     });
 
-    $("logout").addEventListener("click", () => {
-      showPage("login");
-    });
-  </script>
+    message("registerMessage", "Qeydiyyat uğurludur!");
+  } catch (error) {
+    message("registerMessage", errorText(error));
+  }
+});
+
+// GIRIS
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const email = $("loginEmail").value.trim();
+  const password = $("loginPassword").value;
+
+  try {
+    message("loginMessage", "Hesaba daxil olunur...");
+
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    message("loginMessage", errorText(error));
+  }
+});
+
+// PROFIL
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    showPage("login");
+    return;
+  }
+
+  try {
+    const snapshot = await getDoc(doc(db, "users", user.uid));
+    const data = snapshot.exists() ? snapshot.data() : {};
+
+    const name = data.name || user.displayName || "İstifadəçi";
+    const username = data.username || "istifadəçi";
+
+    $("profileName").textContent = name;
+    $("profileFullName").textContent = name;
+    $("profileUsername").textContent = "@" + username;
+    $("profileEmail").textContent = user.email || "";
+    $("avatar").textContent = name.charAt(0).toUpperCase();
+
+    showPage("profile");
+  } catch (error) {
+    showPage("profile");
+    message("profileMessage", errorText(error));
+  }
+});
+
+// HESABDAN CIXIS
+$("logout").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    message("profileMessage", errorText(error));
+  }
+});
+</script>
+
 </body>
 </html>
