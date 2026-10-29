@@ -2,255 +2,346 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQİ — Böyük Quiz</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#0b0b10;color:#fff;font:16px Arial,sans-serif}
-main{max-width:720px;margin:auto;padding:16px}
-header,.card{background:#17171f;border:1px solid #38323a;border-radius:16px;padding:17px;margin-bottom:14px}
-header{display:flex;align-items:center;gap:13px}
-.logo{background:#080808;color:#e9c65d;border:2px solid #e9c65d;border-radius:12px;padding:12px;font-size:23px;font-weight:bold}
-h1{font-size:20px;margin:0 0 5px}
-h2{font-size:19px;color:#f2d57c}
-.small{color:#b9bac4;font-size:13px;line-height:1.6}
-input{width:100%;padding:13px;background:#0b0b10;border:1px solid #444;color:white;border-radius:9px;font-size:16px}
-button{padding:13px;border:0;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer}
-.gold{background:#edcc68;color:#15120a}
-.dark{background:#30303b;color:white}
-.full{width:100%;margin-top:12px}
-.hidden{display:none!important}
-.question{font-size:22px;font-weight:bold;line-height:1.5;margin:22px 0}
-.answers{display:grid;gap:9px}
-.ans{background:#0d0d13;color:white;border:1px solid #444;text-align:left}
-.ans.selected{border:2px solid #edcc68}
-.ans.right{border:2px solid #35d39a}
-.ans.wrong{border:2px solid #ff6476}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{text-align:center;background:#0c0c12;padding:12px;border-radius:10px}
-.stat b{display:block;color:#edcc68;font-size:22px}
-.stat span{font-size:11px;color:#b9bac4}
-.bar{height:7px;background:#444;margin:13px 0;border-radius:8px;overflow:hidden}
-.fill{height:100%;background:#edcc68}
-table{width:100%;border-collapse:collapse}
-td,th{padding:10px 4px;border-bottom:1px solid #383842;text-align:left;font-size:13px}
-th{color:#c9c9d0}
-.goldtext{color:#edcc68;font-weight:bold}
-.people{display:flex;gap:7px;flex-wrap:wrap}
-.person{background:#0b0b10;border:1px solid #444;border-radius:25px;padding:8px;font-size:12px}
-footer{text-align:center;color:#aaa;font-size:12px;padding:15px}
-footer b{color:#edcc68}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZQİ — Hesabım</title>
+
+  <style>
+    :root {
+      --gold: #d8ad52;
+      --bg: #090909;
+      --panel: #141414;
+      --text: #f5f5f5;
+      --muted: #999;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #292929;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    header span {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    main {
+      width: min(430px, 92%);
+      margin: 45px auto;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 26px;
+    }
+
+    h1 {
+      font-size: 25px;
+      margin: 0 0 8px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin: 15px 0 8px;
+      color: #ddd;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: 1px solid #333;
+      background: #0b0b0b;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--gold);
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover { opacity: .9; }
+
+    .secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid #5c4926;
+      margin-top: 10px;
+    }
+
+    .switch {
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .switch a {
+      color: var(--gold);
+      cursor: pointer;
+    }
+
+    .hidden { display: none !important; }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      margin: 8px auto 18px;
+      border-radius: 50%;
+      background: #252015;
+      border: 2px solid var(--gold);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 34px;
+      font-weight: bold;
+    }
+
+    .profile-head { text-align: center; }
+
+    .profile-head h1 { margin-bottom: 7px; }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #51401e;
+      border-radius: 20px;
+      color: var(--gold);
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      padding: 14px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .info small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .info strong {
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: var(--gold);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      padding: 20px;
+    }
+  </style>
 </head>
+
 <body>
-<main>
-<header>
-<div class="logo">ZQİ</div>
-<div>
-<h1>Zogadiunarebi Qəbul İmtahanı</h1>
-<div class="small">Xüsusi Riyaziyyat Quizı</div>
-<div style="color:#edcc68;font-size:12px;margin-top:6px">10 sual · hər suala 60 saniyə</div>
-</div>
-</header>
+  <header>
+    <div class="logo">ZQİ</div>
+    <span>Zogadiunarebi Qəbul İmtahanı</span>
+  </header>
 
-<section class="card" id="waiting">
-<h2>⏳ Quizə geri sayım</h2>
-<div class="stats">
-<div class="stat"><b id="hh">--</b><span>Saat</span></div>
-<div class="stat"><b id="mm">--</b><span>Dəqiqə</span></div>
-<div class="stat"><b id="ss">--</b><span>Saniyə</span></div>
-</div>
-<p id="status" class="small">Quiz Gürcüstan vaxtı ilə saat 20:48-də başlayacaq.</p>
-<label for="player">İştirakçı adı</label>
-<input id="player" maxlength="24" placeholder="Adını yaz">
-<p class="small">Adını əvvəlcədən yaz. Başlanma vaxtında quiz avtomatik açılacaq.</p>
-<button class="gold full" id="join">İştiraka qoşul</button>
-</section>
+  <main>
+    <!-- QEYDIYYAT -->
+    <section id="register" class="panel">
+      <h1>Hesab yarat</h1>
+      <p class="sub">ZQİ platformasına xoş gəlmisən!</p>
 
-<section class="card hidden" id="quiz">
-<div class="stats">
-<div class="stat"><b id="number">1/10</b><span>Sual</span></div>
-<div class="stat"><b id="timer">60</b><span>Saniyə</span></div>
-<div class="stat"><b id="points">0</b><span>Xal</span></div>
-</div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div class="small">Riyaziyyat · Çətin səviyyə</div>
-<div class="question" id="question"></div>
-<div class="answers" id="answers"></div>
-<button class="gold full" id="send" disabled>Cavabı göndər</button>
-<button class="dark full hidden" id="next">Növbəti sual</button>
-<p class="small" id="feedback"></p>
-</section>
+      <form id="registerForm">
+        <label for="fullName">Ad və soyad</label>
+        <input id="fullName" required maxlength="80"
+          autocomplete="name" placeholder="Adın və soyadın">
 
-<section class="card hidden" id="result">
-<h2>🏁 Quiz bitdi!</h2>
-<div class="stats">
-<div class="stat"><b id="finalPoints">0</b><span>Xal</span></div>
-<div class="stat"><b id="finalCorrect">0/10</b><span>Düzgün cavab</span></div>
-<div class="stat"><b id="finalTime">0</b><span>Saniyə</span></div>
-</div>
-</section>
+        <label for="username">İstifadəçi adı</label>
+        <input id="username" required minlength="3" maxlength="24"
+          autocomplete="username" placeholder="İstifadəçi adı">
 
-<section class="card">
-<h2>🏆 Liderlik cədvəli</h2>
-<div style="overflow:auto">
-<table>
-<thead><tr><th>Yer</th><th>İştirakçı</th><th>Düzgün</th><th>Xal</th></tr></thead>
-<tbody id="leaders"><tr><td colspan="4">Hələ nəticə yoxdur.</td></tr></tbody>
-</table>
-</div>
-</section>
+        <label for="email">E-poçt</label>
+        <input id="email" type="email" required
+          autocomplete="email" placeholder="example@email.com">
 
-<section class="card">
-<h2>👥 İştirak edənlər</h2>
-<div id="people" class="people">Hələ iştirakçı yoxdur.</div>
-</section>
+        <label for="password">Şifrə</label>
+        <input id="password" type="password" required minlength="8"
+          autocomplete="new-password" placeholder="Ən azı 8 simvol">
 
-<footer>Hazırladı: <b>Haldun Məmmədov</b> · ZQİ</footer>
-</main>
+        <label for="confirmPassword">Şifrəni təsdiqlə</label>
+        <input id="confirmPassword" type="password" required
+          minlength="8" autocomplete="new-password"
+          placeholder="Şifrəni yenidən yaz">
 
-<script>
-const ZONE="Asia/Tbilisi";
-const $=id=>document.getElementById(id);
+        <button type="submit">Qeydiyyatdan keç</button>
+      </form>
 
-function timeParts(){
- const p=new Intl.DateTimeFormat("en-GB",{
-  timeZone:ZONE,hour:"2-digit",minute:"2-digit",second:"2-digit",
-  year:"numeric",month:"2-digit",day:"2-digit",hourCycle:"h23"
- }).formatToParts(new Date());
- return Object.fromEntries(p.filter(x=>x.type!=="literal").map(x=>[x.type,x.value]));
-}
-function getTarget(){
- const p=timeParts();
- const now=+p.hour*3600 + +p.minute*60 + +p.second;
- let delta=20*3600+48*60-now;
- if(delta<=0)delta+=86400;
- return Date.now()+delta*1000;
-}
-let target=getTarget(),begun=false,joined=false;
-let name="",idx=0,chosen=null,score=0,correct=0;
-let seconds=60,elapsed=0,locked=false,clock=null;
+      <div id="registerMessage" class="message" role="status"></div>
 
-const questions=[
-{q:"7/10 kəsrinin surət və məxrəcindən eyni ədəd çıxıldıqda 2/3 alınır. Ədəd neçədir?",a:["1","2","3","4"],c:0,e:"(7−x)/(10−x)=2/3. 21−3x=20−2x, deməli x=1."},
-{q:"7/9 kəsrinin surət və məxrəcinə eyni ədəd əlavə edildikdə 5/6 alınır. Ədəd neçədir?",a:["2","3","4","5"],c:1,e:"(7+x)/(9+x)=5/6. 42+6x=45+5x, deməli x=3."},
-{q:"3 7/24 : (−5/6 + 7/8) ifadəsinin qiymətini tapın.",a:["71","72","77","79"],c:3,e:"Mötərizə 1/24 edir. 79/24 : 1/24 = 79."},
-{q:"2 5/16 : (−3/8 + 7/16) ifadəsinin qiymətini tapın.",a:["31","32","35","37"],c:3,e:"Mötərizə 1/16 edir. 37/16 : 1/16 = 37."},
-{q:"(2 − 1,6 : 2) : (1 4/5 : 2 1/4) ifadəsinin qiymətini tapın.",a:["0,25","2,5","1,5","0,75"],c:2,e:"Surət 1,2, məxrəc 0,8-dir. 1,2 : 0,8 = 1,5."},
-{q:"(2 1/2 − (−0,5)) : (3 + 3 : 3) ifadəsinin qiyməti nədir?",a:["−2/3","1","−1/3","3/4"],c:3,e:"Surət 3, məxrəc 4-dür. Cavab 3/4."},
-{q:"(4 3/4 − 3,75) : (7 1/3 : 1 2/9) · 6 ifadəsinin qiyməti nədir?",a:["1","0,2","1/2","2/3"],c:0,e:"4 3/4 − 3,75 = 1. Daxili bölmə 6 edir; 1 : 6 · 6 = 1."},
-{q:"4 1/2 · 8/9 + 5 1/3 : 10 2/3 ifadəsinin qiymətini tapın.",a:["0,5","1,5","4,5","3"],c:2,e:"Birinci hissə 4, ikinci hissə 1/2-dir. Cəm 4,5."},
-{q:"m və n tək ədədlərdirsə, hansı ifadə cüt ədəddir?",a:["2n² + m","m·n","m+n","n+2m"],c:2,e:"İki tək ədədin cəmi həmişə cüt ədəddir."},
-{q:"x cüt, y tək ədəddirsə, hansı ifadə mütləq cüt ədəddir?",a:["3(x+y)","2x+3y²","(x+y)²","(x−y)²","5x²+2y²"],c:4,e:"5x² cütdür və 2y² də cütdür. Cəmləri də cütdür."}
-];
+      <p class="switch">
+        Artıq hesabın var?
+        <a id="showLogin">Daxil ol</a>
+      </p>
+    </section>
 
-function load(key,fallback){
- try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}
- catch(e){return fallback}
-}
-function save(key,value){localStorage.setItem(key,JSON.stringify(value))}
-function safe(s){
- return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function refresh(){
- const r=load("zqiHardResults",[]);
- r.sort((a,b)=>b.score-a.score||b.correct-a.correct||a.elapsed-b.elapsed);
- $("leaders").innerHTML=r.length?r.slice(0,50).map((x,j)=>
- `<tr><td class="goldtext">${["🥇","🥈","🥉"][j]||j+1}</td><td>${safe(x.name)}</td><td>${x.correct}/10</td><td>${x.score}</td></tr>`
- ).join(""):'<tr><td colspan="4">Hələ nəticə yoxdur.</td></tr>';
- const p=load("zqiHardPeople",[]);
- $("people").innerHTML=p.length?p.map(n=>`<span class="person">👤 ${safe(n)}</span>`).join(""):"Hələ iştirakçı yoxdur.";
-}
-function join(){
- name=$("player").value.trim();
- if(!name){alert("Əvvəl adını yaz.");return}
- joined=true;
- let p=load("zqiHardPeople",[]);
- if(!p.some(x=>x.toLowerCase()===name.toLowerCase())){p.push(name);save("zqiHardPeople",p)}
- refresh();
- if(begun&&!clock)startQuiz();
- else $("status").textContent="İştirak qeyd edildi. Quiz 20:48-də başlayacaq.";
-}
-function startQuiz(){
- if(!joined){$("status").textContent="Quiz başladı! Adını yazıb qoşul.";return}
- if(clock)return;
- $("waiting").classList.add("hidden");
- $("quiz").classList.remove("hidden");
- idx=0;score=0;correct=0;elapsed=0;
- showQuestion();
-}
-function countdown(){
- if(begun)return;
- let remain=Math.max(0,Math.floor((target-Date.now())/1000));
- $("hh").textContent=String(Math.floor(remain/3600)).padStart(2,"0");
- $("mm").textContent=String(Math.floor(remain%3600/60)).padStart(2,"0");
- $("ss").textContent=String(remain%60).padStart(2,"0");
- if(remain===0){begun=true;startQuiz()}
-}
-function showQuestion(){
- clearInterval(clock);chosen=null;locked=false;seconds=60;
- const q=questions[idx];
- $("number").textContent=(idx+1)+"/10";
- $("timer").textContent=60;$("points").textContent=score;
- $("fill").style.width="100%";
- $("question").textContent=q.q;$("feedback").textContent="";
- $("send").disabled=true;$("send").classList.remove("hidden");
- $("next").classList.add("hidden");
- $("answers").innerHTML=q.a.map((a,j)=>
- `<button class="ans" data-i="${j}">${String.fromCharCode(65+j)}) ${safe(a)}</button>`
- ).join("");
- document.querySelectorAll(".ans").forEach(b=>b.onclick=()=>{
-  if(locked)return;
-  chosen=Number(b.dataset.i);
-  document.querySelectorAll(".ans").forEach(x=>x.classList.toggle("selected",x===b));
-  $("send").disabled=false;
- });
- clock=setInterval(()=>{
-  seconds--;elapsed++;
-  $("timer").textContent=seconds;
-  $("fill").style.width=(seconds/60*100)+"%";
-  if(seconds<=0)submit(true);
- },1000);
-}
-function submit(timeout=false){
- if(locked||(!timeout&&chosen===null))return;
- locked=true;clearInterval(clock);
- const q=questions[idx],ok=chosen===q.c;
- if(ok){correct++;score+=10+seconds}
- document.querySelectorAll(".ans").forEach((b,j)=>{
-  b.disabled=true;
-  if(j===q.c)b.classList.add("right");
-  if(j===chosen&&!ok)b.classList.add("wrong");
- });
- $("feedback").textContent=(timeout?"Vaxt bitdi. ":ok?"Düzgün cavab! ":"Səhv cavab. ")+q.e;
- $("points").textContent=score;
- $("send").classList.add("hidden");$("next").classList.remove("hidden");
- $("next").textContent=idx===9?"Nəticəni göstər":"Növbəti sual";
-}
-function next(){
- if(!locked)return;
- if(idx<9){idx++;showQuestion()}else finish();
-}
-function finish(){
- clearInterval(clock);clock=null;
- $("quiz").classList.add("hidden");$("result").classList.remove("hidden");
- $("finalPoints").textContent=score;
- $("finalCorrect").textContent=correct+"/10";
- $("finalTime").textContent=elapsed;
- let r=load("zqiHardResults",[]);
- let pos=r.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
- const item={name,score,correct,elapsed};
- if(pos<0)r.push(item);else if(score>r[pos].score)r[pos]=item;
- save("zqiHardResults",r);refresh();
-}
-$("join").onclick=join;
-$("send").onclick=()=>submit(false);
-$("next").onclick=next;
-$("player").addEventListener("keydown",e=>{if(e.key==="Enter")join()});
-setInterval(countdown,250);
-countdown();
-refresh();
-</script>
+    <!-- GIRIS -->
+    <section id="login" class="panel hidden">
+      <h1>Hesabına daxil ol</h1>
+      <p class="sub">Davam etmək üçün məlumatlarını daxil et.</p>
+
+      <form id="loginForm">
+        <label for="loginEmail">E-poçt</label>
+        <input id="loginEmail" type="email" required
+          autocomplete="email" placeholder="E-poçt ünvanın">
+
+        <label for="loginPassword">Şifrə</label>
+        <input id="loginPassword" type="password" required
+          autocomplete="current-password" placeholder="Şifrən">
+
+        <button type="submit">Daxil ol</button>
+      </form>
+
+      <div id="loginMessage" class="message" role="status"></div>
+
+      <p class="switch">
+        Hesabın yoxdur?
+        <a id="showRegister">Qeydiyyatdan keç</a>
+      </p>
+    </section>
+
+    <!-- PROFIL -->
+    <section id="profile" class="panel hidden">
+      <div class="profile-head">
+        <div class="avatar" id="avatar">Z</div>
+        <h1 id="profileName">İstifadəçi</h1>
+        <p class="sub">ZQİ hesabın</p>
+        <span class="tag">Üzv</span>
+      </div>
+
+      <div class="info">
+        <small>İstifadəçi adı</small>
+        <strong id="profileUsername"></strong>
+      </div>
+
+      <div class="info">
+        <small>Ad və soyad</small>
+        <strong id="profileFullName"></strong>
+      </div>
+
+      <div class="info">
+        <small>E-poçt</small>
+        <strong id="profileEmail"></strong>
+      </div>
+
+      <button id="logout" class="secondary">Hesabdan çıxış</button>
+      <p id="profileMessage" class="message" role="status"></p>
+    </section>
+  </main>
+
+  <footer>© ZQİ — Zogadiunarebi Qəbul İmtahanı</footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    function showPage(page) {
+      ["register", "login", "profile"].forEach(id => {
+        $(id).classList.toggle("hidden", id !== page);
+      });
+    }
+
+    $("showLogin").onclick = () => showPage("login");
+    $("showRegister").onclick = () => showPage("register");
+
+    function getDemoAccount() {
+      try {
+        return JSON.parse(sessionStorage.getItem("zqi_demo_account"));
+      } catch {
+        return null;
+      }
+    }
+
+    function showProfile(account) {
+      $("profileName").textContent = account.fullName;
+      $("profileFullName").textContent = account.fullName;
+      $("profileUsername").textContent = "@" + account.username;
+      $("profileEmail").textContent = account.email;
+      $("avatar").textContent =
+        account.fullName.trim().charAt(0).toUpperCase() || "Z";
+      showPage("profile");
+    }
+
+    $("registerForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const fullName = $("fullName").value.trim();
+      const username = $("username").value.trim();
+      const email = $("email").value.trim();
+      const password = $("password").value;
+      const confirm = $("confirmPassword").value;
+
+      if (password !== confirm) {
+        $("registerMessage").textContent = "Şifrələr eyni deyil.";
+        return;
+      }
+
+      $("registerMessage").textContent =
+        "Görünüş hazırdır, lakin real qeydiyyat üçün Firebase bağlantısı lazımdır.";
+    });
+
+    $("loginForm").addEventListener("submit", event => {
+      event.preventDefault();
+      $("loginMessage").textContent =
+        "Giriş hələ aktiv deyil. Növbəti mərhələdə Firebase qoşacağıq.";
+    });
+
+    $("logout").addEventListener("click", () => {
+      showPage("login");
+    });
+  </script>
 </body>
 </html>
