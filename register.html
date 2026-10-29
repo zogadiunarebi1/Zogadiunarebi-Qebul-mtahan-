@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZQİ | Qeydiyyat</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #090909;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: 100%;
+      max-width: 440px;
+      padding: 26px;
+      background: #151515;
+      border: 1px solid #b89035;
+      border-radius: 18px;
+    }
+    h1 { text-align: center; color: #e5bd58; }
+    p { text-align: center; color: #bbb; }
+    input, button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      border-radius: 9px;
+      font-size: 15px;
+    }
+    input {
+      color: white;
+      background: #222;
+      border: 1px solid #444;
+    }
+    button {
+      color: #111;
+      background: #e5bd58;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #message { line-height: 1.5; overflow-wrap: anywhere; }
+    a { color: #e5bd58; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>ZQİ</h1>
+    <p>Zogadiunarebi Qəbul İmtahanı</p>
+
+    <form id="registerForm">
+      <input id="firstName" placeholder="Ad" required>
+      <input id="lastName" placeholder="Soyad" required>
+      <input id="username" placeholder="İstifadəçi adı" required>
+      <input id="email" type="email" placeholder="E-poçt" required>
+      <input id="password" type="password"
+        placeholder="Şifrə (ən azı 6 simvol)" minlength="6" required>
+      <input id="confirmPassword" type="password"
+        placeholder="Şifrəni təkrar yaz" minlength="6" required>
+      <button id="submitBtn" type="submit">Qeydiyyatdan keç</button>
+    </form>
+
+    <p id="message" role="status"></p>
+    <p>Hesabın var? <a href="login.html">Daxil ol</a></p>
+  </main>
+
+  <script type="module">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      // Öz mövcud Firebase konfiqurasiyanı buraya yaz.
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.firebasestorage.app",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("registerForm");
+    const message = document.getElementById("message");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        message.textContent = "Şifrələr uyğun gəlmir.";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      message.textContent = "Qeydiyyat yaradılır...";
+
+      let user = null;
+
+      try {
+        const credential = await createUserWithEmailAndPassword(
+          auth, email, password
+        );
+        user = credential.user;
+
+        await updateProfile(user, {
+          displayName: `${firstName} ${lastName}`
+        });
+
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          firstName,
+          lastName,
+          name: `${firstName} ${lastName}`,
+          username,
+          email,
+          status: "pending",
+          createdAt: serverTimestamp()
+        });
+
+        await signOut(auth);
+
+        message.textContent =
+          "Qeydiyyat tamamlandı. Admin təsdiqini gözləyirsən.";
+        form.reset();
+
+      } catch (error) {
+        // Məlumat bazasına yazılma uğursuz olarsa,
+        // yarımçıq hesabı silinmədən saxlamaq əvəzinə xəbər veririk.
+        console.error(error);
+
+        if (user) {
+          message.textContent =
+            "Hesab yaradıldı, amma məlumatlar saxlanmadı. " +
+            "Yenidən qeydiyyat etməzdən əvvəl adminlə əlaqə saxla.";
+        } else if (error.code === "auth/email-already-in-use") {
+          message.textContent = "Bu e-poçt artıq qeydiyyatdan keçib.";
+        } else if (error.code === "auth/weak-password") {
+          message.textContent = "Daha güclü şifrə seç.";
+        } else if (error.code === "auth/operation-not-allowed") {
+          message.textContent =
+            "Firebase-də Email/Password giriş üsulunu aktivləşdir.";
+        } else {
+          message.textContent = "Xəta: " + error.message;
+        }
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
