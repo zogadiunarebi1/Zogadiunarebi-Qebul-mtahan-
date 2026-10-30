@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZQİ | Riyaziyyat Testləri</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:#080808;color:#eee;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+}
+header{
+ background:#111;border-bottom:1px solid #b58b35;
+ padding:20px;text-align:center;
+}
+.logo{color:#e7bd55;font-size:28px;font-weight:bold}
+header p{color:#aaa;margin-top:7px}
+.container{max-width:850px;margin:25px auto;padding:15px}
+h2{color:#e7bd55;margin-bottom:15px}
+.panel{
+ background:#141414;border:1px solid #35302a;
+ border-radius:14px;padding:20px;margin-bottom:20px;
+}
+.info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.info span{color:#e7bd55}
+.progress{
+ background:#292929;height:8px;border-radius:20px;
+ margin:15px 0;overflow:hidden
+}
+.progress div{height:100%;background:#d6aa42;width:0%;transition:.3s}
+.question{
+ background:#151515;border:1px solid #34302a;
+ border-radius:12px;padding:18px;margin:15px 0;
+}
+.question h3{font-size:16px;line-height:1.6;margin-bottom:14px}
+.number{color:#d6aa42;font-size:13px;margin-bottom:8px}
+.options{display:grid;gap:9px}
+.option{
+ border:1px solid #414141;background:#202020;
+ padding:13px;border-radius:9px;color:white;
+ text-align:left;cursor:pointer;font-size:15px;
+ transition:.2s
+}
+.option:hover{border-color:#d6aa42}
+.option.correct{background:#123d25;border-color:#27ae60;color:#7dffae}
+.option.wrong{background:#481c1c;border-color:#e74c3c;color:#ffaaaa}
+.option:disabled{cursor:default}
+.feedback{font-size:14px;margin-top:10px;font-weight:bold}
+.correct-text{color:#42d878}
+.wrong-text{color:#ff6565}
+button.main{
+ width:100%;padding:15px;background:#d6aa42;
+ border:0;border-radius:10px;color:#111;
+ font-size:16px;font-weight:bold;cursor:pointer;
+ margin-top:12px
+}
+button.main:disabled{opacity:.5;cursor:not-allowed}
+.result{text-align:center;padding:20px}
+.score{font-size:45px;color:#e7bd55;font-weight:bold;margin:15px}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+td,th{padding:13px 8px;border-bottom:1px solid #333;text-align:left}
+th{color:#e7bd55}
+.rank{color:#e7bd55;font-weight:bold}
+.small{color:#aaa;font-size:13px;margin-top:10px;line-height:1.6}
+.hidden{display:none}
+footer{text-align:center;color:#666;padding:25px}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">ZQİ</div>
+ <p>Zogadiunarebi Qəbul İmtahanı</p>
+</header>
+
+<div class="container">
+
+ <div class="panel">
+  <h2>📚 Testlər</h2>
+  <div class="info">
+   <div>Fənn: <span>Riyaziyyat</span></div>
+   <div>Sinif: <span>9-cu sinif</span></div>
+   <div>Suallar: <span>20</span></div>
+   <div>Maksimum: <span>100 bal</span></div>
+  </div>
+  <div class="progress"><div id="progress"></div></div>
+  <p class="small" id="progressText">0 / 20 cavablandırılıb</p>
+ </div>
+
+ <div id="testArea"></div>
+
+ <div class="panel">
+  <h2>🏆 Reytinq cədvəli</h2>
+  <p class="small">Ən yüksək nəticə göstərən şagirdlər.</p>
+  <div style="overflow-x:auto">
+   <table>
+    <thead>
+     <tr>
+      <th>Yer</th>
+      <th>Şagird</th>
+      <th>Bal</th>
+     </tr>
+    </thead>
+    <tbody id="ranking">
+     <tr><td colspan="3">Reytinq yüklənir...</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+
+</div>
+
+<footer>ZQİ © 2026 | Bütün hüquqlar qorunur</footer>
+
+<script>
+
+// FIREBASE CONFIG
+// Buraya öz Firebase layihənin config məlumatlarını yaz.
+
+const firebaseConfig = {
+ apiKey: "BURAYA_API_KEY",
+ authDomain: "zqi-riyaziyyat.firebaseapp.com",
+ projectId: "zqi-riyaziyyat",
+ storageBucket: "BURAYA_STORAGE_BUCKET",
+ messagingSenderId: "BURAYA_SENDER_ID",
+ appId: "BURAYA_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+
+// SUALLAR
+
+const questions = [
+["3x + 5 = 20 tənliyində x-i tap.",["3","5","7","10"],1],
+["√196 ifadəsinin qiymətini tap.",["12","13","14","16"],2],
+["200 ədədinin 25%-i neçədir?",["25","40","50","75"],2],
+["(a+b)² düsturunu aç.",["a²+b²","a²+2ab+b²","a²−2ab+b²","a²−b²"],1],
+["2x − 8 = 12 tənliyini həll et.",["8","10","12","14"],1],
+["5² − 3² ifadəsinin qiymətini tap.",["8","12","16","20"],2],
+["x² − 9 = 0 tənliyinin kökləri hansılardır?",["3","−3","±3","9"],2],
+["2/3 + 1/6 cəmini tap.",["1/2","5/6","1","2/9"],1],
+["Üçbucağın iki bucağı 50° və 60°-dirsə, üçüncü bucaq neçədir?",["60°","70°","80°","90°"],1],
+["4x = 3x + 11 tənliyində x neçədir?",["9","10","11","12"],2],
+["√81 + √49 ifadəsini hesabla.",["14","15","16","17"],1],
+["(x−2)(x+2) ifadəsini aç.",["x²+4","x²−4","x²−2","x²+2"],1],
+["Bir ədədin 40%-i 80-dir. Ədəd neçədir?",["160","180","200","240"],2],
+["x² − 5x + 6 = 0 tənliyinin köklərini tap.",["1 və 6","2 və 3","−2 və −3","1 və 5"],1],
+["Düzbucaqlının uzunluğu 12 sm, eni 5 sm-dir. Sahəsi neçədir?",["17 sm²","34 sm²","60 sm²","120 sm²"],2],
+["3² + 4² ifadəsinin qiyməti neçədir?",["12","25","49","14"],1],
+["2(x+3)=18 tənliyində x-i tap.",["3","6","9","12"],1],
+["Ədədi silsilədə a₁=3, d=4 olarsa, a₅ neçədir?",["15","17","19","21"],2],
+["x² = 121 tənliyinin həlləri hansılardır?",["11","−11","±11","121"],2],
+["Katetləri 6 sm və 8 sm olan düzbucaqlı üçbucağın hipotenuzunu tap.",["9 sm","10 sm","12 sm","14 sm"],1]
+];
+
+const letters = ["A","B","C","D"];
+let answers = {};
+let submitted = false;
+let currentUser = null;
+
+
+// TESTİ GÖSTƏR
+
+function renderTest(){
+
+ const area = document.getElementById("testArea");
+
+ area.innerHTML = questions.map((q,i)=>`
+
+ <div class="question">
+  <div class="number">SUAL ${i+1} / 20</div>
+  <h3>${q[0]}</h3>
+
+  <div class="options">
+   ${q[1].map((option,j)=>`
+    <button
+     class="option"
+     id="q${i}_${j}"
+     onclick="selectAnswer(${i},${j})"
+     ${submitted ? "disabled" : ""}
+    >
+     ${letters[j]}) ${option}
+    </button>
+   `).join("")}
+  </div>
+
+  <div id="feedback${i}" class="feedback"></div>
+ </div>
+
+ `).join("");
+
+ area.innerHTML += `
+  <div class="panel">
+   <button class="main" id="submitBtn" onclick="submitTest()"
+   ${submitted ? "disabled" : ""}>
+    Cavabları göndər
+   </button>
+   <p class="small">Cavablarını göndərdikdən sonra nəticən hesablanacaq.</p>
+  </div>
+  <div id="finalResult"></div>
+ `;
+
+ updateProgress();
+
+}
+
+
+// CAVAB SEÇİMİ
+
+function selectAnswer(i,j){
+
+ if(submitted) return;
+
+ answers[i] = j;
+
+ const correct = questions[i][2];
+ const feedback = document.getElementById("feedback"+i);
+
+ for(let k=0;k<4;k++){
+
+  const btn = document.getElementById(`q${i}_${k}`);
+
+  btn.classList.remove("correct","wrong");
+
+  if(k===j){
+   if(j===correct){
+    btn.classList.add("correct");
+   }else{
+    btn.classList.add("wrong");
+   }
+  }
+ }
+
+ if(j===correct){
+  feedback.textContent = "✓ Düzgün cavab!";
+  feedback.className = "feedback correct-text";
+ }else{
+  feedback.textContent = "✗ Səhv cavab! Düzgün cavab: "+letters[correct];
+  feedback.className = "feedback wrong-text";
+ }
+
+ updateProgress();
+
+}
+
+
+// PROGRESS
+
+function updateProgress(){
+
+ const count = Object.keys(answers).length;
+
+ document.getElementById("progress").style.width =
+ (count/20*100)+"%";
+
+ document.getElementById("progressText").textContent =
+ count+" / 20 cavablandırılıb";
+
+}
+
+
+// TESTİ GÖNDƏR
+
+async function submitTest(){
+
+ if(submitted) return;
+
+ if(Object.keys(answers).length===0){
+  alert("Ən azı bir suala cavab ver!");
+  return;
+ }
+
+ const btn = document.getElementById("submitBtn");
+ btn.disabled = true;
+ btn.textContent = "Nəticə hesablanır...";
+
+ submitted = true;
+
+ let correctCount = 0;
+
+ questions.forEach((q,i)=>{
+
+  const correct = q[2];
+  const selected = answers[i];
+
+  if(selected===correct){
+   correctCount++;
+  }
+
+  for(let j=0;j<4;j++){
+   const option = document.getElementById(`q${i}_${j}`);
+   option.disabled = true;
+
+   if(j===correct){
+    option.classList.add("correct");
+   }
+  }
+
+  const feedback = document.getElementById("feedback"+i);
+
+  if(selected===undefined){
+   feedback.textContent = "Cavab verilməyib. Düzgün cavab: "+letters[correct];
+   feedback.className = "feedback wrong-text";
+  }
+
+ });
+
+ const score = correctCount*5;
+
+ document.getElementById("finalResult").innerHTML = `
+  <div class="panel result">
+   <h2>🎉 Test tamamlandı!</h2>
+   <div class="score">${score}/100</div>
+   <p>Düzgün cavab: ${correctCount}/20</p>
+   <p>Səhv və boş cavab: ${20-correctCount}</p>
+   <p class="small">Nəticən reytinqə əlavə edilir.</p>
+  </div>
+ `;
+
+ try{
+
+  if(!currentUser){
+   throw new Error("LOGIN_REQUIRED");
+  }
+
+  const name =
+   currentUser.displayName ||
+   currentUser.email.split("@")[0];
+
+  await db.collection("test_results").add({
+   uid: currentUser.uid,
+   name: name,
+   subject: "Riyaziyyat",
+   grade: 9,
+   score: score,
+   correct: correctCount,
+   total: 20,
+   createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById("finalResult").innerHTML += `
+   <div class="panel">
+    <p class="correct-text">✓ Nəticən uğurla yadda saxlanıldı!</p>
+   </div>
+  `;
+
+ }catch(error){
+
+  console.error(error);
+
+  const message = error.message==="LOGIN_REQUIRED"
+   ? "Reytinqə yazılmaq üçün sayta daxil olmalısan."
+   : "Nəticə yadda saxlanılmadı. Firebase ayarlarını yoxla.";
+
+  document.getElementById("finalResult").innerHTML += `
+   <div class="panel">
+    <p class="wrong-text">${message}</p>
+   </div>
+  `;
+
+ }
+
+ btn.textContent = "Test göndərildi";
+ loadRanking();
+
+}
+
+
+// REYTİNQ
+
+function loadRanking(){
+
+ db.collection("test_results")
+ .where("subject","==","Riyaziyyat")
+ .where("grade","==",9)
+ .orderBy("score","desc")
+ .orderBy("createdAt","asc")
+ .limit(30)
+ .onSnapshot(snapshot=>{
+
+  const tbody = document.getElementById("ranking");
+
+  if(snapshot.empty){
+   tbody.innerHTML =
+   '<tr><td colspan="3">Hələ nəticə yoxdur.</td></tr>';
+   return;
+  }
+
+  tbody.innerHTML = snapshot.docs.map((doc,i)=>{
+
+   const data = doc.data();
+
+   return `
+    <tr>
+     <td class="rank">${i+1}</td>
+     <td>${escapeHTML(data.name || "Şagird")}</td>
+     <td style="color:#e7bd55;font-weight:bold">
+      ${data.score}/100
+     </td>
+    </tr>
+   `;
+
+  }).join("");
+
+ },error=>{
+  console.error("Reytinq xətası:",error);
+  document.getElementById("ranking").innerHTML =
+  '<tr><td colspan="3">Reytinq yüklənmədi. Firebase indeksini yoxla.</td></tr>';
+ });
+
+}
+
+
+// HTML TƏHLÜKƏSİZLİYİ
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+
+// İSTİFADƏÇİ
+
+auth.onAuthStateChanged(user=>{
+
+ currentUser = user;
+
+ renderTest();
+ loadRanking();
+
+});
+
+</script>
+</body>
+</html>
