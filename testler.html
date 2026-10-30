@@ -38,13 +38,19 @@ button{
  font-weight:bold;cursor:pointer;margin-top:12px
 }
 button:disabled{opacity:.5;cursor:not-allowed}
-.info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.info{
+ display:flex;justify-content:space-between;
+ gap:10px;flex-wrap:wrap
+}
 .info span{color:#e7bd55}
 .progress{
  background:#292929;height:8px;border-radius:20px;
  margin:15px 0;overflow:hidden
 }
-.progress div{height:100%;background:#d6aa42;width:0%}
+.progress div{
+ height:100%;background:#d6aa42;width:0%;
+ transition:width .3s
+}
 .question{
  background:#151515;border:1px solid #34302a;
  border-radius:12px;padding:18px;margin:15px 0
@@ -56,12 +62,21 @@ button:disabled{opacity:.5;cursor:not-allowed}
  padding:14px;border-radius:9px;color:white;
  text-align:left;cursor:pointer;font-size:15px
 }
-.option.selected{border-color:#d6aa42;color:#ffe49a}
-.option.correct{background:#183a29;border-color:#27ae60}
-.option.wrong{background:#481c1c;border-color:#e74c3c}
+.option.selected{
+ border-color:#d6aa42;color:#ffe49a
+}
+.option.correct{
+ background:#183a29;border-color:#27ae60
+}
+.option.wrong{
+ background:#481c1c;border-color:#e74c3c
+}
 .feedback{margin-top:12px;font-weight:bold;line-height:1.6}
 table{width:100%;border-collapse:collapse;margin-top:15px}
-td,th{padding:12px;border-bottom:1px solid #383838;text-align:left}
+td,th{
+ padding:12px;border-bottom:1px solid #383838;
+ text-align:left
+}
 th{color:#e7bd55}
 .hidden{display:none!important}
 footer{text-align:center;color:#777;padding:25px}
@@ -82,19 +97,21 @@ footer{text-align:center;color:#777;padding:25px}
  <h2>📚 Testə başla</h2>
  <p>İştirakçı adını yaz:</p>
  <input id="studentName" maxlength="30" placeholder="Ad və soyad">
- <p>20 sual • Hər suala 10 saniyə • Maksimum 100 bal</p>
+ <p>20 sual • Vaxt məhdudiyyəti yoxdur • Maksimum 100 bal</p>
  <button id="startBtn">Testə başla</button>
  <p id="status"></p>
 </section>
 
 <section class="panel hidden" id="testPanel">
+
  <div class="info">
   <span id="number">1/20</span>
-  <span>Vaxt: <b id="time">10</b> saniyə</span>
-  <span>Xal: <b id="score">0</b></span>
+  <span>Xal: <b id="score">0</b> / 100</span>
  </div>
 
- <div class="progress"><div id="bar"></div></div>
+ <div class="progress">
+  <div id="bar"></div>
+ </div>
 
  <div class="question">
   <h3 id="questionText"></h3>
@@ -102,8 +119,15 @@ footer{text-align:center;color:#777;padding:25px}
  </div>
 
  <p id="feedback" class="feedback"></p>
- <button id="submitBtn" disabled>Cavabı göndər</button>
- <button id="nextBtn" class="hidden">Növbəti sual</button>
+
+ <button id="submitBtn" disabled>
+  Cavabı göndər
+ </button>
+
+ <button id="nextBtn" class="hidden">
+  Növbəti sual
+ </button>
+
 </section>
 
 <section class="panel hidden" id="resultPanel">
@@ -115,6 +139,7 @@ footer{text-align:center;color:#777;padding:25px}
 
 <section class="panel">
  <h2>🏆 Reytinq cədvəli</h2>
+
  <div style="overflow-x:auto">
  <table>
   <thead>
@@ -134,7 +159,9 @@ footer{text-align:center;color:#777;padding:25px}
 
 </div>
 
-<footer>ZQİ © 2026 | Hazırladı: Haldun Məmmədov</footer>
+<footer>
+ ZQİ © 2026 | Hazırladı: Haldun Məmmədov
+</footer>
 
 <script>
 
@@ -152,48 +179,120 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// SUALLAR
+// 20 TEST SUALI
 const questions = [
-["2x + 5 = 15. x neçədir?",["3","5","7","10"],1,"2x=10, x=5."],
-["√144 neçədir?",["10","11","12","14"],2,"12 × 12 = 144."],
-["25%-i 80 olan ədəd neçədir?",["200","240","300","320"],3,"80 ÷ 0.25 = 320."],
-["3² + 4² = ?",["12","25","49","36"],1,"9 + 16 = 25."],
-["x² = 49 olarsa, x-in həlləri hansıdır?",["7","-7","7 və -7","49"],2,"x = ±7."],
-["5(2x - 1) = 15. x neçədir?",["1","2","3","4"],1,"10x - 5 = 15, x = 2."],
-["1/2 + 1/4 = ?",["1/4","2/4","3/4","1"],2,"2/4 + 1/4 = 3/4."],
-["200-ün 15%-i neçədir?",["15","20","25","30"],3,"200 × 0.15 = 30."],
-["3x - 7 = 8. x neçədir?",["3","4","5","6"],2,"3x=15, x=5."],
-["Düzbucaqlının tərəfləri 6 və 8-dir. Sahəsi neçədir?",["14","28","48","56"],2,"Sahə = 6 × 8 = 48."],
-["(a+b)² düsturu hansıdır?",["a²+b²","a²+2ab+b²","a²-2ab+b²","2a+2b"],1,"(a+b)² = a²+2ab+b²."],
-["√225 neçədir?",["12","13","14","15"],3,"15 × 15 = 225."],
-["2³ × 2² = ?",["16","24","32","64"],2,"Eyni əsaslı qüvvətlər vurulduqda üstlər toplanır: 2⁵=32."],
-["Bir üçbucağın bucaqları 50° və 60°-dir. Üçüncü bucaq neçədir?",["60°","70°","80°","90°"],1,"180° - 50° - 60° = 70°."],
-["|−12| neçədir?",["-12","0","12","24"],2,"Modul ədədin müsbət qiymətidir."],
-["4x = 36. x neçədir?",["6","7","8","9"],3,"36 ÷ 4 = 9."],
-["0.4 × 50 = ?",["10","15","20","25"],2,"0.4 × 50 = 20."],
-["3/5 kəsrinin faizi neçədir?",["30%","40%","50%","60%"],3,"3 ÷ 5 × 100 = 60%."],
-["Kvadratın tərəfi 7 sm-dir. Perimetri neçədir?",["14","21","28","49"],2,"P = 4 × 7 = 28 sm."],
-["2x + 3 = 17. x neçədir?",["5","6","7","8"],1,"2x=14, x=7."]
+
+["2x + 5 = 15. x neçədir?",
+["3","5","7","10"],1,
+"2x=10, x=5."],
+
+["√144 neçədir?",
+["10","11","12","14"],2,
+"12 × 12 = 144."],
+
+["25%-i 80 olan ədəd neçədir?",
+["200","240","300","320"],3,
+"80 ÷ 0.25 = 320."],
+
+["3² + 4² = ?",
+["12","25","49","36"],1,
+"9 + 16 = 25."],
+
+["x² = 49 olarsa, x-in həlləri hansıdır?",
+["7","-7","7 və -7","49"],2,
+"x = ±7."],
+
+["5(2x - 1) = 15. x neçədir?",
+["1","2","3","4"],1,
+"10x - 5 = 15, x = 2."],
+
+["1/2 + 1/4 = ?",
+["1/4","2/4","3/4","1"],2,
+"2/4 + 1/4 = 3/4."],
+
+["200-ün 15%-i neçədir?",
+["15","20","25","30"],3,
+"200 × 0.15 = 30."],
+
+["3x - 7 = 8. x neçədir?",
+["3","4","5","6"],2,
+"3x=15, x=5."],
+
+["Düzbucaqlının tərəfləri 6 və 8-dir. Sahəsi neçədir?",
+["14","28","48","56"],2,
+"Sahə = 6 × 8 = 48."],
+
+["(a+b)² düsturu hansıdır?",
+["a²+b²","a²+2ab+b²","a²-2ab+b²","2a+2b"],1,
+"(a+b)² = a²+2ab+b²."],
+
+["√225 neçədir?",
+["12","13","14","15"],3,
+"15 × 15 = 225."],
+
+["2³ × 2² = ?",
+["16","24","32","64"],2,
+"Eyni əsaslı qüvvətlər vurulduqda üstlər toplanır: 2⁵=32."],
+
+["Bir üçbucağın bucaqları 50° və 60°-dir. Üçüncü bucaq neçədir?",
+["60°","70°","80°","90°"],1,
+"180° - 50° - 60° = 70°."],
+
+["|−12| neçədir?",
+["-12","0","12","24"],2,
+"Modul ədədin müsbət qiymətidir."],
+
+["4x = 36. x neçədir?",
+["6","7","8","9"],3,
+"36 ÷ 4 = 9."],
+
+["0.4 × 50 = ?",
+["10","15","20","25"],2,
+"0.4 × 50 = 20."],
+
+["3/5 kəsrinin faizi neçədir?",
+["30%","40%","50%","60%"],3,
+"3 ÷ 5 × 100 = 60%."],
+
+["Kvadratın tərəfi 7 sm-dir. Perimetri neçədir?",
+["14","21","28","49"],2,
+"P = 4 × 7 = 28 sm."],
+
+["2x + 3 = 17. x neçədir?",
+["5","6","7","8"],2,
+"2x=14, x=7."]
+
 ];
 
+// DƏYİŞƏNLƏR
 let index=0;
 let score=0;
 let correct=0;
 let selected=null;
-let seconds=10;
-let timer=null;
 let student="";
 let locked=false;
 
-// ELEMENTLƏR
 const $=id=>document.getElementById(id);
+
+// HTML TƏHLÜKƏSİZLİYİ
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#39;"
+ })[c]);
+}
 
 // REYTİNQ
 db.collection("quizResults")
 .orderBy("score","desc")
 .limit(30)
 .onSnapshot(snapshot=>{
+
  const rows=snapshot.docs.map(d=>d.data());
+
  $("ranking").innerHTML=rows.length
  ? rows.map((r,i)=>`
  <tr>
@@ -201,22 +300,19 @@ db.collection("quizResults")
  <td>${escapeHTML(r.name)}</td>
  <td>${r.correct}/20</td>
  <td>${r.score}</td>
- </tr>`).join("")
+ </tr>
+ `).join("")
  : '<tr><td colspan="4">Hələ nəticə yoxdur.</td></tr>';
+
 },error=>{
- $("ranking").innerHTML='<tr><td colspan="4">Reytinq yüklənmədi.</td></tr>';
  console.error(error);
+ $("ranking").innerHTML=
+ '<tr><td colspan="4">Reytinq yüklənmədi.</td></tr>';
 });
 
-function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",
- '"':"&quot;","'":"&#39;"
- })[c]);
-}
-
-// BAŞLA
+// TESTƏ BAŞLA
 $("startBtn").onclick=()=>{
+
  student=$("studentName").value.trim();
 
  if(!student){
@@ -237,20 +333,19 @@ $("startBtn").onclick=()=>{
 
 // SUALI GÖSTƏR
 function showQuestion(){
- clearInterval(timer);
 
  selected=null;
  locked=false;
- seconds=10;
 
  const q=questions[index];
 
  $("number").textContent=(index+1)+"/20";
- $("time").textContent=seconds;
  $("score").textContent=score;
- $("bar").style.width="100%";
+ $("bar").style.width=((index)/20*100)+"%";
+
  $("questionText").textContent=q[0];
  $("feedback").textContent="";
+
  $("submitBtn").disabled=true;
  $("submitBtn").classList.remove("hidden");
  $("nextBtn").classList.add("hidden");
@@ -262,7 +357,9 @@ function showQuestion(){
  `).join("");
 
  document.querySelectorAll(".option").forEach(button=>{
+
   button.onclick=()=>{
+
    if(locked)return;
 
    selected=Number(button.dataset.index);
@@ -273,26 +370,17 @@ function showQuestion(){
 
    $("submitBtn").disabled=false;
   };
+
  });
 
- timer=setInterval(()=>{
-  seconds--;
-  $("time").textContent=seconds;
-  $("bar").style.width=(seconds*10)+"%";
-
-  if(seconds<=0){
-   checkAnswer(true);
-  }
- },1000);
 }
 
 // CAVABI YOXLAMA
-function checkAnswer(timeout=false){
- if(locked)return;
- if(selected===null&&!timeout)return;
+function checkAnswer(){
+
+ if(locked || selected===null)return;
 
  locked=true;
- clearInterval(timer);
 
  const q=questions[index];
  const isCorrect=selected===q[2];
@@ -303,17 +391,21 @@ function checkAnswer(timeout=false){
  }
 
  document.querySelectorAll(".option").forEach((button,i)=>{
+
   button.disabled=true;
 
-  if(i===q[2])button.classList.add("correct");
-  else if(i===selected)button.classList.add("wrong");
+  if(i===q[2]){
+   button.classList.add("correct");
+  }else if(i===selected){
+   button.classList.add("wrong");
+  }
+
  });
 
  $("score").textContent=score;
 
  $("feedback").textContent=
- (timeout?"Vaxt bitdi. ":isCorrect?"Düzgün cavab! ":"Səhv cavab! ")
- +q[3];
+ (isCorrect?"Düzgün cavab! ":"Səhv cavab! ")+q[3];
 
  $("submitBtn").classList.add("hidden");
  $("nextBtn").classList.remove("hidden");
@@ -322,56 +414,77 @@ function checkAnswer(timeout=false){
  index===19?"Nəticəni göstər":"Növbəti sual";
 }
 
-$("submitBtn").onclick=()=>checkAnswer(false);
+$("submitBtn").onclick=checkAnswer;
 
 // NÖVBƏTİ SUAL
 $("nextBtn").onclick=()=>{
+
  if(!locked)return;
 
  if(index<19){
+
   index++;
   showQuestion();
+
  }else{
+
   finishTest();
+
  }
+
 };
 
 // TESTİN SONU
 async function finishTest(){
- clearInterval(timer);
 
  $("testPanel").classList.add("hidden");
  $("resultPanel").classList.remove("hidden");
 
+ $("bar").style.width="100%";
+
  $("finalScore").textContent=score+" / 100";
+
  $("correctCount").textContent=
  "Düzgün cavab: "+correct+" / 20";
 
  $("status").textContent="Nəticə yadda saxlanılır...";
 
  try{
+
   await db.collection("quizResults").add({
+
    name:student,
    score:score,
    correct:correct,
    total:20,
-   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+   createdAt:
+   firebase.firestore.FieldValue.serverTimestamp()
+
   });
 
-  $("status").textContent="Nəticən uğurla yadda saxlanıldı!";
+  $("status").textContent=
+  "Nəticən uğurla yadda saxlanıldı!";
+
  }catch(error){
+
   console.error(error);
+
   $("status").textContent=
   "Nəticə yadda saxlanmadı. Firebase icazələrini yoxla.";
+
  }
+
 }
 
 // YENİDƏN BAŞLA
 $("restartBtn").onclick=()=>{
+
  $("resultPanel").classList.add("hidden");
  $("startPanel").classList.remove("hidden");
+
  $("studentName").value=student;
  $("status").textContent="";
+
 };
 
 </script>
