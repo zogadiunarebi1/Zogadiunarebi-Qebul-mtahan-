@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zogadiu Qəbul İmtahanı</title>
+    <title>Qəbul İmtahanı Hazırlıq</title>
     <style>
         :root {
-            --primary-blue: #0066cc;
-            --light-blue: #e6f0ff;
-            --dark-blue: #003366;
-            --white: #ffffff;
-            --gray: #f4f6f9;
+            --primary-color: #0066cc;
+            --primary-light: #e6f0ff;
+            --bg-color: #f4f7fc;
             --text-color: #333333;
-            --success: #28a745;
-            --danger: #dc3545;
+            --white: #ffffff;
+            --gray: #e0e0e0;
+            --green: #28a745;
+            --red: #dc3545;
         }
 
         * {
@@ -24,88 +24,90 @@
         }
 
         body {
-            background-color: var(--gray);
+            background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Header */
         header {
-            background-color: var(--primary-blue);
+            background-color: var(--primary-color);
             color: var(--white);
             padding: 15px 20px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         .menu-btn {
             background: none;
             border: none;
-            color: var(--white);
-            font-size: 24px;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            width: 25px;
         }
 
-        .logo-title {
-            font-size: 18px;
-            font-weight: bold;
+        .menu-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--white);
+            border-radius: 2px;
         }
 
-        /* Sidebar Menu */
+        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -280px;
-            width: 280px;
+            right: -250px;
+            width: 250px;
             height: 100%;
             background-color: var(--white);
-            box-shadow: 3px 0 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            transition: right 0.3s ease;
             z-index: 1000;
+            padding: 20px;
             display: flex;
             flex-direction: column;
         }
 
         .sidebar.active {
-            left: 0;
+            right: 0;
         }
 
-        .sidebar-header {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-sidebar {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 20px;
-            cursor: pointer;
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
         }
 
         .sidebar-content {
-            padding: 20px;
-        }
-
-        .sidebar-content h3 {
-            margin-bottom: 15px;
-            color: var(--dark-blue);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .sidebar-content p {
             margin-bottom: 10px;
-            font-size: 14px;
-            line-height: 1.5;
+        }
+
+        .close-sidebar {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-bottom: 10px;
         }
 
         .overlay {
@@ -114,7 +116,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.4);
             display: none;
             z-index: 999;
         }
@@ -125,416 +127,279 @@
 
         /* Main Container */
         .container {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
-            width: 100%;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             flex: 1;
+            width: 90%;
         }
 
-        /* Main 5 Sections Grid */
-        .main-menu {
+        h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .grid-menu {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
         .menu-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,102,204,0.1);
+            background-color: var(--primary-light);
+            border: 1px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.2s;
-            border-top: 5px solid var(--primary-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+            transition: all 0.2s ease;
         }
 
         .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,102,204,0.2);
-            background-color: var(--light-blue);
+            background-color: var(--primary-color);
+            color: var(--white);
         }
 
-        .menu-card h2 {
-            color: var(--dark-blue);
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .menu-card p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        /* Back Button */
         .back-btn {
-            background-color: var(--dark-blue);
+            background-color: #6c757d;
             color: var(--white);
             border: none;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 20px;
-            font-size: 14px;
+            font-size: 0.9rem;
         }
 
         .back-btn:hover {
-            background-color: var(--primary-blue);
+            background-color: #5a6268;
         }
 
         /* Content Sections */
         .section-view {
             display: none;
-            background: var(--white);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .section-view.active {
             display: block;
         }
 
-        .lesson-list, .sub-menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .btn-item {
-            background-color: var(--light-blue);
-            color: var(--dark-blue);
-            border: 1px solid #b3d1ff;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: left;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-item:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-        }
-
         .info-box {
-            background-color: #fffde7;
-            border-left: 4px solid #fbc02d;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
             padding: 15px;
-            margin: 15px 0;
-            font-size: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #856404;
         }
 
         /* Quiz / Homework Styling */
-        .question-card {
+        .question-container {
             margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray);
+            padding-bottom: 15px;
         }
 
-        .options-list {
-            list-style: none;
-            margin-top: 10px;
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .options-list li {
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            background: var(--gray);
-            border-radius: 5px;
+        .options label {
+            display: block;
+            margin: 5px 0;
             cursor: pointer;
-            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid var(--gray);
         }
 
-        .options-list li:hover {
-            background: var(--light-blue);
-        }
-
-        .options-list li.selected {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
+        .options label:hover {
+            background-color: var(--primary-light);
         }
 
         .submit-btn {
-            background-color: var(--success);
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--white);
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
+            font-size: 1rem;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
         }
 
-        .result-feedback {
-            margin-top: 10px;
+        .submit-btn:hover {
+            background-color: #0052a3;
+        }
+
+        .result-box {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
             font-weight: bold;
+        }
+
+        .correct {
+            background-color: #d4edda;
+            color: var(--green);
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+            color: var(--red);
+        }
+
+        .explanation {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
-        <div class="logo-title">Zogadiu Qəbul İmtahanı</div>
-        <div style="width: 24px;"></div>
+        <div class="header-title" onclick="goHome()">Qəbul İmtahanı</div>
+        <button class="menu-btn" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
-    <!-- Sidebar Menu -->
+    <!-- Sidebar & Əlaqə -->
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span>Əlaqə Məlumatları</span>
-            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-        </div>
+        <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        <h3>Əlaqə</h3>
         <div class="sidebar-content">
-            <h3>Bizimlə Əlaqə</h3>
             <p><strong>Telefon nömrəsi:</strong><br> +995 555 93 65 47</p>
             <p><strong>E-poçt:</strong><br> zogadiunarebiqebulimtahanı@gmail.com</p>
         </div>
     </div>
 
-    <!-- Main Content Container -->
     <div class="container">
-
-        <!-- 5 əsas menyu (Ana Səhifə) -->
-        <div id="homeView" class="main-menu">
-            <div class="menu-card" onclick="openSection('mathSection')">
-                <h2>1. Riyaziyyat</h2>
-                <p>Testlər və Qaydalar (5 bölmə)</p>
-            </div>
-            <div class="menu-card" onclick="openSection('verbalSection')">
-                <h2>2. Verbal</h2>
-                <p>Məntiq, Mətn və Analogiyalar</p>
-            </div>
-            <div class="menu-card" onclick="openSection('examSection')">
-                <h2>3. İmtahan Testləri</h2>
-                <p>2011-2026-cı illər üzrə sınaqlar</p>
-            </div>
-            <div class="menu-card" onclick="openSection('homeworkSection')">
-                <h2>4. Ev Tapşırığı</h2>
-                <p>Hər dərsə uyğun tək-tək suallar</p>
-            </div>
-            <div class="menu-card" onclick="openSection('trialSection')">
-                <h2>5. Sınaq</h2>
-                <p>Ümumi səviyyə yoxlama imtahanları</p>
+        <!-- ANA SƏHİFƏ: 5 HİSSƏ -->
+        <div id="home-view" class="section-view active">
+            <h2>Hissələr</h2>
+            <div class="grid-menu">
+                <div class="menu-card" onclick="openSection('math-view')">1. Riyaziyyat</div>
+                <div class="menu-card" onclick="openSection('verbal-view')">2. Verbal</div>
+                <div class="menu-card" onclick="openSection('exams-view')">3. İmtahan testləri</div>
+                <div class="menu-card" onclick="openSection('homework-view')">4. Ev tapşırığı</div>
+                <div class="menu-card" onclick="openSection('mock-view')">5. Sınaq</div>
             </div>
         </div>
 
         <!-- 1. RİYAZİYYAT BÖLMƏSİ -->
-        <div id="mathSection" class="section-view">
+        <div id="math-view" class="section-view">
             <button class="back-btn" onclick="goHome()">← Geri</button>
-            <h2>Riyaziyyat Bölməsi</h2>
-            <div class="sub-menu-list">
-                <button class="btn-item" onclick="openMathCategory('test')">Testlər (50 Sual və İzahlı)</button>
-                <button class="btn-item" onclick="openMathCategory('rule')">Qaydalar (Geniş və İzahlı)</button>
+            <h2>Riyaziyyat - Dərslər</h2>
+            <div class="grid-menu">
+                <div class="menu-card" onclick="openMathSub('Natural ədədlər')">Natural ədədlər</div>
+                <div class="menu-card" onclick="openMathSub('Tam ədədlər')">Tam ədədlər</div>
+                <div class="menu-card" onclick="openMathSub('Rasional ədədlər')">Rasional ədədlər</div>
+                <div class="menu-card" onclick="openMathSub('İrrasional ədədlər')">İrrasional ədədlər</div>
+                <div class="menu-card" onclick="openMathSub('Həqiqi ədədlər')">Həqiqi ədədlər</div>
             </div>
         </div>
 
-        <!-- Riyaziyyat: Dərs seçimi (Testlər və ya Qaydalar üçün) -->
-        <div id="mathLessonsView" class="section-view">
-            <button class="back-btn" onclick="openSection('mathSection')">← Geri</button>
-            <h2 id="mathViewTitle">Mövzu Seçimi</h2>
-            <div class="lesson-list">
-                <button class="btn-item" onclick="selectMathLesson('Natural ədədlər')">1. Natural ədədlər</button>
-                <button class="btn-item" onclick="selectMathLesson('Tam ədədlər')">2. Tam ədədlər</button>
-                <button class="btn-item" onclick="selectMathLesson('Rasional ədədlər')">3. Rasional ədədlər</button>
-                <button class="btn-item" onclick="selectMathLesson('İrrasional ədədlər')">4. İrrasional ədədlər</button>
-                <button class="btn-item" onclick="selectMathLesson('Həqiqi ədədlər')">5. Həqiqi ədədlər</button>
+        <!-- RİYAZİYYAT ALT BÖLMƏSİ (Testlər və Qaydalar seçimi) -->
+        <div id="math-sub-view" class="section-view">
+            <button class="back-btn" onclick="openSection('math-view')">← Geri</button>
+            <h2 id="math-sub-title">Dərs</h2>
+            <div class="grid-menu">
+                <div class="menu-card" onclick="openMathContent('tests')">Testlər (50 Sual)</div>
+                <div class="menu-card" onclick="openMathContent('rules')">Qaydalar</div>
             </div>
         </div>
 
-        <!-- Riyaziyyat Qaydalar Ekranı -->
-        <div id="mathRuleDetail" class="section-view">
-            <button class="back-btn" onclick="openMathCategory('rule')">← Dərslərə qayıt</button>
-            <h2 id="ruleTitle">Qayda</h2>
-            <div id="ruleContent" class="info-box" style="margin-top:20px; line-height: 1.6;"></div>
+        <!-- QAYDALAR BÖLMƏSİ -->
+        <div id="rules-view" class="section-view">
+            <button class="back-btn" onclick="openMathSub(currentLesson)">← Geri</button>
+            <h2 id="rules-title">Qaydalar</h2>
+            <div id="rules-content" style="line-height: 1.6; font-size: 1rem;"></div>
         </div>
 
-        <!-- Riyaziyyat Testlər Ekranı -->
-        <div id="mathTestDetail" class="section-view">
-            <button class="back-btn" onclick="openMathCategory('test')">← Dərslərə qayıt</button>
-            <h2 id="testTitle">Testlər (50 Sual)</h2>
-            <div id="testContainer" style="margin-top: 15px;"></div>
+        <!-- TESTLƏR BÖLMƏSİ (50 sual nümunəsi) -->
+        <div id="tests-view" class="section-view">
+            <button class="back-btn" onclick="openMathSub(currentLesson)">← Geri</button>
+            <h2 id="tests-title">Testlər</h2>
+            <div id="tests-container"></div>
+            <button class="submit-btn" onclick="checkTests()">Cavabları Yoxla</button>
+            <div id="tests-result-summary" style="margin-top: 15px; font-weight: bold; text-align: center;"></div>
         </div>
-
 
         <!-- 2. VERBAL BÖLMƏSİ -->
-        <div id="verbalSection" class="section-view">
+        <div id="verbal-view" class="section-view">
             <button class="back-btn" onclick="goHome()">← Geri</button>
-            <h2>Verbal Bölməsi</h2>
-            <div class="lesson-list">
-                <button class="btn-item" onclick="showEmptyMessage('Məntiq')">Məntiq</button>
-                <button class="btn-item" onclick="showEmptyMessage('Mətn')">Mətn</button>
-                <button class="btn-item" onclick="showEmptyMessage('Analogiyalar')">Analogiyalar</button>
+            <h2>Verbal</h2>
+            <div class="grid-menu">
+                <div class="menu-card" onclick="openInfoBox('Verbal: Məntiq')">Məntiq</div>
+                <div class="menu-card" onclick="openInfoBox('Verbal: Mətn')">Mətn</div>
+                <div class="menu-card" onclick="openInfoBox('Verbal: Analogiyalar')">Analogiyalar</div>
             </div>
-            <div id="verbalMessage" class="info-box" style="display:none; margin-top:15px;">Hələ suallar əlavə olunmayıb.</div>
         </div>
 
+        <div id="info-box-view" class="section-view">
+            <button class="back-btn" onclick="openSection('verbal-view')">← Geri</button>
+            <h2 id="info-title">Verbal</h2>
+            <div class="info-box">Hələ suallar əlavə olunmayıb</div>
+        </div>
 
         <!-- 3. İMTAHAN TESTLƏRİ BÖLMƏSİ -->
-        <div id="examSection" class="section-view">
+        <div id="exams-view" class="section-view">
             <button class="back-btn" onclick="goHome()">← Geri</button>
             <h2>İmtahan Testləri (2011 - 2026)</h2>
-            <div class="lesson-list" id="examYearsList">
-                <!-- Javascript ilə doldurulacaq -->
-            </div>
-            <div id="examMessage" class="info-box" style="display:none; margin-top:15px;">Hələ suallar əlavə olunmayıb.</div>
+            <div class="grid-menu" id="exams-list"></div>
         </div>
 
+        <div id="exam-empty-view" class="section-view">
+            <button class="back-btn" onclick="openSection('exams-view')">← Geri</button>
+            <h2 id="exam-year-title">İmtahan</h2>
+            <div class="info-box">Hələ suallar əlavə olunmayıb</div>
+        </div>
 
         <!-- 4. EV TAPŞIRIĞI BÖLMƏSİ -->
-        <div id="homeworkSection" class="section-view">
+        <div id="homework-view" class="section-view">
             <button class="back-btn" onclick="goHome()">← Geri</button>
-            <h2>Ev Tapşırığı - Dərs Seçin</h2>
-            <div class="lesson-list">
-                <button class="btn-item" onclick="startHomework('Natural ədədlər')">1. Natural ədədlər (20 Sual)</button>
-                <button class="btn-item" onclick="startHomework('Tam ədədlər')">2. Tam ədədlər (20 Sual)</button>
-                <button class="btn-item" onclick="startHomework('Rasional ədədlər')">3. Rasional ədədlər (20 Sual)</button>
-                <button class="btn-item" onclick="startHomework('İrrasional ədədlər')">4. İrrasional ədədlər (20 Sual)</button>
-                <button class="btn-item" onclick="startHomework('Həqiqi ədədlər')">5. Həqiqi ədədlər (20 Sual)</button>
-            </div>
+            <h2>Ev Tapşırığı (20 Sual)</h2>
+            <div id="homework-container"></div>
+            <button class="submit-btn" onclick="checkHomework()">Cavab Göndər</button>
+            <div id="homework-result"></div>
         </div>
-
-        <div id="homeworkQuestionView" class="section-view">
-            <button class="back-btn" onclick="openSection('homeworkSection')">← Dərslərə qayıt</button>
-            <h2 id="hwLessonTitle">Ev Tapşırığı</h2>
-            <div id="hwContainer" style="margin-top: 15px;"></div>
-        </div>
-
 
         <!-- 5. SINAQ BÖLMƏSİ -->
-        <div id="trialSection" class="section-view">
+        <div id="mock-view" class="section-view">
             <button class="back-btn" onclick="goHome()">← Geri</button>
-            <h2>Sınaq Bölməsi</h2>
-            <div class="lesson-list">
-                <button class="btn-item" onclick="startTrial(1)">Sınaq 1 (Ən çətin suallar - 5 dərsdən)</button>
-                <button class="btn-item" onclick="startTrial(2)">Sınaq 2</button>
-                <button class="btn-item" onclick="startTrial(3)">Sınaq 3</button>
+            <h2>Sınaqlar</h2>
+            <div class="grid-menu">
+                <div class="menu-card" onclick="startMockExam()">Sınaq 1 (Çətin suallar)</div>
+                <div class="menu-card" onclick="openMockEmpty(2)">Sınaq 2</div>
+                <div class="menu-card" onclick="openMockEmpty(3)">Sınaq 3</div>
             </div>
-            <div id="trialMessage" class="info-box" style="display:none; margin-top:15px;"></div>
         </div>
 
-        <div id="trialActiveView" class="section-view">
-            <button class="back-btn" onclick="openSection('trialSection')">← Sınaqlara qayıt</button>
-            <h2>Sınaq 1</h2>
-            <div id="trialContainer" style="margin-top: 15px;"></div>
+        <div id="mock-empty-view" class="section-view">
+            <button class="back-btn" onclick="openSection('mock-view')">← Geri</button>
+            <h2 id="mock-empty-title">Sınaq</h2>
+            <div class="info-box">Hələ sınaq əlavə edilməyib</div>
         </div>
 
-    </div>
-
-    <script>
-        // Yan menyunun açılıb-bağlanması
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-
-        // Bütün bölmələri gizlədib əsas səhifəni göstərmək
-        function goHome() {
-            const views = document.querySelectorAll('.section-view');
-            views.forEach(v => v.classList.remove('active'));
-            document.getElementById('homeView').style.display = 'grid';
-        }
-
-        // Müəyyən bölməni açmaq
-        function openSection(sectionId) {
-            document.getElementById('homeView').style.display = 'none';
-            const views = document.querySelectorAll('.section-view');
-            views.forEach(v => v.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
-
-        // Riyaziyyat alt menyu idarəetməsi (Test və ya Qayda)
-        let currentMathMode = '';
-        function openMathCategory(mode) {
-            currentMathMode = mode;
-            document.getElementById('mathSection').classList.remove('active');
-            document.getElementById('mathLessonsView').classList.add('active');
-            document.getElementById('mathViewTitle').innerText = mode === 'test' ? 'Testlər üçün dərs seçin' : 'Qaydalar üçün dərs seçin';
-        }
-
-        // Riyaziyyat dərsi seçildikdə
-        function selectMathLesson(lessonName) {
-            document.getElementById('mathLessonsView').classList.remove('active');
-            if (currentMathMode === 'rule') {
-                document.getElementById('mathRuleDetail').classList.add('active');
-                document.getElementById('ruleTitle').innerText = lessonName + ' - Qayda';
-                document.getElementById('ruleContent').innerHTML = getRuleContent(lessonName);
-            } else {
-                document.getElementById('mathTestDetail').classList.add('active');
-                document.getElementById('testTitle').innerText = lessonName + ' - Testlər (50 sual)';
-                loadTests(lessonName);
-            }
-        }
-
-        // Qaydaların məzmunu
-        function getRuleContent(lesson) {
-            const rules = {
-                'Natural ədədlər': '<b>Natural ədədlər</b> saymaq üçün istifadə olunan ədədlərdir (1, 2, 3, ...). 0 natural ədəd deyil. Sadə və mürəkkəb ədədlər, bölünmə əlamətləri bu bölmənin əsasını təşkil edir.',
-                'Tam ədədlər': '<b>Tam ədədlər</b> natural ədədlər, onların əksləri olan mənfi ədədlər və sıfırın birləşməsindən əmələ gəlir (..., -2, -1, 0, 1, 2, ...).',
-                'Rasional ədədlər': '<b>Rasional ədədlər</b> m/n şəklində göstərilə bilən ədədlərdir (burada m tam, n natural ədəddir). Sonlu və dövri onluq kəsrlər də rasionaldır.',
-                'İrrasional ədədlər': '<b>İrrasional ədədlər</b> sonsuz qeyri-dövri onluq kəsrlərdir. Məsələn: Pi, kvadrat kök altından çıxmayan ədədlər (kök 2, kök 3).',
-                'Həqiqi ədədlər': '<b>Həqiqi ədədlər</b> çoxluğu rasional və irrasional ədədlərin birləşməsindən ibarətdir. Ədəd oxundakı bütün nöqtələrə uyğun gəlir.'
-            };
-            return rules[lesson] || 'Qayda hələ əlavə olunmayıb.';
-        }
-
-        // 50 Testin dinamik yaradılması və yoxlanılması
-        function loadTests(lesson) {
-            let container = document.getElementById('testContainer');
-            let html = '';
-            for (let i = 1; i <= 50; i++) {
-                html += `
-                    <div class="question-card" id="test-q-${i}">
-                        <p><b>Sual ${i}:</b> ${lesson} mövzusuna aid nümunə sual nömrə ${i}?</p>
-                        <ul class="options-list">
-                            <li onclick="selectOption(this, ${i})">A) Cavab variantı 1</li>
-                            <li onclick="selectOption(this, ${i})">B) Cavab variantı 2</li>
-                            <li onclick="selectOption(this, ${i})">C) Cavab variantı 3</li>
-                            <li onclick="selectOption(this, ${i})">D) Cavab variantı 4</li>
-                        </ul>
-                        <button class="submit-btn" onclick="checkTestAnswer(${i})">Cavabı Göndər</button>
-                        <div class="result-feedback" id="test-feedback-${i}"></div>
-                    </div>
-                    <hr style="margin:20px 0; border:0; border-top:1px solid #ddd;">
-                `;
-            }
-            container.innerHTML = html;
-        }
-
-        function selectOption(liElement, qId) {
-            const parent = liElement.parentNode;
-            Array.from(parent.children).forEach(li => li.classList.remove('selected'));
-            liElement.classList.add('selected');
-        }
-
-        function checkTestAnswer(qId) {
-            const qCard = document.getElementById(`test-q-${qId}`);
-            const selected = qCard.querySelector('.selected');
-            const feedback = document.getElementById(`test-feedback-${qId}`);
-            
-            if (!selected) {
-                feedback.style.color = 'orange';
-                feedback.innerText = 'Zəhmət olmasa bir variant seçin!';
-                return;
-            }
-
-            // Təlimat üçün şərti olaraq 1-ci variantı düz qəbul edirik
-            let isCorrect = selected.innerText.startsWith('A)');
-            if (isCorrect) {
-                feedback.style.color = 'var(--success)';
-                feedback.innerText = '✓ Düzdür! İzah: Bu sualın həlli əsas düstura əsaslanır.';
-            } else {
-                feedback.style.color = 'var(--danger)';
-                feedback.innerText = '✕ Səhvdir. Düzgün cavab: A variantı. İzah: Qaydaya görə hesablanmalıdır.';
-            }
-        }
-
-        // Verbal bölməsi mesajı
-        function showEmptyMessage(type) {
-            let msg = documen
+        <!-- SINAQ 1 İCRA BÖLMƏSİ -->
+        <div id="mock-exam-view" class="section-view">
+            <button class="back-btn" onclick="openSection('mock-view')">← Geri</button>
+            <h2>S
