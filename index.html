@@ -3,395 +3,424 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1559c9">
-<title>ZQİ | Zogadiunarebi Qəbul İmtahanı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZQİ - Qəbul İmtahanı</title>
 <style>
 *{box-sizing:border-box}
-:root{
- --blue:#1765d1;--dark:#103e85;--bg:#f2f6fc;
- --text:#18263d;--white:#fff;--border:#e0e8f3;
-}
-body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:var(--text)}
+body{margin:0;background:#f2f6fc;color:#192b45;font-family:Arial,sans-serif}
+header{background:linear-gradient(120deg,#10449b,#287cf0);color:white;padding:17px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.logo{font-size:26px;font-weight:900;letter-spacing:2px}
 button{cursor:pointer;font-family:inherit}
-header{
- background:linear-gradient(120deg,#103b83,#2479ed);
- color:white;padding:17px 5%;display:flex;
- justify-content:space-between;align-items:center;
- position:sticky;top:0;z-index:10;
- box-shadow:0 3px 15px #0002
-}
-.logo{font-size:27px;font-weight:900;letter-spacing:2px}
-.menu-btn{border:0;background:none;color:white;font-size:30px}
-#menu{
- display:none;position:fixed;right:12px;top:68px;
- background:white;width:260px;padding:17px;
- border-radius:15px;z-index:20;box-shadow:0 8px 30px #0003
-}
+.menuBtn{background:none;border:0;color:white;font-size:30px}
+#menu{display:none;position:fixed;right:10px;top:65px;background:white;padding:15px;width:250px;z-index:10;border-radius:12px;box-shadow:0 5px 20px #0003}
 #menu.open{display:block}
-#menu a{display:block;text-decoration:none;color:#18345d;padding:13px;border-bottom:1px solid #eee}
-main{max-width:1050px;margin:auto;padding:22px 15px 55px}
+#menu button{display:block;width:100%;padding:13px;background:white;border:0;text-align:left;border-bottom:1px solid #eee}
+main{max-width:950px;margin:auto;padding:20px 13px 50px}
 .page{display:none}.page.active{display:block}
-.hero{
- padding:30px 24px;border-radius:20px;color:white;
- background:linear-gradient(120deg,#1050aa,#398af3);
- margin-bottom:25px
-}
-.hero h1{font-size:27px;margin:0 0 10px}
-.hero p{line-height:1.6;color:#eaf2ff}
-h2.section-title{font-size:23px;margin:22px 0 17px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.card{
- padding:21px;border-radius:17px;background:white;
- border:1px solid var(--border);
- box-shadow:0 5px 17px #153d7010;
- transition:.2s
-}
-.card:hover{transform:translateY(-3px)}
-.card h3{margin:9px 0;font-size:19px}
-.card p{font-size:14px;line-height:1.5;color:#64748b}
-.icon{font-size:32px}
-.primary,.secondary,.back,.answer-btn{
- border:0;padding:12px 17px;border-radius:10px;font-weight:bold
-}
-.primary,.answer-btn{background:#1765d1;color:white}
-.primary:hover,.answer-btn:hover{background:#10458e}
-.secondary{background:#e9f1ff;color:#1456ac}
-.back{background:#e2ebfa;color:#214b80;margin-bottom:15px}
-.blue{border-top:5px solid #2675ed}
-.purple{border-top:5px solid #8855dd}
-.green{border-top:5px solid #16a36b}
-.orange{border-top:5px solid #f29a32}
-.pink{border-top:5px solid #e45c9d}
-.cyan{border-top:5px solid #15a7bd}
-.red{border-top:5px solid #df5555}
-.gold{border-top:5px solid #d5a326}
-.lesson-card{border-left:5px solid #2675ed}
-.rule-card{border-left:5px solid #8c58df}
-.test-card{border-left:5px solid #13a36b}
-.rule{
- background:white;padding:20px;border-radius:14px;
- margin-bottom:13px;border-left:5px solid #8959df;
- line-height:1.75;box-shadow:0 3px 12px #00008
-}
-.rule h3{color:#7040ba;margin-top:0}
-.note{background:#f0eaff;padding:12px;border-radius:9px;margin-top:10px}
-.question-box{
- background:white;padding:23px;border-radius:17px;
- margin-top:15px;border:1px solid var(--border)
-}
-.question-number{color:#1765d1;font-weight:bold}
-.question-text{font-size:19px;line-height:1.6;margin:20px 0}
+.hero{background:linear-gradient(120deg,#104ca8,#398afa);color:white;padding:28px;border-radius:18px;margin-bottom:25px}
+.hero h1{font-size:25px}.hero p{line-height:1.6}
+h2{font-size:23px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{background:white;padding:20px;border-radius:15px;border:1px solid #e0e9f5;border-top:5px solid var(--c);box-shadow:0 4px 12px #00008}
+.card .ico{font-size:30px}
+.card h3{margin:10px 0}
+.card p{font-size:14px;color:#718096;line-height:1.5}
+.primary,.back,.secondary{border:0;border-radius:9px;padding:12px 16px;font-weight:bold}
+.primary{background:#1765d1;color:white}
+.back{background:#e2edff;color:#164c99;margin-bottom:15px}
+.secondary{background:#eee8ff;color:#6942b5}
+.blue{--c:#2879ed}.purple{--c:#9158dc}.green{--c:#16a36b}.orange{--c:#ed9635}.pink{--c:#dd559b}.cyan{--c:#14a4b8}
+.rule{background:white;padding:19px;border-radius:12px;margin:12px 0;border-left:5px solid #8958d8;line-height:1.7}
+.rule h3{color:#7040b9;margin-top:0}
+.note{background:#f0eaff;padding:12px;border-radius:8px}
+.question{background:white;padding:22px;border-radius:15px;margin-top:15px;border:1px solid #e0e9f5}
+.qtext{font-size:19px;line-height:1.6;margin:20px 0}
 .options{display:grid;gap:10px}
-.option{
- text-align:left;padding:14px;border:1px solid #dce6f3;
- border-radius:10px;background:#f8faff;color:#192c47;font-size:15px
-}
-.option.selected{border:2px solid #1765d1;background:#eaf2ff}
-.option.correct{border:2px solid #16a36b;background:#e8fff2}
-.option.wrong{border:2px solid #df4141;background:#fff0f0}
-.progress{height:9px;background:#e5edf8;border-radius:10px;margin:15px 0;overflow:hidden}
+.option{background:#f7faff;border:1px solid #dbe6f5;padding:14px;text-align:left;border-radius:9px;color:#192b45}
+.option.selected{background:#e4efff;border:2px solid #1765d1}
+.option.correct{background:#e4fff0;border:2px solid #16a36b}
+.option.wrong{background:#fff0f0;border:2px solid #dc4545}
+.progress{height:8px;background:#e5edf8;border-radius:9px;margin:15px 0}
 .progress div{height:100%;background:#1765d1}
-.feedback{display:none;padding:14px;border-radius:10px;margin:15px 0;line-height:1.7}
-.feedback.good{display:block;background:#e7fff0;color:#087343}
-.feedback.bad{display:block;background:#fff0f0;color:#a52a2a}
-.result{background:white;padding:26px;border-radius:17px;text-align:center;margin-top:18px}
-.score{font-size:45px;font-weight:900;color:#1765d1}
-.code-box{background:white;padding:25px;border-radius:17px;max-width:430px;margin:25px auto}
-.code-box input{width:100%;padding:14px;border:1px solid #ccd9e9;border-radius:9px;font-size:18px;margin:15px 0}
-.small{font-size:13px;color:#718096}
-.contact-card{background:white;padding:20px;border-radius:14px;margin-bottom:12px}
-.contact-card a{color:#1765d1;word-break:break-word}
-footer{background:#103b79;color:white;text-align:center;padding:25px 12px;line-height:1.8}
-@media(max-width:500px){
- main{padding:15px 11px 40px}
- .hero h1{font-size:23px}
- .card{padding:18px}
-}
+.feedback{display:none;padding:13px;margin-top:15px;border-radius:9px;line-height:1.6}
+.good{background:#e5fff0;color:#087343}
+.bad{background:#fff0f0;color:#a52a2a}
+.result{background:white;padding:25px;border-radius:15px;text-align:center;margin-top:15px}
+.score{font-size:44px;color:#1765d1;font-weight:900}
+input{width:100%;padding:14px;border:1px solid #ccd9e9;border-radius:9px;font-size:18px;margin:12px 0}
+footer{background:#103b79;color:white;text-align:center;padding:25px;line-height:1.8}
+a{color:#1765d1;word-break:break-word}
 </style>
 </head>
 <body>
 
 <header>
- <div class="logo">ZQİ <span style="color:#b9d8ff">●</span></div>
- <button class="menu-btn" onclick="toggleMenu()">☰</button>
+ <div class="logo">ZQİ ●</div>
+ <button class="menuBtn" data-action="menu">☰</button>
 </header>
 
 <div id="menu">
- <h3 style="color:#1765d1">ZQİ MENYU</h3>
- <a href="#" onclick="showPage('home')">Ana səhifə</a>
- <a href="#" onclick="showPage('contact')">Əlaqə</a>
- <a href="tel:+995555936547">Telefon</a>
- <a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">E-poçt</a>
+ <button data-action="home">🏠 Ana səhifə</button>
+ <button data-action="contact">📞 Əlaqə</button>
 </div>
 
 <main>
-
 <section id="home" class="page active">
  <div class="hero">
   <h1>Zogadiunarebi Qəbul İmtahanı</h1>
-  <p>Biliklərini artır, testlərini həll et və qəbul imtahanına hazırlaş. Uğura gedən yol ZQİ-dən keçir!</p>
+  <p>Öyrən, məşq et və imtahana hazırlaş. Uğura gedən yol ZQİ-dən keçir!</p>
  </div>
- <h2 class="section-title">Tədris bölmələri</h2>
+ <h2>Tədris bölmələri</h2>
  <div class="grid">
-  <div class="card blue"><div class="icon">📐</div><h3>Riyaziyyat</h3><p>Dərslər, qaydalar və testlər.</p><button class="primary" onclick="openMath()">Daxil ol →</button></div>
-  <div class="card purple"><div class="icon">🧠</div><h3>Verbal</h3><p>Məntiq, mətn və analogiyalar.</p><button class="primary" onclick="showPage('verbal')">Daxil ol →</button></div>
-  <div class="card green"><div class="icon">📝</div><h3>İmtahan testləri</h3><p>2011–2026-cı illər.</p><button class="primary" onclick="openExams()">Daxil ol →</button></div>
-  <div class="card orange"><div class="icon">📚</div><h3>Ev tapşırığı</h3><p>Hər dərsə aid 20 sual.</p><button class="primary" onclick="openHomework()">Daxil ol →</button></div>
-  <div class="card pink"><div class="icon">🏆</div><h3>Sınaq</h3><p>40 çətin sualdan ibarət sınaq.</p><button class="primary" onclick="showPage('trials')">Daxil ol →</button></div>
+  <div class="card blue"><div class="ico">📐</div><h3>Riyaziyyat</h3><p>Dərslər, testlər və qaydalar.</p><button class="primary" data-action="math">Daxil ol →</button></div>
+  <div class="card purple"><div class="ico">🧠</div><h3>Verbal</h3><p>Məntiq, mətn, analogiyalar.</p><button class="primary" data-action="verbal">Daxil ol →</button></div>
+  <div class="card green"><div class="ico">📝</div><h3>İmtahan testləri</h3><p>2011–2026-cı illər.</p><button class="primary" data-action="exams">Daxil ol →</button></div>
+  <div class="card orange"><div class="ico">📚</div><h3>Ev tapşırığı</h3><p>Hər dərsə 20 sual.</p><button class="primary" data-action="homework">Daxil ol →</button></div>
+  <div class="card pink"><div class="ico">🏆</div><h3>Sınaq</h3><p>40 çətin sual.</p><button class="primary" data-action="trials">Daxil ol →</button></div>
  </div>
 </section>
 
 <section id="math" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">📐 Riyaziyyat dərsləri</h2>
+ <button class="back" data-action="home">← Geri</button>
+ <h2>📐 Riyaziyyat dərsləri</h2>
  <div id="lessonList" class="grid"></div>
 </section>
 
 <section id="lessonMenu" class="page">
- <button class="back" onclick="showPage('math')">← Geri</button>
- <h2 id="lessonHeading" class="section-title"></h2>
+ <button class="back" data-action="math">← Geri</button>
+ <h2 id="lessonTitle"></h2>
  <div class="grid">
-  <div class="card test-card"><div class="icon">📝</div><h3>Testlər</h3><p>50 sual, düzgün və səhv cavabların yoxlanılması və izahlar.</p><button class="primary" onclick="startLessonTest()">Testlərə başla →</button></div>
-  <div class="card rule-card"><div class="icon">📖</div><h3>Qaydalar</h3><p>Dərsin bütün əsas qaydaları və nümunələri.</p><button class="primary" style="background:#8050c7" onclick="openRules()">Qaydaları oxu →</button></div>
+  <div class="card green"><div class="ico">📝</div><h3>Testlər</h3><p>50 sual, cavab və izah.</p><button class="primary" data-action="lessonTest">Testlərə başla</button></div>
+  <div class="card purple"><div class="ico">📖</div><h3>Qaydalar</h3><p>Geniş və izahlı dərs qaydaları.</p><button class="primary" data-action="rules">Qaydaları oxu</button></div>
  </div>
 </section>
 
 <section id="rules" class="page">
- <button class="back" onclick="showPage('lessonMenu')">← Geri</button>
- <h2 class="section-title">📖 Qaydalar</h2>
- <div id="rulesContent"></div>
-</section>
-
-<section id="quiz" class="page">
- <button class="back" onclick="leaveQuiz()">← Geri</button>
- <h2 id="quizHeading" class="section-title"></h2>
- <div id="quizArea"></div>
+ <button class="back" data-action="lessonMenu">← Geri</button>
+ <h2>📖 Qaydalar</h2>
+ <div id="rulesList"></div>
 </section>
 
 <section id="verbal" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">🧠 Verbal</h2>
+ <button class="back" data-action="home">← Geri</button>
+ <h2>🧠 Verbal</h2>
  <div class="grid">
-  <div class="card purple"><div class="icon">🔍</div><h3>Məntiq</h3><button class="primary" onclick="emptyMessage()">Daxil ol →</button></div>
-  <div class="card cyan"><div class="icon">📄</div><h3>Mətn</h3><button class="primary" onclick="emptyMessage()">Daxil ol →</button></div>
-  <div class="card pink"><div class="icon">🔗</div><h3>Analogiyalar</h3><button class="primary" onclick="emptyMessage()">Daxil ol →</button></div>
+  <div class="card purple"><h3>Məntiq</h3><button class="primary" data-action="empty">Daxil ol</button></div>
+  <div class="card cyan"><h3>Mətn</h3><button class="primary" data-action="empty">Daxil ol</button></div>
+  <div class="card pink"><h3>Analogiyalar</h3><button class="primary" data-action="empty">Daxil ol</button></div>
  </div>
 </section>
 
 <section id="exams" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">📝 İmtahan testləri</h2>
- <div id="yearList" class="grid"></div>
+ <button class="back" data-action="home">← Geri</button>
+ <h2>📝 İmtahan testləri</h2>
+ <div id="years" class="grid"></div>
 </section>
 
 <section id="homework" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">📚 Ev tapşırığı</h2>
- <p>Hər dərs üzrə 20 sualı bir-bir həll et.</p>
+ <button class="back" data-action="home">← Geri</button>
+ <h2>📚 Ev tapşırığı</h2>
  <div id="homeworkList" class="grid"></div>
 </section>
 
 <section id="trials" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">🏆 Sınaq imtahanları</h2>
+ <button class="back" data-action="home">← Geri</button>
+ <h2>🏆 Sınaqlar</h2>
  <div class="grid">
-  <div class="card gold"><div class="icon">🥇</div><h3>1-ci sınaq</h3><p>5 dərsdən 40 çətin sual. İzah göstərilmir.</p><button class="primary" onclick="showCode()">Sınağa daxil ol →</button></div>
-  <div class="card purple"><div class="icon">🥈</div><h3>2-ci sınaq</h3><p>Hələ sınaq əlavə edilməyib.</p><button class="secondary" onclick="emptyMessage()">Bax</button></div>
-  <div class="card cyan"><div class="icon">🥉</div><h3>3-cü sınaq</h3><p>Hələ sınaq əlavə edilməyib.</p><button class="secondary" onclick="emptyMessage()">Bax</button></div>
+  <div class="card orange"><h3>1-ci sınaq</h3><p>40 çətin sual. Beş dərsdən.</p><button class="primary" data-action="code">Sınağa daxil ol</button></div>
+  <div class="card purple"><h3>2-ci sınaq</h3><p>Hələ sınaq əlavə edilməyib.</p><button class="secondary" data-action="empty">Bax</button></div>
+  <div class="card cyan"><h3>3-cü sınaq</h3><p>Hələ sınaq əlavə edilməyib.</p><button class="secondary" data-action="empty">Bax</button></div>
  </div>
 </section>
 
 <section id="codePage" class="page">
- <button class="back" onclick="showPage('trials')">← Geri</button>
- <div class="code-box">
-  <div class="icon">🔐</div>
-  <h2>Sınağa giriş</h2>
-  <p>Sınağa daxil olmaq üçün giriş kodunu yazın.</p>
-  <input id="trialCode" type="password" inputmode="numeric" placeholder="Giriş kodu">
-  <button class="primary" style="width:100%" onclick="checkCode()">Daxil ol →</button>
-  <p id="codeError" style="color:#d33"></p>
+ <button class="back" data-action="trials">← Geri</button>
+ <div class="card blue" style="max-width:430px;margin:20px auto">
+  <h2>🔐 Sınağa giriş</h2>
+  <p>Giriş kodunu daxil edin.</p>
+  <input id="codeInput" type="password" inputmode="numeric" placeholder="Giriş kodu">
+  <button class="primary" style="width:100%" data-action="checkCode">Daxil ol →</button>
+  <p id="codeError" style="color:red"></p>
  </div>
 </section>
 
-<section id="contact" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h2 class="section-title">📞 Əlaqə</h2>
- <div class="contact-card"><h3>Telefon</h3><a href="tel:+995555936547">+995 555 93 65 47</a></div>
- <div class="contact-card"><h3>E-poçt</h3><a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">zogadiunarebiqebulimtahanı@gmail.com</a></div>
+<section id="quiz" class="page">
+ <button class="back" data-action="leaveQuiz">← Geri</button>
+ <h2 id="quizTitle"></h2>
+ <div id="quizArea"></div>
 </section>
 
+<section id="contact" class="page">
+ <button class="back" data-action="home">← Geri</button>
+ <h2>📞 Əlaqə</h2>
+ <div class="card blue"><h3>Telefon</h3><a href="tel:+995555936547">+995 555 93 65 47</a></div>
+ <br>
+ <div class="card purple"><h3>E-poçt</h3><a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">zogadiunarebiqebulimtahanı@gmail.com</a></div>
+</section>
 </main>
 
 <footer>
- <strong>ZQİ – Zogadiunarebi Qəbul İmtahanı</strong><br>
- Bilik gələcəyin açarıdır.<br>
- © 2026 ZQİ. Bütün hüquqlar qorunur.
+<strong>ZQİ – Zogadiunarebi Qəbul İmtahanı</strong><br>
+Bilik gələcəyin açarıdır.<br>© 2026 ZQİ
 </footer>
 
 <script>
+"use strict";
+
 const lessons=[
 "Natural ədədlər","Tam ədədlər","Rasional ədədlər",
 "İrrasional ədədlər","Həqiqi ədədlər"
 ];
 
-let currentLesson=0,currentQuestions=[],currentIndex=0;
-let selectedAnswer=null,correctCount=0,wrongCount=0;
-let quizMode="lesson",quizAnswered=false;
+let lesson=0,questions=[],index=0,selected=-1;
+let correct=0,wrong=0,mode="lesson";
 
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+function page(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
  document.getElementById(id).classList.add("active");
  document.getElementById("menu").classList.remove("open");
  window.scrollTo(0,0);
 }
-function toggleMenu(){document.getElementById("menu").classList.toggle("open")}
-function emptyMessage(){alert("Hələ suallar əlavə edilməyib.")}
-function openMath(){
- document.getElementById("lessonList").innerHTML=lessons.map((l,i)=>`
- <div class="card lesson-card"><div class="icon">📘</div><h3>${i+1}. ${l}</h3>
- <p>50 test və geniş izahlı qaydalar.</p>
- <button class="primary" onclick="selectLesson(${i})">Dərsə daxil ol →</button></div>`).join("");
- showPage("math");
-}
-function selectLesson(i){
- currentLesson=i;
- document.getElementById("lessonHeading").textContent=lessons[i];
- showPage("lessonMenu");
-}
-function openExams(){
- document.getElementById("yearList").innerHTML=Array.from({length:16},(_,i)=>2011+i).map(y=>`
- <div class="card green"><div class="icon">📄</div><h3>${y}-ci il</h3>
- <p>Hələ suallar əlavə edilməyib.</p>
- <button class="secondary" onclick="emptyMessage()">Daxil ol</button></div>`).join("");
- showPage("exams");
-}
-function openHomework(){
- document.getElementById("homeworkList").innerHTML=lessons.map((l,i)=>`
- <div class="card orange"><h3>${l}</h3><p>20 ev tapşırığı sualı.</p>
- <button class="primary" onclick="startHomework(${i})">Başla →</button></div>`).join("");
- showPage("homework");
-}
 
-const ruleData=[
-[
-["Natural ədədlər","Natural ədədlər saymaq üçün istifadə olunan ədədlərdir. N={1,2,3,4,...}.","Məsələn: 5 alma, 10 kitab. Bu kursda 0 natural ədədə daxil edilmir."],
-["Cüt və tək ədədlər","2-yə qalıqsız bölünənlər cüt, qalıq 1 verənlər tək ədədlərdir.","Cüt: 2,4,6,8. Tək: 1,3,5,7."],
-["Sadə ədədlər","Yalnız iki natural böləni olan ədədlər sadə adlanır.","2,3,5,7,11 sadə ədədlərdir. 1 sadə deyil."],
-["Mürəkkəb ədədlər","İkidən çox natural böləni olan ədədlər mürəkkəbdir.","12-nin bölənləri 1,2,3,4,6,12-dir."],
-["Bölünmə əlamətləri","2-yə: son rəqəm cütdür. 3-ə: rəqəmlər cəmi 3-ə bölünür. 5-ə: son rəqəm 0 və ya 5-dir. 10-a: son rəqəm 0-dır.","135 ədədi 3-ə və 5-ə bölünür."],
-["ƏBOB","Ən böyük ortaq bölənə ƏBOB deyilir.","ƏBOB(12,18)=6."],
-["ƏKOB","Ən kiçik ortaq bölünənə ƏKOB deyilir.","ƏKOB(4,6)=12."],
-["Əməliyyat ardıcıllığı","Əvvəl mötərizə, sonra qüvvət, vurma və bölmə, sonda toplama və çıxma aparılır.","2+3×4=14."],
-["Qüvvət","Ədədin özünə bir neçə dəfə vurulması qüvvət adlanır.","3²=3×3=9."],
-["Natural ədədlərin müqayisəsi","Ədəd oxunda sağda yerləşən natural ədəd daha böyükdür.","9>5."]
-],
-[
-["Tam ədədlər","Mənfi ədədlər, sıfır və müsbət ədədlər tam ədədlərdir.","Z={...,-3,-2,-1,0,1,2,3,...}."],
-["Əks ədədlər","Modulları bərabər, işarələri fərqli ədədlər əks ədədlərdir.","5 və -5."],
-["Modul","Ədədin sıfırdan məsafəsi onun moduludur.","|-8|=8."],
-["Mənfi ədədlərin toplanması","İki mənfi ədədin modulları toplanır və mənfi işarə saxlanılır.","-4+(-3)=-7."],
-["Müxtəlif işarəli ədədlər","Modullar çıxılır, böyük modulun işarəsi saxlanılır.","-9+5=-4."],
-["Çıxma","Çıxılan ədədin əksini toplamaqla çıxma aparılır.","5-(-3)=5+3=8."],
-["Vurma","Eyni işarəli ədədlərin hasili müsbət, müxtəlif işarəli ədədlərin hasili mənfidir.","(-3)×(-4)=12."],
-["Bölmə","Vurmada olduğu kimi işarə qaydası tətbiq olunur.","(-12):3=-4."],
-["Sıfır","Ədədin sıfıra hasili sıfırdır. Sıfıra bölmə mümkün deyil.","5×0=0."],
-["Müqayisə","Mənfi ədədlərdə modul kiçik olduqca ədəd böyük olur.","-2>-5."]
-],
-[
-["Rasional ədədlər","a/b şəklində yazıla bilən ədədlərdir. a və b tam, b sıfırdan fərqli olmalıdır.","3/4, -2/5 və 7 rasionaldır."],
-["Surət və məxrəc","Kəsrin yuxarı hissəsi surət, aşağı hissəsi məxrəcdir.","3/5 kəsrində 3 surət, 5 məxrəcdir."],
-["İxtisar","Surət və məxrəc eyni sıfırdan fərqli ədədə bölünür.","12/18=2/3."],
-["Toplama","Məxrəclər bərabərləşdirilir, sonra surətlər toplanır.","1/5+2/5=3/5."],
-["Çıxma","Məxrəclər bərabərləşdirilir, surətlər çıxılır.","4/7-2/7=2/7."],
-["Vurma","Surətlər və məxrəclər ayrı-ayrılıqda vurulur.","2/3×3/4=1/2."],
-["Bölmə","İkinci kəsr tərsinə çevrilərək vurulur.","2/3:4/5=5/6."],
-["Sonlu onluq kəsr","Vergüldən sonra sonlu sayda rəqəmi olan kəsr rasionaldır.","0,25=1/4."],
-["Dövri onluq kəsr","Rəqəmləri dövri təkrarlanan sonsuz kəsr rasionaldır.","0,333...=1/3."],
-["Müqayisə","Məxrəcləri bərabərləşdirərək kəsrləri müqayisə etmək olar.","1/2<2/3."]
-],
-[
-["İrrasional ədədlər","İki tam ədədin nisbəti kimi yazıla bilməyən ədədlərdir.","√2, √3, π."],
-["Tam kvadrat","Natural ədədin kvadratı tam kvadratdır.","1,4,9,16,25,36,49,64,81,100."],
-["Kvadrat kök","Ədədin kvadrat kökü özünə vurulduqda həmin ədədi verir.","√25=5."],
-["Kökaltı ifadə","Tam kvadrat olmayan natural ədədin kvadrat kökü irrasionaldır.","√7 irrasionaldır."],
-["Pi ədədi","π çevrənin uzunluğunun diametrinə nisbətidir.","π≈3,14159..."],
-["Kökün sadələşdirilməsi","Kökaltı ifadədə tam kvadrat vuruq tapılır.","√12=2√3."],
-["Onluq yazılış","İrrasional ədədlərin onluq yazılışı sonsuz və dövri deyil.","√2=1,4142..."],
-["Cəm","İki irrasional ədədin cəmi mütləq irrasional deyil.","√2-√2=0."],
-["Hasil","İki irrasional ədədin hasili də mütləq irrasional deyil.","√2×√2=2."],
-["Ədəd oxu","Hər irrasional ədəd ədəd oxunda müəyyən nöqtəyə uyğundur.","√2 ədədi 1 və 2 arasındadır."]
-],
-[
-["Həqiqi ədədlər","Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlərdir.","R=Q∪I."],
-["Ədədlər çoxluğu","N⊂Z⊂Q⊂R.","Natural ədədlər tam, tam ədədlər rasionaldır."],
-["Sıfır","Sıfır tam, rasional və həqiqi ədəddir.","0=0/1."],
-["Müsbət və mənfi","Sıfırdan böyük ədədlər müsbət, kiçiklər mənfidir.","-5<0<5."],
-["Müqayisə","Ədəd oxunda sağdakı ədəd böyükdür.","-3<-1<0<2."],
-["Açıq interval","(a,b) aralığında sərhəd nöqtələri daxil deyil.","(2,5): 2 və 5 daxil deyil."],
-["Qapalı interval","[a,b] aralığında sərhəd nöqtələri daxildir.","[2,5]: 2 və 5 daxildir."],
-["Modul","Modul ədədin sıfırdan məsafəsidir.","|-9|=9."],
-["Kvadrat kök","Müsbət ədədin əsas kvadrat kökü qeyri-mənfidir.","√36=6."],
-["Çoxluqlar","A∩B ortaq elementlər, A∪B bütün elementlərdir.","{1,2}∩{2,3}={2}."]
-]
-];
-
-function openRules(){
- document.getElementById("rulesContent").innerHTML=
- ruleData[currentLesson].map((r,i)=>`
- <div class="rule"><h3>${i+1}. ${r[0]}</h3>
- <p>${r[1]}</p><div class="note"><b>Nümunə və izah:</b><br>${r[2]}</div></div>`).join("");
- showPage("rules");
-}
-
-function Q(text,answer,explanation,options){
- answer=String(answer);
- if(!options){
-  let n=Number(answer);
-  options=Number.isFinite(n)&&answer.trim()!==""
-   ?[answer,String(n+1),String(n-1),String(n+2)]
-   :[answer,"Başqa cavab","Heç biri","Bütün cavablar"];
+function makeQ(q,a,why,extra=[]){
+ a=String(a);
+ let opts=[a,...extra.map(String)];
+ if(extra.length===0){
+  let n=Number(a);
+  if(Number.isFinite(n)){
+   opts.push(String(n+1),String(n-1),String(n+2));
+  }else{
+   opts.push("Başqa cavab","Heç biri","Bütün cavablar");
+  }
  }
- options=[...new Set(options.map(String))];
- while(options.length<4)options.push("Digər cavab");
- return {text,answer,explanation,options:options.slice(0,4).sort(()=>Math.random()-.5)};
+ opts=[...new Set(opts)];
+ while(opts.length<4)opts.push("Digər cavab");
+ return {q,a,why,opts:opts.slice(0,4).sort(()=>Math.random()-.5)};
 }
 
-function buildQuestions(L){
- let arr=[];
+function build(L){
+ let out=[];
  for(let t=0;t<10;t++){
   for(let k=1;k<=5;k++){
    let a=k+3,b=k+2,n=k+2,q;
    if(L===0){
-    switch(t){
-     case 0:q=Q(`${a} + ${b} = ?`,a+b,"Toplama: "+a+"+"+b+"="+(a+b)+".");break;
-     case 1:q=Q(`${a+10} - ${b} = ?`,a+10-b,"Böyük ədəddən kiçik ədəd çıxılır.");break;
-     case 2:q=Q(`${a} × ${b} = ?`,a*b,"Vurma: "+a+"×"+b+"="+(a*b)+".");break;
-     case 3:q=Q(`${a*3} : 3 = ?`,a,"Bölmə: "+a*3+":3="+a+".");break;
-     case 4:q=Q(`${a} ədədinin kvadratı neçədir?`,a*a,"Ədəd özünə vurulur: "+a+"×"+a+"="+a*a+".");break;
-     case 5:q=Q(`${a} və ${a+2} ədədlərinin cəmi?`,2*a+2,"Ədədləri toplayırıq.");break;
-     case 6:q=Q(`${a*2} ədədi cütdürmü?`,"Bəli","Son rəqəmi cüt olan ədəd 2-yə bölünür.",["Bəli","Xeyr"]);break;
-     case 7:q=Q(`${a*2+1} ədədi təkdirmi?`,"Bəli","2-yə bölünəndə qalıq 1 olur.",["Bəli","Xeyr"]);break;
-     case 8:q=Q(`${a} ədədindən sonra gələn natural ədəd?`,a+1,"Növbəti ədəd bir vahid böyükdür.");break;
-     default:q=Q(`${a} × 2 + ${b} = ?`,a*2+b,"Əvvəl vurma, sonra toplama aparılır.");
-    }
-   }else if(L===1){
-    switch(t){
-     case 0:q=Q(`${a}+(-${b})=?`,a-b,"Müxtəlif işarələrdə modullar çıxılır.");break;
-     case 1:q=Q(`(-${a})+(-${b})=?`,-a-b,"Modullar toplanır və mənfi işarə saxlanılır.");break;
-     case 2:q=Q(`${a}-(-${b})=?`,a+b,"Mənfi ədədi çıxmaq onun əksini toplamaqdır.");break;
-     case 3:q=Q(`(-${a})×${b}=?`,-a*b,"Müxtəlif işarələrin hasili mənfidir.");break;
-     case 4:q=Q(`(-${a})×(-${b})=?`,a*b,"Eyni işarələrin hasili müsbətdir.");break;
-     case 5:q=Q(`|-${a*2}|=?`,a*2,"Modul müsbət məsafədir.");break;
-     case 6:q=Q(`${a*3}:(-3)=?`,-a,"Müxtəlif işarəli bölmənin cavabı mənfidir.");break;
-     case 7:q=Q(`(-${a})+${b*2}=?`,b*2-a,"Modullar çıxılır və böyük modulun işarəsi saxlanılır.");break;
-     case 8:q=Q(`0-(-${a})=?`,a,"Mənfi ədədi çıxmaq müsbət ədədi toplamaqdır.");break;
-     default:q=Q(`(-${a})×2+${b}=?`,-a*2+b,"Əvvəl vurma, sonra toplama aparılır.");
-    }
-   }else if(L===2){
-    switch(t){
-     case 0:q=Q(`${a*2}/${b*2} kəsrini ixtisar edin`,`${a}/${b}`,"Surət və məxrəc 2-yə bölünür.",[`${a}/${b}`,`${a*2}/${b}`,`${a}/${b*2}`,"1"]);break;
-     case 1:q=Q(`${a}/7 + 2/7 = ?`,`${a+2}/7`,"Eyni məxrəcli kəsrlərdə surətlər toplanır.",[`${a+2}/7`,`${a}/9`,`2/7`,`1/7`]);break;
-     case 2:q=Q(`${a+2}/9 - 2/9 = ?`,`${a}/9`,"Surətlər çıxılır, məxrəc saxlanılır.",[`${a}/9`,`${a+2}/7`,`2/9`,`1/9`]);break;
-     case 3:q=Q(`${a}/3 × 3/5 = ?`,`${a}/5`,"Surət və məxrəclər vurulur, ixtisar edilir.",[`${a}/5`,`${a}/3`,`${a*3}/5`,`${a}/15`]);break;
-     case 4:q=Q(`${a}/4 : 1/2 = ?`,`${a}/2`,"İkinci kəsri tərsinə çevirib vururuq.",[`${a}/2`,`${a}/4`,`${a}/8`,`${a}`]);
+    let data=[
+     [`${a}+${b} neçədir?`,a+b,`${a}+${b}=${a+b}.`],
+     [`${a+10}-${b} neçədir?`,a+10-b,"Çıxma əməliyyatı aparılır."],
+     [`${a}×${b} neçədir?`,a*b,"Vurma əməliyyatı aparılır."],
+     [`${a*3}:3 neçədir?`,a,"Bölmə əməliyyatı aparılır."],
+     [`${a} ədədinin kvadratı neçədir?`,a*a,"Ədədi özünə vururuq."]
+    ];
+    let d=data[t%5];q=makeQ(d[0],d[1],d[2]);
+   }
+   if(L===1){
+    let data=[
+     [`${a}+(-${b}) neçədir?`,a-b,"Müxtəlif işarələrdə modullar çıxılır."],
+     [`(-${a})+(-${b}) neçədir?`,-a-b,"Modullar toplanır və mənfi işarə saxlanılır."],
+     [`${a}-(-${b}) neçədir?`,a+b,"Mənfi ədədi çıxmaq müsbət ədədi toplamaqdır."],
+     [`(-${a})×${b} neçədir?`,-a*b,"Müxtəlif işarələrin hasili mənfidir."],
+     [`|-${a*2}| neçədir?`,a*2,"Modul sıfırdan məsafədir."]
+    ];
+    let d=data[t%5];q=makeQ(d[0],d[1],d[2]);
+   }
+   if(L===2){
+    let data=[
+     [`${a}/7 + 2/7 neçədir?`,`${a+2}/7`,"Eyni məxrəcli kəsrlərin surətləri toplanır.",[`${a+2}/7`,`${a}/9`,`2/7`,`1/7`]],
+     [`${a+2}/9 - 2/9 neçədir?`,`${a}/9`,"Surətlər çıxılır, məxrəc saxlanılır.",[`${a}/9`,`${a+2}/7`,`2/9`,`1/9`]],
+     [`${a}/3 × 3/5 neçədir?`,`${a}/5`,"Surət və məxrəcləri vurub ixtisar edirik.",[`${a}/5`,`${a}/3`,`${a*3}/5`,`${a}/15`]],
+     [`${a}/4 : 1/2 neçədir?`,`${a}/2`,"İkinci kəsri tərsinə çevirib vururuq.",[`${a}/2`,`${a}/4`,`${a}/8`,`${a}`]],
+     [`0,${k} adi kəsr kimi necə yazılır?`,`${k}/10`,"Vergüldən sonra bir rəqəm olduğuna görə məxrəc 10-dur.",[`${k}/10`,`${k}/100`,`1/${k}`,`${k}/1`]]
+    ];
+    let d=data[t%5];q=makeQ(d[0],d[1],d[2],d[3]);
+   }
+   if(L===3){
+    let data=[
+     [`√${n*n} neçədir?`,n,"Tam kvadratın kökü həmin ədəddir."],
+     [`√${n*n+1} rasionaldırmı?`,"Xeyr","Tam kvadrat olmayan ədədin kökü irrasionaldır.",["Bəli","Xeyr"]],
+     ["π hansı ədəd növüdür?","İrrasional","π sonsuz və dövri olmayan ədəddir.",["Natural","Tam","Rasional","İrrasional"]],
+     [`√${n*n+1} hansı iki ədəd arasındadır?`,`${n} və ${n+1}`,"Kökaltı ədəd iki ardıcıl tam kvadrat arasındadır.",[`${n} və ${n+1}`,`${n-1} və ${n}`,`${n+1} və ${n+2}`,`${n+2} və ${n+3}`]],
+     [`√${n*n*2} ifadəsini sadələşdirin`,`${n}√2`,"√(n²×2)=n√2.",[`${n}√2`,`2√${n}`,`${n*2}√2`,`√${n}`]]
+    ];
+    let d=data[t%5];q=makeQ(d[0],d[1],d[2],d[3]||[]);
+   }
+   if(L===4){
+    let data=[
+     [`${n} həqiqi ədəddirmi?`,"Bəli","Bütün natural ədədlər həqiqidir.",["Bəli","Xeyr"]],
+     [`-${n} hansı çoxluqlara daxildir?`,"Tam, rasional və həqiqi","Mənfi tam ədədlər rasional və həqiqidir.",["Natural","Tam, rasional və həqiqi","İrrasional","Heç biri"]],
+     ["0 hansı çoxluqlara daxildir?","Tam, rasional və həqiqi","0=0/1 olduğuna görə rasionaldır.",["Natural","Tam, rasional və həqiqi","İrrasional","Yalnız həqiqi"]],
+     ["0,5 hansı çoxluqlara daxildir?","Rasional və həqiqi","0,5=1/2.",["Tam","İrrasional","Rasional və həqiqi","Natural"]],
+     [`√${n*n+1} hansı ədəd növüdür?`,"İrrasional və həqiqi","Tam kvadrat olmayan ədədin kökü irrasionaldır.",["Natural","Tam","İrrasional və həqiqi","Rasional"]]
+    ];
+    let d=data[t%5];q=makeQ(d[0],d[1],d[2],d[3]||[]);
+   }
+   out.push(q);
+  }
+ }
+ return out;
+}
+
+const rules=[
+[
+["Natural ədədlər","Saymaq üçün istifadə olunan ədədlərdir. N={1,2,3,...}.","5 alma, 10 kitab."],
+["Cüt ədədlər","2-yə qalıqsız bölünən ədədlərdir.","2,4,6,8."],
+["Tək ədədlər","2-yə bölündükdə qalıq 1 verən ədədlərdir.","1,3,5,7."],
+["Sadə ədədlər","Yalnız iki natural böləni olan ədədlərdir.","2,3,5,7."],
+["Mürəkkəb ədədlər","İkidən çox natural böləni olan ədədlərdir.","4-ün bölənləri 1,2,4."],
+["Bölünmə əlaməti","3-ə bölünmə üçün rəqəmlərin cəmi 3-ə bölünməlidir.","123: 1+2+3=6."],
+["ƏBOB","Ən böyük ortaq böləndir.","ƏBOB(12,18)=6."],
+["ƏKOB","Ən kiçik ortaq qatdır.","ƏKOB(4,6)=12."],
+["Qüvvət","Ədədin özünə təkrar vurulmasıdır.","3²=9."],
+["Əməliyyat ardıcıllığı","Mötərizə, qüvvət, vurma-bölmə, toplama-çıxma.","2+3×4=14."]
+],
+[
+["Tam ədədlər","Mənfi, sıfır və müsbət ədədlərdir.","...-2,-1,0,1,2..."],
+["Əks ədədlər","İşarələri fərqli, modulları eyni ədədlərdir.","5 və -5."],
+["Modul","Ədədin sıfırdan məsafəsidir.","|-8|=8."],
+["Mənfi ədədlərin cəmi","Modullar toplanır, mənfi işarə saxlanılır.","-4-3=-7."],
+["Müxtəlif işarələr","Modullar çıxılır, böyük modulun işarəsi saxlanılır.","-9+5=-4."],
+["Çıxma","Əks ədədin toplanmasıdır.","5-(-3)=8."],
+["Vurma","Eyni işarə müsbət, müxtəlif işarə mənfi nəticə verir.","(-3)×(-4)=12."],
+["Bölmə","Vurmanın işarə qaydası tətbiq olunur.","(-12):3=-4."],
+["Sıfır","Sıfıra bölmə mümkün deyil.","5×0=0."],
+["Müqayisə","Ədəd oxunda sağdakı ədəd böyükdür.","-2>-5."]
+],
+[
+["Rasional ədədlər","a/b şəklində yazıla bilən ədədlərdir; b≠0.","3/4, -2/5."],
+["Surət və məxrəc","Surət yuxarı, məxrəc aşağı hissədir.","3/5."],
+["İxtisar","Surət və məxrəc eyni ədədə bölünür.","12/18=2/3."],
+["Toplama","Məxrəclər bərabərləşdirilir.","1/5+2/5=3/5."],
+["Çıxma","Surətlər çıxılır.","4/7-2/7=2/7."],
+["Vurma","Surətlər və məxrəclər vurulur.","2/3×3/4=1/2."],
+["Bölmə","İkinci kəsr tərsinə çevrilir.","2/3:4/5=5/6."],
+["Sonlu kəsr","Sonlu onluq kəsr rasionaldır.","0,25=1/4."],
+["Dövri kəsr","Təkrarlanan sonsuz onluq kəsr rasionaldır.","0,333...=1/3."],
+["Müqayisə","Ortaq məxrəcə gətirilir.","1/2<2/3."]
+],
+[
+["İrrasional ədədlər","Adi kəsr şəklində yazıla bilməyən ədədlərdir.","√2, π."],
+["Tam kvadrat","Natural ədədin kvadratıdır.","1,4,9,16,25."],
+["Kvadrat kök","Ədədin özünə vurulması həmin ədədi verir.","√25=5."],
+["Kökaltı ifadə","Tam kvadrat olmayan natural ədədin kökü irrasionaldır.","√7."],
+["Pi","Çevrənin uzunluğunun diametrinə nisbətidir.","π≈3,14159."],
+["Sadələşdirmə","Kökaltında tam kvadrat vuruq axtarılır.","√12=2√3."],
+["Onluq yazılış","Sonsuz və dövri olmayan yazılışdır.","√2=1,4142..."],
+["Cəm","İki irrasional ədədin cəmi rasional ola bilər.","√2-√2=0."],
+["Hasil","İki irrasionalın hasili rasional ola bilər.","√2×√2=2."],
+["Ədəd oxu","İrrasional ədədlər də ədəd oxunda yerləşir.","1<√2<2."]
+],
+[
+["Həqiqi ədədlər","Rasional və irrasional ədədlərin birləşməsidir.","R=Q∪I."],
+["Çoxluqlar","N⊂Z⊂Q⊂R.","Natural ədədlər həqiqidir."],
+["Sıfır","Tam, rasional və həqiqi ədəddir.","0=0/1."],
+["Müsbət və mənfi","Sıfırdan böyük və kiçik ədədlərdir.","-5<0<5."],
+["Müqayisə","Sağdakı ədəd böyükdür.","-3<-1<0<2."],
+["Açıq interval","Sərhəd nöqtələri daxil deyil.","(2,5)."],
+["Qapalı interval","Sərhəd nöqtələri daxildir.","[2,5]."],
+["Modul","Sıfırdan məsafədir.","|-9|=9."],
+["Kvadrat kök","Əsas kvadrat kök qeyri-mənfidir.","√36=6."],
+["Kəsişmə və birləşmə","Kəsişmə ortaq, birləşmə bütün elementlərdir.","{1,2}∩{2,3}={2}."]
+]
+];
+
+function openMath(){
+ document.getElementById("lessonList").innerHTML=lessons.map((x,i)=>`
+ <div class="card blue"><div class="ico">📘</div><h3>${i+1}. ${x}</h3><p>50 test və qaydalar</p><button class="primary" data-action="selectLesson" data-i="${i}">Dərsə daxil ol →</button></div>`).join("");
+ page("math");
+}
+function selectLesson(i){
+ lesson=i;
+ document.getElementById("lessonTitle").textContent=lessons[i];
+ page("lessonMenu");
+}
+function openRules(){
+ document.getElementById("rulesList").innerHTML=rules[lesson].map((r,i)=>`
+ <div class="rule"><h3>${i+1}. ${r[0]}</h3><p>${r[1]}</p><div class="note"><b>Nümunə və izah:</b><br>${r[2]}</div></div>`).join("");
+ page("rules");
+}
+function openExams(){
+ document.getElementById("years").innerHTML=Array.from({length:16},(_,i)=>2011+i).map(y=>`
+ <div class="card green"><h3>${y}-ci il</h3><p>Hələ suallar əlavə edilməyib.</p><button class="secondary" data-action="empty">Bax</button></div>`).join("");
+ page("exams");
+}
+function openHomework(){
+ document.getElementById("homeworkList").innerHTML=lessons.map((x,i)=>`
+ <div class="card orange"><h3>${x}</h3><p>20 suallıq tapşırıq.</p><button class="primary" data-action="startHomework" data-i="${i}">Başla →</button></div>`).join("");
+ page("homework");
+}
+function startQuiz(title,qs,m){
+ questions=qs;index=0;correct=0;wrong=0;mode=m;
+ document.getElementById("quizTitle").textContent=title;
+ page("quiz");render();
+}
+function render(){
+ if(index>=questions.length){finish();return}
+ selected=-1;
+ let q=questions[index];
+ document.getElementById("quizArea").innerHTML=`
+ <div class="question">
+ <b style="color:#1765d1">Sual ${index+1} / ${questions.length}</b>
+ <div class="progress"><div style="width:${index/questions.length*100}%"></div></div>
+ <div class="qtext">${q.q}</div>
+ <div class="options">${q.opts.map((o,i)=>`<button class="option" data-action="choose" data-i="${i}">${"ABCD"[i]}) ${o}</button>`).join("")}</div>
+ <div id="feedback" class="feedback"></div>
+ <button id="send" class="primary" style="width:100%;margin-top:17px" data-action="submit">Cavabı göndər</button>
+ <button id="next" class="primary" style="display:none;width:100%;margin-top:10px" data-action="next">Növbəti sual →</button>
+ </div>`;
+}
+function choose(i){
+ if(document.getElementById("send").style.display==="none")return;
+ selected=i;
+ document.querySelectorAll(".option").forEach((b,j)=>b.classList.toggle("selected",j===i));
+}
+function submit(){
+ if(selected<0){alert("Əvvəlcə cavab seçin.");return}
+ let q=questions[index];
+ let ok=String(q.opts[selected])===String(q.a);
+ if(ok)correct++;else wrong++;
+ document.querySelectorAll(".option").forEach((b,i)=>{
+  b.disabled=true;
+  if(String(q.opts[i])===String(q.a))b.classList.add("correct");
+  else if(i===selected)b.classList.add("wrong");
+ });
+ let f=document.getElementById("feedback");
+ if(mode!=="trial"){
+  f.className="feedback "+(ok?"good":"bad");
+  f.innerHTML=ok?"✓ Doğru cavab!<br>İzah: "+q.why:"✗ Səhv cavab!<br>Düzgün cavab: "+q.a+"<br>İzah: "+q.why;
+ }
+ document.getElementById("send").style.display="none";
+ document.getElementById("next").style.display="block";
+ if(index===questions.length-1)document.getElementById("next").textContent="Nəticəni gör";
+}
+function next(){
+ if(selected<0)return;
+ index++;render();
+}
+function finish(){
+ let total=questions.length;
+ document.getElementById("quizArea").innerHTML=`
+ <div class="result"><div style="font-size:35px">🏆</div><h2>Test tamamlandı!</h2>
+ <div class="score">${Math.round(correct/total*100)}%</div>
+ <p>Ümumi sual: ${total}</p>
+ <p style="color:green">Düzgün cavab: ${correct}</p>
+ <p style="color:red">Səhv cavab: ${wrong}</p>
+ <p>Cavablandırılmayan: ${total-correct-wrong}</p>
+ <button class="primary" data-action="leaveQuiz">Bölməyə qayıt</button></div>`;
+}
+function leaveQuiz(){
+ page(mode==="lesson"?"lessonMenu":mode==="homework"?"homework":"trials");
+}
+
+function handle(action,i){
+ switch(action){
+ case "menu":document.getElementById("menu").classList.toggle("open");break;
+ case "home":page("home");break;
+ case "contact":page("contact");break;
+ case "math":openMath();break;
+ case "selectLesson":selectLesson(i);break;
+ case "lessonMenu":page("lessonMenu");break;
+ case "rules":openRules();break;
+ case "lessonTest":startQuiz(lessons[lesson]+" – 50 test",build(lesson),"lesson");break;
+ case "verbal":page("verbal");break;
+ case "exams":openExams();break;
+ case "homework":openHomework();break;
+ case "startHomework":startQuiz(lessons[i]+" – Ev tapşı
