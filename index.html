@@ -10,21 +10,19 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#f3f7fd;color:#172b46;line-height:1.65}
 button{font:inherit;cursor:pointer}
-header{background:#fff;box-shadow:0 2px 15px #183b6510;position:sticky;top:0;z-index:20}
+header{background:white;box-shadow:0 2px 15px #183b6510;position:sticky;top:0;z-index:20}
 .nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-size:21px;font-weight:800;color:#1769c2}
 .menu-btn{border:0;background:#edf4ff;color:#1769c2;width:45px;height:43px;border-radius:12px;font-size:25px}
 main{max-width:1050px;margin:auto;padding:25px 18px 50px}
-.hero{background:linear-gradient(130deg,#1769c2,#4d9af0);color:#fff;border-radius:23px;padding:42px 28px;margin:20px 0 28px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:210px;height:210px;border:35px solid #ffffff16;border-radius:50%;right:-50px;top:-75px}
+.hero{background:linear-gradient(130deg,#1769c2,#4d9af0);color:white;border-radius:23px;padding:42px 28px;margin:20px 0 28px}
 .hero h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin-bottom:13px}
 .hero p{color:#e8f3ff;max-width:580px}
 .hero-tag{display:inline-block;background:#ffffff20;border:1px solid #ffffff50;padding:6px 13px;border-radius:20px;margin-bottom:15px;font-size:13px}
 .section-title{font-size:23px;margin:30px 0 15px}
 .section-title span{color:#1769c2}
 .subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
-.subject{border:1px solid #e3ebf6;background:#fff;border-radius:17px;padding:23px;text-align:left;transition:.2s;box-shadow:0 5px 18px #173c6510;color:#172b46}
-.subject:hover{transform:translateY(-3px);border-color:#8bb9f1}
+.subject{border:1px solid #e3ebf6;background:white;border-radius:17px;padding:23px;text-align:left;box-shadow:0 5px 18px #173c6510;color:#172b46}
 .subject-icon{width:49px;height:49px;border-radius:14px;display:grid;place-items:center;background:#eaf3ff;font-size:25px;margin-bottom:15px}
 .subject h3{font-size:19px;margin-bottom:5px}
 .subject p{font-size:13px;color:#72839a}
@@ -33,32 +31,27 @@ main{max-width:1050px;margin:auto;padding:25px 18px 50px}
 .page.active{display:block}
 .back{border:0;background:#e7f1ff;color:#1769c2;padding:10px 16px;border-radius:10px;font-weight:bold;margin:10px 0 20px}
 .topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:20px}
-.topic{border:1px solid #e2eaf4;background:#fff;border-radius:14px;padding:18px;text-align:left;color:#17314f}
-.topic:hover{border-color:#1769c2;background:#f7fbff}
+.topic{border:1px solid #e2eaf4;background:white;border-radius:14px;padding:18px;text-align:left;color:#17314f;width:100%}
 .topic strong{display:block;color:#1769c2;font-size:17px}
 .topic small{color:#8291a5}
-.card{background:#fff;border:1px solid #e6edf6;border-radius:16px;padding:23px;margin:16px 0;box-shadow:0 4px 16px #173c6508}
+.card{background:white;border:1px solid #e6edf6;border-radius:16px;padding:23px;margin:16px 0;box-shadow:0 4px 16px #173c6508}
 .card h2,.card h3{color:#1769c2;margin-bottom:12px}
-.card h2{font-size:22px}
-.formula{background:#edf5ff;border-left:4px solid #287bd1;border-radius:9px;padding:17px;text-align:center;color:#155ba5;font-size:20px;font-weight:bold;margin:15px 0;overflow-wrap:anywhere}
+.formula{background:#edf5ff;border-left:4px solid #287bd1;border-radius:9px;padding:17px;text-align:center;color:#155ba5;font-size:20px;font-weight:bold;margin:15px 0}
 .example{background:#f6f9fd;border:1px solid #e8eef6;border-radius:10px;padding:13px;margin:10px 0}
 .note{background:#fff8e8;border-left:4px solid #e7b344;padding:14px;border-radius:8px;margin-top:15px}
 .quiz-question{padding:16px 0;border-bottom:1px solid #e7edf5}
-.quiz-question:last-child{border:0}
 .quiz-question>p{font-weight:bold;margin-bottom:10px}
 .option{display:block;background:#f5f8fc;border:1px solid #e1eaf4;border-radius:9px;padding:11px;margin:8px 0;cursor:pointer}
-.option:hover{border-color:#1769c2}
 .option input{margin-right:9px;accent-color:#1769c2}
-.primary{border:0;background:#1769c2;color:#fff;padding:13px 18px;border-radius:10px;font-weight:bold;width:100%}
-.primary:hover{background:#1056a3}
-.primary:disabled{opacity:.5;cursor:not-allowed}
+.primary{border:0;background:#1769c2;color:white;padding:13px 18px;border-radius:10px;font-weight:bold;width:100%;margin-top:10px}
+.primary:disabled{opacity:.5}
 .secondary{border:1px solid #1769c2;background:#edf5ff;color:#1769c2;padding:12px 18px;border-radius:10px;font-weight:bold;width:100%;margin-top:10px}
 .result{display:none;background:#edf5ff;border-radius:12px;padding:17px;margin-top:17px}
 .correct{color:#16844c}
 .wrong{color:#cf4141}
 .menu-overlay{display:none;position:fixed;inset:0;background:#071a3180;z-index:30}
 .menu-overlay.open{display:block}
-.side-menu{position:absolute;right:0;top:0;height:100%;width:min(330px,85%);background:#fff;padding:27px;box-shadow:-5px 0 25px #0002}
+.side-menu{position:absolute;right:0;top:0;height:100%;width:min(330px,85%);background:white;padding:27px}
 .close-menu{float:right;border:0;background:#edf4ff;color:#1769c2;width:38px;height:38px;border-radius:10px;font-size:22px}
 .side-menu h2{color:#1769c2;margin:35px 0 22px}
 .contact-item{background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0}
@@ -69,15 +62,13 @@ main{max-width:1050px;margin:auto;padding:25px 18px 50px}
 .feedback.good{border-left:4px solid #16844c}
 .feedback.bad{border-left:4px solid #cf4141}
 .code-input{width:100%;padding:14px;border:1px solid #d6e2f0;border-radius:10px;font-size:18px;margin:12px 0;letter-spacing:3px}
-.lock-icon{font-size:48px;margin-bottom:12px}
-footer{text-align:center;background:#fff;border-top:1px solid #e7edf5;padding:27px 15px;color:#718198;font-size:13px}
+footer{text-align:center;background:white;border-top:1px solid #e7edf5;padding:27px 15px;color:#718198;font-size:13px}
 footer strong{color:#1769c2}
 @media(max-width:600px){
  main{padding:15px 13px 35px}
  .hero{padding:32px 20px}
  .subjects{grid-template-columns:1fr;gap:11px}
  .subject{padding:16px}
- .subject h3{font-size:16px}
  .topic-grid{grid-template-columns:1fr}
  .card{padding:17px}
 }
@@ -86,173 +77,172 @@ footer strong{color:#1769c2}
 <body>
 
 <header>
-<div class="nav">
-<div class="brand">Qəbul İmtahanı</div>
-<button class="menu-btn" id="menu-button" aria-label="Menyu">☰</button>
-</div>
+ <div class="nav">
+  <div class="brand">Qəbul İmtahanı</div>
+  <button class="menu-btn" id="menu-button">☰</button>
+ </div>
 </header>
 
 <div class="menu-overlay" id="menu">
-<div class="side-menu">
-<button class="close-menu" id="close-menu">×</button>
-<h2>Əlaqə</h2>
-<div class="contact-item">
-<strong>Telefon nömrəsi</strong>
-<a href="tel:+995555936547">+995 555 93 65 47</a>
-</div>
-<div class="contact-item">
-<strong>E-poçt</strong>
-<a href="mailto:zogadiunarebiqebul@gmail.com">zogadiunarebiqebul@gmail.com</a>
-</div>
-</div>
+ <div class="side-menu">
+  <button class="close-menu" id="close-menu">×</button>
+  <h2>Əlaqə</h2>
+  <div class="contact-item">
+   <strong>Telefon nömrəsi</strong>
+   <a href="tel:+995555936547">+995 555 93 65 47</a>
+  </div>
+  <div class="contact-item">
+   <strong>E-poçt</strong>
+   <a href="mailto:zogadiunarebiqebul@gmail.com">zogadiunarebiqebul@gmail.com</a>
+  </div>
+ </div>
 </div>
 
 <main>
 
 <section id="home" class="page active">
-<div class="hero">
-<div class="hero-tag">Təhsil platforması</div>
-<h1>Öyrənməyə buradan başla!</h1>
-<p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p>
-</div>
-<h2 class="section-title">Tədris <span>bölmələri</span></h2>
-<div class="subjects">
-<button class="subject" data-page="math">
-<div class="subject-icon">📐</div>
-<h3>Riyaziyyat</h3>
-<p>Riyazi qaydalar, izahlar və testlər</p>
-<span class="arrow">Daxil ol →</span>
-</button>
-<button class="subject" data-page="verbal">
-<div class="subject-icon">📚</div>
-<h3>Verbal</h3>
-<p>Verbal dərslər və tapşırıqlar</p>
-<span class="arrow">Daxil ol →</span>
-</button>
-<button class="subject" data-page="exam">
-<div class="subject-icon">📝</div>
-<h3>İmtahan sualları</h3>
-<p>İmtahana hazırlıq üçün suallar</p>
-<span class="arrow">Daxil ol →</span>
-</button>
-</div>
+ <div class="hero">
+  <div class="hero-tag">Təhsil platforması</div>
+  <h1>Öyrənməyə buradan başla!</h1>
+  <p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p>
+ </div>
+ <h2 class="section-title">Tədris <span>bölmələri</span></h2>
+ <div class="subjects">
+  <button class="subject" data-page="math">
+   <div class="subject-icon">📐</div>
+   <h3>Riyaziyyat</h3>
+   <p>Riyazi qaydalar, izahlar və testlər</p>
+   <span class="arrow">Daxil ol →</span>
+  </button>
+  <button class="subject" data-page="verbal">
+   <div class="subject-icon">📚</div>
+   <h3>Verbal</h3>
+   <p>Verbal dərslər və tapşırıqlar</p>
+   <span class="arrow">Daxil ol →</span>
+  </button>
+  <button class="subject" data-page="exam-info">
+   <div class="subject-icon">📝</div>
+   <h3>İmtahan sualları</h3>
+   <p>İmtahana hazırlıq üçün suallar</p>
+   <span class="arrow">Daxil ol →</span>
+  </button>
+ </div>
 </section>
 
 <section id="math" class="page">
-<button class="back" data-page="home">← Ana səhifə</button>
-<h1>Riyaziyyat</h1>
-<p>Hansı bölməyə daxil olmaq istəyirsən?</p>
-<div class="subjects" style="margin-top:20px">
-<button class="subject" data-page="tests">
-<div class="subject-icon">✍️</div>
-<h3>Testlər</h3>
-<p>Hər mövzu üzrə 50 sual və izahlı cavablar</p>
-<span class="arrow">Testlərə keç →</span>
-</button>
-<button class="subject" data-page="rules">
-<div class="subject-icon">📖</div>
-<h3>Qaydalar</h3>
-<p>Mövzular, qaydalar və nümunələr</p>
-<span class="arrow">Qaydalara keç →</span>
-</button>
-<button class="subject" data-page="homework">
-<div class="subject-icon">📒</div>
-<h3>Ev tapşırıqları</h3>
-<p>Hər mövzu üzrə 20 sual və izahlı cavab</p>
-<span class="arrow">Tapşırıqlara keç →</span>
-</button>
-<button class="subject" data-page="practice-exams">
-<div class="subject-icon">🔒</div>
-<h3>Sınaqlar</h3>
-<p>Admin kodu ilə açılan çətin sınaqlar</p>
-<span class="arrow">Sınaqlara keç →</span>
-</button>
-</div>
+ <button class="back" data-page="home">← Ana səhifə</button>
+ <h1>Riyaziyyat</h1>
+ <p>Hansı bölməyə daxil olmaq istəyirsən?</p>
+ <div class="subjects" style="margin-top:20px">
+  <button class="subject" data-page="tests">
+   <div class="subject-icon">✍️</div>
+   <h3>Testlər</h3>
+   <p>Hər mövzu üzrə 50 sual</p>
+   <span class="arrow">Testlərə keç →</span>
+  </button>
+  <button class="subject" data-page="rules">
+   <div class="subject-icon">📖</div>
+   <h3>Qaydalar</h3>
+   <p>Mövzular, qaydalar və nümunələr</p>
+   <span class="arrow">Qaydalara keç →</span>
+  </button>
+  <button class="subject" data-page="homework">
+   <div class="subject-icon">📒</div>
+   <h3>Ev tapşırıqları</h3>
+   <p>Hər mövzu üzrə 20 sual</p>
+   <span class="arrow">Tapşırıqlara keç →</span>
+  </button>
+  <button class="subject" data-page="practice-exams">
+   <div class="subject-icon">🔒</div>
+   <h3>Sınaqlar</h3>
+   <p>Admin kodu ilə açılan sınaqlar</p>
+   <span class="arrow">Sınaqlara keç →</span>
+  </button>
+ </div>
 </section>
 
 <section id="tests" class="page">
-<button class="back" data-page="math">← Riyaziyyata qayıt</button>
-<h1>Riyaziyyat testləri</h1>
-<p>Test etmək istədiyin mövzunu seç. Hər mövzuda 50 sual var.</p>
-<div class="topic-grid" id="test-topic-list"></div>
+ <button class="back" data-page="math">← Riyaziyyata qayıt</button>
+ <h1>Riyaziyyat testləri</h1>
+ <p>Test etmək istədiyin mövzunu seç. Hər mövzuda 50 sual var.</p>
+ <div class="topic-grid" id="test-topic-list"></div>
 </section>
 
 <section id="rules" class="page">
-<button class="back" data-page="math">← Riyaziyyata qayıt</button>
-<h1>Riyaziyyat qaydaları</h1>
-<p>Öyrənmək istədiyin mövzunu seç.</p>
-<div class="topic-grid" id="topic-list"></div>
+ <button class="back" data-page="math">← Riyaziyyata qayıt</button>
+ <h1>Riyaziyyat qaydaları</h1>
+ <p>Öyrənmək istədiyin mövzunu seç.</p>
+ <div class="topic-grid" id="topic-list"></div>
 </section>
 
 <section id="homework" class="page">
-<button class="back" data-page="math">← Riyaziyyata qayıt</button>
-<h1>Ev tapşırıqları</h1>
-<p>Hər mövzuda 20 sual var. Cavab verdikdən sonra düzgün cavab və izah göstəriləcək.</p>
-<div class="topic-grid" id="homework-topic-list"></div>
+ <button class="back" data-page="math">← Riyaziyyata qayıt</button>
+ <h1>Ev tapşırıqları</h1>
+ <p>Hər mövzuda 20 sual. Cavabdan sonra izah göstərilir.</p>
+ <div class="topic-grid" id="homework-topic-list"></div>
 </section>
 
 <section id="homework-page" class="page">
-<button class="back" data-page="homework">← Ev tapşırıqlarına qayıt</button>
-<div id="homework-content"></div>
+ <button class="back" data-page="homework">← Ev tapşırıqlarına qayıt</button>
+ <div id="homework-content"></div>
 </section>
 
 <section id="practice-exams" class="page">
-<button class="back" data-page="math">← Riyaziyyata qayıt</button>
-<h1>Sınaqlar</h1>
-<div class="card">
-<div class="lock-icon">🔐</div>
-<h2>Sınaq 1</h2>
-<p>5 mövzudan hazırlanmış 40 çətin sual. Sınağa daxil olmaq üçün admindən kod almalısınız.</p>
-<button class="primary" id="exam-continue">Davam et</button>
-<div id="exam-code-area" style="display:none;margin-top:18px">
-<label for="admin-code"><b>Admin kodunu daxil edin:</b></label>
-<input class="code-input" id="admin-code" type="password" inputmode="numeric" placeholder="Kodu yazın">
-<button class="primary" id="check-admin-code">Sınağa daxil ol</button>
-<p id="code-message" style="margin-top:12px"></p>
-</div>
-</div>
+ <button class="back" data-page="math">← Riyaziyyata qayıt</button>
+ <h1>Sınaqlar</h1>
+ <div class="card">
+  <div style="font-size:45px">🔐</div>
+  <h2>Sınaq 1</h2>
+  <p>Sınaqda beş mövzudan 40 çətin sual var. Daxil olmaq üçün admindən kod almalısınız.</p>
+  <button class="primary" id="exam-continue">Davam et</button>
+  <div id="exam-code-area" style="display:none;margin-top:18px">
+   <label for="admin-code"><b>Admin kodunu daxil edin:</b></label>
+   <input class="code-input" id="admin-code" type="password" inputmode="numeric" placeholder="Kodu yazın">
+   <button class="primary" id="check-admin-code">Sınağa daxil ol</button>
+   <p id="code-message" style="margin-top:12px"></p>
+  </div>
+ </div>
 </section>
 
 <section id="exam-page" class="page">
-<button class="back" data-page="practice-exams">← Sınaqlara qayıt</button>
-<div id="exam-content"></div>
+ <button class="back" data-page="practice-exams">← Sınaqlara qayıt</button>
+ <div id="exam-content"></div>
 </section>
 
 <section id="verbal" class="page">
-<button class="back" data-page="home">← Ana səhifə</button>
-<div class="card" style="text-align:center;padding:45px 20px">
-<div style="font-size:55px">📚</div>
-<h2>Verbal bölməsi</h2>
-<p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p>
-<p style="color:#8090a4">Yeni dərslər tezliklə əlavə ediləcək.</p>
-</div>
+ <button class="back" data-page="home">← Ana səhifə</button>
+ <div class="card" style="text-align:center;padding:45px 20px">
+  <div style="font-size:55px">📚</div>
+  <h2>Verbal bölməsi</h2>
+  <p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p>
+  <p>Yeni dərslər tezliklə əlavə ediləcək.</p>
+ </div>
 </section>
 
-<section id="exam" class="page">
-<button class="back" data-page="home">← Ana səhifə</button>
-<div class="card" style="text-align:center;padding:45px 20px">
-<div style="font-size:55px">📝</div>
-<h2>İmtahan sualları</h2>
-<p>Bu bölməyə hələlik suallar əlavə edilməyib.</p>
-<p style="color:#8090a4">Suallar əlavə edildikdən sonra burada görünəcək.</p>
-</div>
+<section id="exam-info" class="page">
+ <button class="back" data-page="home">← Ana səhifə</button>
+ <div class="card" style="text-align:center;padding:45px 20px">
+  <div style="font-size:55px">📝</div>
+  <h2>İmtahan sualları</h2>
+  <p>Bu bölməyə hələlik suallar əlavə edilməyib.</p>
+ </div>
 </section>
 
 <section id="lesson" class="page">
-<button class="back" data-page="rules">← Qaydalara qayıt</button>
-<div id="lesson-content"></div>
+ <button class="back" data-page="rules">← Qaydalara qayıt</button>
+ <div id="lesson-content"></div>
 </section>
 
 <section id="test-page" class="page">
-<button class="back" data-page="tests">← Test mövzularına qayıt</button>
-<div id="test-content"></div>
+ <button class="back" data-page="tests">← Test mövzularına qayıt</button>
+ <div id="test-content"></div>
 </section>
 
 </main>
 
 <footer>
-<p>© <span id="year"></span> Bütün hüquqlar qorunur.</p>
-<p>Hazırlayan: <strong>Haldun Məmmədov</strong></p>
+ <p>© <span id="year"></span> Bütün hüquqlar qorunur.</p>
+ <p>Hazırlayan: <strong>Haldun Məmmədov</strong></p>
 </footer>
 
 <script>
@@ -260,20 +250,29 @@ footer strong{color:#1769c2}
 
 const $ = id => document.getElementById(id);
 
+/* SƏHİFƏ KEÇİDLƏRİ */
 function showPage(id){
- const page=$(id);
- if(!page)return;
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- page.classList.add("active");
+ const target=$(id);
+ if(!target)return;
+
+ document.querySelectorAll(".page").forEach(page=>{
+  page.classList.remove("active");
+ });
+
+ target.classList.add("active");
  closeMenu();
- window.scrollTo({top:0,behavior:"auto"});
+ window.scrollTo(0,0);
 }
 
-document.addEventListener("click",e=>{
- const btn=e.target.closest("[data-page]");
- if(btn)showPage(btn.dataset.page);
+/* BÜTÜN data-page DÜYMƏLƏRİ ÜÇÜN TƏK KLİK SİSTEMİ */
+document.addEventListener("click",function(e){
+ const button=e.target.closest("[data-page]");
+ if(!button)return;
+ e.preventDefault();
+ showPage(button.getAttribute("data-page"));
 });
 
+/* MENYU */
 const menu=$("menu");
 function openMenu(){menu.classList.add("open")}
 function closeMenu(){menu.classList.remove("open")}
@@ -284,6 +283,7 @@ menu.addEventListener("click",e=>{
  if(e.target===menu)closeMenu();
 });
 
+/* MÖVZULAR */
 const topics=[
 {
 title:"Natural ədədlər",
@@ -328,69 +328,71 @@ note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional �
 ];
 
 function renderTopics(){
- $("topic-list").replaceChildren();
+ const list=$("topic-list");
+ list.innerHTML="";
  topics.forEach((t,i)=>{
   const b=document.createElement("button");
   b.className="topic";
   b.innerHTML=`<strong>${i+1}. ${t.title}</strong><small>${t.desc}</small>`;
   b.addEventListener("click",()=>openLesson(i));
-  $("topic-list").appendChild(b);
+  list.appendChild(b);
  });
 }
 
 function openLesson(i){
  const t=topics[i];
- if(!t)return;
  $("lesson-content").innerHTML=`
  <div class="card">
- <h2>${t.title}</h2>
- <p>${t.desc}</p>
- <h3 style="margin-top:22px">📖 Qayda və izah</h3>
- <p>${t.rule}</p>
- <div class="formula">${t.formula}</div>
- <h3>📝 Nümunələr</h3>
- ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
- <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
+  <h2>${t.title}</h2>
+  <p>${t.desc}</p>
+  <h3 style="margin-top:22px">📖 Qayda və izah</h3>
+  <p>${t.rule}</p>
+  <div class="formula">${t.formula}</div>
+  <h3>📝 Nümunələr</h3>
+  ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
+  <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
  </div>`;
  showPage("lesson");
 }
 
+/* SUAL FUNKSİYASI */
 function Q(text,options,answer,explanation){
  return {text,options,answer,explanation};
 }
 
-function generateQuestions(topicIndex){
+/* 50 TEST SUALI */
+function generateQuestions(index){
  const a=[];
  for(let k=1;k<=10;k++){
-  if(topicIndex===0){
-   a.push(Q("Hansı natural ədəddir?",["-"+(k+2),String(k+5),k+",5"],1,`${k+5} müsbət tam ədəd olduğu üçün naturaldır.`));
-   a.push(Q(`${k+10} ədədindən sonra hansı natural ədəd gəlir?`,[String(k+10),String(k+11),String(k+12)],1,`${k+10}+1=${k+11}.`));
-   a.push(Q(`${k+20} ədədindən əvvəl hansı natural ədəd gəlir?`,[String(k+19),String(k+20),String(k+21)],0,`${k+20}-1=${k+19}.`));
-   a.push(Q(`${k+3} + ${k+4} neçə edir?`,[String(2*k+6),String(2*k+7),String(2*k+8)],1,`${k+3}+${k+4}=${2*k+7}.`));
-   a.push(Q(`${k+1} × 2 neçə edir?`,[String(2*k+1),String(2*k+2),String(2*k+3)],1,`${k+1}×2=${2*k+2}.`));
-  }else if(topicIndex===1){
-   a.push(Q("Hansı tam ədəddir?",[`${k},5`,String(-k),`${k}/3`],1,`${-k} mənfi tam ədəddir.`));
-   a.push(Q("Ən böyük ədəd hansıdır?",[String(-k-1),String(-k+1),String(-k)],1,"Mənfi ədədlərdən sıfıra yaxın olan daha böyükdür."));
-   a.push(Q(`(-${k}) + ${k} neçədir?`,["-1","0","1"],1,"Bir-birinin əksi olan ədədlərin cəmi sıfırdır."));
-   a.push(Q(`(-${k}) - 2 neçədir?`,[String(-k-1),String(-k-2),String(-k-3)],1,`${-k}-2=${-k-2}.`));
-   a.push(Q("Sıfır tam ədəddirmi?",["Bəli","Xeyr","Yalnız müsbət olduqda"],0,"Sıfır tam ədəddir; nə müsbət, nə də mənfidir."));
-  }else if(topicIndex===2){
-   a.push(Q("Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."));
-   a.push(Q(`${k}/2 rasional ədəddirmi?`,["Bəli","Xeyr","İrrasionaldır"],0,"İki tam ədədin nisbəti rasional ədəddir."));
+  if(index===0){
+   a.push(Q("Hansı natural ədəddir?",["-"+(k+2),String(k+5),k+",5"],1,"Müsbət tam ədəd natural ədəddir."));
+   a.push(Q(`${k+10} ədədindən sonra hansı ədəd gəlir?`,[String(k+10),String(k+11),String(k+12)],1,"Sonrakı ədədi tapmaq üçün 1 əlavə edirik."));
+   a.push(Q(`${k+20} ədədindən əvvəl hansı ədəd gəlir?`,[String(k+19),String(k+20),String(k+21)],0,"Əvvəlki ədədi tapmaq üçün 1 çıxırıq."));
+   a.push(Q(`${k+3} + ${k+4} neçə edir?`,[String(2*k+6),String(2*k+7),String(2*k+8)],1,"Toplama nəticəsi hesablanır."));
+   a.push(Q(`${k+1} × 2 neçə edir?`,[String(2*k+1),String(2*k+2),String(2*k+3)],1,"Ədədi 2-yə vururuq."));
+  }else if(index===1){
+   a.push(Q("Hansı tam ədəddir?",[`${k},5`,String(-k),`${k}/3`],1,"Mənfi tam ədədlər də tam ədədlərdir."));
+   a.push(Q("Ən böyük ədəd hansıdır?",[String(-k-1),String(-k+1),String(-k)],1,"Sıfıra yaxın mənfi ədəd daha böyükdür."));
+   a.push(Q(`(-${k}) + ${k} neçədir?`,["-1","0","1"],1,"Əks ədədlərin cəmi sıfırdır."));
+   a.push(Q(`(-${k}) - 2 neçədir?`,[String(-k-1),String(-k-2),String(-k-3)],1,"Mənfi ədəddən 2 çıxılır."));
+   a.push(Q("Sıfır tam ədəddirmi?",["Bəli","Xeyr","Yalnız müsbət olduqda"],0,"Sıfır tam ədəddir."));
+  }else if(index===2){
+   a.push(Q("Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4."));
+   a.push(Q(`${k}/2 rasional ədəddirmi?`,["Bəli","Xeyr","İrrasionaldır"],0,"İki tam ədədin nisbəti rasionaldır."));
    a.push(Q("Hansı ədəd rasionaldır?",["√3","0,5","π"],1,"0,5 = 1/2."));
    a.push(Q("0,333... hansı kəsrə bərabərdir?",["1/2","1/3","1/4"],1,"0,333... = 1/3."));
-   a.push(Q("Hər tam ədəd rasionaldırmı?",["Bəli","Xeyr","Yalnız müsbət olduqda"],0,"Hər tam ədədi məxrəci 1 olan kəsr kimi yazmaq olar."));
-  }else if(topicIndex===3){
-   a.push(Q("Hansı ədəd irrasionaldır?",[`√${(k+1)*(k+1)}`,`√${4*k+2}`,String(2*k+1)],1,`${4*k+2} tam kvadrat deyil, buna görə kökü irrasionaldır.`));
+   a.push(Q("Hər tam ədəd rasionaldırmı?",["Bəli","Xeyr","Yalnız müsbət olduqda"],0,"Tam ədədi məxrəci 1 olan kəsr kimi yazmaq olar."));
+  }else if(index===3){
+   a.push(Q("Hansı ədəd irrasionaldır?",[`√${(k+1)*(k+1)}`,`√${4*k+2}`,String(2*k+1)],1,"Kökaltı ifadə tam kvadrat olmadığı üçün nəticə irrasionaldır."));
    a.push(Q("Hansı irrasional ədəddir?",[`√${(k+1)*(k+1)}`,"π",String(k+2)],1,"π irrasional ədəddir."));
-   a.push(Q("π hansı ədəd növünə aiddir?",["İrrasional","Natural","Tam"],0,"π sonsuz və dövri olmayan onluq yazılışa malikdir."));
-   a.push(Q("Hansı kök irrasionaldır?",[`√${(k+2)*(k+2)}`,`√${4*k+3}`,`√${k*k}`],1,`${4*k+3} tam kvadrat deyil.`));
-   a.push(Q("√49 hansı ədəd növüdür?",["İrrasional","Rasional","Heç biri"],1,"√49 = 7, yəni rasionaldır."));
+   a.push(Q("π hansı ədəd növünə aiddir?",["İrrasional","Natural","Tam"],0,"π sonsuz və dövri olmayan onluq ədəddir."));
+   a.push(Q("Hansı kök irrasionaldır?",[`√${(k+2)*(k+2)}`,`√${4*k+3}`,`√${k*k}`],1,"Kökaltı ədəd tam kvadrat deyil."));
+   a.push(Q("√49 hansı ədəd növüdür?",["İrrasional","Rasional","Heç biri"],1,"√49=7."));
   }else{
-   a.push(Q("Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q ⊂ R","Q ⊂ N ⊂ Z","R ⊂ Q ⊂ Z"],0,"N ⊂ Z ⊂ Q ⊂ R doğrudur."));
-   a.push(Q("İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlər çoxluğuna daxildir."));
+   a.push(Q("Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q ⊂ R","Q ⊂ N ⊂ Z","R ⊂ Q ⊂ Z"],0,"Natural, tam, rasional və həqiqi ədədlər ardıcıllığı doğrudur."));
+   a.push(Q("İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərdir."));
    a.push(Q("Rasional ədədlər hansı işarə ilə göstərilir?",["Q","I","N"],0,"Q rasional ədədlər çoxluğudur."));
-   a.push(Q("Həqiqi ədədlər nələrdən ibarətdir?",["Yalnız natural","Rasional və irrasional","Yalnız tam"],1,"Həqiqi ədədlər rasional və irrasional ədədləri birləşdirir."));
+   a.push(Q("Həqiqi ədədlər nələrdən ibarətdir?",["Yalnız natural","Rasional və irrasional","Yalnız tam"],1,"Həqiqi ədədlər rasional və irrasional ədədlərdən ibarətdir."));
    a.push(Q("Hər tam ədəd rasionaldırmı?",["Bəli","Xeyr","Yalnız müsbət olduqda"],0,"Hər tam ədəd məxrəci 1 olan kəsrdir."));
   }
  }
@@ -398,66 +400,66 @@ function generateQuestions(topicIndex){
 }
 
 function renderTestTopics(){
- $("test-topic-list").replaceChildren();
+ const list=$("test-topic-list");
+ list.innerHTML="";
  topics.forEach((t,i)=>{
   const b=document.createElement("button");
   b.className="topic";
   b.innerHTML=`<strong>${i+1}. ${t.title}</strong><small>50 sual · İzahlı test</small>`;
   b.addEventListener("click",()=>openTest(i));
-  $("test-topic-list").appendChild(b);
+  list.appendChild(b);
  });
 }
 
 function openTest(index){
- const t=topics[index];
- if(!t)return;
  const questions=generateQuestions(index);
- if(questions.length!==50){
-  alert("Test sualları hazırlanmadı.");
-  return;
- }
  $("test-content").innerHTML=`
  <div class="card">
- <h2>${t.title} — Test</h2>
- <p>50 sualı cavablandır. Sonda nəticəni və izahları görəcəksən.</p>
- <p class="progress-text">Sual sayı: 50</p>
- <form id="full-test">
- ${questions.map((q,i)=>`
- <div class="quiz-question">
- <p>${i+1}. ${q.text}</p>
- ${q.options.map((o,j)=>`
- <label class="option">
- <input type="radio" name="q${i}" value="${j}"> ${o}
- </label>`).join("")}
- </div>`).join("")}
- <button class="primary" type="submit">Testi bitir və nəticəni yoxla</button>
- </form>
- <div class="result" id="full-test-result"></div>
+  <h2>${topics[index].title} — Test</h2>
+  <p>50 sualı cavablandır. Sonda nəticəni və izahları görəcəksən.</p>
+  <form id="full-test">
+   ${questions.map((q,i)=>`
+   <div class="quiz-question">
+    <p>${i+1}. ${q.text}</p>
+    ${q.options.map((o,j)=>`
+    <label class="option"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}
+   </div>`).join("")}
+   <button class="primary" type="submit">Testi bitir və nəticəni yoxla</button>
+  </form>
+  <div class="result" id="full-test-result"></div>
  </div>`;
  showPage("test-page");
 
- const form=$("full-test");
- form.addEventListener("submit",e=>{
+ $("full-test").addEventListener("submit",e=>{
   e.preventDefault();
-  let score=0,answered=0,details="";
+  let score=0,details="";
   questions.forEach((q,i)=>{
-   const selected=form.querySelector(`input[name="q${i}"]:checked`);
-   const ok=!!selected && Number(selected.value)===q.answer;
-   if(selected)answered++;
+   const selected=$("full-test").querySelector(`input[name="q${i}"]:checked`);
+   const ok=!!selected&&Number(selected.value)===q.answer;
    if(ok)score++;
-   details+=`
-   <div class="example">
-   <b class="${ok?"correct":"wrong"}">${i+1}. ${ok?"✓ Düzgün":"✗ Səhv və ya cavabsız"}</b>
-   <p><b>Sənin cavabın:</b> ${selected?q.options[Number(selected.value)]:"Cavab verilməyib"}</p>
-   <p><b>Düzgün cavab:</b> ${q.options[q.answer]}</p>
-   <p><b>İzah:</b> ${q.explanation}</p>
+   details+=`<div class="example">
+    <b class="${ok?"correct":"wrong"}">${i+1}. ${ok?"✓ Düzgün":"✗ Səhv və ya cavabsız"}</b>
+    <p>Sənin cavabın: ${selected?q.options[Number(selected.value)]:"Cavabsız"}</p>
+    <p>Düzgün cavab: ${q.options[q.answer]}</p>
+    <p>İzah: ${q.explanation}</p>
    </div>`;
   });
-
   const result=$("full-test-result");
-  result.innerHTML=`
-  <h2>Nəticə: ${score} / 50</h2>
-  <p>Düzgün: ${score} · Cavablandırılan: ${answered} / 50</p>
-  <h3 style="margin-top:18px">Cavabların izahı</h3>
-  ${details}
-  <but
+  result.innerHTML=`<h2>Nəticə: ${score} / 50</h2>${details}<button class="primary" type="button" id="retry-test">Yenidən test et</button>`;
+  result.style.display="block";
+  $("full-test").querySelectorAll("input").forEach(x=>x.disabled=true);
+  $("full-test").querySelector('button[type="submit"]').disabled=true;
+  $("retry-test").addEventListener("click",()=>openTest(index));
+  result.scrollIntoView({behavior:"smooth"});
+ });
+}
+
+/* EV TAPŞIRIQLARI */
+function renderHomeworkTopics(){
+ const list=$("homework-topic-list");
+ list.innerHTML="";
+ topics.forEach((t,i)=>{
+  const b=document.createElement("button");
+  b.className="topic";
+  b.innerHTML=`<strong>${i+1}. ${t.title}</strong><small>20 sual · İzahlı tapşırıq</small>`;
+  b.addEventListener("click",()=>star
