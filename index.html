@@ -52,6 +52,7 @@ main{max-width:1050px;margin:auto;padding:25px 18px 50px}
 .primary{border:0;background:#1769c2;color:#fff;padding:13px 18px;border-radius:10px;font-weight:bold;width:100%}
 .primary:hover{background:#1056a3}
 .primary:disabled{opacity:.5;cursor:not-allowed}
+.secondary{border:1px solid #1769c2;background:#edf5ff;color:#1769c2;padding:12px 18px;border-radius:10px;font-weight:bold;width:100%;margin-top:10px}
 .result{display:none;background:#edf5ff;border-radius:12px;padding:17px;margin-top:17px}
 .correct{color:#16844c}
 .wrong{color:#cf4141}
@@ -64,6 +65,11 @@ main{max-width:1050px;margin:auto;padding:25px 18px 50px}
 .contact-item strong{display:block;color:#1769c2;font-size:14px}
 .contact-item a{color:#243b57;text-decoration:none;overflow-wrap:anywhere}
 .progress-text{color:#718198;font-size:14px;margin:8px 0 15px}
+.feedback{padding:15px;border-radius:10px;margin:15px 0;background:#edf5ff}
+.feedback.good{border-left:4px solid #16844c}
+.feedback.bad{border-left:4px solid #cf4141}
+.code-input{width:100%;padding:14px;border:1px solid #d6e2f0;border-radius:10px;font-size:18px;margin:12px 0;letter-spacing:3px}
+.lock-icon{font-size:48px;margin-bottom:12px}
 footer{text-align:center;background:#fff;border-top:1px solid #e7edf5;padding:27px 15px;color:#718198;font-size:13px}
 footer strong{color:#1769c2}
 @media(max-width:600px){
@@ -149,6 +155,18 @@ footer strong{color:#1769c2}
 <p>Mövzular, qaydalar və nümunələr</p>
 <span class="arrow">Qaydalara keç →</span>
 </button>
+<button class="subject" data-page="homework">
+<div class="subject-icon">📒</div>
+<h3>Ev tapşırıqları</h3>
+<p>Hər mövzu üzrə 20 sual və izahlı cavab</p>
+<span class="arrow">Tapşırıqlara keç →</span>
+</button>
+<button class="subject" data-page="practice-exams">
+<div class="subject-icon">🔒</div>
+<h3>Sınaqlar</h3>
+<p>Admin kodu ilə açılan çətin sınaqlar</p>
+<span class="arrow">Sınaqlara keç →</span>
+</button>
 </div>
 </section>
 
@@ -164,6 +182,40 @@ footer strong{color:#1769c2}
 <h1>Riyaziyyat qaydaları</h1>
 <p>Öyrənmək istədiyin mövzunu seç.</p>
 <div class="topic-grid" id="topic-list"></div>
+</section>
+
+<section id="homework" class="page">
+<button class="back" data-page="math">← Riyaziyyata qayıt</button>
+<h1>Ev tapşırıqları</h1>
+<p>Hər mövzuda 20 sual var. Cavab verdikdən sonra düzgün cavab və izah göstəriləcək.</p>
+<div class="topic-grid" id="homework-topic-list"></div>
+</section>
+
+<section id="homework-page" class="page">
+<button class="back" data-page="homework">← Ev tapşırıqlarına qayıt</button>
+<div id="homework-content"></div>
+</section>
+
+<section id="practice-exams" class="page">
+<button class="back" data-page="math">← Riyaziyyata qayıt</button>
+<h1>Sınaqlar</h1>
+<div class="card">
+<div class="lock-icon">🔐</div>
+<h2>Sınaq 1</h2>
+<p>5 mövzudan hazırlanmış 40 çətin sual. Sınağa daxil olmaq üçün admindən kod almalısınız.</p>
+<button class="primary" id="exam-continue">Davam et</button>
+<div id="exam-code-area" style="display:none;margin-top:18px">
+<label for="admin-code"><b>Admin kodunu daxil edin:</b></label>
+<input class="code-input" id="admin-code" type="password" inputmode="numeric" placeholder="Kodu yazın">
+<button class="primary" id="check-admin-code">Sınağa daxil ol</button>
+<p id="code-message" style="margin-top:12px"></p>
+</div>
+</div>
+</section>
+
+<section id="exam-page" class="page">
+<button class="back" data-page="practice-exams">← Sınaqlara qayıt</button>
+<div id="exam-content"></div>
 </section>
 
 <section id="verbal" class="page">
@@ -408,19 +460,4 @@ function openTest(index){
   <p>Düzgün: ${score} · Cavablandırılan: ${answered} / 50</p>
   <h3 style="margin-top:18px">Cavabların izahı</h3>
   ${details}
-  <button type="button" class="primary" id="retry">Yenidən test et</button>`;
-  result.style.display="block";
-
-  form.querySelectorAll("input").forEach(x=>x.disabled=true);
-  form.querySelector('button[type="submit"]').disabled=true;
-  $("retry").addEventListener("click",()=>openTest(index));
-  result.scrollIntoView({behavior:"smooth",block:"start"});
- });
-}
-
-$("year").textContent=new Date().getFullYear();
-renderTopics();
-renderTestTopics();
-</script>
-</body>
-</html>
+  <but
