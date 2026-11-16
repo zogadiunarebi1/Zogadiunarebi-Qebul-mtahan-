@@ -1,459 +1,466 @@
 
-<!DOCTYPE html>
-<html lang="az">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZQİ — Hesabım</title>
+<!-- ZQI - RIYAZIYYAT DERSI -->
+<style>
+#zqi-lesson {
+  --gold: #d6ad52;
+  --bg: #090909;
+  --panel: #151515;
+  --text: #f5f5f5;
+  --muted: #aaa;
+  color: var(--text);
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+  padding: 24px 15px 50px;
+  line-height: 1.7;
+  border-radius: 14px;
+}
+#zqi-lesson * { box-sizing: border-box; }
+#zqi-lesson .container {
+  max-width: 900px;
+  margin: auto;
+}
+#zqi-lesson .hero {
+  text-align: center;
+  padding: 35px 15px;
+  border: 1px solid #5b4724;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#1d1910,#0d0d0d);
+  margin-bottom: 25px;
+}
+#zqi-lesson .logo {
+  color: var(--gold);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+#zqi-lesson h1 {
+  color: var(--gold);
+  font-size: clamp(23px,5vw,35px);
+  line-height: 1.3;
+  margin: 15px 0;
+}
+#zqi-lesson h2 {
+  color: var(--gold);
+  font-size: 22px;
+  margin-top: 0;
+}
+#zqi-lesson h3 { color: var(--gold); }
+#zqi-lesson p { margin: 10px 0; }
+#zqi-lesson .muted { color: var(--muted); }
+#zqi-lesson .panel {
+  background: var(--panel);
+  border: 1px solid #303030;
+  padding: 22px;
+  border-radius: 13px;
+  margin: 18px 0;
+}
+#zqi-lesson .time {
+  display: inline-block;
+  color: #111;
+  background: var(--gold);
+  border-radius: 20px;
+  padding: 4px 13px;
+  font-weight: bold;
+  font-size: 13px;
+}
+#zqi-lesson .formula {
+  background: #211c12;
+  border-left: 4px solid var(--gold);
+  color: #f5d68d;
+  padding: 15px;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 20px;
+  margin: 15px 0;
+  overflow-wrap: anywhere;
+}
+#zqi-lesson .example {
+  background: #101010;
+  border: 1px solid #333;
+  padding: 13px;
+  border-radius: 9px;
+  margin: 10px 0;
+}
+#zqi-lesson .gold { color: var(--gold); font-weight: bold; }
+#zqi-lesson .note {
+  background: #211c12;
+  border: 1px solid #574421;
+  border-radius: 9px;
+  padding: 14px;
+  margin-top: 14px;
+}
+#zqi-lesson table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+#zqi-lesson th, #zqi-lesson td {
+  border: 1px solid #393939;
+  padding: 10px;
+  text-align: left;
+}
+#zqi-lesson th {
+  background: #292115;
+  color: var(--gold);
+}
+#zqi-lesson .question {
+  padding: 17px 0;
+  border-bottom: 1px solid #333;
+}
+#zqi-lesson .question:last-child { border-bottom: 0; }
+#zqi-lesson .question p { font-weight: bold; }
+#zqi-lesson .option {
+  display: block;
+  background: #202020;
+  border: 1px solid #393939;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: .2s;
+}
+#zqi-lesson .option:hover {
+  border-color: var(--gold);
+}
+#zqi-lesson .option input {
+  accent-color: var(--gold);
+  margin-right: 9px;
+}
+#zqi-lesson button {
+  background: var(--gold);
+  color: #111;
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+}
+#zqi-lesson button:hover { background: #efc96f; }
+#zqi-lesson .result {
+  display: none;
+  padding: 17px;
+  border-radius: 10px;
+  background: #211c12;
+  border: 1px solid var(--gold);
+  margin-top: 18px;
+}
+#zqi-lesson .correct { color: #63d68a; }
+#zqi-lesson .wrong { color: #ff7777; }
+#zqi-lesson .footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 5px 5px;
+  font-size: 13px;
+}
+@media(max-width:500px) {
+  #zqi-lesson { padding: 15px 10px 30px; }
+  #zqi-lesson .panel { padding: 16px; }
+  #zqi-lesson h2 { font-size: 20px; }
+}
+</style>
 
-  <style>
-    :root {
-      --gold: #d8ad52;
-      --bg: #090909;
-      --panel: #141414;
-      --text: #f5f5f5;
-      --muted: #999;
-    }
+<div id="zqi-lesson">
+<div class="container">
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      padding: 20px;
-      border-bottom: 1px solid #292929;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      color: var(--gold);
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    header span {
-      color: #aaa;
-      font-size: 12px;
-    }
-
-    main {
-      width: min(430px, 92%);
-      margin: 45px auto;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid #292929;
-      border-radius: 18px;
-      padding: 26px;
-    }
-
-    h1 {
-      font-size: 25px;
-      margin: 0 0 8px;
-    }
-
-    .sub {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      margin: 15px 0 8px;
-      color: #ddd;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      border-radius: 9px;
-      border: 1px solid #333;
-      background: #0b0b0b;
-      color: white;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: var(--gold);
-    }
-
-    button {
-      width: 100%;
-      padding: 13px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--gold);
-      color: #111;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    button:hover { opacity: .9; }
-
-    .secondary {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid #5c4926;
-      margin-top: 10px;
-    }
-
-    .switch {
-      text-align: center;
-      color: #aaa;
-      font-size: 14px;
-      margin-top: 20px;
-    }
-
-    .switch a {
-      color: var(--gold);
-      cursor: pointer;
-    }
-
-    .hidden { display: none !important; }
-
-    .avatar {
-      width: 88px;
-      height: 88px;
-      margin: 8px auto 18px;
-      border-radius: 50%;
-      background: #252015;
-      border: 2px solid var(--gold);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      font-size: 34px;
-      font-weight: bold;
-    }
-
-    .profile-head { text-align: center; }
-
-    .profile-head h1 { margin-bottom: 7px; }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 12px;
-      border: 1px solid #51401e;
-      border-radius: 20px;
-      color: var(--gold);
-      font-size: 12px;
-      margin-bottom: 20px;
-    }
-
-    .info {
-      padding: 14px 0;
-      border-bottom: 1px solid #292929;
-    }
-
-    .info small {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 7px;
-    }
-
-    .info strong {
-      overflow-wrap: anywhere;
-    }
-
-    .message {
-      margin-top: 15px;
-      color: var(--gold);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    footer {
-      text-align: center;
-      color: #666;
-      font-size: 12px;
-      padding: 20px;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
+  <div class="hero">
     <div class="logo">ZQİ</div>
-    <span>Zogadiunarebi Qəbul İmtahanı</span>
-  </header>
+    <div class="muted">Zogadiunarebi Qəbul İmtahanı</div>
+    <h1>ƏDƏDLƏR ÇOXLUĞU</h1>
+    <p>Natural • Tam • Rasional • İrrasional ədədlər</p>
+    <span class="time">90 DƏQİQƏLİK DƏRS</span>
+  </div>
 
-  <main>
-    <!-- QEYDIYYAT -->
-    <section id="register" class="panel">
-      <h1>Hesab yarat</h1>
-      <p class="sub">ZQİ platformasına xoş gəlmisən!</p>
+  <div class="panel">
+    <h2>📚 Dərsin proqramı</h2>
+    <p>Bu dərsdə ədədlərin növlərini, onların xüsusiyyətlərini və bir-birindən fərqlərini öyrənəcəyik.</p>
+    <ol>
+      <li>Natural ədədlər — 15 dəqiqə</li>
+      <li>Tam ədədlər — 15 dəqiqə</li>
+      <li>Rasional ədədlər — 20 dəqiqə</li>
+      <li>İrrasional ədədlər — 15 dəqiqə</li>
+      <li>Ədədlər çoxluğunun əlaqəsi — 10 dəqiqə</li>
+      <li>Yekun yoxlama — 10 dəqiqə</li>
+      <li>Dərsə giriş — 5 dəqiqə</li>
+    </ol>
+  </div>
 
-      <form id="registerForm">
-        <label for="fullName">Ad və soyad</label>
-        <input id="fullName" required maxlength="80"
-          autocomplete="name" placeholder="Adın və soyadın">
+  <div class="panel">
+    <span class="time">5 DƏQİQƏ</span>
+    <h2>1. Dərsə giriş</h2>
+    <p>Şagirdə aşağıdakı sualları verərək ilkin biliklərini yoxla:</p>
+    <ul>
+      <li>Riyaziyyatda ədəd nədir?</li>
+      <li>Mənfi ədədlər nə deməkdir?</li>
+      <li>Kəsr ədədlər nədir?</li>
+      <li>Sıfır natural ədəd sayılırmı?</li>
+    </ul>
+    <div class="note">Məqsəd: Şagirdin mövzu haqqında əvvəlki biliklərini müəyyən etmək.</div>
+  </div>
 
-        <label for="username">İstifadəçi adı</label>
-        <input id="username" required minlength="3" maxlength="24"
-          autocomplete="username" placeholder="İstifadəçi adı">
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>2. Natural ədədlər (N)</h2>
+    <p><b>Qayda:</b> Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.</p>
+    <div class="formula">N = {1, 2, 3, 4, 5, 6, ...}</div>
+    <h3>Nümunələr</h3>
+    <div class="example">
+      <p class="correct">✓ 1 — natural ədəddir.</p>
+      <p class="correct">✓ 15 — natural ədəddir.</p>
+      <p class="correct">✓ 100 — natural ədəddir.</p>
+      <p class="wrong">✗ -5 — natural ədəd deyil.</p>
+      <p class="wrong">✗ 2,5 — natural ədəd deyil.</p>
+    </div>
+    <h3>Şagird üçün tapşırıq</h3>
+    Aşağıdakılardan natural ədədləri seç:
+    <div class="example">7, -3, 12, 0, 25, 4,5</div>
+    <div class="note">Qeyd: Bu dərsdə N = {1, 2, 3, ...} qəbul edirik. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.</div>
+  </div>
 
-        <label for="email">E-poçt</label>
-        <input id="email" type="email" required
-          autocomplete="email" placeholder="example@email.com">
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>3. Tam ədədlər (Z)</h2>
+    <p><b>Qayda:</b> Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.</p>
+    <div class="formula">Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}</div>
+    <h3>Tam ədədlərin növləri</h3>
+    <div class="example">
+      <p><b>Mənfi ədədlər:</b> -1, -2, -10</p>
+      <p><b>Sıfır:</b> 0</p>
+      <p><b>Müsbət ədədlər:</b> 1, 2, 10</p>
+    </div>
+    <h3>Nümunələr</h3>
+    <table>
+      <tr><th>Ədəd</th><th>Tam ədəddirmi?</th></tr>
+      <tr><td>-8</td><td class="correct">Bəli</td></tr>
+      <tr><td>0</td><td class="correct">Bəli</td></tr>
+      <tr><td>15</td><td class="correct">Bəli</td></tr>
+      <tr><td>2,5</td><td class="wrong">Xeyr</td></tr>
+      <tr><td>1/2</td><td class="wrong">Xeyr</td></tr>
+    </table>
+    <div class="note"><b>Vacib qayda:</b> Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.</div>
+  </div>
 
-        <label for="password">Şifrə</label>
-        <input id="password" type="password" required minlength="8"
-          autocomplete="new-password" placeholder="Ən azı 8 simvol">
+  <div class="panel">
+    <span class="time">20 DƏQİQƏ</span>
+    <h2>4. Rasional ədədlər (Q)</h2>
+    <p><b>Qayda:</b> İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.</p>
+    <div class="formula">Q = {a/b : a,b ∈ Z; b ≠ 0}</div>
+    <p>Burada:</p>
+    <ul>
+      <li>a — tam ədəd;</li>
+      <li>b — sıfırdan fərqli tam ədəd.</li>
+    </ul>
+    <h3>Nümunələr</h3>
+    <div class="formula">1/2, 3/4, -5/2</div>
+    <div class="example">
+      <p>5 = 5/1</p>
+      <p>-3 = -3/1</p>
+      <p>0,5 = 1/2</p>
+      <p>0,75 = 3/4</p>
+      <p>0,333... = 1/3</p>
+    </div>
+    <div class="note">
+      <b>Vacib qayda:</b> Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir.
+    </div>
+    <h3>Şagird üçün tapşırıq</h3>
+    Aşağıdakı ədədlərdən rasional olanları müəyyən et:
+    <div class="example">3/5, -7, 0,25, √2, 0,777..., π</div>
+  </div>
 
-        <label for="confirmPassword">Şifrəni təsdiqlə</label>
-        <input id="confirmPassword" type="password" required
-          minlength="8" autocomplete="new-password"
-          placeholder="Şifrəni yenidən yaz">
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>5. İrrasional ədədlər</h2>
+    <p><b>Qayda:</b> İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.</p>
+    <p>Onların onluq yazılışı sonsuz və dövri olmayan ədədlərdir.</p>
+    <h3>Nümunələr</h3>
+    <div class="formula">√2 = 1,4142135...</div>
+    <div class="formula">√3 = 1,7320508...</div>
+    <div class="formula">π = 3,1415926...</div>
+    <div class="note">
+      <b>Diqqət!</b> Hər kökaltı ifadə irrasional deyil.
+      <p>√4 = 2 — rasional ədəddir.</p>
+      <p>√5 — irrasional ədəddir.</p>
+    </div>
+  </div>
 
-        <button type="submit">Qeydiyyatdan keç</button>
-      </form>
+  <div class="panel">
+    <span class="time">10 DƏQİQƏ</span>
+    <h2>6. Ədədlər çoxluğunun əlaqəsi</h2>
+    <p>Ədədlər çoxluğu arasında müəyyən əlaqə mövcuddur.</p>
+    <div class="formula">N ⊂ Z ⊂ Q ⊂ R</div>
+    <div class="example">
+      <p><b>N</b> — Natural ədədlər</p>
+      <p><b>Z</b> — Tam ədədlər</p>
+      <p><b>Q</b> — Rasional ədədlər</p>
+      <p><b>R</b> — Həqiqi ədədlər</p>
+    </div>
+    <p>İrrasional ədədlər də həqiqi ədədlərə daxildir, lakin rasional ədədlərə daxil deyil.</p>
+    <div class="note">
+      <b>Yadda saxla:</b> Natural ədəd həm tam, həm rasional, həm də həqiqi ədəddir.
+    </div>
+  </div>
 
-      <div id="registerMessage" class="message" role="status"></div>
+  <div class="panel" id="zqi-quiz">
+    <span class="time">10 DƏQİQƏ</span>
+    <h2>7. Yekun yoxlama — Mini test</h2>
+    <p class="muted">Biliklərini yoxla. Hər sualın yalnız bir düzgün cavabı var.</p>
 
-      <p class="switch">
-        Artıq hesabın var?
-        <a id="showLogin">Daxil ol</a>
-      </p>
-    </section>
-
-    <!-- GIRIS -->
-    <section id="login" class="panel hidden">
-      <h1>Hesabına daxil ol</h1>
-      <p class="sub">Davam etmək üçün məlumatlarını daxil et.</p>
-
-      <form id="loginForm">
-        <label for="loginEmail">E-poçt</label>
-        <input id="loginEmail" type="email" required
-          autocomplete="email" placeholder="E-poçt ünvanın">
-
-        <label for="loginPassword">Şifrə</label>
-        <input id="loginPassword" type="password" required
-          autocomplete="current-password" placeholder="Şifrən">
-
-        <button type="submit">Daxil ol</button>
-      </form>
-
-      <div id="loginMessage" class="message" role="status"></div>
-
-      <p class="switch">
-        Hesabın yoxdur?
-        <a id="showRegister">Qeydiyyatdan keç</a>
-      </p>
-    </section>
-
-    <!-- PROFIL -->
-    <section id="profile" class="panel hidden">
-      <div class="profile-head">
-        <div class="avatar" id="avatar">Z</div>
-        <h1 id="profileName">İstifadəçi</h1>
-        <p class="sub">ZQİ hesabın</p>
-        <span class="tag">Üzv</span>
+    <form id="zqi-test">
+      <div class="question">
+        <p>1. 7 hansı çoxluğa daxildir?</p>
+        <label class="option"><input type="radio" name="q1" value="0"> Yalnız natural</label>
+        <label class="option"><input type="radio" name="q1" value="1"> Natural, tam, rasional və həqiqi</label>
+        <label class="option"><input type="radio" name="q1" value="2"> Yalnız irrasional</label>
       </div>
 
-      <div class="info">
-        <small>İstifadəçi adı</small>
-        <strong id="profileUsername"></strong>
+      <div class="question">
+        <p>2. -5 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q2" value="0"> Natural</label>
+        <label class="option"><input type="radio" name="q2" value="1"> Tam və rasional</label>
+        <label class="option"><input type="radio" name="q2" value="2"> İrrasional</label>
       </div>
 
-      <div class="info">
-        <small>Ad və soyad</small>
-        <strong id="profileFullName"></strong>
+      <div class="question">
+        <p>3. √9 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q3" value="0"> İrrasional</label>
+        <label class="option"><input type="radio" name="q3" value="1"> Natural, tam və rasional</label>
+        <label class="option"><input type="radio" name="q3" value="2"> Yalnız rasional</label>
       </div>
 
-      <div class="info">
-        <small>E-poçt</small>
-        <strong id="profileEmail"></strong>
+      <div class="question">
+        <p>4. π hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q4" value="0"> Rasional</label>
+        <label class="option"><input type="radio" name="q4" value="1"> Tam</label>
+        <label class="option"><input type="radio" name="q4" value="2"> İrrasional</label>
       </div>
 
-      <button id="logout" class="secondary">Hesabdan çıxış</button>
-      <p id="profileMessage" class="message" role="status"></p>
-    </section>
-  </main>
+      <div class="question">
+        <p>5. 0,5 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q5" value="0"> Rasional</label>
+        <label class="option"><input type="radio" name="q5" value="1"> İrrasional</label>
+        <label class="option"><input type="radio" name="q5" value="2"> Natural</label>
+      </div>
 
-  <footer>© ZQİ — Zogadiunarebi Qəbul İmtahanı</footer>
+      <div class="question">
+        <p>6. √7 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q6" value="0"> Natural</label>
+        <label class="option"><input type="radio" name="q6" value="1"> İrrasional</label>
+        <label class="option"><input type="radio" name="q6" value="2"> Tam</label>
+      </div>
 
+      <div class="question">
+        <p>7. Hansı münasibət doğrudur?</p>
+        <label class="option"><input type="radio" name="q7" value="0"> N ⊂ Z ⊂ Q</label>
+        <label class="option"><input type="radio" name="q7" value="1"> Q ⊂ N ⊂ Z</label>
+        <label class="option"><input type="radio" name="q7" value="2"> Z ⊂ N ⊂ Q</label>
+      </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+      <button type="submit">CAVABLARI YOXLAMAQ</button>
+    </form>
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    <div class="result" id="zqi-result" aria-live="polite">
+      <h2 id="zqi-score"></h2>
+      <p id="zqi-message"></p>
+      <div id="zqi-explanations"></div>
+      <button type="button" id="zqi-retry">YENİDƏN CƏHD ET</button>
+    </div>
+  </div>
 
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+  <div class="panel">
+    <h2>📝 Ev tapşırığı</h2>
+    <p>Şagird aşağıdakı tapşırıqları yerinə yetirməlidir:</p>
+    <ol>
+      <li>10 natural ədəd yaz.</li>
+      <li>10 tam ədəd yaz.</li>
+      <li>5 rasional ədəd yaz.</li>
+      <li>5 irrasional ədəd yaz.</li>
+      <li>Aşağıdakı ədədləri uyğun çoxluqlara ayır.</li>
+    </ol>
+    <div class="formula">
+      -12, 0, 5, 3/7, √16, √11, π, 2,5
+    </div>
+  </div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
-  authDomain: "zqi-riyaziyyat.firebaseapp.com",
-  projectId: "zqi-riyaziyyat",
-  storageBucket: "zqi-riyaziyyat.firebasestorage.app",
-  messagingSenderId: "228687771538",
-  appId: "1:228687771538:web:4b4c31d993b0614ca6334b",
-  measurementId: "G-MT0Q1DP79N"
-};
+  <div class="footer">
+    <div class="logo">ZQİ</div>
+    <p>Zogadiunarebi Qəbul İmtahanı</p>
+    <p>Riyaziyyat dərsi • 1-ci dərs</p>
+  </div>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+</div>
+</div>
 
-const $ = id => document.getElementById(id);
+<script>
+(function () {
+  const root = document.getElementById("zqi-lesson");
+  if (!root) return;
 
-function showPage(page) {
-  ["register", "login", "profile"].forEach(id => {
-    $(id).classList.toggle("hidden", id !== page);
+  const form = root.querySelector("#zqi-test");
+  const result = root.querySelector("#zqi-result");
+  const score = root.querySelector("#zqi-score");
+  const message = root.querySelector("#zqi-message");
+  const explanations = root.querySelector("#zqi-explanations");
+
+  const answers = [1, 1, 1, 2, 0, 1, 0];
+
+  const details = [
+    "7 natural, tam, rasional və həqiqi ədəddir.",
+    "-5 tam və rasional ədəddir.",
+    "√9 = 3 olduğuna görə natural, tam və rasionaldır.",
+    "π irrasional ədəddir.",
+    "0,5 = 1/2 olduğuna görə rasionaldır.",
+    "√7 irrasional ədəddir.",
+    "Natural ədədlər tam, tam ədədlər isə rasional ədədlərin alt çoxluğudur."
+  ];
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let correct = 0;
+    let html = "";
+
+    answers.forEach(function (answer, i) {
+      const selected = form.querySelector(
+        'input[name="q' + (i + 1) + '"]:checked'
+      );
+
+      const isCorrect = selected && Number(selected.value) === answer;
+
+      if (isCorrect) correct++;
+
+      html +=
+        '<div class="example">' +
+        '<p class="' + (isCorrect ? "correct" : "wrong") + '">' +
+        "Sual " + (i + 1) + ": " +
+        (isCorrect ? "✓ Düzgün" : "✗ Yanlış") +
+        "</p><p>" + details[i] + "</p></div>";
+    });
+
+    score.textContent = "Nəticə: " + correct + " / 7";
+    message.textContent =
+      correct === 7 ? "Əla! Bütün sualları düzgün cavablandırdın." :
+      correct >= 5 ? "Yaxşı nəticə! Bir az da təkrar et." :
+      "Mövzuları yenidən oxu və testə təkrar cəhd et.";
+
+    explanations.innerHTML = html;
+    result.style.display = "block";
+
+    form.querySelectorAll("input").forEach(function (input) {
+      input.disabled = true;
+    });
+
+    result.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-}
 
-function message(id, text) {
-  $(id).textContent = text;
-}
-
-function errorText(error) {
-  const errors = {
-    "auth/email-already-in-use": "Bu e-poçt artıq qeydiyyatdan keçib.",
-    "auth/invalid-email": "E-poçt ünvanı düzgün deyil.",
-    "auth/weak-password": "Şifrə ən azı 6 simvol olmalıdır.",
-    "auth/invalid-credential": "E-poçt və ya şifrə yanlışdır.",
-    "auth/network-request-failed": "İnternet bağlantısını yoxla.",
-    "permission-denied": "Firestore Rules qaydalarını yoxlamaq lazımdır."
-  };
-
-  return errors[error.code] || "Xəta: " + error.message;
-}
-
-$("showLogin").onclick = () => showPage("login");
-$("showRegister").onclick = () => showPage("register");
-
-// QEYDIYYAT
-$("registerForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const fullName = $("fullName").value.trim();
-  const username = $("username").value.trim();
-  const email = $("email").value.trim();
-  const password = $("password").value;
-  const confirm = $("confirmPassword").value;
-
-  if (!fullName || !username || !email) {
-    message("registerMessage", "Bütün xanaları doldur.");
-    return;
-  }
-
-  if (!/^[a-zA-Z0-9_]{3,24}$/.test(username)) {
-    message("registerMessage", "İstifadəçi adı 3–24 simvol olmalıdır.");
-    return;
-  }
-
-  if (password.length < 8) {
-    message("registerMessage", "Şifrə ən azı 8 simvol olmalıdır.");
-    return;
-  }
-
-  if (password !== confirm) {
-    message("registerMessage", "Şifrələr eyni deyil.");
-    return;
-  }
-
-  try {
-    message("registerMessage", "Hesab yaradılır...");
-
-    const credential = await createUserWithEmailAndPassword(
-      auth, email, password
-    );
-
-    await updateProfile(credential.user, {
-      displayName: fullName
+  root.querySelector("#zqi-retry").addEventListener("click", function () {
+    form.reset();
+    form.querySelectorAll("input").forEach(function (input) {
+      input.disabled = false;
     });
-
-    await setDoc(doc(db, "users", credential.user.uid), {
-      name: fullName,
-      username: username,
-      email: credential.user.email,
-      createdAt: serverTimestamp()
-    });
-
-    message("registerMessage", "Qeydiyyat uğurludur!");
-  } catch (error) {
-    message("registerMessage", errorText(error));
-  }
-});
-
-// GIRIS
-$("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const email = $("loginEmail").value.trim();
-  const password = $("loginPassword").value;
-
-  try {
-    message("loginMessage", "Hesaba daxil olunur...");
-
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    message("loginMessage", errorText(error));
-  }
-});
-
-// PROFIL
-onAuthStateChanged(auth, async user => {
-  if (!user) {
-    showPage("login");
-    return;
-  }
-
-  try {
-    const snapshot = await getDoc(doc(db, "users", user.uid));
-    const data = snapshot.exists() ? snapshot.data() : {};
-
-    const name = data.name || user.displayName || "İstifadəçi";
-    const username = data.username || "istifadəçi";
-
-    $("profileName").textContent = name;
-    $("profileFullName").textContent = name;
-    $("profileUsername").textContent = "@" + username;
-    $("profileEmail").textContent = user.email || "";
-    $("avatar").textContent = name.charAt(0).toUpperCase();
-
-    showPage("profile");
-  } catch (error) {
-    showPage("profile");
-    message("profileMessage", errorText(error));
-  }
-});
-
-// HESABDAN CIXIS
-$("logout").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    message("profileMessage", errorText(error));
-  }
-});
+    result.style.display = "none";
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
 </script>
-
-</body>
-</html>
