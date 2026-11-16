@@ -1,450 +1,466 @@
 
-<!DOCTYPE html>
-<html lang="az">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZQİ | Riyaziyyat Testləri</title>
-
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-
+<!-- ZQI - RIYAZIYYAT DERSI -->
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
- background:#080808;color:#eee;
- font-family:Arial,sans-serif;
- min-height:100vh;
+#zqi-lesson {
+  --gold: #d6ad52;
+  --bg: #090909;
+  --panel: #151515;
+  --text: #f5f5f5;
+  --muted: #aaa;
+  color: var(--text);
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+  padding: 24px 15px 50px;
+  line-height: 1.7;
+  border-radius: 14px;
 }
-header{
- background:#111;border-bottom:1px solid #b58b35;
- padding:20px;text-align:center;
+#zqi-lesson * { box-sizing: border-box; }
+#zqi-lesson .container {
+  max-width: 900px;
+  margin: auto;
 }
-.logo{color:#e7bd55;font-size:28px;font-weight:bold}
-header p{color:#aaa;margin-top:7px}
-.container{max-width:850px;margin:25px auto;padding:15px}
-h2{color:#e7bd55;margin-bottom:15px}
-.panel{
- background:#141414;border:1px solid #35302a;
- border-radius:14px;padding:20px;margin-bottom:20px;
+#zqi-lesson .hero {
+  text-align: center;
+  padding: 35px 15px;
+  border: 1px solid #5b4724;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#1d1910,#0d0d0d);
+  margin-bottom: 25px;
 }
-.info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.info span{color:#e7bd55}
-.progress{
- background:#292929;height:8px;border-radius:20px;
- margin:15px 0;overflow:hidden
+#zqi-lesson .logo {
+  color: var(--gold);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 5px;
 }
-.progress div{height:100%;background:#d6aa42;width:0%;transition:.3s}
-.question{
- background:#151515;border:1px solid #34302a;
- border-radius:12px;padding:18px;margin:15px 0;
+#zqi-lesson h1 {
+  color: var(--gold);
+  font-size: clamp(23px,5vw,35px);
+  line-height: 1.3;
+  margin: 15px 0;
 }
-.question h3{font-size:16px;line-height:1.6;margin-bottom:14px}
-.number{color:#d6aa42;font-size:13px;margin-bottom:8px}
-.options{display:grid;gap:9px}
-.option{
- border:1px solid #414141;background:#202020;
- padding:13px;border-radius:9px;color:white;
- text-align:left;cursor:pointer;font-size:15px;
- transition:.2s
+#zqi-lesson h2 {
+  color: var(--gold);
+  font-size: 22px;
+  margin-top: 0;
 }
-.option:hover{border-color:#d6aa42}
-.option.correct{background:#123d25;border-color:#27ae60;color:#7dffae}
-.option.wrong{background:#481c1c;border-color:#e74c3c;color:#ffaaaa}
-.option:disabled{cursor:default}
-.feedback{font-size:14px;margin-top:10px;font-weight:bold}
-.correct-text{color:#42d878}
-.wrong-text{color:#ff6565}
-button.main{
- width:100%;padding:15px;background:#d6aa42;
- border:0;border-radius:10px;color:#111;
- font-size:16px;font-weight:bold;cursor:pointer;
- margin-top:12px
+#zqi-lesson h3 { color: var(--gold); }
+#zqi-lesson p { margin: 10px 0; }
+#zqi-lesson .muted { color: var(--muted); }
+#zqi-lesson .panel {
+  background: var(--panel);
+  border: 1px solid #303030;
+  padding: 22px;
+  border-radius: 13px;
+  margin: 18px 0;
 }
-button.main:disabled{opacity:.5;cursor:not-allowed}
-.result{text-align:center;padding:20px}
-.score{font-size:45px;color:#e7bd55;font-weight:bold;margin:15px}
-table{width:100%;border-collapse:collapse;margin-top:15px}
-td,th{padding:13px 8px;border-bottom:1px solid #333;text-align:left}
-th{color:#e7bd55}
-.rank{color:#e7bd55;font-weight:bold}
-.small{color:#aaa;font-size:13px;margin-top:10px;line-height:1.6}
-.hidden{display:none}
-footer{text-align:center;color:#666;padding:25px}
+#zqi-lesson .time {
+  display: inline-block;
+  color: #111;
+  background: var(--gold);
+  border-radius: 20px;
+  padding: 4px 13px;
+  font-weight: bold;
+  font-size: 13px;
+}
+#zqi-lesson .formula {
+  background: #211c12;
+  border-left: 4px solid var(--gold);
+  color: #f5d68d;
+  padding: 15px;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 20px;
+  margin: 15px 0;
+  overflow-wrap: anywhere;
+}
+#zqi-lesson .example {
+  background: #101010;
+  border: 1px solid #333;
+  padding: 13px;
+  border-radius: 9px;
+  margin: 10px 0;
+}
+#zqi-lesson .gold { color: var(--gold); font-weight: bold; }
+#zqi-lesson .note {
+  background: #211c12;
+  border: 1px solid #574421;
+  border-radius: 9px;
+  padding: 14px;
+  margin-top: 14px;
+}
+#zqi-lesson table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+#zqi-lesson th, #zqi-lesson td {
+  border: 1px solid #393939;
+  padding: 10px;
+  text-align: left;
+}
+#zqi-lesson th {
+  background: #292115;
+  color: var(--gold);
+}
+#zqi-lesson .question {
+  padding: 17px 0;
+  border-bottom: 1px solid #333;
+}
+#zqi-lesson .question:last-child { border-bottom: 0; }
+#zqi-lesson .question p { font-weight: bold; }
+#zqi-lesson .option {
+  display: block;
+  background: #202020;
+  border: 1px solid #393939;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: .2s;
+}
+#zqi-lesson .option:hover {
+  border-color: var(--gold);
+}
+#zqi-lesson .option input {
+  accent-color: var(--gold);
+  margin-right: 9px;
+}
+#zqi-lesson button {
+  background: var(--gold);
+  color: #111;
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+}
+#zqi-lesson button:hover { background: #efc96f; }
+#zqi-lesson .result {
+  display: none;
+  padding: 17px;
+  border-radius: 10px;
+  background: #211c12;
+  border: 1px solid var(--gold);
+  margin-top: 18px;
+}
+#zqi-lesson .correct { color: #63d68a; }
+#zqi-lesson .wrong { color: #ff7777; }
+#zqi-lesson .footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 5px 5px;
+  font-size: 13px;
+}
+@media(max-width:500px) {
+  #zqi-lesson { padding: 15px 10px 30px; }
+  #zqi-lesson .panel { padding: 16px; }
+  #zqi-lesson h2 { font-size: 20px; }
+}
 </style>
-</head>
 
-<body>
-
-<header>
- <div class="logo">ZQİ</div>
- <p>Zogadiunarebi Qəbul İmtahanı</p>
-</header>
-
+<div id="zqi-lesson">
 <div class="container">
 
- <div class="panel">
-  <h2>📚 Testlər</h2>
-  <div class="info">
-   <div>Fənn: <span>Riyaziyyat</span></div>
-   <div>Sinif: <span>9-cu sinif</span></div>
-   <div>Suallar: <span>20</span></div>
-   <div>Maksimum: <span>100 bal</span></div>
+  <div class="hero">
+    <div class="logo">ZQİ</div>
+    <div class="muted">Zogadiunarebi Qəbul İmtahanı</div>
+    <h1>ƏDƏDLƏR ÇOXLUĞU</h1>
+    <p>Natural • Tam • Rasional • İrrasional ədədlər</p>
+    <span class="time">90 DƏQİQƏLİK DƏRS</span>
   </div>
-  <div class="progress"><div id="progress"></div></div>
-  <p class="small" id="progressText">0 / 20 cavablandırılıb</p>
- </div>
 
- <div id="testArea"></div>
-
- <div class="panel">
-  <h2>🏆 Reytinq cədvəli</h2>
-  <p class="small">Ən yüksək nəticə göstərən şagirdlər.</p>
-  <div style="overflow-x:auto">
-   <table>
-    <thead>
-     <tr>
-      <th>Yer</th>
-      <th>Şagird</th>
-      <th>Bal</th>
-     </tr>
-    </thead>
-    <tbody id="ranking">
-     <tr><td colspan="3">Reytinq yüklənir...</td></tr>
-    </tbody>
-   </table>
+  <div class="panel">
+    <h2>📚 Dərsin proqramı</h2>
+    <p>Bu dərsdə ədədlərin növlərini, onların xüsusiyyətlərini və bir-birindən fərqlərini öyrənəcəyik.</p>
+    <ol>
+      <li>Natural ədədlər — 15 dəqiqə</li>
+      <li>Tam ədədlər — 15 dəqiqə</li>
+      <li>Rasional ədədlər — 20 dəqiqə</li>
+      <li>İrrasional ədədlər — 15 dəqiqə</li>
+      <li>Ədədlər çoxluğunun əlaqəsi — 10 dəqiqə</li>
+      <li>Yekun yoxlama — 10 dəqiqə</li>
+      <li>Dərsə giriş — 5 dəqiqə</li>
+    </ol>
   </div>
- </div>
+
+  <div class="panel">
+    <span class="time">5 DƏQİQƏ</span>
+    <h2>1. Dərsə giriş</h2>
+    <p>Şagirdə aşağıdakı sualları verərək ilkin biliklərini yoxla:</p>
+    <ul>
+      <li>Riyaziyyatda ədəd nədir?</li>
+      <li>Mənfi ədədlər nə deməkdir?</li>
+      <li>Kəsr ədədlər nədir?</li>
+      <li>Sıfır natural ədəd sayılırmı?</li>
+    </ul>
+    <div class="note">Məqsəd: Şagirdin mövzu haqqında əvvəlki biliklərini müəyyən etmək.</div>
+  </div>
+
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>2. Natural ədədlər (N)</h2>
+    <p><b>Qayda:</b> Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.</p>
+    <div class="formula">N = {1, 2, 3, 4, 5, 6, ...}</div>
+    <h3>Nümunələr</h3>
+    <div class="example">
+      <p class="correct">✓ 1 — natural ədəddir.</p>
+      <p class="correct">✓ 15 — natural ədəddir.</p>
+      <p class="correct">✓ 100 — natural ədəddir.</p>
+      <p class="wrong">✗ -5 — natural ədəd deyil.</p>
+      <p class="wrong">✗ 2,5 — natural ədəd deyil.</p>
+    </div>
+    <h3>Şagird üçün tapşırıq</h3>
+    Aşağıdakılardan natural ədədləri seç:
+    <div class="example">7, -3, 12, 0, 25, 4,5</div>
+    <div class="note">Qeyd: Bu dərsdə N = {1, 2, 3, ...} qəbul edirik. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.</div>
+  </div>
+
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>3. Tam ədədlər (Z)</h2>
+    <p><b>Qayda:</b> Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.</p>
+    <div class="formula">Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}</div>
+    <h3>Tam ədədlərin növləri</h3>
+    <div class="example">
+      <p><b>Mənfi ədədlər:</b> -1, -2, -10</p>
+      <p><b>Sıfır:</b> 0</p>
+      <p><b>Müsbət ədədlər:</b> 1, 2, 10</p>
+    </div>
+    <h3>Nümunələr</h3>
+    <table>
+      <tr><th>Ədəd</th><th>Tam ədəddirmi?</th></tr>
+      <tr><td>-8</td><td class="correct">Bəli</td></tr>
+      <tr><td>0</td><td class="correct">Bəli</td></tr>
+      <tr><td>15</td><td class="correct">Bəli</td></tr>
+      <tr><td>2,5</td><td class="wrong">Xeyr</td></tr>
+      <tr><td>1/2</td><td class="wrong">Xeyr</td></tr>
+    </table>
+    <div class="note"><b>Vacib qayda:</b> Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.</div>
+  </div>
+
+  <div class="panel">
+    <span class="time">20 DƏQİQƏ</span>
+    <h2>4. Rasional ədədlər (Q)</h2>
+    <p><b>Qayda:</b> İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.</p>
+    <div class="formula">Q = {a/b : a,b ∈ Z; b ≠ 0}</div>
+    <p>Burada:</p>
+    <ul>
+      <li>a — tam ədəd;</li>
+      <li>b — sıfırdan fərqli tam ədəd.</li>
+    </ul>
+    <h3>Nümunələr</h3>
+    <div class="formula">1/2, 3/4, -5/2</div>
+    <div class="example">
+      <p>5 = 5/1</p>
+      <p>-3 = -3/1</p>
+      <p>0,5 = 1/2</p>
+      <p>0,75 = 3/4</p>
+      <p>0,333... = 1/3</p>
+    </div>
+    <div class="note">
+      <b>Vacib qayda:</b> Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir.
+    </div>
+    <h3>Şagird üçün tapşırıq</h3>
+    Aşağıdakı ədədlərdən rasional olanları müəyyən et:
+    <div class="example">3/5, -7, 0,25, √2, 0,777..., π</div>
+  </div>
+
+  <div class="panel">
+    <span class="time">15 DƏQİQƏ</span>
+    <h2>5. İrrasional ədədlər</h2>
+    <p><b>Qayda:</b> İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.</p>
+    <p>Onların onluq yazılışı sonsuz və dövri olmayan ədədlərdir.</p>
+    <h3>Nümunələr</h3>
+    <div class="formula">√2 = 1,4142135...</div>
+    <div class="formula">√3 = 1,7320508...</div>
+    <div class="formula">π = 3,1415926...</div>
+    <div class="note">
+      <b>Diqqət!</b> Hər kökaltı ifadə irrasional deyil.
+      <p>√4 = 2 — rasional ədəddir.</p>
+      <p>√5 — irrasional ədəddir.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="time">10 DƏQİQƏ</span>
+    <h2>6. Ədədlər çoxluğunun əlaqəsi</h2>
+    <p>Ədədlər çoxluğu arasında müəyyən əlaqə mövcuddur.</p>
+    <div class="formula">N ⊂ Z ⊂ Q ⊂ R</div>
+    <div class="example">
+      <p><b>N</b> — Natural ədədlər</p>
+      <p><b>Z</b> — Tam ədədlər</p>
+      <p><b>Q</b> — Rasional ədədlər</p>
+      <p><b>R</b> — Həqiqi ədədlər</p>
+    </div>
+    <p>İrrasional ədədlər də həqiqi ədədlərə daxildir, lakin rasional ədədlərə daxil deyil.</p>
+    <div class="note">
+      <b>Yadda saxla:</b> Natural ədəd həm tam, həm rasional, həm də həqiqi ədəddir.
+    </div>
+  </div>
+
+  <div class="panel" id="zqi-quiz">
+    <span class="time">10 DƏQİQƏ</span>
+    <h2>7. Yekun yoxlama — Mini test</h2>
+    <p class="muted">Biliklərini yoxla. Hər sualın yalnız bir düzgün cavabı var.</p>
+
+    <form id="zqi-test">
+      <div class="question">
+        <p>1. 7 hansı çoxluğa daxildir?</p>
+        <label class="option"><input type="radio" name="q1" value="0"> Yalnız natural</label>
+        <label class="option"><input type="radio" name="q1" value="1"> Natural, tam, rasional və həqiqi</label>
+        <label class="option"><input type="radio" name="q1" value="2"> Yalnız irrasional</label>
+      </div>
+
+      <div class="question">
+        <p>2. -5 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q2" value="0"> Natural</label>
+        <label class="option"><input type="radio" name="q2" value="1"> Tam və rasional</label>
+        <label class="option"><input type="radio" name="q2" value="2"> İrrasional</label>
+      </div>
+
+      <div class="question">
+        <p>3. √9 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q3" value="0"> İrrasional</label>
+        <label class="option"><input type="radio" name="q3" value="1"> Natural, tam və rasional</label>
+        <label class="option"><input type="radio" name="q3" value="2"> Yalnız rasional</label>
+      </div>
+
+      <div class="question">
+        <p>4. π hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q4" value="0"> Rasional</label>
+        <label class="option"><input type="radio" name="q4" value="1"> Tam</label>
+        <label class="option"><input type="radio" name="q4" value="2"> İrrasional</label>
+      </div>
+
+      <div class="question">
+        <p>5. 0,5 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q5" value="0"> Rasional</label>
+        <label class="option"><input type="radio" name="q5" value="1"> İrrasional</label>
+        <label class="option"><input type="radio" name="q5" value="2"> Natural</label>
+      </div>
+
+      <div class="question">
+        <p>6. √7 hansı ədəddir?</p>
+        <label class="option"><input type="radio" name="q6" value="0"> Natural</label>
+        <label class="option"><input type="radio" name="q6" value="1"> İrrasional</label>
+        <label class="option"><input type="radio" name="q6" value="2"> Tam</label>
+      </div>
+
+      <div class="question">
+        <p>7. Hansı münasibət doğrudur?</p>
+        <label class="option"><input type="radio" name="q7" value="0"> N ⊂ Z ⊂ Q</label>
+        <label class="option"><input type="radio" name="q7" value="1"> Q ⊂ N ⊂ Z</label>
+        <label class="option"><input type="radio" name="q7" value="2"> Z ⊂ N ⊂ Q</label>
+      </div>
+
+      <button type="submit">CAVABLARI YOXLAMAQ</button>
+    </form>
+
+    <div class="result" id="zqi-result" aria-live="polite">
+      <h2 id="zqi-score"></h2>
+      <p id="zqi-message"></p>
+      <div id="zqi-explanations"></div>
+      <button type="button" id="zqi-retry">YENİDƏN CƏHD ET</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>📝 Ev tapşırığı</h2>
+    <p>Şagird aşağıdakı tapşırıqları yerinə yetirməlidir:</p>
+    <ol>
+      <li>10 natural ədəd yaz.</li>
+      <li>10 tam ədəd yaz.</li>
+      <li>5 rasional ədəd yaz.</li>
+      <li>5 irrasional ədəd yaz.</li>
+      <li>Aşağıdakı ədədləri uyğun çoxluqlara ayır.</li>
+    </ol>
+    <div class="formula">
+      -12, 0, 5, 3/7, √16, √11, π, 2,5
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="logo">ZQİ</div>
+    <p>Zogadiunarebi Qəbul İmtahanı</p>
+    <p>Riyaziyyat dərsi • 1-ci dərs</p>
+  </div>
 
 </div>
-
-<footer>ZQİ © 2026 | Bütün hüquqlar qorunur</footer>
+</div>
 
 <script>
+(function () {
+  const root = document.getElementById("zqi-lesson");
+  if (!root) return;
 
-// FIREBASE CONFIG
-// Buraya öz Firebase layihənin config məlumatlarını yaz.
+  const form = root.querySelector("#zqi-test");
+  const result = root.querySelector("#zqi-result");
+  const score = root.querySelector("#zqi-score");
+  const message = root.querySelector("#zqi-message");
+  const explanations = root.querySelector("#zqi-explanations");
 
-const firebaseConfig = {
- apiKey: "BURAYA_API_KEY",
- authDomain: "zqi-riyaziyyat.firebaseapp.com",
- projectId: "zqi-riyaziyyat",
- storageBucket: "BURAYA_STORAGE_BUCKET",
- messagingSenderId: "BURAYA_SENDER_ID",
- appId: "BURAYA_APP_ID"
-};
+  const answers = [1, 1, 1, 2, 0, 1, 0];
 
-firebase.initializeApp(firebaseConfig);
+  const details = [
+    "7 natural, tam, rasional və həqiqi ədəddir.",
+    "-5 tam və rasional ədəddir.",
+    "√9 = 3 olduğuna görə natural, tam və rasionaldır.",
+    "π irrasional ədəddir.",
+    "0,5 = 1/2 olduğuna görə rasionaldır.",
+    "√7 irrasional ədəddir.",
+    "Natural ədədlər tam, tam ədədlər isə rasional ədədlərin alt çoxluğudur."
+  ];
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
+    let correct = 0;
+    let html = "";
 
-// SUALLAR
+    answers.forEach(function (answer, i) {
+      const selected = form.querySelector(
+        'input[name="q' + (i + 1) + '"]:checked'
+      );
 
-const questions = [
-["3x + 5 = 20 tənliyində x-i tap.",["3","5","7","10"],1],
-["√196 ifadəsinin qiymətini tap.",["12","13","14","16"],2],
-["200 ədədinin 25%-i neçədir?",["25","40","50","75"],2],
-["(a+b)² düsturunu aç.",["a²+b²","a²+2ab+b²","a²−2ab+b²","a²−b²"],1],
-["2x − 8 = 12 tənliyini həll et.",["8","10","12","14"],1],
-["5² − 3² ifadəsinin qiymətini tap.",["8","12","16","20"],2],
-["x² − 9 = 0 tənliyinin kökləri hansılardır?",["3","−3","±3","9"],2],
-["2/3 + 1/6 cəmini tap.",["1/2","5/6","1","2/9"],1],
-["Üçbucağın iki bucağı 50° və 60°-dirsə, üçüncü bucaq neçədir?",["60°","70°","80°","90°"],1],
-["4x = 3x + 11 tənliyində x neçədir?",["9","10","11","12"],2],
-["√81 + √49 ifadəsini hesabla.",["14","15","16","17"],1],
-["(x−2)(x+2) ifadəsini aç.",["x²+4","x²−4","x²−2","x²+2"],1],
-["Bir ədədin 40%-i 80-dir. Ədəd neçədir?",["160","180","200","240"],2],
-["x² − 5x + 6 = 0 tənliyinin köklərini tap.",["1 və 6","2 və 3","−2 və −3","1 və 5"],1],
-["Düzbucaqlının uzunluğu 12 sm, eni 5 sm-dir. Sahəsi neçədir?",["17 sm²","34 sm²","60 sm²","120 sm²"],2],
-["3² + 4² ifadəsinin qiyməti neçədir?",["12","25","49","14"],1],
-["2(x+3)=18 tənliyində x-i tap.",["3","6","9","12"],1],
-["Ədədi silsilədə a₁=3, d=4 olarsa, a₅ neçədir?",["15","17","19","21"],2],
-["x² = 121 tənliyinin həlləri hansılardır?",["11","−11","±11","121"],2],
-["Katetləri 6 sm və 8 sm olan düzbucaqlı üçbucağın hipotenuzunu tap.",["9 sm","10 sm","12 sm","14 sm"],1]
-];
+      const isCorrect = selected && Number(selected.value) === answer;
 
-const letters = ["A","B","C","D"];
-let answers = {};
-let submitted = false;
-let currentUser = null;
+      if (isCorrect) correct++;
 
+      html +=
+        '<div class="example">' +
+        '<p class="' + (isCorrect ? "correct" : "wrong") + '">' +
+        "Sual " + (i + 1) + ": " +
+        (isCorrect ? "✓ Düzgün" : "✗ Yanlış") +
+        "</p><p>" + details[i] + "</p></div>";
+    });
 
-// TESTİ GÖSTƏR
+    score.textContent = "Nəticə: " + correct + " / 7";
+    message.textContent =
+      correct === 7 ? "Əla! Bütün sualları düzgün cavablandırdın." :
+      correct >= 5 ? "Yaxşı nəticə! Bir az da təkrar et." :
+      "Mövzuları yenidən oxu və testə təkrar cəhd et.";
 
-function renderTest(){
+    explanations.innerHTML = html;
+    result.style.display = "block";
 
- const area = document.getElementById("testArea");
+    form.querySelectorAll("input").forEach(function (input) {
+      input.disabled = true;
+    });
 
- area.innerHTML = questions.map((q,i)=>`
-
- <div class="question">
-  <div class="number">SUAL ${i+1} / 20</div>
-  <h3>${q[0]}</h3>
-
-  <div class="options">
-   ${q[1].map((option,j)=>`
-    <button
-     class="option"
-     id="q${i}_${j}"
-     onclick="selectAnswer(${i},${j})"
-     ${submitted ? "disabled" : ""}
-    >
-     ${letters[j]}) ${option}
-    </button>
-   `).join("")}
-  </div>
-
-  <div id="feedback${i}" class="feedback"></div>
- </div>
-
- `).join("");
-
- area.innerHTML += `
-  <div class="panel">
-   <button class="main" id="submitBtn" onclick="submitTest()"
-   ${submitted ? "disabled" : ""}>
-    Cavabları göndər
-   </button>
-   <p class="small">Cavablarını göndərdikdən sonra nəticən hesablanacaq.</p>
-  </div>
-  <div id="finalResult"></div>
- `;
-
- updateProgress();
-
-}
-
-
-// CAVAB SEÇİMİ
-
-function selectAnswer(i,j){
-
- if(submitted) return;
-
- answers[i] = j;
-
- const correct = questions[i][2];
- const feedback = document.getElementById("feedback"+i);
-
- for(let k=0;k<4;k++){
-
-  const btn = document.getElementById(`q${i}_${k}`);
-
-  btn.classList.remove("correct","wrong");
-
-  if(k===j){
-   if(j===correct){
-    btn.classList.add("correct");
-   }else{
-    btn.classList.add("wrong");
-   }
-  }
- }
-
- if(j===correct){
-  feedback.textContent = "✓ Düzgün cavab!";
-  feedback.className = "feedback correct-text";
- }else{
-  feedback.textContent = "✗ Səhv cavab! Düzgün cavab: "+letters[correct];
-  feedback.className = "feedback wrong-text";
- }
-
- updateProgress();
-
-}
-
-
-// PROGRESS
-
-function updateProgress(){
-
- const count = Object.keys(answers).length;
-
- document.getElementById("progress").style.width =
- (count/20*100)+"%";
-
- document.getElementById("progressText").textContent =
- count+" / 20 cavablandırılıb";
-
-}
-
-
-// TESTİ GÖNDƏR
-
-async function submitTest(){
-
- if(submitted) return;
-
- if(Object.keys(answers).length===0){
-  alert("Ən azı bir suala cavab ver!");
-  return;
- }
-
- const btn = document.getElementById("submitBtn");
- btn.disabled = true;
- btn.textContent = "Nəticə hesablanır...";
-
- submitted = true;
-
- let correctCount = 0;
-
- questions.forEach((q,i)=>{
-
-  const correct = q[2];
-  const selected = answers[i];
-
-  if(selected===correct){
-   correctCount++;
-  }
-
-  for(let j=0;j<4;j++){
-   const option = document.getElementById(`q${i}_${j}`);
-   option.disabled = true;
-
-   if(j===correct){
-    option.classList.add("correct");
-   }
-  }
-
-  const feedback = document.getElementById("feedback"+i);
-
-  if(selected===undefined){
-   feedback.textContent = "Cavab verilməyib. Düzgün cavab: "+letters[correct];
-   feedback.className = "feedback wrong-text";
-  }
-
- });
-
- const score = correctCount*5;
-
- document.getElementById("finalResult").innerHTML = `
-  <div class="panel result">
-   <h2>🎉 Test tamamlandı!</h2>
-   <div class="score">${score}/100</div>
-   <p>Düzgün cavab: ${correctCount}/20</p>
-   <p>Səhv və boş cavab: ${20-correctCount}</p>
-   <p class="small">Nəticən reytinqə əlavə edilir.</p>
-  </div>
- `;
-
- try{
-
-  if(!currentUser){
-   throw new Error("LOGIN_REQUIRED");
-  }
-
-  const name =
-   currentUser.displayName ||
-   currentUser.email.split("@")[0];
-
-  await db.collection("test_results").add({
-   uid: currentUser.uid,
-   name: name,
-   subject: "Riyaziyyat",
-   grade: 9,
-   score: score,
-   correct: correctCount,
-   total: 20,
-   createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    result.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  document.getElementById("finalResult").innerHTML += `
-   <div class="panel">
-    <p class="correct-text">✓ Nəticən uğurla yadda saxlanıldı!</p>
-   </div>
-  `;
-
- }catch(error){
-
-  console.error(error);
-
-  const message = error.message==="LOGIN_REQUIRED"
-   ? "Reytinqə yazılmaq üçün sayta daxil olmalısan."
-   : "Nəticə yadda saxlanılmadı. Firebase ayarlarını yoxla.";
-
-  document.getElementById("finalResult").innerHTML += `
-   <div class="panel">
-    <p class="wrong-text">${message}</p>
-   </div>
-  `;
-
- }
-
- btn.textContent = "Test göndərildi";
- loadRanking();
-
-}
-
-
-// REYTİNQ
-
-function loadRanking(){
-
- db.collection("test_results")
- .where("subject","==","Riyaziyyat")
- .where("grade","==",9)
- .orderBy("score","desc")
- .orderBy("createdAt","asc")
- .limit(30)
- .onSnapshot(snapshot=>{
-
-  const tbody = document.getElementById("ranking");
-
-  if(snapshot.empty){
-   tbody.innerHTML =
-   '<tr><td colspan="3">Hələ nəticə yoxdur.</td></tr>';
-   return;
-  }
-
-  tbody.innerHTML = snapshot.docs.map((doc,i)=>{
-
-   const data = doc.data();
-
-   return `
-    <tr>
-     <td class="rank">${i+1}</td>
-     <td>${escapeHTML(data.name || "Şagird")}</td>
-     <td style="color:#e7bd55;font-weight:bold">
-      ${data.score}/100
-     </td>
-    </tr>
-   `;
-
-  }).join("");
-
- },error=>{
-  console.error("Reytinq xətası:",error);
-  document.getElementById("ranking").innerHTML =
-  '<tr><td colspan="3">Reytinq yüklənmədi. Firebase indeksini yoxla.</td></tr>';
- });
-
-}
-
-
-// HTML TƏHLÜKƏSİZLİYİ
-
-function escapeHTML(value){
- return String(value).replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",
-  '"':"&quot;","'":"&#39;"
- }[c]));
-}
-
-
-// İSTİFADƏÇİ
-
-auth.onAuthStateChanged(user=>{
-
- currentUser = user;
-
- renderTest();
- loadRanking();
-
-});
-
+  root.querySelector("#zqi-retry").addEventListener("click", function () {
+    form.reset();
+    form.querySelectorAll("input").forEach(function (input) {
+      input.disabled = false;
+    });
+    result.style.display = "none";
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
 </script>
-</body>
-</html>
