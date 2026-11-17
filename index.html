@@ -4,123 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Təhsil Platforması</title>
-
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f6fc;
-  color:#18304d;
-}
-header{
-  background:#1769c2;
-  color:white;
-  padding:17px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 3px 12px #0002;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f6fc;color:#18304d}
+header{background:#1769c2;color:white;padding:17px 20px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:21px;font-weight:bold}
-.menu{
-  border:0;background:transparent;color:white;
-  font-size:29px;cursor:pointer;
-}
-main{max-width:900px;margin:25px auto;padding:0 15px}
-h1{font-size:26px;margin:8px 0 10px}
-h2{font-size:21px}
+.menu{border:0;background:transparent;color:white;font-size:29px;cursor:pointer}
+main{max-width:900px;margin:25px auto;padding:0 15px;min-height:70vh}
+h1{font-size:26px}
 .subtitle{color:#71849a;line-height:1.6}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;margin-top:22px;
-}
-.card{
-  background:white;border-radius:15px;padding:22px;
-  border:1px solid #e0eaf5;
-  box-shadow:0 4px 14px #18304d0b;
-  cursor:pointer;transition:.2s;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:22px}
+.card{background:white;border-radius:15px;padding:22px;border:1px solid #e0eaf5;box-shadow:0 4px 14px #18304d0b;cursor:pointer;transition:.2s}
 .card:hover{transform:translateY(-3px);border-color:#7eb5f1}
 .card h3{margin:0 0 9px;color:#1769c2;font-size:19px}
 .card p{margin:0;color:#71849a;line-height:1.5}
-.btn{
-  border:0;border-radius:9px;padding:12px 18px;
-  background:#1769c2;color:white;font-size:15px;
-  font-weight:bold;cursor:pointer;margin:5px 5px 5px 0;
-}
+.btn{border:0;border-radius:9px;padding:12px 18px;background:#1769c2;color:white;font-size:15px;font-weight:bold;cursor:pointer;margin:5px 5px 5px 0}
 .btn:hover{background:#10549e}
 .btn.secondary{background:#e4effb;color:#1769c2}
-.btn.secondary:hover{background:#d2e5fa}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.panel{
-  background:white;padding:22px;border-radius:15px;
-  box-shadow:0 4px 14px #18304d0b;margin-top:18px;
-}
+.panel{background:white;padding:22px;border-radius:15px;box-shadow:0 4px 14px #18304d0b;margin-top:18px}
 .back{margin-bottom:15px}
-.question{
-  font-size:19px;font-weight:bold;line-height:1.6;
-  margin:15px 0;
-}
-.option{
-  display:block;background:#f4f8fd;border:2px solid #e0eaf5;
-  padding:13px;border-radius:10px;margin:9px 0;
-  cursor:pointer;line-height:1.4;
-}
+.question{font-size:19px;font-weight:bold;line-height:1.6;margin:15px 0}
+.option{display:block;background:#f4f8fd;border:2px solid #e0eaf5;padding:13px;border-radius:10px;margin:9px 0;cursor:pointer;line-height:1.4}
 .option:hover{border-color:#7eb5f1}
 .option.selected{border-color:#1769c2;background:#e7f2ff}
 .option.correct{border-color:#20a46b;background:#e5f8ef}
 .option.wrong{border-color:#df5555;background:#fff0f0}
-.feedback{
-  padding:14px;border-radius:10px;margin:15px 0;
-  line-height:1.6;background:#edf5ff;
-}
+.feedback{padding:14px;border-radius:10px;margin:15px 0;line-height:1.6;background:#edf5ff}
 .feedback.good{background:#e5f8ef;color:#176b48}
 .feedback.bad{background:#fff0f0;color:#a52d2d}
-.progress{
-  height:9px;background:#e3edf8;border-radius:10px;
-  overflow:hidden;margin:15px 0;
-}
-.progress div{height:100%;background:#1769c2;width:0}
+.progress{height:9px;background:#e3edf8;border-radius:10px;overflow:hidden;margin:15px 0}
+.progress div{height:100%;background:#1769c2}
 .small{font-size:14px;color:#71849a}
 .rule h3{color:#1769c2;margin-bottom:7px}
-.rule p,.rule li{line-height:1.7}
-.drawer{
-  display:none;position:fixed;inset:0;background:#0006;z-index:10;
-}
+.rule p{line-height:1.7}
+.drawer{display:none;position:fixed;inset:0;background:#0006;z-index:10}
 .drawer.show{display:block}
-.drawer-content{
-  background:white;width:min(320px,85%);height:100%;
-  padding:25px;box-shadow:5px 0 20px #0002;
-}
+.drawer-content{background:white;width:min(320px,85%);height:100%;padding:25px}
 .drawer-content h2{color:#1769c2}
-.drawer-content button{
-  display:block;width:100%;text-align:left;
-  padding:14px;border:0;background:#f0f6fd;
-  border-radius:8px;margin:10px 0;color:#18304d;
-  font-size:16px;cursor:pointer;
-}
-.contact-card{
-  background:#f1f7ff;padding:17px;border-radius:12px;
-  margin:12px 0;overflow-wrap:anywhere;
-}
+.drawer-content button{display:block;width:100%;text-align:left;padding:14px;border:0;background:#f0f6fd;border-radius:8px;margin:10px 0;color:#18304d;font-size:16px;cursor:pointer}
+.contact-card{background:#f1f7ff;padding:17px;border-radius:12px;margin:12px 0;overflow-wrap:anywhere}
 .contact-card strong{display:block;color:#1769c2;margin-bottom:7px}
+.empty{text-align:center;padding:35px 15px;background:white;border-radius:14px;color:#71849a;line-height:1.7}
 footer{text-align:center;color:#8293a7;padding:30px 10px;font-size:14px}
 input[type=radio]{display:none}
-.empty{
-  text-align:center;padding:35px 15px;background:white;
-  border-radius:14px;color:#71849a;line-height:1.7;
-}
-@media(max-width:500px){
-  main{margin:18px auto}
-  .panel{padding:16px}
-  h1{font-size:23px}
-  .question{font-size:17px}
-}
+@media(max-width:500px){main{margin:18px auto}.panel{padding:16px}h1{font-size:23px}.question{font-size:17px}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -138,366 +68,244 @@ input[type=radio]{display:none}
     </div>
     <div class="contact-card">
       <strong>E-poçt</strong>
-      <a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">
-        zogadiunarebiqebulimtahanı@gmail.com
-      </a>
+      <a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">zogadiunarebiqebulimtahanı@gmail.com</a>
     </div>
   </div>
 </div>
 
 <main id="app"></main>
 
-<footer>
-  Hazırlayan: **Haldun Məmmədov**
-</footer>
+<footer>Hazırlayan: <strong>Haldun Məmmədov</strong></footer>
 
 <script>
 "use strict";
 
-/* =========================
-   SUAL YARATMA SİSTEMİ
-========================= */
+/* SUAL YARATMA */
 
-function makeQuestion(text, answer, wrong, explanation){
-  let choices = [String(answer)];
+function makeQuestion(text,answer,wrong,explanation){
+  const choices=[String(answer)];
   wrong.forEach(x=>{
     x=String(x);
-    if(!choices.includes(x) && choices.length<4) choices.push(x);
+    if(!choices.includes(x)&&choices.length<4)choices.push(x);
   });
-  let extra=0;
+  let n=1;
   while(choices.length<4){
-    let value="Variant "+(++extra);
-    if(!choices.includes(value)) choices.push(value);
+    const x="Variant "+n++;
+    if(!choices.includes(x))choices.push(x);
   }
-  return {
-    text,
-    answer:String(answer),
-    options:choices,
-    explanation
-  };
+  return {text,answer:String(answer),options:choices,explanation};
 }
 
 function naturalQuestion(i){
-  let k=i%5+1;
+  const k=i%5+1;
   switch(Math.floor(i/5)){
     case 0:{
-      let a=12+k*3,b=5+k;
-      return makeQuestion(`${a} + ${b} neçədir?`,a+b,[a+b+2,a+b-2,a+b+5],
-        `Toplama əməlini yerinə yetiririk: ${a}+${b}=${a+b}.`);
+      const a=12+k*3,b=5+k;
+      return makeQuestion(`${a} + ${b} neçədir?`,a+b,[a+b+2,a+b-2,a+b+5],`${a}+${b}=${a+b}. Toplama əməlini yerinə yetiririk.`);
     }
     case 1:{
-      let a=30+k*4,b=8+k;
-      return makeQuestion(`${a} − ${b} neçədir?`,a-b,[a-b+2,a-b-2,a-b+5],
-        `Çıxma əməlini yerinə yetiririk: ${a}−${b}=${a-b}.`);
+      const a=30+k*4,b=8+k;
+      return makeQuestion(`${a} − ${b} neçədir?`,a-b,[a-b+2,a-b-2,a-b+5],`${a}−${b}=${a-b}.`);
     }
     case 2:{
-      let a=3+k,b=4+k;
-      return makeQuestion(`${a} × ${b} neçədir?`,a*b,[a*b+2,a*b-2,a*b+5],
-        `Vurma əməliyyatı: ${a}×${b}=${a*b}.`);
+      const a=3+k,b=4+k;
+      return makeQuestion(`${a} × ${b} neçədir?`,a*b,[a*b+2,a*b-2,a*b+5],`${a}×${b}=${a*b}.`);
     }
     case 3:{
-      let b=2+k,a=b*(3+k);
-      return makeQuestion(`${a} : ${b} neçədir?`,a/b,[a/b+1,a/b-1,a/b+2],
-        `Bölmə əməliyyatı: ${a}:${b}=${a/b}.`);
+      const b=2+k,a=b*(3+k);
+      return makeQuestion(`${a} : ${b} neçədir?`,a/b,[a/b+1,a/b-1,a/b+2],`${a}:${b}=${a/b}.`);
     }
     case 4:{
-      let n=10+k*2;
-      let ans=n%2===0?"Cüt":"Tək";
-      return makeQuestion(`${n} ədədi cütdür, yoxsa tək?`,ans,
-        [ans==="Cüt"?"Tək":"Cüt","Sadə","Mürəkkəb"],
-        `Son rəqəmi ${n%10}-dir. Son rəqəmi 0, 2, 4, 6, 8 olan ədədlər cütdür.`);
+      const n=10+k*2,ans=n%2===0?"Cüt":"Tək";
+      return makeQuestion(`${n} ədədi cütdür, yoxsa tək?`,ans,[ans==="Cüt"?"Tək":"Cüt","Sadə","Mürəkkəb"],`Son rəqəmi ${n%10}-dir. Cüt ədədlərin son rəqəmi 0, 2, 4, 6 və ya 8 olur.`);
     }
     case 5:{
-      let n=3+k*3;
-      return makeQuestion(`${n} ədədi 3-ə bölünürmü?`,"Bəli",
-        ["Xeyr","Yalnız 2-yə bölünür","Müəyyən etmək olmur"],
-        `Rəqəmləri cəmi ${String(n).split("").reduce((s,x)=>s+Number(x),0)}-dir. Bu cəm 3-ə bölündüyünə görə ${n} də 3-ə bölünür.`);
+      const n=3+k*3;
+      return makeQuestion(`${n} ədədi 3-ə bölünürmü?`,"Bəli",["Xeyr","Yalnız 2-yə bölünür","Müəyyən etmək olmur"],`Rəqəmlərinin cəmi 3-ə bölündüyünə görə ${n} də 3-ə bölünür.`);
     }
     case 6:{
-      let n=5+k*4;
-      return makeQuestion(`${n} ədədinin özündən sonrakı natural ədəd hansıdır?`,n+1,
-        [n+2,n-1,n+3],
-        `Natural ədəddən sonrakı ədədi tapmaq üçün 1 əlavə edirik: ${n}+1=${n+1}.`);
+      const n=5+k*4;
+      return makeQuestion(`${n} ədədindən sonrakı natural ədəd hansıdır?`,n+1,[n+2,n-1,n+3],`${n}+1=${n+1}.`);
     }
     case 7:{
-      let n=2+k*5;
-      return makeQuestion(`${n} ədədinin 2 misli neçədir?`,n*2,
-        [n*2+2,n*2-2,n+2],
-        `2 misli həmin ədədi 2-yə vurmaqdır: ${n}×2=${n*2}.`);
+      const n=2+k*5;
+      return makeQuestion(`${n} ədədinin 2 misli neçədir?`,n*2,[n*2+2,n*2-2,n+2],`${n}×2=${n*2}.`);
     }
     case 8:{
-      let n=4+k*3;
-      return makeQuestion(`${n} ədədinin 1-ə hasili neçədir?`,n,
-        [n+1,n-1,n*2],
-        `İstənilən natural ədədin 1-ə hasili özünə bərabərdir.`);
+      const n=4+k*3;
+      return makeQuestion(`${n} ədədinin 1-ə hasili neçədir?`,n,[n+1,n-1,n*2],"İstənilən ədədin 1-ə hasili özünə bərabərdir.");
     }
     default:{
-      let n=20+k*5;
-      return makeQuestion(`${n} ədədindən 10 vahid böyük olan ədəd hansıdır?`,n+10,
-        [n+5,n-10,n+20],
-        `${n}+10=${n+10}.`);
+      const n=20+k*5;
+      return makeQuestion(`${n} ədədindən 10 vahid böyük olan ədəd hansıdır?`,n+10,[n+5,n-10,n+20],`${n}+10=${n+10}.`);
     }
   }
 }
 
 function integerQuestion(i){
-  let k=i%5+1;
+  const k=i%5+1;
   switch(Math.floor(i/5)){
     case 0:{
-      let a=10+k,b=3+k;
-      return makeQuestion(`(${a}) + (−${b}) neçədir?`,a-b,
-        [a+b,-(a-b),a-b+2],
-        `Müxtəlif işarəli ədədlər toplanarkən modulları çıxılır: ${a}−${b}=${a-b}. Böyük modulun işarəsi saxlanılır.`);
+      const a=10+k,b=3+k;
+      return makeQuestion(`(${a}) + (−${b}) neçədir?`,a-b,[a+b,-(a-b),a-b+2],`Müxtəlif işarəli ədədlərdə modullar çıxılır: ${a}−${b}=${a-b}.`);
     }
     case 1:{
-      let a=8+k,b=12+k;
-      return makeQuestion(`(−${a}) + (−${b}) neçədir?`,-a-b,
-        [a+b,-a+b,-a-b+2],
-        `Eyni işarəli mənfi ədədlər toplanır və mənfi işarə saxlanılır.`);
+      const a=8+k,b=12+k;
+      return makeQuestion(`(−${a}) + (−${b}) neçədir?`,-a-b,[a+b,-a+b,-a-b+2],"Eyni işarəli mənfi ədədlər toplanır və mənfi işarə saxlanılır.");
     }
     case 2:{
-      let a=15+k,b=6+k;
-      return makeQuestion(`${a} − ${b} neçədir?`,a-b,
-        [b-a,a+b,a-b+2],
-        `Çıxma əməliyyatı: ${a}−${b}=${a-b}.`);
+      const a=15+k,b=6+k;
+      return makeQuestion(`${a} − ${b} neçədir?`,a-b,[b-a,a+b,a-b+2],`${a}−${b}=${a-b}.`);
     }
     case 3:{
-      let a=3+k,b=4+k;
-      return makeQuestion(`(−${a}) × ${b} neçədir?`,-a*b,
-        [a*b,-a*b+2,-a-b],
-        `Mənfi ədəd müsbət ədədə vurulduqda nəticə mənfi olur: −${a}×${b}=${-a*b}.`);
+      const a=3+k,b=4+k;
+      return makeQuestion(`(−${a}) × ${b} neçədir?`,-a*b,[a*b,-a*b+2,-a-b],`Mənfi ədəd müsbət ədədə vurulduqda nəticə mənfi olur: −${a}×${b}=${-a*b}.`);
     }
     case 4:{
-      let a=4+k,b=2;
-      return makeQuestion(`(${a*b}) : (−${b}) neçədir?`,-a,
-        [a,-a+1,-a-2],
-        `Müsbət ədəd mənfi ədədə bölündükdə nəticə mənfi olur.`);
+      const a=4+k,b=2;
+      return makeQuestion(`(${a*b}) : (−${b}) neçədir?`,-a,[a,-a+1,-a-2],"Müsbət ədəd mənfi ədədə bölündükdə nəticə mənfi olur.");
     }
     case 5:{
-      let n=-(k*3+2);
-      return makeQuestion(`${n} ədədinin modulu neçədir?`,Math.abs(n),
-        [n,n+1,Math.abs(n)+1],
-        `Modul ədədin sıfırdan məsafəsidir. Buna görə |${n}|=${Math.abs(n)}.`);
+      const n=-(k*3+2);
+      return makeQuestion(`${n} ədədinin modulu neçədir?`,Math.abs(n),[n,n+1,Math.abs(n)+1],`|${n}|=${Math.abs(n)}. Modul sıfırdan məsafədir.`);
     }
     case 6:{
-      let n=5+k;
-      return makeQuestion(`${n} ədədinin əksi hansıdır?`,-n,
-        [n,n+1,-n-1],
-        `Əks ədədlərin cəmi sıfırdır. ${n} ədədinin əksi −${n}-dir.`);
+      const n=5+k;
+      return makeQuestion(`${n} ədədinin əksi hansıdır?`,-n,[n,n+1,-n-1],`Əks ədədlərin cəmi sıfırdır. ${n} ədədinin əksi −${n}-dir.`);
     }
     case 7:{
-      let a=-(k+4),b=k+3;
-      return makeQuestion(`Hansı ədəd böyükdür: ${a}, yoxsa ${b}?`,b,
-        [a,0,a+b],
-        Müsbət ədəd mənfi ədəddən böyükdür.");
+      const a=-(k+4),b=k+3;
+      return makeQuestion(`Hansı ədəd böyükdür: ${a}, yoxsa ${b}?`,b,[a,0,a+b],"Müsbət ədəd mənfi ədəddən böyükdür.");
     }
     case 8:{
-      let n=k+4;
-      return makeQuestion(`−${n} ədədindən 3 vahid böyük olan ədəd hansıdır?`,3-n,
-        [-n-3,3+n,n-3],
-        `−${n}+3=${3-n}.`);
+      const n=k+4;
+      return makeQuestion(`−${n} ədədindən 3 vahid böyük olan ədəd hansıdır?`,3-n,[-n-3,3+n,n-3],`−${n}+3=${3-n}.`);
     }
     default:{
-      let n=k+5;
-      return makeQuestion(`−${n} və −${n+2} ədədlərindən hansı böyükdür?`,-n,
-        [-n-2,n,-(n+3)],
-        `Mənfi ədədlərdə modulu kiçik olan ədəd daha böyükdür.`);
+      const n=k+5;
+      return makeQuestion(`−${n} və −${n+2} ədədlərindən hansı böyükdür?`,-n,[-n-2,n,-(n+3)],"Mənfi ədədlərdə modulu kiçik olan ədəd daha böyükdür.");
     }
   }
 }
 
 function rationalQuestion(i){
-  let k=i%5+1;
+  const k=i%5+1;
   switch(Math.floor(i/5)){
     case 0:{
-      let a=k+1,b=k+2;
-      return makeQuestion(`${a}/${b} + ${b}/${b} ifadəsinin qiyməti nədir?`,
-        `${a+b}/${b}`,
-        [`${a+1}/${b}`,`${a+b+1}/${b}`,`${a}/${b}`],
-        `Məxrəclər eynidir. Surətləri toplayırıq: (${a}+${b})/${b}=${a+b}/${b}.`);
+      const a=k+1,b=k+2;
+      return makeQuestion(`${a}/${b} + ${b}/${b} ifadəsinin qiyməti nədir?`,`${a+b}/${b}`,[`${a+1}/${b}`,`${a+b+1}/${b}`,`${a}/${b}`],`Məxrəclər eynidir. Surətləri toplayırıq: ${a}+${b}=${a+b}.`);
     }
     case 1:{
-      let a=k+5;
-      return makeQuestion(`${a}/2 kəsrinin surəti hansıdır?`,a,
-        [2,a+1,a-1],
-        `Kəsrin yuxarı hissəsi surət, aşağı hissəsi məxrəc adlanır.`);
+      const a=k+5;
+      return makeQuestion(`${a}/2 kəsrinin surəti hansıdır?`,a,[2,a+1,a-1],"Kəsrin yuxarı hissəsi surət adlanır.");
     }
     case 2:{
-      let a=k+1;
-      return makeQuestion(`${a}/10 onluq kəsr şəklində necə yazılır?`,
-        (a/10).toFixed(1).replace(".",","),
-        [(a/100).toFixed(2).replace(".",","),String(a).replace(".",","),((a+1)/10).toFixed(1).replace(".",",")],
-        `Məxrəc 10 olduqda vergül bir rəqəm sola keçirilir.`);
+      const a=k+1;
+      return makeQuestion(`${a}/10 onluq kəsr şəklində necə yazılır?`,(a/10).toFixed(1).replace(".",","),[(a/100).toFixed(2).replace(".",","),String(a),((a+1)/10).toFixed(1).replace(".",",")],"Məxrəc 10 olduqda vergül bir rəqəm sola keçirilir.");
     }
     case 3:{
-      let a=k+2;
-      return makeQuestion(`${a}/1 kəsrinin qiyməti neçədir?`,a,
-        [a+1,a-1,1],
-        `Məxrəci 1 olan kəsrin qiyməti surətinə bərabərdir.`);
+      const a=k+2;
+      return makeQuestion(`${a}/1 kəsrinin qiyməti neçədir?`,a,[a+1,a-1,1],"Məxrəci 1 olan kəsrin qiyməti surətinə bərabərdir.");
     }
     case 4:{
-      let a=2*k;
-      return makeQuestion(`${a}/4 kəsrini sadələşdirin.`,`${a/2}/2`,
-        [`${a}/2`,`1/4`,`${a+1}/4`],
-        `Surəti və məxrəci eyni ədədə bölməklə kəsri sadələşdiririk.`);
+      const a=2*k;
+      return makeQuestion(`${a}/4 kəsrini sadələşdirin.`,`${a/2}/2`,[`${a}/2`,"1/4",`${a+1}/4`],"Surəti və məxrəci eyni ədədə bölməklə kəsri sadələşdiririk.");
     }
     case 5:{
-      let a=k+2;
-      return makeQuestion(`${a}/5 kəsrinin məxrəci hansıdır?`,"5",
-        [String(a),"1","10"],
-        `Kəsrin aşağı hissəsində yazılan ədəd məxrəcdir.`);
+      const a=k+2;
+      return makeQuestion(`${a}/5 kəsrinin məxrəci hansıdır?`,"5",[String(a),"1","10"],"Kəsrin aşağı hissəsi məxrəc adlanır.");
     }
     case 6:{
-      let a=k+1;
-      return makeQuestion(`${a}/4 və ${a+1}/4 kəsrlərindən hansı böyükdür?`,
-        `${a+1}/4`,
-        [`${a}/4`,"Bərabərdir","Müqayisə etmək olmur"],
-        `Məxrəclər eyni olduqda surəti böyük olan kəsr daha böyükdür.`);
+      const a=k+1;
+      return makeQuestion(`${a}/4 və ${a+1}/4 kəsrlərindən hansı böyükdür?`,`${a+1}/4`,[`${a}/4`,"Bərabərdir","Müqayisə etmək olmur"],"Məxrəclər eyni olduqda surəti böyük olan kəsr daha böyükdür.");
     }
     case 7:{
-      let a=k+1;
-      return makeQuestion(`${a}/1 kəsri hansı ədədə bərabərdir?`,a,
-        [a+1,a-1,1],
-        `Məxrəci 1 olan kəsr tam ədədə bərabərdir.`);
+      const a=k+1;
+      return makeQuestion(`${a}/1 kəsri hansı ədədə bərabərdir?`,a,[a+1,a-1,1],"Məxrəci 1 olan kəsr tam ədədə bərabərdir.");
     }
     case 8:{
-      let a=k+1;
-      return makeQuestion(`${a}/2 kəsrinin surətini 2 dəfə artırsaq, yeni kəsr nə olar?`,
-        `${a*2}/2`,
-        [`${a}/4`,`${a+1}/2`,`${a*2}/4`],
-        `Surəti 2 dəfə artırdıqda məxrəc dəyişməz qalır.`);
+      const a=k+1;
+      return makeQuestion(`${a}/2 kəsrinin surətini 2 dəfə artırsaq, yeni kəsr nə olar?`,`${a*2}/2`,[`${a}/4`,`${a+1}/2`,`${a*2}/4`],"Surəti 2 dəfə artırdıqda məxrəc dəyişməz qalır.");
     }
     default:{
-      let a=k+2;
-      return makeQuestion(`${a}/10 kəsri hansı tip ədəddir?`,"Rasional",
-        ["İrrasional","Natural","Heç biri"],
-        `İki tam ədədin nisbəti kimi yazılan ədədlər rasionaldır.`);
+      const a=k+2;
+      return makeQuestion(`${a}/10 kəsri hansı tip ədəddir?`,"Rasional",["İrrasional","Natural","Heç biri"],"İki tam ədədin nisbəti kimi yazılan ədədlər rasionaldır.");
     }
   }
 }
 
 function irrationalQuestion(i){
-  let k=i%5+1;
+  const k=i%5+1;
   switch(Math.floor(i/5)){
     case 0:{
-      let n=2+k;
-      return makeQuestion(`√${n*n+1} ədədi hansı tip ədəddir?`,"İrrasional",
-        ["Natural","Tam","Rasional"],
-        `Tam kvadrat olmayan natural ədədin kvadrat kökü irrasionaldır.`);
+      const n=2+k;
+      return makeQuestion(`√${n*n+1} ədədi hansı tip ədəddir?`,"İrrasional",["Natural","Tam","Rasional"],"Tam kvadrat olmayan natural ədədin kvadrat kökü irrasionaldır.");
     }
-    case 1:{
-      return makeQuestion("π (pi) ədədi hansı tip ədəddir?","İrrasional",
-        ["Natural","Tam","Rasional"],
-        `π sonsuz və dövri olmayan onluq yazılışa malikdir, buna görə irrasionaldır.`);
-    }
+    case 1:
+      return makeQuestion("π (pi) ədədi hansı tip ədəddir?","İrrasional",["Natural","Tam","Rasional"],"π sonsuz və dövri olmayan onluq yazılışa malikdir.");
     case 2:{
-      let n=k+2;
-      return makeQuestion(`√${n*n} ifadəsinin qiyməti neçədir?`,n,
-        [n+1,n-1,n*n],
-        `√(${n}×${n})=${n}.`);
+      const n=k+2;
+      return makeQuestion(`√${n*n} ifadəsinin qiyməti neçədir?`,n,[n+1,n-1,n*n],`√(${n}×${n})=${n}.`);
     }
     case 3:{
-      let n=k+2;
-      return makeQuestion(`Aşağıdakılardan hansı irrasional ədəddir?`,`√${n*n+2}`,
-        [`${n+1}`,`${n}/2`,`0,5`],
-        `Tam kvadrat olmayan müsbət ədədin kvadrat kökü irrasionaldır.`);
+      const n=k+2;
+      return makeQuestion("Aşağıdakılardan hansı irrasional ədəddir?",`√${n*n+2}`,[`${n+1}`,`${n}/2`,"0,5"],"Tam kvadrat olmayan müsbət ədədin kvadrat kökü irrasionaldır.");
     }
     case 4:{
-      let n=k+3;
-      return makeQuestion(`√${n*n+1} ədədi hansı iki ardıcıl natural ədəd arasındadır?`,
-        `${n} və ${n+1}`,
-        [`${n-1} və ${n}`,`${n+1} və ${n+2}`,`${n-2} və ${n-1}`],
-        `${n}² < ${n*n+1} < ${(n+1)*(n+1)} olduğuna görə kök ${n} ilə ${n+1} arasındadır.`);
+      const n=k+3;
+      return makeQuestion(`√${n*n+1} ədədi hansı iki ardıcıl natural ədəd arasındadır?`,`${n} və ${n+1}`,[`${n-1} və ${n}`,`${n+1} və ${n+2}`,`${n-2} və ${n-1}`],`${n}² < ${n*n+1} < ${(n+1)*(n+1)} olduğuna görə kök ${n} ilə ${n+1} arasındadır.`);
     }
-    case 5:{
-      return makeQuestion("Sonsuz və dövri olmayan onluq kəsr hansı ədəd növüdür?","İrrasional",
-        ["Natural","Tam","Rasional"],
-        `Sonsuz və dövri olmayan onluq kəsrlər irrasional ədədlərdir.`);
-    }
-    case 6:{
-      return makeQuestion("√2 ədədi rasionaldırmı?","Xeyr",
-        ["Bəli","Natural ədəddir","Tam ədəddir"],
-        `√2 tam kvadrat olmayan ədədin köküdür və irrasionaldır.`);
-    }
-    case 7:{
-      return makeQuestion("√9 + √16 ifadəsinin qiyməti neçədir?","7",
-        ["25","12","5"],
-        `√9=3 və √16=4. Cəm 3+4=7-dir.`);
-    }
-    case 8:{
-      return makeQuestion("√25 ədədi hansı ədədə bərabərdir?","5",
-        ["25","10","±5"],
-        `Əsas kvadrat kök müsbət götürülür: √25=5.`);
-    }
-    default:{
-      return makeQuestion("Aşağıdakılardan hansı irrasional ədəddir?","π",
-        ["3/4","−8","0,25"],
-        `π irrasionaldır. Digər variantlar rasional ədədlərdir.`);
-    }
+    case 5:
+      return makeQuestion("Sonsuz və dövri olmayan onluq kəsr hansı ədəd növüdür?","İrrasional",["Natural","Tam","Rasional"],"Sonsuz və dövri olmayan onluq kəsrlər irrasionaldır.");
+    case 6:
+      return makeQuestion("√2 ədədi rasionaldırmı?","Xeyr",["Bəli","Natural ədəddir","Tam ədəddir"],"√2 irrasional ədəddir.");
+    case 7:
+      return makeQuestion("√9 + √16 ifadəsinin qiyməti neçədir?","7",["25","12","5"],"√9=3 və √16=4. Cəm 3+4=7-dir.");
+    case 8:
+      return makeQuestion("√25 ədədi hansı ədədə bərabərdir?","5",["25","10","±5"],"Əsas kvadrat kök müsbət götürülür: √25=5.");
+    default:
+      return makeQuestion("Aşağıdakılardan hansı irrasional ədəddir?","π",["3/4","−8","0,25"],"π irrasional ədəddir.");
   }
 }
 
 function realQuestion(i){
-  let k=i%5+1;
+  const k=i%5+1;
   switch(Math.floor(i/5)){
     case 0:{
-      let a=k+3;
-      return makeQuestion(`${a} ədədi həqiqi ədəddirmi?`,"Bəli",
-        ["Xeyr","Yalnız irrasionaldır","Yalnız mənfidir"],
-        `Natural, tam, rasional və irrasional ədədlərin hamısı həqiqi ədədlərdir.`);
+      const a=k+3;
+      return makeQuestion(`${a} ədədi həqiqi ədəddirmi?`,"Bəli",["Xeyr","Yalnız irrasionaldır","Yalnız mənfidir"],"Natural, tam, rasional və irrasional ədədlərin hamısı həqiqi ədədlərdir.");
     }
     case 1:{
-      let a=k+4;
-      return makeQuestion(`|−${a}| neçədir?`,a,
-        [-a,a+1,a-1],
-        `Modul sıfırdan məsafədir: |−${a}|=${a}.`);
+      const a=k+4;
+      return makeQuestion(`|−${a}| neçədir?`,a,[-a,a+1,a-1],`|−${a}|=${a}.`);
     }
     case 2:{
-      let a=k+2,b=a+2;
-      return makeQuestion(`${a} və ${b} ədədlərindən hansı böyükdür?`,b,
-        [a,a-1,"Bərabərdir"],
-        `Ədəd oxunda sağda yerləşən ədəd daha böyükdür.`);
+      const a=k+2,b=a+2;
+      return makeQuestion(`${a} və ${b} ədədlərindən hansı böyükdür?`,b,[a,a-1,"Bərabərdir"],"Ədəd oxunda sağda yerləşən ədəd daha böyükdür.");
     }
     case 3:{
-      let a=k+2;
-      return makeQuestion(`−${a} ədədi hansı çoxluğa daxildir?`,"Həqiqi ədədlər",
-        ["Yalnız natural ədədlər","Yalnız irrasional ədədlər","Heç birinə"],
-        `Mənfi tam ədədlər həqiqi ədədlər çoxluğuna daxildir.`);
+      const a=k+2;
+      return makeQuestion(`−${a} ədədi hansı çoxluğa daxildir?`,"Həqiqi ədədlər",["Yalnız natural ədədlər","Yalnız irrasional ədədlər","Heç birinə"],"Mənfi tam ədədlər həqiqi ədədlərə daxildir.");
     }
     case 4:{
-      let a=k+3;
-      return makeQuestion(`${a} + (−${k}) neçədir?`,a-k,
-        [a+k,a-k+2,k-a],
-        `Müxtəlif işarəli ədədlərin cəmi modulların fərqinə bərabərdir.`);
+      const a=k+3;
+      return makeQuestion(`${a} + (−${k}) neçədir?`,a-k,[a+k,a-k+2,k-a],"Müxtəlif işarəli ədədlərin cəmi modulların fərqinə bərabərdir.");
     }
-    case 5:{
-      let a=k+5;
-      return makeQuestion(`${a} × 0 neçədir?`,"0",
-        [String(a),"1",String(-a)],
-        `İstənilən ədədin sıfıra hasili sıfırdır.`);
-    }
+    case 5:
+      return makeQuestion("7 × 0 neçədir?","0",["7","1","−7"],"İstənilən ədədin sıfıra hasili sıfırdır.");
     case 6:{
-      let a=k+2;
-      return makeQuestion(`${a}² neçədir?`,a*a,
-        [a*2,a*a+1,a*a-1],
-        `${a}²=${a}×${a}=${a*a}.`);
+      const a=k+2;
+      return makeQuestion(`${a}² neçədir?`,a*a,[a*2,a*a+1,a*a-1],`${a}×${a}=${a*a}.`);
     }
     case 7:{
-      let a=k+4;
-      return makeQuestion(`−${a} ədədi 0-dan kiçikdirmi?`,"Bəli",
-        ["Xeyr","0-a bərabərdir","Müəyyən deyil"],
-        `Mənfi ədədlər sıfırdan kiçikdir.`);
+      const a=k+4;
+      return makeQuestion(`−${a} ədədi 0-dan kiçikdirmi?`,"Bəli",["Xeyr","0-a bərabərdir","Müəyyən deyil"],"Mənfi ədədlər sıfırdan kiçikdir.");
     }
-    case 8:{
-      return makeQuestion("Hansı ədəd bütün natural, tam, rasional və irrasional ədədləri əhatə edir?","Həqiqi ədədlər",
-        ["Yalnız tam ədədlər","Yalnız rasional ədədlər","Natural ədədlər"],
-        `Həqiqi ədədlər rasional və irrasional ədədlərin birləşməsidir.`);
-    }
+    case 8:
+      return makeQuestion("Hansı ədəd bütün natural, tam, rasional və irrasional ədədləri əhatə edir?","Həqiqi ədədlər",["Yalnız tam ədədlər","Yalnız rasional ədədlər","Natural ədədlər"],"Həqiqi ədədlər rasional və irrasional ədədlərin birləşməsidir.");
     default:{
-      let a=k+2;
-      return makeQuestion(`0 ilə ${a} arasında neçə tam ədəd var?`,a-1,
-        [a,a+1,a-2],
-        `0 və ${a} daxil deyil. Aradakı tam ədədlər 1-dən ${a-1}-ə qədərdir.`);
+      const a=k+2;
+      return makeQuestion(`0 ilə ${a} arasında neçə tam ədəd var?`,a-1,[a,a+1,a-2],`0 və ${a} daxil deyil. Aradakı tam ədədlər 1-dən ${a-1}-ə qədərdir.`);
     }
   }
 }
@@ -510,54 +318,84 @@ const lessons=[
   {name:"Həqiqi ədədlər",make:realQuestion}
 ];
 
-function getQuestions(lesson,count){
-  return Array.from({length:count},(_,i)=>lesson.make(i));
-}
-
-/* =========================
-   QAYDALAR
-========================= */
+/* QAYDALAR */
 
 const rules=[
-{
-title:"Natural ədədlər",
-sections:[
-["Natural ədədlər nədir?","Saymaq üçün istifadə etdiyimiz ədədlər natural ədədlər adlanır. Natural ədədlər 1, 2, 3, 4, 5, ... şəklində davam edir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir; bu kursda natural ədədləri 1-dən başlayaraq götürürük."],
-["Əsas əməllər","Toplama iki və ya daha çox ədədin birləşdirilməsidir. Çıxma fərqi tapır. Vurma təkrar toplamanın qısa yazılışıdır. Bölmə isə ədədi bərabər hissələrə ayırır."],
-["Cüt və tək ədədlər","2-yə qalıqsız bölünən ədədlər cüt, 2-yə qalıqla bölünən ədədlər tək adlanır. Cüt ədədlərin son rəqəmi 0, 2, 4, 6 və ya 8 olur."],
+{title:"Natural ədədlər",sections:[
+["Natural ədədlər nədir?","Saymaq üçün istifadə etdiyimiz ədədlər natural ədədlər adlanır: 1, 2, 3, 4, 5, ... Bu kursda natural ədədləri 1-dən başlayaraq götürürük."],
+["Əsas əməllər","Toplama ədədləri birləşdirir. Çıxma fərqi tapır. Vurma təkrar toplamanın qısa yazılışıdır. Bölmə ədədi bərabər hissələrə ayırır."],
+["Cüt və tək ədədlər","2-yə qalıqsız bölünən ədədlər cüt, qalıqla bölünənlər tək adlanır. Cüt ədədlərin son rəqəmi 0, 2, 4, 6 və ya 8 olur."],
 ["Bölünmə əlamətləri","2-yə bölünmə: son rəqəm cüt olmalıdır. 5-ə bölünmə: son rəqəm 0 və ya 5 olmalıdır. 10-a bölünmə: son rəqəm 0 olmalıdır. 3-ə bölünmə: rəqəmlərin cəmi 3-ə bölünməlidir."],
-["Sadə və mürəkkəb ədədlər","1-dən böyük və yalnız 1-ə, özünə bölünən natural ədədlər sadədir. İkidən çox müsbət böləni olan natural ədədlər mürəkkəbdir. 1 nə sadə, nə də mürəkkəbdir."]
+["Sadə və mürəkkəb ədədlər","1-dən böyük və yalnız 1-ə, özünə bölünən natural ədədlər sadədir. İkidən çox müsbət böləni olanlar mürəkkəbdir. 1 nə sadə, nə də mürəkkəbdir."]
 ]},
-{
-title:"Tam ədədlər",
-sections:[
+{title:"Tam ədədlər",sections:[
 ["Tam ədədlər nədir?","Tam ədədlərə müsbət natural ədədlər, mənfi natural ədədlər və sıfır daxildir: ..., −3, −2, −1, 0, 1, 2, 3, ..."],
-["Ədəd oxu","Ədəd oxunda sağa doğru getdikcə ədədlər böyüyür, sola doğru getdikcə kiçilir. Hər müsbət ədəd sıfırdan böyük, hər mənfi ədəd sıfırdan kiçikdir."],
-["Əks ədədlər","İki ədədin modulları eyni, işarələri fərqli olarsa, onlar əks ədədlərdir. Məsələn, 5 və −5. Əks ədədlərin cəmi sıfırdır."],
+["Ədəd oxu","Ədəd oxunda sağa doğru getdikcə ədədlər böyüyür, sola doğru getdikcə kiçilir. Müsbət ədədlər sıfırdan böyük, mənfi ədədlər sıfırdan kiçikdir."],
+["Əks ədədlər","Modulları eyni, işarələri fərqli olan ədədlər əks ədədlərdir. Məsələn, 5 və −5. Əks ədədlərin cəmi sıfırdır."],
 ["Modul","Ədədin modulu onun sıfırdan məsafəsidir. Modul mənfi ola bilməz. Məsələn, |−7|=7 və |7|=7."],
-["Əməllərin işarə qaydaları","Eyni işarəli ədədlər toplanarkən modullar toplanır və ortaq işarə saxlanılır. Müxtəlif işarəli ədədlərdə modullar çıxılır və böyük modulun işarəsi götürülür. Vurma və bölmədə eyni işarələr müsbət, fərqli işarələr mənfi nəticə verir."]
+["İşarə qaydaları","Eyni işarəli ədədlər toplanarkən modullar toplanır və ortaq işarə saxlanılır. Müxtəlif işarəli ədədlərdə modullar çıxılır. Vurma və bölmədə eyni işarələr müsbət, fərqli işarələr mənfi nəticə verir."]
 ]},
-{
-title:"Rasional ədədlər",
-sections:[
+{title:"Rasional ədədlər",sections:[
 ["Rasional ədədlər nədir?","m/n şəklində yazıla bilən ədədlər rasional adlanır. Burada m və n tam ədədlərdir, n sıfırdan fərqlidir. Məsələn, 1/2, −3/4, 5 və 0,25."],
-["Kəsrin hissələri","Kəsrin yuxarı hissəsi surət, aşağı hissəsi məxrəc adlanır. Məxrəc bütövün neçə bərabər hissəyə bölündüyünü, surət isə həmin hissələrdən neçəsinin götürüldüyünü göstərir."],
+["Kəsrin hissələri","Kəsrin yuxarı hissəsi surət, aşağı hissəsi məxrəc adlanır. Məxrəc bütövün neçə bərabər hissəyə bölündüyünü, surət isə neçə hissənin götürüldüyünü göstərir."],
 ["Kəsrlərin sadələşdirilməsi","Surət və məxrəci eyni sıfırdan fərqli ədədə bölməklə kəsr sadələşdirilir. Məsələn, 6/8=3/4."],
 ["Kəsrlərin toplanması və çıxılması","Məxrəclər eynidirsə, surətlər toplanır və ya çıxılır, məxrəc dəyişmir. Məxrəclər fərqlidirsə, əvvəl ortaq məxrəc tapılır."],
 ["Onluq kəsrlər","Məxrəci 10, 100, 1000 və s. olan kəsrlər onluq kəsr kimi yazıla bilər. Məsələn, 3/10=0,3 və 25/100=0,25. Sonlu və dövri onluq kəsrlər rasionaldır."]
 ]},
-{
-title:"İrrasional ədədlər",
-sections:[
+{title:"İrrasional ədədlər",sections:[
 ["İrrasional ədədlər nədir?","İki tam ədədin nisbəti şəklində yazıla bilməyən həqiqi ədədlər irrasional adlanır. Onların onluq yazılışı sonsuz və dövri deyil."],
 ["Kvadrat kök","Tam kvadrat olmayan müsbət tam ədədin kvadrat kökü irrasionaldır. Məsələn, √2 və √3 irrasionaldır. √4=2 isə rasionaldır."],
 ["Pi ədədi","π çevrənin uzunluğunun diametrinə nisbətidir. Təqribi qiyməti 3,14-dür. π irrasional ədəddir."],
 ["Köklərin sadələşdirilməsi","Kökaltı ifadədə tam kvadrat vuruq varsa, onu kök xaricinə çıxarmaq olar. Məsələn, √12=√(4×3)=2√3."],
 ["Rasional və irrasional fərqi","Rasional ədədlər kəsr şəklində yazıla bilir və onluq yazılışı sonlu və ya dövridir. İrrasional ədədlərin onluq yazılışı sonsuz və dövri deyil."]
 ]},
-{
-title:"Həqiqi ədədlər",
-sections:[
-["Həqiqi ədədlər nədir?","Ədəd oxu üzərində göstərilə bilən bütün rasional və irrasional ədədlər həqiqi ədədlər adlanır. Həqiqi ədədlər rasional və irrasional ədədləri əhatə edir."],
+{title:"Həqiqi ədədlər",sections:[
+["Həqiqi ədədlər nədir?","Ədəd oxu üzərində göstərilə bilən bütün rasional və irrasional ədədlər həqiqi ədədlər adlanır."],
 ["Ədəd çoxluqları","Natural ədədlər tam ədədlərin, tam ədədlər rasional ədədlərin tərkibindədir. Rasional və irrasional ədədlər birlikdə həqiqi ədədləri əmələ gətirir."],
-["Müqayisə","Ədə
+["Müqayisə","Ədəd oxunda sağda yerləşən ədəd daha böyükdür. Müsbət ədədlər sıfırdan böyük, mənfi ədədlər sıfırdan kiçikdir."],
+["Modul","Həqiqi ədədin modulu onun sıfırdan məsafəsidir. Müsbət ədədin və sıfırın modulu özünə bərabərdir; mənfi ədədin modulu isə əks ədədidir."],
+["Ədədlər üzərində əməllər","Həqiqi ədədlər üzərində toplama, çıxma, vurma və bölmə əməlləri yerinə yetirilir. Sıfıra bölmək olmaz. Əvvəl mötərizə, sonra qüvvət və kök, daha sonra vurma-bölmə, sonda toplama-çıxma yerinə yetirilir."]
+]}
+];
+
+/* TƏTBİQ */
+
+const app=document.getElementById("app");
+let page="home",currentLesson=0,currentMode="test";
+let questions=[],questionIndex=0,selectedAnswers={},checkedAnswers={};
+let examSubmitted=false;
+
+function go(p){page=p;render();window.scrollTo(0,0)}
+function back(){
+  if(page==="lessonTests"||page==="lessonRules")go("math");
+  else if(page==="math"||page==="verbal"||page==="years"||page==="homework"||page==="trials")go("home");
+  else if(page==="quiz")go(currentMode==="homework"?"homework":"lessonTests");
+  else if(page==="exam")go("trials");
+  else if(page==="ruleDetail")go("lessonRules");
+  else go("home");
+}
+function backButton(){return `<button class="btn secondary back" data-action="back">← Geri</button>`}
+function card(title,description,action,value){
+  return `<div class="card" data-action="${action}" data-value="${value}">
+    <h3>${title}</h3><p>${description}</p></div>`;
+}
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+
+function renderHome(){
+  app.innerHTML=`<h1>Xoş gəlmisiniz!</h1>
+  <p class="subtitle">Öyrənmək, məşq etmək və biliklərinizi yoxlamaq üçün bölməni seçin.</p>
+  <div class="grid">
+  ${card("Riyaziyyat","Dərslər, testlər və qaydalar","go","math")}
+  ${card("Verbal","Məntiq, mətnlər və analogiyalar","go","verbal")}
+  ${card("İmtahan testləri","2011–2026-cı illərin imtahan bölmələri","go","years")}
+  ${card("Ev tapşırığı","Hər dərs üzrə 20 sual","go","homework")}
+  ${card("Sınaq","Biliklərinizi sınaqdan keçirin","go","trials")}
+  </div>`;
+}
+function renderMath(){
+  app.innerHTML=`${backButton()}<h1>Riyaziyyat</h1>
+  <p class="subtitle">Öyrənmək istədiyiniz bölməni seçin.</p>
+  <div class="grid">
+  ${card("Testlər","Hər dərs üzrə 50 sual və izah","go
