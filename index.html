@@ -1,239 +1,452 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQİ | Qəbul İmtahanı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1769c2">
+<title>Qəbul İmtahanı | Təhsil Platforması</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f6fc;color:#192b46}
-header{background:#172b4d;color:white;text-align:center;padding:25px 12px}
-header h1{margin:0;font-size:27px}
-header p{margin:10px 0 0;color:#dce8fa;font-size:17px}
-main{max-width:950px;margin:25px auto;padding:0 15px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:Arial,sans-serif;
+ background:#f3f7fd;
+ color:#172b46;
+ line-height:1.65;
+}
+button{font:inherit;cursor:pointer}
+header{
+ background:#fff;
+ box-shadow:0 2px 15px #183b6510;
+ position:sticky;top:0;z-index:20;
+}
+.nav{
+ max-width:1100px;margin:auto;padding:15px 20px;
+ display:flex;align-items:center;justify-content:space-between;
+}
+.brand{font-size:21px;font-weight:800;color:#1769c2}
+.menu-btn{
+ border:0;background:#edf4ff;color:#1769c2;
+ width:45px;height:43px;border-radius:12px;font-size:25px;
+}
+main{max-width:1050px;margin:auto;padding:25px 18px 50px}
+.hero{
+ background:linear-gradient(130deg,#1769c2,#4d9af0);
+ color:white;border-radius:23px;padding:42px 28px;
+ margin:20px 0 28px;position:relative;overflow:hidden;
+}
+.hero:after{
+ content:"";position:absolute;width:210px;height:210px;
+ border:35px solid #ffffff16;border-radius:50%;
+ right:-50px;top:-75px;
+}
+.hero h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin-bottom:13px}
+.hero p{color:#e8f3ff;max-width:580px}
+.hero-tag{
+ display:inline-block;background:#ffffff20;
+ border:1px solid #ffffff50;padding:6px 13px;
+ border-radius:20px;margin-bottom:15px;font-size:13px;
+}
+.section-title{font-size:23px;margin:30px 0 15px}
+.section-title span{color:#1769c2}
+.subjects{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;
+}
+.subject{
+ border:1px solid #e3ebf6;background:white;border-radius:17px;
+ padding:23px;text-align:left;transition:.2s;
+ box-shadow:0 5px 18px #173c6510;
+ color:#172b46;
+}
+.subject:hover{transform:translateY(-4px);border-color:#8bb9f1}
+.subject-icon{
+ width:49px;height:49px;border-radius:14px;
+ display:grid;place-items:center;background:#eaf3ff;
+ font-size:25px;margin-bottom:15px;
+}
+.subject h3{font-size:19px;margin-bottom:5px}
+.subject p{font-size:13px;color:#72839a}
+.arrow{color:#1769c2;font-weight:bold;margin-top:15px;display:block}
 .page{display:none}
 .page.active{display:block}
-.intro,.content{background:white;padding:24px;border-radius:17px;box-shadow:0 4px 18px #172b4d12;margin-bottom:20px}
-.intro{text-align:center}
-.intro h2{color:#172b4d}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.card{border:0;border-radius:17px;padding:23px;color:white;text-align:left;min-height:145px;cursor:pointer;width:100%;font-size:16px;transition:.2s}
-.card:hover{transform:translateY(-4px);filter:brightness(1.06)}
-.card .emoji{font-size:34px;display:block;margin-bottom:12px}
-.card strong{font-size:21px;display:block;margin-bottom:8px}
-.card span:last-child{line-height:1.4}
-.blue{background:#2878d0}
-.purple{background:#8050c9}
-.orange{background:#e58a27}
-.green{background:#23976d}
-.red{background:#d64e58}
-button{font-family:inherit}
-.back,.action{border:0;border-radius:10px;padding:13px 19px;font-size:15px;font-weight:bold;cursor:pointer;margin:5px 5px 12px 0}
-.back{background:#e5edf8;color:#23466f}
-.action{background:#2878d0;color:white}
-.topic{display:block;width:100%;text-align:left;background:#edf4ff;color:#214f83;border:1px solid #d8e6fa;border-radius:11px;padding:17px;margin:10px 0;font-size:16px;cursor:pointer}
-.topic:hover{background:#dceaff}
-input{width:100%;padding:14px;border:1px solid #bdcadd;border-radius:10px;font-size:17px;margin:12px 0}
-.notice{background:#fff3db;color:#80520b;padding:15px;border-radius:10px;line-height:1.5}
-footer{text-align:center;padding:25px;color:#78869a}
-@media(max-width:500px){header h1{font-size:22px}.intro,.content{padding:18px}.card{min-height:125px}}
+.back{
+ border:0;background:#e7f1ff;color:#1769c2;
+ padding:10px 16px;border-radius:10px;font-weight:bold;
+ margin:10px 0 20px;
+}
+.topic-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;
+}
+.topic{
+ border:1px solid #e2eaf4;background:white;border-radius:14px;
+ padding:18px;text-align:left;color:#17314f;
+}
+.topic:hover{border-color:#1769c2;background:#f7fbff}
+.topic strong{display:block;color:#1769c2;font-size:17px}
+.topic small{color:#8291a5}
+.card{
+ background:white;border:1px solid #e6edf6;border-radius:16px;
+ padding:23px;margin:16px 0;
+ box-shadow:0 4px 16px #173c6508;
+}
+.card h2,.card h3{color:#1769c2;margin-bottom:12px}
+.card h2{font-size:22px}
+.formula{
+ background:#edf5ff;border-left:4px solid #287bd1;
+ border-radius:9px;padding:17px;text-align:center;
+ color:#155ba5;font-size:21px;font-weight:bold;
+ margin:15px 0;overflow-wrap:anywhere;
+}
+.example{
+ background:#f6f9fd;border:1px solid #e8eef6;
+ border-radius:10px;padding:13px;margin:10px 0;
+}
+.note{
+ background:#fff8e8;border-left:4px solid #e7b344;
+ padding:14px;border-radius:8px;margin-top:15px;
+}
+.quiz-question{padding:16px 0;border-bottom:1px solid #e7edf5}
+.quiz-question:last-child{border:0}
+.quiz-question>p{font-weight:bold;margin-bottom:10px}
+.option{
+ display:block;background:#f5f8fc;border:1px solid #e1eaf4;
+ border-radius:9px;padding:11px;margin:8px 0;cursor:pointer;
+}
+.option:hover{border-color:#1769c2}
+.option input{margin-right:9px;accent-color:#1769c2}
+.primary{
+ border:0;background:#1769c2;color:white;
+ padding:13px 18px;border-radius:10px;font-weight:bold;width:100%;
+}
+.primary:hover{background:#1056a3}
+.result{
+ display:none;background:#edf5ff;border-radius:12px;
+ padding:17px;margin-top:17px;
+}
+.correct{color:#16844c}
+.wrong{color:#cf4141}
+.menu-overlay{
+ display:none;position:fixed;inset:0;background:#071a3180;
+ z-index:30;
+}
+.menu-overlay.open{display:block}
+.side-menu{
+ position:absolute;right:0;top:0;height:100%;width:min(330px,85%);
+ background:white;padding:27px;
+ box-shadow:-5px 0 25px #0002;
+}
+.close-menu{
+ float:right;border:0;background:#edf4ff;color:#1769c2;
+ width:38px;height:38px;border-radius:10px;font-size:22px;
+}
+.side-menu h2{color:#1769c2;margin:35px 0 22px}
+.contact-item{
+ background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0;
+}
+.contact-item strong{display:block;color:#1769c2;font-size:14px}
+.contact-item a{color:#243b57;text-decoration:none;overflow-wrap:anywhere}
+footer{
+ text-align:center;background:#fff;border-top:1px solid #e7edf5;
+ padding:27px 15px;color:#718198;font-size:13px;
+}
+footer strong{color:#1769c2}
+@media(max-width:600px){
+ main{padding:15px 13px 35px}
+ .hero{padding:32px 20px}
+ .subjects{gap:11px}
+ .subject{padding:16px}
+ .subject h3{font-size:16px}
+ .topic-grid{grid-template-columns:1fr}
+ .card{padding:17px}
+}
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1>📚 ZQİ | Qəbul İmtahanı</h1>
-  <p>Öyrən, inkişaf et, hədəfinə çat!</p>
+ <div class="nav">
+  <div class="brand">Qəbul İmtahanı</div>
+  <button class="menu-btn" onclick="openMenu()" aria-label="Menyu">☰</button>
+ </div>
 </header>
+
+<div class="menu-overlay" id="menu">
+ <div class="side-menu">
+  <button class="close-menu" onclick="closeMenu()">×</button>
+  <h2>Əlaqə</h2>
+  <div class="contact-item">
+   <strong>Telefon nömrəsi</strong>
+   <a href="tel:+995555936547">+995 555 93 65 47</a>
+  </div>
+  <div class="contact-item">
+   <strong>E-poçt</strong>
+   <a href="mailto:zogadiunarebiqebul@gmail.com">
+    zogadiunarebiqebul@gmail.com
+   </a>
+  </div>
+ </div>
+</div>
 
 <main>
 
 <!-- ANA SƏHİFƏ -->
 <section id="home" class="page active">
-  <div class="intro">
-    <h2>Platformamıza xoş gəlmisiniz!</h2>
-    <p>Biliklərini artır, özünü sına və uğura doğru irəlilə.</p>
-  </div>
+ <div class="hero">
+  <div class="hero-tag">Təhsil platforması</div>
+  <h1>Öyrənməyə buradan başla!</h1>
+  <p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p>
+ </div>
 
-  <div class="cards">
-    <button class="card blue" type="button" onclick="openPage('math')">
-      <span class="emoji">➗</span>
-      <strong>Riyaziyyat</strong>
-      <span>Riyaziyyat dərsləri və mövzular</span>
-    </button>
+ <h2 class="section-title">Tədris <span>bölmələri</span></h2>
 
-    <button class="card purple" type="button" onclick="openPage('verbal')">
-      <span class="emoji">📖</span>
-      <strong>Verbal</strong>
-      <span>Verbal biliklərini inkişaf etdir</span>
-    </button>
+ <div class="subjects">
+  <button class="subject" onclick="showPage('math')">
+   <div class="subject-icon">📐</div>
+   <h3>Riyaziyyat</h3>
+   <p>Riyazi qaydalar, izahlar və testlər</p>
+   <span class="arrow">Daxil ol →</span>
+  </button>
 
-    <button class="card orange" type="button" onclick="openPage('exam')">
-      <span class="emoji">🎓</span>
-      <strong>İmtahan testləri</strong>
-      <span>İmtahan suallarına hazırlaş</span>
-    </button>
-
-    <button class="card green" type="button" onclick="openPage('trial')">
-      <span class="emoji">🏆</span>
-      <strong>Sınaq</strong>
-      <span>Sınağa daxil ol və özünü yoxla</span>
-    </button>
-
-    <button class="card red" type="button" onclick="openPage('homework')">
-      <span class="emoji">📝</span>
-      <strong>Ev tapşırıqları</strong>
-      <span>Mövzular üzrə tapşırıqları həll et</span>
-    </button>
-  </div>
+  <button class="subject" onclick="showPage('verbal')">
+   <div class="subject-icon">📚</div>
+   <h3>Verbal</h3>
+   <p>Verbal dərslər və tapşırıqlar</p>
+   <span class="arrow">Daxil ol →</span>
+  </button>
+ </div>
 </section>
 
-<!-- RİYAZİYYAT -->
+<!-- RİYAZİYYAT BÖLMƏSİ -->
 <section id="math" class="page">
-  <button class="back" onclick="openPage('home')">← Ana səhifə</button>
-  <div class="content">
-    <h2>➗ Riyaziyyat</h2>
-    <p>Öyrənmək istədiyiniz mövzunu seçin:</p>
-    <button class="topic" onclick="showTopic('Natural ədədlər','Natural ədədlər 1, 2, 3, 4, ... şəklində davam edən sayma ədədləridir.')">🔢 Natural ədədlər</button>
-    <button class="topic" onclick="showTopic('Tam ədədlər','Tam ədədlərə mənfi ədədlər, sıfır və müsbət natural ədədlər daxildir.')">➖ Tam ədədlər</button>
-    <button class="topic" onclick="showTopic('Rasional ədədlər','Rasional ədədlər a/b şəklində yazıla bilən ədədlərdir. Burada b sıfırdan fərqlidir.')">➗ Rasional ədədlər</button>
-    <button class="topic" onclick="showTopic('İrrasional ədədlər','İrrasional ədədlər adi kəsr şəklində yazıla bilməyən, sonsuz və dövri olmayan onluq kəsrlərdir.')">√ İrrasional ədədlər</button>
-    <button class="topic" onclick="showTopic('Həqiqi ədədlər','Həqiqi ədədlər rasional və irrasional ədədlərin birləşməsidir.')">ℝ Həqiqi ədədlər və əlaqələr</button>
-  </div>
+ <button class="back" onclick="showPage('home')">← Geri</button>
+ <h1>Riyaziyyat</h1>
+ <p>Öyrənmək istədiyin mövzunu seç.</p>
+
+ <div class="topic-grid" id="topic-list"></div>
 </section>
 
-<section id="topicDetail" class="page">
-  <button class="back" onclick="openPage('math')">← Riyaziyyat</button>
-  <div class="content">
-    <h2 id="topicName">Mövzu</h2>
-    <p id="topicDescription"></p>
-  </div>
-</section>
-
-<!-- VERBAL -->
+<!-- VERBAL BÖLMƏSİ -->
 <section id="verbal" class="page">
-  <button class="back" onclick="openPage('home')">← Ana səhifə</button>
-  <div class="content">
-    <h2>📖 Verbal</h2>
-    <p>Verbal bölməsinə xoş gəlmisiniz.</p>
-    <div class="notice">Bu bölmədə verbal qaydalar və testlər yerləşdiriləcək.</div>
-  </div>
+ <button class="back" onclick="showPage('home')">← Geri</button>
+ <div class="card" style="text-align:center;padding:45px 20px">
+  <div style="font-size:55px">📚</div>
+  <h2>Verbal bölməsi</h2>
+  <p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p>
+  <p style="color:#8090a4">Yeni dərslər tezliklə əlavə ediləcək.</p>
+  <button class="primary" style="margin-top:20px;max-width:220px" onclick="showPage('home')">Ana səhifəyə qayıt</button>
+ </div>
 </section>
 
-<!-- İMTAHAN TESTLƏRİ -->
-<section id="exam" class="page">
-  <button class="back" onclick="openPage('home')">← Ana səhifə</button>
-  <div class="content">
-    <h2>🎓 İmtahan testləri</h2>
-    <p>İmtahan testləri bölməsinə xoş gəlmisiniz.</p>
-    <div class="notice">İmtahan sualları bu bölmədə yerləşdiriləcək.</div>
-  </div>
-</section>
-
-<!-- SINAQ -->
-<section id="trial" class="page">
-  <button class="back" onclick="openPage('home')">← Ana səhifə</button>
-  <div class="content">
-    <h2>🏆 Sınaq</h2>
-    <p class="notice">Sınağa daxil olmaq üçün admindən kod almanız lazımdır.</p>
-    <button class="action" onclick="showCodeInput()">Davam et</button>
-    <div id="codeArea" style="display:none">
-      <p>Sınaq kodunu daxil edin:</p>
-      <input id="trialCode" type="password" placeholder="Kod">
-      <button class="action" onclick="checkTrialCode()">Daxil ol</button>
-      <p id="codeResult"></p>
-    </div>
-  </div>
-</section>
-
-<section id="trialOne" class="page">
-  <button class="back" onclick="openPage('trial')">← Sınaqlara qayıt</button>
-  <div class="content">
-    <h2>🏆 Sınaq 1</h2>
-    <p>Sınaq 1 bölməsinə uğurla daxil oldunuz.</p>
-    <p>Burada 40 suallıq sınaq yerləşdiriləcək.</p>
-  </div>
-</section>
-
-<!-- EV TAPŞIRIQLARI -->
-<section id="homework" class="page">
-  <button class="back" onclick="openPage('home')">← Ana səhifə</button>
-  <div class="content">
-    <h2>📝 Ev tapşırıqları</h2>
-    <p>Tapşırıq mövzusunu seçin:</p>
-    <button class="topic" onclick="showHomework('Natural ədədlər')">🔢 Natural ədədlər – 20 sual</button>
-    <button class="topic" onclick="showHomework('Tam ədədlər')">➖ Tam ədədlər – 20 sual</button>
-    <button class="topic" onclick="showHomework('Rasional ədədlər')">➗ Rasional ədədlər – 20 sual</button>
-    <button class="topic" onclick="showHomework('İrrasional ədədlər')">√ İrrasional ədədlər – 20 sual</button>
-    <button class="topic" onclick="showHomework('Həqiqi ədədlər və əlaqələr')">ℝ Həqiqi ədədlər – 20 sual</button>
-  </div>
-</section>
-
-<section id="homeworkDetail" class="page">
-  <button class="back" onclick="openPage('homework')">← Tapşırıqlara qayıt</button>
-  <div class="content">
-    <h2 id="homeworkName">Ev tapşırığı</h2>
-    <p id="homeworkDescription"></p>
-    <div class="notice">Seçilmiş mövzu açıldı. Suallar bu bölməyə əlavə ediləcək.</div>
-  </div>
+<!-- DƏRS SƏHİFƏSİ -->
+<section id="lesson" class="page">
+ <button class="back" onclick="showPage('math')">← Mövzulara qayıt</button>
+ <div id="lesson-content"></div>
 </section>
 
 </main>
 
 <footer>
-  <p>Qəbul İmtahanı | Təhsil Platforması</p>
-  <p>Hazırlayan: Haldun Məmmədov</p>
+ <p>© <span id="year"></span> Bütün hüquqlar qorunur.</p>
+ <p>Hazırlayan: <strong>Haldun Məmmədov</strong></p>
 </footer>
 
 <script>
-function openPage(pageId){
-  var pages=document.querySelectorAll(".page");
-  var target=document.getElementById(pageId);
+const topics = [
+ {
+  title:"Natural ədədlər",
+  symbol:"N",
+  desc:"Saymaq üçün istifadə olunan ədədlər.",
+  rule:"Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.",
+  formula:"N = {1, 2, 3, 4, 5, 6, ...}",
+  examples:[
+   "1 — natural ədəddir.",
+   "15 — natural ədəddir.",
+   "100 — natural ədəddir.",
+   "-5 — natural ədəd deyil.",
+   "2,5 — natural ədəd deyil."
+  ],
+  note:"Bu saytda N = {1, 2, 3, ...} qəbul edilir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.",
+  questions:[
+   ["Hansı natural ədəddir?",["-4","12","2,5"],1,"12 natural ədəddir."],
+   ["Natural ədədlər hansı məqsədlə istifadə olunur?",["Saymaq üçün","Mənfi ədədləri göstərmək üçün","Yalnız kəsrləri göstərmək üçün"],0,"Natural ədədlər saymaq üçün istifadə olunur."]
+  ]
+ },
+ {
+  title:"Tam ədədlər",
+  symbol:"Z",
+  desc:"Mənfi, müsbət ədədlər və sıfır.",
+  rule:"Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.",
+  formula:"Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",
+  examples:[
+   "-8 — tam ədəddir.",
+   "0 — tam ədəddir.",
+   "15 — tam ədəddir.",
+   "2,5 — tam ədəd deyil.",
+   "1/2 — tam ədəd deyil."
+  ],
+  note:"Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.",
+  questions:[
+   ["Hansı tam ədəddir?",["2,5","-8","1/3"],1,"-8 tam ədəddir."],
+   ["Tam ədədlərə hansı daxildir?",["Yalnız müsbət ədədlər","Yalnız mənfi ədədlər","Mənfi, müsbət ədədlər və sıfır"],2,"Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir."]
+  ]
+ },
+ {
+  title:"Rasional ədədlər",
+  symbol:"Q",
+  desc:"Adi kəsr şəklində yazıla bilən ədədlər.",
+  rule:"İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.",
+  formula:"Q = {a/b : a,b ∈ Z; b ≠ 0}",
+  examples:[
+   "1/2 — rasional ədəddir.",
+   "3/4 — rasional ədəddir.",
+   "-5/2 — rasional ədəddir.",
+   "0,5 = 1/2",
+   "0,75 = 3/4",
+   "0,333... = 1/3"
+  ],
+  note:"Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir. Bütün tam ədədlər də rasionaldır.",
+  questions:[
+   ["Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."],
+   ["Aşağıdakılardan hansı rasionaldır?",["0,333...","√7","π"],0,"0,333... = 1/3 olduğuna görə rasionaldır."]
+  ]
+ },
+ {
+  title:"İrrasional ədədlər",
+  symbol:"I",
+  desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",
+  rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",
+  formula:"√2 = 1,4142135...<br>√3 = 1,7320508...<br>π = 3,1415926...",
+  examples:[
+   "√2 — irrasionaldır.",
+   "√3 — irrasionaldır.",
+   "√5 — irrasionaldır.",
+   "π — irrasionaldır.",
+   "√4 = 2 — rasionaldır."
+  ],
+  note:"İrrasional ədədlərin onluq yazılışı sonsuz və dövri olmayan olur. Hər kökaltı ifadə irrasional deyil!",
+  questions:[
+   ["Hansı irrasional ədəddir?",["√9","√2","4"],1,"√2 irrasional ədəddir."],
+   ["√16 hansı ədəddir?",["İrrasional","Rasional","Heç biri"],1,"√16 = 4 olduğuna görə rasionaldır."]
+  ]
+ },
+ {
+  title:"Həqiqi ədədlər və əlaqələr",
+  symbol:"R",
+  desc:"Bütün rasional və irrasional ədədlər.",
+  rule:"Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu təşkil edir.",
+  formula:"N ⊂ Z ⊂ Q ⊂ R",
+  examples:[
+   "N — natural ədədlər.",
+   "Z — tam ədədlər.",
+   "Q — rasional ədədlər.",
+   "R — həqiqi ədədlər.",
+   "İrrasional ədədlər də R çoxluğuna daxildir."
+  ],
+  note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional ədədlər isə həqiqi ədədlər çoxluğuna daxildir.",
+  questions:[
+   ["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],
+   ["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]
+  ]
+ }
+];
 
-  if(!target){
-    alert("Bölmə tapılmadı: "+pageId);
-    return;
-  }
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ closeMenu();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
 
-  pages.forEach(function(page){
-    page.classList.remove("active");
+function openMenu(){
+ document.getElementById("menu").classList.add("open");
+}
+function closeMenu(){
+ document.getElementById("menu").classList.remove("open");
+}
+document.getElementById("menu").addEventListener("click",function(e){
+ if(e.target===this) closeMenu();
+});
+
+function renderTopics(){
+ const list=document.getElementById("topic-list");
+ topics.forEach((t,i)=>{
+  const button=document.createElement("button");
+  button.className="topic";
+  button.innerHTML=
+   "<strong>"+(i+1)+". "+t.title+"</strong>"+
+   "<small>"+t.desc+"</small>";
+  button.addEventListener("click",()=>openLesson(i));
+  list.appendChild(button);
+ });
+}
+
+function openLesson(index){
+ const t=topics[index];
+ let html=`
+  <div class="card">
+   <h2>${t.title}</h2>
+   <p>${t.desc}</p>
+   <h3 style="margin-top:22px">📖 Qayda və izah</h3>
+   <p>${t.rule}</p>
+   <div class="formula">${t.formula}</div>
+   <h3>📝 Nümunələr</h3>
+   ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
+   <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
+  </div>
+  <div class="card">
+   <h2>✍️ Mövzu testi</h2>
+   <p>Sualları cavablandır və nəticəni yoxla.</p>
+   <form id="topic-test">
+    ${t.questions.map((q,i)=>`
+     <div class="quiz-question">
+      <p>${i+1}. ${q[0]}</p>
+      ${q[1].map((option,j)=>`
+       <label class="option">
+        <input type="radio" name="q${i}" value="${j}">
+        ${option}
+       </label>
+      `).join("")}
+     </div>
+    `).join("")}
+    <button class="primary" type="submit">Cavabları yoxla</button>
+   </form>
+   <div class="result" id="topic-result" aria-live="polite"></div>
+  </div>
+ `;
+ document.getElementById("lesson-content").innerHTML=html;
+ showPage("lesson");
+
+ document.getElementById("topic-test").addEventListener("submit",function(e){
+  e.preventDefault();
+  let score=0;
+  let output="";
+  t.questions.forEach((q,i)=>{
+   const selected=this.querySelector('input[name="q'+i+'"]:checked');
+   const ok=selected && Number(selected.value)===q[2];
+   if(ok) score++;
+   output+=`
+    <div class="example">
+     <b class="${ok?'correct':'wrong'}">
+      ${i+1}. ${ok?'✓ Düzgün':'✗ Yanlış'}
+     </b>
+     <p>${q[3]}</p>
+    </div>`;
   });
-
-  target.classList.add("active");
-  window.scrollTo(0,0);
+  const result=document.getElementById("topic-result");
+  result.innerHTML="<h3>Nəticə: "+score+" / "+t.questions.length+"</h3>"+output+
+   '<button type="button" class="primary" onclick="openLesson('+index+')">Yenidən cəhd et</button>';
+  result.style.display="block";
+  this.querySelectorAll("input").forEach(input=>input.disabled=true);
+  this.querySelector("button[type=submit]").disabled=true;
+  this.querySelector("button[type=submit]").style.opacity=".5";
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+ });
 }
 
-function showTopic(name,description){
-  document.getElementById("topicName").textContent=name;
-  document.getElementById("topicDescription").textContent=description;
-  openPage("topicDetail");
-}
-
-function showHomework(name){
-  document.getElementById("homeworkName").textContent=name;
-  document.getElementById("homeworkDescription").textContent=
-    name+" mövzusu üzrə ev tapşırığı seçildi.";
-  openPage("homeworkDetail");
-}
-
-function showCodeInput(){
-  document.getElementById("codeArea").style.display="block";
-  document.getElementById("trialCode").focus();
-}
-
-function checkTrialCode(){
-  var code=document.getElementById("trialCode").value.trim();
-  var result=document.getElementById("codeResult");
-
-  if(code==="55578912"){
-    result.textContent="Kod doğrudur! Sınaq açılır...";
-    result.style.color="green";
-    setTimeout(function(){openPage("trialOne");},500);
-  }else{
-    result.textContent="Kod yanlışdır. Yenidən yoxlayın.";
-    result.style.color="red";
-  }
-}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderTopics();
 </script>
 
 </body>
