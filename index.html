@@ -6,151 +6,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1769c2">
 <title>Qəbul İmtahanı | Təhsil Platforması</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
- font-family:Arial,sans-serif;
- background:#f3f7fd;
- color:#172b46;
- line-height:1.65;
-}
+body{font-family:Arial,sans-serif;background:#f3f7fd;color:#172b46;line-height:1.65}
 button{font:inherit;cursor:pointer}
-header{
- background:#fff;
- box-shadow:0 2px 15px #183b6510;
- position:sticky;top:0;z-index:20;
-}
-.nav{
- max-width:1100px;margin:auto;padding:15px 20px;
- display:flex;align-items:center;justify-content:space-between;
-}
+header{background:#fff;box-shadow:0 2px 15px #183b6510;position:sticky;top:0;z-index:20}
+.nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-size:21px;font-weight:800;color:#1769c2}
-.menu-btn{
- border:0;background:#edf4ff;color:#1769c2;
- width:45px;height:43px;border-radius:12px;font-size:25px;
-}
+.menu-btn{border:0;background:#edf4ff;color:#1769c2;width:45px;height:43px;border-radius:12px;font-size:25px}
 main{max-width:1050px;margin:auto;padding:25px 18px 50px}
-.hero{
- background:linear-gradient(130deg,#1769c2,#4d9af0);
- color:white;border-radius:23px;padding:42px 28px;
- margin:20px 0 28px;position:relative;overflow:hidden;
-}
-.hero:after{
- content:"";position:absolute;width:210px;height:210px;
- border:35px solid #ffffff16;border-radius:50%;
- right:-50px;top:-75px;
-}
+.hero{background:linear-gradient(130deg,#1769c2,#4d9af0);color:white;border-radius:23px;padding:42px 28px;margin:20px 0 28px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:210px;height:210px;border:35px solid #ffffff16;border-radius:50%;right:-50px;top:-75px}
 .hero h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin-bottom:13px}
 .hero p{color:#e8f3ff;max-width:580px}
-.hero-tag{
- display:inline-block;background:#ffffff20;
- border:1px solid #ffffff50;padding:6px 13px;
- border-radius:20px;margin-bottom:15px;font-size:13px;
-}
+.hero-tag{display:inline-block;background:#ffffff20;border:1px solid #ffffff50;padding:6px 13px;border-radius:20px;margin-bottom:15px;font-size:13px}
 .section-title{font-size:23px;margin:30px 0 15px}
 .section-title span{color:#1769c2}
-.subjects{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;
-}
-.subject{
- border:1px solid #e3ebf6;background:white;border-radius:17px;
- padding:23px;text-align:left;transition:.2s;
- box-shadow:0 5px 18px #173c6510;
- color:#172b46;
-}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.subject{border:1px solid #e3ebf6;background:white;border-radius:17px;padding:23px;text-align:left;transition:.2s;box-shadow:0 5px 18px #173c6510;color:#172b46}
 .subject:hover{transform:translateY(-4px);border-color:#8bb9f1}
-.subject-icon{
- width:49px;height:49px;border-radius:14px;
- display:grid;place-items:center;background:#eaf3ff;
- font-size:25px;margin-bottom:15px;
-}
+.subject-icon{width:49px;height:49px;border-radius:14px;display:grid;place-items:center;background:#eaf3ff;font-size:25px;margin-bottom:15px}
 .subject h3{font-size:19px;margin-bottom:5px}
 .subject p{font-size:13px;color:#72839a}
 .arrow{color:#1769c2;font-weight:bold;margin-top:15px;display:block}
 .page{display:none}
 .page.active{display:block}
-.back{
- border:0;background:#e7f1ff;color:#1769c2;
- padding:10px 16px;border-radius:10px;font-weight:bold;
- margin:10px 0 20px;
-}
-.topic-grid{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;
-}
-.topic{
- border:1px solid #e2eaf4;background:white;border-radius:14px;
- padding:18px;text-align:left;color:#17314f;
-}
+.back{border:0;background:#e7f1ff;color:#1769c2;padding:10px 16px;border-radius:10px;font-weight:bold;margin:10px 0 20px}
+.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.topic{border:1px solid #e2eaf4;background:white;border-radius:14px;padding:18px;text-align:left;color:#17314f}
 .topic:hover{border-color:#1769c2;background:#f7fbff}
 .topic strong{display:block;color:#1769c2;font-size:17px}
 .topic small{color:#8291a5}
-.card{
- background:white;border:1px solid #e6edf6;border-radius:16px;
- padding:23px;margin:16px 0;
- box-shadow:0 4px 16px #173c6508;
-}
+.card{background:white;border:1px solid #e6edf6;border-radius:16px;padding:23px;margin:16px 0;box-shadow:0 4px 16px #173c6508}
 .card h2,.card h3{color:#1769c2;margin-bottom:12px}
 .card h2{font-size:22px}
-.formula{
- background:#edf5ff;border-left:4px solid #287bd1;
- border-radius:9px;padding:17px;text-align:center;
- color:#155ba5;font-size:21px;font-weight:bold;
- margin:15px 0;overflow-wrap:anywhere;
-}
-.example{
- background:#f6f9fd;border:1px solid #e8eef6;
- border-radius:10px;padding:13px;margin:10px 0;
-}
-.note{
- background:#fff8e8;border-left:4px solid #e7b344;
- padding:14px;border-radius:8px;margin-top:15px;
-}
+.formula{background:#edf5ff;border-left:4px solid #287bd1;border-radius:9px;padding:17px;text-align:center;color:#155ba5;font-size:21px;font-weight:bold;margin:15px 0;overflow-wrap:anywhere}
+.example{background:#f6f9fd;border:1px solid #e8eef6;border-radius:10px;padding:13px;margin:10px 0}
+.note{background:#fff8e8;border-left:4px solid #e7b344;padding:14px;border-radius:8px;margin-top:15px}
 .quiz-question{padding:16px 0;border-bottom:1px solid #e7edf5}
-.quiz-question:last-child{border:0}
-.quiz-question>p{font-weight:bold;margin-bottom:10px}
-.option{
- display:block;background:#f5f8fc;border:1px solid #e1eaf4;
- border-radius:9px;padding:11px;margin:8px 0;cursor:pointer;
-}
+.option{display:block;background:#f5f8fc;border:1px solid #e1eaf4;border-radius:9px;padding:11px;margin:8px 0;cursor:pointer}
 .option:hover{border-color:#1769c2}
 .option input{margin-right:9px;accent-color:#1769c2}
-.primary{
- border:0;background:#1769c2;color:white;
- padding:13px 18px;border-radius:10px;font-weight:bold;width:100%;
-}
+.primary{border:0;background:#1769c2;color:white;padding:13px 18px;border-radius:10px;font-weight:bold;width:100%}
 .primary:hover{background:#1056a3}
-.result{
- display:none;background:#edf5ff;border-radius:12px;
- padding:17px;margin-top:17px;
-}
+.primary:disabled{opacity:.5;cursor:not-allowed}
+.result{display:none;background:#edf5ff;border-radius:12px;padding:17px;margin-top:17px}
 .correct{color:#16844c}
 .wrong{color:#cf4141}
-.menu-overlay{
- display:none;position:fixed;inset:0;background:#071a3180;
- z-index:30;
-}
+.menu-overlay{display:none;position:fixed;inset:0;background:#071a3180;z-index:30}
 .menu-overlay.open{display:block}
-.side-menu{
- position:absolute;right:0;top:0;height:100%;width:min(330px,85%);
- background:white;padding:27px;
- box-shadow:-5px 0 25px #0002;
-}
-.close-menu{
- float:right;border:0;background:#edf4ff;color:#1769c2;
- width:38px;height:38px;border-radius:10px;font-size:22px;
-}
+.side-menu{position:absolute;right:0;top:0;height:100%;width:min(330px,85%);background:white;padding:27px;box-shadow:-5px 0 25px #0002}
+.close-menu{float:right;border:0;background:#edf4ff;color:#1769c2;width:38px;height:38px;border-radius:10px;font-size:22px}
 .side-menu h2{color:#1769c2;margin:35px 0 22px}
-.contact-item{
- background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0;
-}
+.contact-item{background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0}
 .contact-item strong{display:block;color:#1769c2;font-size:14px}
 .contact-item a{color:#243b57;text-decoration:none;overflow-wrap:anywhere}
-footer{
- text-align:center;background:#fff;border-top:1px solid #e7edf5;
- padding:27px 15px;color:#718198;font-size:13px;
-}
+footer{text-align:center;background:#fff;border-top:1px solid #e7edf5;padding:27px 15px;color:#718198;font-size:13px}
 footer strong{color:#1769c2}
+.progress{height:9px;background:#e7edf5;border-radius:20px;overflow:hidden;margin:15px 0}
+.progress div{height:100%;background:#1769c2;width:0%;transition:.2s}
+.question-number{color:#1769c2;font-weight:bold;margin-bottom:8px}
+.answer-box{padding:15px;border-radius:10px;margin:15px 0;background:#edf5ff}
+.exam-year{font-size:20px}
 @media(max-width:600px){
  main{padding:15px 13px 35px}
  .hero{padding:32px 20px}
@@ -162,7 +79,6 @@ footer strong{color:#1769c2}
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -176,75 +92,114 @@ footer strong{color:#1769c2}
  <div class="side-menu">
   <button class="close-menu" onclick="closeMenu()">×</button>
   <h2>Əlaqə</h2>
-  <div class="contact-item">
-   <strong>Telefon nömrəsi</strong>
-   <a href="tel:+995555936547">+995 555 93 65 47</a>
-  </div>
-  <div class="contact-item">
-   <strong>E-poçt</strong>
-   <a href="mailto:zogadiunarebiqebul@gmail.com">
-    zogadiunarebiqebul@gmail.com
-   </a>
-  </div>
+  <div class="contact-item"><strong>Telefon nömrəsi</strong><a href="tel:+995555936547">+995 555 93 65 47</a></div>
+  <div class="contact-item"><strong>E-poçt</strong><a href="mailto:zogadiunarebiqebul@gmail.com">zogadiunarebiqebul@gmail.com</a></div>
  </div>
 </div>
 
 <main>
-
-<!-- ANA SƏHİFƏ -->
 <section id="home" class="page active">
  <div class="hero">
   <div class="hero-tag">Təhsil platforması</div>
   <h1>Öyrənməyə buradan başla!</h1>
   <p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p>
  </div>
-
  <h2 class="section-title">Tədris <span>bölmələri</span></h2>
-
  <div class="subjects">
   <button class="subject" onclick="showPage('math')">
-   <div class="subject-icon">📐</div>
-   <h3>Riyaziyyat</h3>
-   <p>Riyazi qaydalar, izahlar və testlər</p>
-   <span class="arrow">Daxil ol →</span>
+   <div class="subject-icon">📐</div><h3>Riyaziyyat</h3>
+   <p>Riyazi qaydalar, izahlar və testlər</p><span class="arrow">Daxil ol →</span>
   </button>
-
   <button class="subject" onclick="showPage('verbal')">
-   <div class="subject-icon">📚</div>
-   <h3>Verbal</h3>
-   <p>Verbal dərslər və tapşırıqlar</p>
-   <span class="arrow">Daxil ol →</span>
+   <div class="subject-icon">📚</div><h3>Verbal</h3>
+   <p>Verbal dərslər və tapşırıqlar</p><span class="arrow">Daxil ol →</span>
+  </button>
+  <button class="subject" onclick="showPage('exams')">
+   <div class="subject-icon">📝</div><h3>İmtahan testləri</h3>
+   <p>2010 və 2011-ci il testləri</p><span class="arrow">İlləri seç →</span>
   </button>
  </div>
 </section>
 
-<!-- RİYAZİYYAT BÖLMƏSİ -->
 <section id="math" class="page">
  <button class="back" onclick="showPage('home')">← Geri</button>
- <h1>Riyaziyyat</h1>
- <p>Öyrənmək istədiyin mövzunu seç.</p>
-
- <div class="topic-grid" id="topic-list"></div>
+ <h1>Riyaziyyat</h1><p>İstədiyin bölməni seç.</p>
+ <div class="topic-grid" style="margin-top:18px">
+  <button class="topic" onclick="showPage('math-tests')"><strong>📝 Testlər</strong><small>Hər mövzu üzrə 50 sual</small></button>
+  <button class="topic" onclick="showPage('math-rules')"><strong>📖 Qaydalar</strong><small>Mövzuların izahı və nümunələr</small></button>
+ </div>
 </section>
 
-<!-- VERBAL BÖLMƏSİ -->
+<section id="math-tests" class="page">
+ <button class="back" onclick="showPage('math')">← Riyaziyyata qayıt</button>
+ <h1>Riyaziyyat testləri</h1>
+ <p>Test etmək istədiyin mövzunu seç. Hər mövzuda 50 sual var.</p>
+ <div class="topic-grid" id="test-topic-list" style="margin-top:18px"></div>
+</section>
+
+<section id="math-rules" class="page">
+ <button class="back" onclick="showPage('math')">← Riyaziyyata qayıt</button>
+ <h1>Riyaziyyat qaydaları</h1>
+ <p>Öyrənmək istədiyin mövzunu seç.</p>
+ <div class="topic-grid" id="topic-list" style="margin-top:18px"></div>
+</section>
+
 <section id="verbal" class="page">
  <button class="back" onclick="showPage('home')">← Geri</button>
  <div class="card" style="text-align:center;padding:45px 20px">
-  <div style="font-size:55px">📚</div>
-  <h2>Verbal bölməsi</h2>
+  <div style="font-size:55px">📚</div><h2>Verbal bölməsi</h2>
   <p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p>
   <p style="color:#8090a4">Yeni dərslər tezliklə əlavə ediləcək.</p>
   <button class="primary" style="margin-top:20px;max-width:220px" onclick="showPage('home')">Ana səhifəyə qayıt</button>
  </div>
 </section>
 
-<!-- DƏRS SƏHİFƏSİ -->
+<section id="exams" class="page">
+ <button class="back" onclick="showPage('home')">← Geri</button>
+ <h1>İmtahan testləri</h1>
+ <p>İmtahan ilini seç.</p>
+ <div class="topic-grid" style="margin-top:18px">
+  <button class="topic" onclick="showExamYear(2010)"><strong class="exam-year">2010-cu il</strong><small>İmtahan testləri</small></button>
+  <button class="topic" onclick="showExamYear(2011)"><strong class="exam-year">2011-ci il</strong><small>İmtahan testləri</small></button>
+ </div>
+</section>
+
+<section id="exam-empty" class="page">
+ <button class="back" onclick="showPage('exams')">← İllərə qayıt</button>
+ <div class="card" style="text-align:center;padding:40px 20px">
+  <h2 id="exam-title">İmtahan testləri</h2>
+  <p>Bu ilə aid suallar hələ əlavə edilməyib.</p>
+ </div>
+</section>
+
 <section id="lesson" class="page">
- <button class="back" onclick="showPage('math')">← Mövzulara qayıt</button>
+ <button class="back" onclick="showPage('math-rules')">← Mövzulara qayıt</button>
  <div id="lesson-content"></div>
 </section>
 
+<section id="test-run" class="page">
+ <button class="back" onclick="leaveTest()">← Mövzulara qayıt</button>
+ <div class="card">
+  <h2 id="test-title">Mövzu testi</h2>
+  <div class="progress"><div id="progress-fill"></div></div>
+  <p id="progress-text"></p>
+  <div id="question-area"></div>
+  <div id="feedback" class="answer-box" style="display:none"></div>
+  <button id="submit-answer" class="primary" onclick="submitAnswer()">Cavabı göndər</button>
+  <button id="next-question" class="primary" onclick="nextQuestion()" style="display:none;margin-top:10px">Növbəti suala keç →</button>
+ </div>
+</section>
+
+<section id="test-finish" class="page">
+ <button class="back" onclick="showPage('math-tests')">← Testlərə qayıt</button>
+ <div class="card" style="text-align:center">
+  <h2>Test tamamlandı!</h2>
+  <div class="formula" id="final-score"></div>
+  <p id="final-message"></p>
+  <button class="primary" style="margin-top:18px" onclick="restartTest()">Yenidən başla</button>
+  <button class="primary" style="margin-top:10px" onclick="showPage('math-tests')">Mövzulara qayıt</button>
+ </div>
+</section>
 </main>
 
 <footer>
@@ -253,201 +208,178 @@ footer strong{color:#1769c2}
 </footer>
 
 <script>
-const topics = [
- {
-  title:"Natural ədədlər",
-  symbol:"N",
-  desc:"Saymaq üçün istifadə olunan ədədlər.",
-  rule:"Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.",
-  formula:"N = {1, 2, 3, 4, 5, 6, ...}",
-  examples:[
-   "1 — natural ədəddir.",
-   "15 — natural ədəddir.",
-   "100 — natural ədəddir.",
-   "-5 — natural ədəd deyil.",
-   "2,5 — natural ədəd deyil."
-  ],
-  note:"Bu saytda N = {1, 2, 3, ...} qəbul edilir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.",
-  questions:[
-   ["Hansı natural ədəddir?",["-4","12","2,5"],1,"12 natural ədəddir."],
-   ["Natural ədədlər hansı məqsədlə istifadə olunur?",["Saymaq üçün","Mənfi ədədləri göstərmək üçün","Yalnız kəsrləri göstərmək üçün"],0,"Natural ədədlər saymaq üçün istifadə olunur."]
-  ]
- },
- {
-  title:"Tam ədədlər",
-  symbol:"Z",
-  desc:"Mənfi, müsbət ədədlər və sıfır.",
-  rule:"Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.",
-  formula:"Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",
-  examples:[
-   "-8 — tam ədəddir.",
-   "0 — tam ədəddir.",
-   "15 — tam ədəddir.",
-   "2,5 — tam ədəd deyil.",
-   "1/2 — tam ədəd deyil."
-  ],
-  note:"Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.",
-  questions:[
-   ["Hansı tam ədəddir?",["2,5","-8","1/3"],1,"-8 tam ədəddir."],
-   ["Tam ədədlərə hansı daxildir?",["Yalnız müsbət ədədlər","Yalnız mənfi ədədlər","Mənfi, müsbət ədədlər və sıfır"],2,"Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir."]
-  ]
- },
- {
-  title:"Rasional ədədlər",
-  symbol:"Q",
-  desc:"Adi kəsr şəklində yazıla bilən ədədlər.",
-  rule:"İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.",
-  formula:"Q = {a/b : a,b ∈ Z; b ≠ 0}",
-  examples:[
-   "1/2 — rasional ədəddir.",
-   "3/4 — rasional ədəddir.",
-   "-5/2 — rasional ədəddir.",
-   "0,5 = 1/2",
-   "0,75 = 3/4",
-   "0,333... = 1/3"
-  ],
-  note:"Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir. Bütün tam ədədlər də rasionaldır.",
-  questions:[
-   ["Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."],
-   ["Aşağıdakılardan hansı rasionaldır?",["0,333...","√7","π"],0,"0,333... = 1/3 olduğuna görə rasionaldır."]
-  ]
- },
- {
-  title:"İrrasional ədədlər",
-  symbol:"I",
-  desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",
-  rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",
-  formula:"√2 = 1,4142135...<br>√3 = 1,7320508...<br>π = 3,1415926...",
-  examples:[
-   "√2 — irrasionaldır.",
-   "√3 — irrasionaldır.",
-   "√5 — irrasionaldır.",
-   "π — irrasionaldır.",
-   "√4 = 2 — rasionaldır."
-  ],
-  note:"İrrasional ədədlərin onluq yazılışı sonsuz və dövri olmayan olur. Hər kökaltı ifadə irrasional deyil!",
-  questions:[
-   ["Hansı irrasional ədəddir?",["√9","√2","4"],1,"√2 irrasional ədəddir."],
-   ["√16 hansı ədəddir?",["İrrasional","Rasional","Heç biri"],1,"√16 = 4 olduğuna görə rasionaldır."]
-  ]
- },
- {
-  title:"Həqiqi ədədlər və əlaqələr",
-  symbol:"R",
-  desc:"Bütün rasional və irrasional ədədlər.",
-  rule:"Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu təşkil edir.",
-  formula:"N ⊂ Z ⊂ Q ⊂ R",
-  examples:[
-   "N — natural ədədlər.",
-   "Z — tam ədədlər.",
-   "Q — rasional ədədlər.",
-   "R — həqiqi ədədlər.",
-   "İrrasional ədədlər də R çoxluğuna daxildir."
-  ],
-  note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional ədədlər isə həqiqi ədədlər çoxluğuna daxildir.",
-  questions:[
-   ["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],
-   ["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]
-  ]
- }
+const topics=[
+{
+title:"Natural ədədlər",symbol:"N",desc:"Saymaq üçün istifadə olunan ədədlər.",
+rule:"Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.",
+formula:"N = {1, 2, 3, 4, 5, 6, ...}",
+examples:["1 — natural ədəddir.","15 — natural ədəddir.","100 — natural ədəddir.","-5 — natural ədəd deyil.","2,5 — natural ədəd deyil."],
+note:"Bu saytda N = {1, 2, 3, ...} qəbul edilir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.",
+questions:[
+["Hansı natural ədəddir?",["-4","12","2,5"],1,"12 natural ədəddir."],
+["Natural ədədlər hansı məqsədlə istifadə olunur?",["Saymaq üçün","Mənfi ədədləri göstərmək üçün","Yalnız kəsrləri göstərmək üçün"],0,"Natural ədədlər saymaq üçün istifadə olunur."]
+]},
+{
+title:"Tam ədədlər",symbol:"Z",desc:"Mənfi, müsbət ədədlər və sıfır.",
+rule:"Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.",
+formula:"Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",
+examples:["-8 — tam ədəddir.","0 — tam ədəddir.","15 — tam ədəddir.","2,5 — tam ədəd deyil.","1/2 — tam ədəd deyil."],
+note:"Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.",
+questions:[
+["Hansı tam ədəddir?",["2,5","-8","1/3"],1,"-8 tam ədəddir."],
+["Tam ədədlərə hansı daxildir?",["Yalnız müsbət ədədlər","Yalnız mənfi ədədlər","Mənfi, müsbət ədədlər və sıfır"],2,"Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir."]
+]},
+{
+title:"Rasional ədədlər",symbol:"Q",desc:"Adi kəsr şəklində yazıla bilən ədədlər.",
+rule:"İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.",
+formula:"Q = {a/b : a,b ∈ Z; b ≠ 0}",
+examples:["1/2 — rasional ədəddir.","3/4 — rasional ədəddir.","-5/2 — rasional ədəddir.","0,5 = 1/2","0,75 = 3/4","0,333... = 1/3"],
+note:"Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir. Bütün tam ədədlər də rasionaldır.",
+questions:[
+["Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."],
+["Aşağıdakılardan hansı rasionaldır?",["0,333...","√7","π"],0,"0,333... = 1/3 olduğuna görə rasionaldır."]
+]},
+{
+title:"İrrasional ədədlər",symbol:"I",desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",
+rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",
+formula:"√2 = 1,4142135...<br>√3 = 1,7320508...<br>π = 3,1415926...",
+examples:["√2 — irrasionaldır.","√3 — irrasionaldır.","√5 — irrasionaldır.","π — irrasionaldır.","√4 = 2 — rasionaldır."],
+note:"İrrasional ədədlərin onluq yazılışı sonsuz və dövri olmayan olur. Hər kökaltı ifadə irrasional deyil!",
+questions:[
+["Hansı irrasional ədəddir?",["√9","√2","4"],1,"√2 irrasional ədəddir."],
+["√16 hansı ədəddir?",["İrrasional","Rasional","Heç biri"],1,"√16 = 4 olduğuna görə rasionaldır."]
+]},
+{
+title:"Həqiqi ədədlər və əlaqələr",symbol:"R",desc:"Bütün rasional və irrasional ədədlər.",
+rule:"Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu təşkil edir.",
+formula:"N ⊂ Z ⊂ Q ⊂ R",
+examples:["N — natural ədədlər.","Z — tam ədədlər.","Q — rasional ədədlər.","R — həqiqi ədədlər.","İrrasional ədədlər də R çoxluğuna daxildir."],
+note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional ədədlər isə həqiqi ədədlər çoxluğuna daxildir.",
+questions:[
+["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],
+["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]
+]}
 ];
 
 function showPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
+ const page=document.getElementById(id);
+ if(!page){alert("Səhifə tapılmadı: "+id);return;}
+ page.classList.add("active");
  closeMenu();
  window.scrollTo({top:0,behavior:"smooth"});
 }
+function openMenu(){document.getElementById("menu").classList.add("open")}
+function closeMenu(){document.getElementById("menu").classList.remove("open")}
+document.getElementById("menu").addEventListener("click",function(e){if(e.target===this)closeMenu()});
+document.getElementById("year").textContent=new Date().getFullYear();
 
-function openMenu(){
- document.getElementById("menu").classList.add("open");
+function showExamYear(year){
+ document.getElementById("exam-title").textContent=year+"-ci il imtahan testləri";
+ showPage("exam-empty");
 }
-function closeMenu(){
- document.getElementById("menu").classList.remove("open");
-}
-document.getElementById("menu").addEventListener("click",function(e){
- if(e.target===this) closeMenu();
-});
 
 function renderTopics(){
- const list=document.getElementById("topic-list");
+ const rules=document.getElementById("topic-list");
+ const tests=document.getElementById("test-topic-list");
  topics.forEach((t,i)=>{
-  const button=document.createElement("button");
-  button.className="topic";
-  button.innerHTML=
-   "<strong>"+(i+1)+". "+t.title+"</strong>"+
-   "<small>"+t.desc+"</small>";
-  button.addEventListener("click",()=>openLesson(i));
-  list.appendChild(button);
+  const ruleButton=document.createElement("button");
+  ruleButton.className="topic";
+  ruleButton.innerHTML="<strong>"+(i+1)+". "+t.title+"</strong><small>"+t.desc+"</small>";
+  ruleButton.addEventListener("click",()=>openLesson(i));
+  rules.appendChild(ruleButton);
+
+  const testButton=document.createElement("button");
+  testButton.className="topic";
+  testButton.innerHTML="<strong>📝 "+t.title+"</strong><small>50 suallıq testə başla</small>";
+  testButton.addEventListener("click",()=>startTest(i));
+  tests.appendChild(testButton);
  });
 }
 
 function openLesson(index){
  const t=topics[index];
- let html=`
-  <div class="card">
-   <h2>${t.title}</h2>
-   <p>${t.desc}</p>
-   <h3 style="margin-top:22px">📖 Qayda və izah</h3>
-   <p>${t.rule}</p>
-   <div class="formula">${t.formula}</div>
-   <h3>📝 Nümunələr</h3>
-   ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
-   <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
-  </div>
-  <div class="card">
-   <h2>✍️ Mövzu testi</h2>
-   <p>Sualları cavablandır və nəticəni yoxla.</p>
-   <form id="topic-test">
-    ${t.questions.map((q,i)=>`
-     <div class="quiz-question">
-      <p>${i+1}. ${q[0]}</p>
-      ${q[1].map((option,j)=>`
-       <label class="option">
-        <input type="radio" name="q${i}" value="${j}">
-        ${option}
-       </label>
-      `).join("")}
-     </div>
-    `).join("")}
-    <button class="primary" type="submit">Cavabları yoxla</button>
-   </form>
-   <div class="result" id="topic-result" aria-live="polite"></div>
-  </div>
- `;
+ const html=`
+ <div class="card">
+  <h2>${t.title}</h2><p>${t.desc}</p>
+  <h3 style="margin-top:22px">📖 Qayda və izah</h3><p>${t.rule}</p>
+  <div class="formula">${t.formula}</div>
+  <h3>📝 Nümunələr</h3>
+  ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
+  <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
+ </div>
+ <div class="card">
+  <h2>✍️ Mövzu testi</h2><p>Qısa yoxlama suallarını cavablandır.</p>
+  <form id="topic-test">
+  ${t.questions.map((q,i)=>`
+   <div class="quiz-question"><p><b>${i+1}. ${q[0]}</b></p>
+   ${q[1].map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}">${o}</label>`).join("")}
+   </div>`).join("")}
+   <button class="primary" type="submit">Cavabları yoxla</button>
+  </form>
+  <div class="result" id="topic-result"></div>
+ </div>`;
  document.getElementById("lesson-content").innerHTML=html;
  showPage("lesson");
-
  document.getElementById("topic-test").addEventListener("submit",function(e){
-  e.preventDefault();
-  let score=0;
-  let output="";
+  e.preventDefault();let score=0,output="";
   t.questions.forEach((q,i)=>{
    const selected=this.querySelector('input[name="q'+i+'"]:checked');
-   const ok=selected && Number(selected.value)===q[2];
-   if(ok) score++;
-   output+=`
-    <div class="example">
-     <b class="${ok?'correct':'wrong'}">
-      ${i+1}. ${ok?'✓ Düzgün':'✗ Yanlış'}
-     </b>
-     <p>${q[3]}</p>
-    </div>`;
+   const ok=selected&&Number(selected.value)===q[2];if(ok)score++;
+   output+=`<div class="example"><b class="${ok?'correct':'wrong'}">${i+1}. ${ok?'✓ Düzgün':'✗ Yanlış'}</b><p>${q[3]}</p></div>`;
   });
   const result=document.getElementById("topic-result");
-  result.innerHTML="<h3>Nəticə: "+score+" / "+t.questions.length+"</h3>"+output+
-   '<button type="button" class="primary" onclick="openLesson('+index+')">Yenidən cəhd et</button>';
+  result.innerHTML="<h3>Nəticə: "+score+" / "+t.questions.length+"</h3>"+output;
   result.style.display="block";
-  this.querySelectorAll("input").forEach(input=>input.disabled=true);
+  this.querySelectorAll("input").forEach(x=>x.disabled=true);
   this.querySelector("button[type=submit]").disabled=true;
-  this.querySelector("button[type=submit]").style.opacity=".5";
-  result.scrollIntoView({behavior:"smooth",block:"nearest"});
  });
 }
 
-document.getElementById("year").textContent=new Date().getFullYear();
-renderTopics();
-</script>
+/* 50 suallıq testlərin yaradılması */
+let activeTopic=0;
+let testQuestions=[];
+let currentQuestion=0;
+let correctAnswers=0;
+let answerLocked=false;
 
-</body>
-</html>
+function makeQuestions(topicIndex){
+ const questions=[];
+ for(let n=1;n<=50;n++){
+  let q;
+  if(topicIndex===0){
+   const a=n+3;
+   const variants=[
+    {text:`Hansı natural ədəddir?`,opts:[`-${a}`,`${a+4}`,`${a},5`],ans:1,why:`${a+4} müsbət tam sayma ədədidir, buna görə natural ədəddir.`},
+    {text:`${a} ədədindən sonra gələn natural ədəd hansıdır?`,opts:[`${a-1}`,`${a+1}`,`${a+2}`],ans:1,why:`Natural ədədlər ardıcıllığında ${a}-dən sonra ${a+1} gəlir.`},
+    {text:`${a+1} ədədindən əvvəl gələn natural ədəd hansıdır?`,opts:[`${a}`,`${a+2}`,`${a+3}`],ans:0,why:`${a+1}-dən bir vahid çıxırıq: ${a+1}-1=${a}.`},
+    {text:`${a} və ${a+2} ədədlərindən hansı böyükdür?`,opts:[`${a}`,`${a+2}`,`Bərabərdir`],ans:1,why:`${a+2}, ${a}-dən 2 vahid böyükdür.`},
+    {text:`${a} + 5 neçədir?`,opts:[`${a+4}`,`${a+5}`,`${a+6}`],ans:1,why:`Toplama aparırıq: ${a}+5=${a+5}.`}
+   ];
+   q=variants[(n-1)%variants.length];
+  }else if(topicIndex===1){
+   const a=n+2;
+   const variants=[
+    {text:`Hansı tam ədəddir?`,opts:[`${a},5`,`-${a}`,`1/${a}`],ans:1,why:`-${a} mənfi tam ədəddir. Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir.`},
+    {text:`-${a} + ${a+2} neçədir?`,opts:[`2`,`-2`,`0`],ans:0,why:`-${a}+${a+2}=2.`},
+    {text:`${a} - ${a+3} neçədir?`,opts:[`3`,`-3`,`0`],ans:1,why:`${a}-${a+3}=-3.`},
+    {text:`-${a} ədədinin əksi hansıdır?`,opts:[`${a}`,`-${a}`,`0`],ans:0,why:`Əks ədədlərin cəmi sıfırdır. -${a} ədədinin əksi ${a}-dır.`},
+    {text:`Hansı ədəd nə müsbət, nə də mənfidir?`,opts:[`-1`,`0`,`1`],ans:1,why:`Sıfır nə müsbət, nə də mənfi tam ədəddir.`}
+   ];
+   q=variants[(n-1)%variants.length];
+  }else if(topicIndex===2){
+   const a=n+1;
+   const variants=[
+    {text:`Hansı rasional ədəddir?`,opts:[`√2`,`0,5`,`π`],ans:1,why:`0,5 sonlu onluq kəsrdir və 1/2 şəklində yazılır. Buna görə rasionaldır.`},
+    {text:`${a}/2 kəsrində məxrəc hansıdır?`,opts:[`${a}`,`2`,`1`],ans:1,why:`Kəsrin aşağı hissəsi məxrəc adlanır. Bu kəsrdə məxrəc 2-dir.`},
+    {text:`Hansı kəsr 1/2-yə bərabərdir?`,opts:[`2/3`,`3/6`,`2/5`],ans:1,why:`3/6 kəsrini 3-ə ixtisar etdikdə 1/2 alınır.`},
+    {text:`0,25 kəsr şəklində necə yazılır?`,opts:[`1/2`,`1/4`,`3/4`],ans:1,why:`0,25=25/100=1/4.`},
+    {text:`Hansı ədəd rasional deyil?`,opts:[`3/4`,`-5`,`√2`],ans:2,why:`√2 sonsuz və dövri olmayan onluq yazılışa malikdir, ona görə irrasionaldır.`}
+   ];
+   q=variants[(n-1)%variants.length];
+  }else if(topicIndex===3){
+   const k=n+1;
+   const variants=[
+    {text:`Hansı irrasional ədəddir?`,opts:[`√${k*k}`,`√2`,`5`],ans:1,why:`√2 tam kvadratın kökü deyil və irrasionaldır.`},
+    {text:`√${k*k} neçədir?`,opts:[`${k}`,`${k+1}`,`${k*k}`],ans:0,why:`${k*k} ədədinin kvadrat kökü ${k}-dir. Bu, rasional ədəddir.`},
+    {text:`π hansı ədəd növüdür?`,opts:[`Natural`,`Tam`,`İrrasional`],ans:2,why:`π sonsuz və dövri olmayan onluq kəsrdir, irrasio
