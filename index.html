@@ -3,694 +3,480 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Qəbul İmtahanı</title>
 <style>
-:root {
-  --blue:#0758c9;
-  --light:#eaf3ff;
-  --dark:#102e68;
-  --border:#cfe1ff;
-}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f8ff;
-  color:var(--dark);
-}
-header{
-  background:white;
-  padding:15px 4%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:12px;
-  box-shadow:0 2px 12px #0001;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:22px;
-  font-weight:bold;
-}
-.logo{
-  background:var(--blue);
-  color:white;
-  padding:13px;
-  border-radius:14px;
-}
-nav{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-button{cursor:pointer;font:inherit}
-.navbtn{
-  border:0;
-  background:transparent;
-  color:var(--dark);
-  padding:11px;
-  border-radius:20px;
-  font-weight:bold;
-}
-.navbtn:hover,.navbtn.active{
-  background:var(--blue);
-  color:white;
-}
-#menuBtn{
-  background:var(--light);
-  color:var(--blue);
-  border:0;
-  border-radius:10px;
-  padding:10px 15px;
-  font-size:23px;
-}
-#contact{
-  display:none;
-  position:absolute;
-  right:4%;
-  top:75px;
-  background:white;
-  padding:20px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  box-shadow:0 8px 25px #0002;
-  line-height:2;
-  max-width:90vw;
-  overflow-wrap:anywhere;
-}
-.hero{
-  margin:22px 2%;
-  padding:45px 5%;
-  border-radius:24px;
-  background:linear-gradient(110deg,#0646ac,#168afa);
-  color:white;
-}
-.hero h1{font-size:clamp(30px,5vw,52px);margin:15px 0}
-.hero p{font-size:18px;line-height:1.5}
-main{padding:0 2% 35px}
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:14px;
-}
-.card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:22px 17px;
-  text-align:center;
-  box-shadow:0 5px 15px #0001;
-}
-.symbol{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  margin:auto;
-  background:var(--blue);
-  color:white;
-  display:grid;
-  place-items:center;
-  font-size:32px;
-}
-.card h2{margin:12px 0}
-.card p{line-height:1.5;min-height:45px}
-.primary,.secondary{
-  width:100%;
-  padding:13px;
-  margin:5px 0;
-  border:0;
-  border-radius:12px;
-  font-weight:bold;
-}
-.primary{background:var(--blue);color:white}
-.primary:hover{background:#03449e}
-.secondary{background:var(--light);color:var(--blue)}
-.panel{
-  display:none;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:22px;
-  margin:18px 0;
-}
-.panel.show{display:block}
-.back{
-  border:0;
-  background:var(--light);
-  color:var(--blue);
-  padding:10px 15px;
-  border-radius:10px;
-  font-weight:bold;
-}
-.topic-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px;
-}
-.topic{
-  background:#f2f7ff;
-  border:1px solid var(--border);
-  padding:18px;
-  border-radius:14px;
-  text-align:left;
-  color:var(--dark);
-  font-weight:bold;
-}
-.topic:hover{background:#e3efff;border-color:var(--blue)}
-.rule{
-  background:#f2f7ff;
-  padding:16px;
-  border-radius:12px;
-  margin:12px 0;
-  line-height:1.7;
-}
-.question{
-  font-size:21px;
-  font-weight:bold;
-  margin:22px 0;
-}
-.answers{display:grid;gap:10px}
-.answer{
-  padding:14px;
-  border:1px solid var(--border);
-  background:#f8fbff;
-  color:var(--dark);
-  border-radius:12px;
-  text-align:left;
-}
-.answer.selected{
-  border:2px solid var(--blue);
-  background:#e6f1ff;
-}
-.answer.correct{
-  border:2px solid #198c48;
-  background:#e6f8ed;
-}
-.feedback{
-  padding:15px;
-  margin-top:15px;
-  border-radius:12px;
-  line-height:1.6;
-}
-.good{background:#e6f8ed;color:#176b37}
-.bad{background:#fff0ed;color:#a22d20}
-.progress{
-  height:9px;
-  background:#e5edfa;
-  border-radius:10px;
-  overflow:hidden;
-}
-#progress{
-  height:100%;
-  width:0;
-  display:block;
-  background:var(--blue);
-}
-footer{
-  background:#0649ad;
-  color:white;
-  text-align:center;
-  padding:25px;
-  line-height:1.8;
-}
-@media(max-width:750px){
-  header{align-items:flex-start}
-  nav{width:100%;overflow-x:auto;flex-wrap:nowrap;order:3}
-  .navbtn{white-space:nowrap;font-size:13px}
-  .hero{padding:30px 22px}
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fc;color:#20243a}
+header{background:linear-gradient(120deg,#1769ef,#7949e8);color:white;padding:25px 18px;border-radius:0 0 25px 25px}
+header h1{margin:0 0 8px;font-size:28px}
+header p{margin:0;opacity:.9}
+.container{max-width:720px;margin:auto;padding:18px}
+h2{margin-top:0}
+.cards{display:flex;flex-direction:column;gap:15px;margin-top:20px}
+.card{border:0;border-radius:20px;padding:23px;color:white;text-align:left;cursor:pointer;box-shadow:0 5px 14px #00000012}
+.card h2{margin:0 0 8px;font-size:22px}
+.card p{margin:0;line-height:1.5}
+.blue{background:linear-gradient(120deg,#2585ff,#3859df)}
+.green{background:linear-gradient(120deg,#15bd8c,#07896d)}
+.purple{background:linear-gradient(120deg,#a05bef,#7041d5)}
+.orange{background:linear-gradient(120deg,#ffad43,#f16d2c)}
+.cyan{background:linear-gradient(120deg,#22bdcb,#1389ad)}
+button{font:inherit}
+.back{border:0;background:#e9edff;color:#385ac4;padding:11px 16px;border-radius:11px;font-weight:bold;cursor:pointer}
+.panel{display:none;background:white;border-radius:20px;padding:20px;margin-top:15px;box-shadow:0 4px 16px #0000000b}
+.panel.active{display:block}
+.topic,.action{width:100%;padding:16px;margin:7px 0;border:0;border-radius:13px;text-align:left;font-weight:bold;cursor:pointer}
+.topic{background:#f0efff;color:#6949c6}
+.topic:hover{background:#e6e1ff}
+.action{background:#eaf2ff;color:#245acb}
+.primary{background:#315fe9;color:white;border:0;border-radius:12px;padding:14px 18px;font-weight:bold;cursor:pointer}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.rule{background:#f4f6ff;border-left:4px solid #8056e8;border-radius:10px;padding:14px;margin:10px 0;line-height:1.6}
+.small{font-size:14px;color:#7b8193}
+.question{font-size:20px;line-height:1.5;font-weight:bold;margin:20px 0}
+.answer{display:block;width:100%;padding:14px;margin:9px 0;border:2px solid #e6e9f2;border-radius:12px;background:white;text-align:left;cursor:pointer}
+.answer.selected{border-color:#3868ef;background:#edf2ff}
+.answer.correct{border-color:#16a36c;background:#e7f8ef}
+.answer.wrong{border-color:#e45b5b;background:#fff0f0}
+.feedback{padding:14px;border-radius:12px;margin:14px 0;line-height:1.6}
+.good{background:#e7f8ef;color:#08794e}
+.bad{background:#fff0ed;color:#b33c32}
+.progress{height:9px;background:#e9edf5;border-radius:20px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:#4268ef}
+footer{text-align:center;color:#858b9c;padding:25px 10px;font-size:13px}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="brand">
-    <div class="logo">🎓</div>
-    <div>
-      Qəbul İmtahanı
-      <small style="display:block;font-size:12px;font-weight:normal">
-        Öyrən • Təkrar et • Uğur qazan
-      </small>
-    </div>
-  </div>
-
-  <nav>
-    <button class="navbtn active" onclick="home()">Ana səhifə</button>
-    <button class="navbtn" onclick="openPage('math')">Riyaziyyat</button>
-    <button class="navbtn" onclick="openPage('verbal')">Verbal</button>
-    <button class="navbtn" onclick="openPage('years')">İmtahan testləri</button>
-    <button class="navbtn" onclick="openPage('homework')">Ev tapşırığı</button>
-    <button class="navbtn" onclick="openPage('mock')">Sınaq</button>
-  </nav>
-
-  <button id="menuBtn" onclick="toggleContact()">☰</button>
-
-  <div id="contact">
-    <h3>Əlaqə</h3>
-    <hr>
-    ☎ Telefon:<br>
-    <a href="tel:+995555936547">+995 555 93 65 47</a>
-    <hr>
-    ✉ E-poçt:<br>
-    <a href="mailto:zogadiunarebiqebulimtahanı@gmail.com">
-      zogadiunarebiqebulimtahanı@gmail.com
-    </a>
-  </div>
+  <h1>🎓 Qəbul İmtahanı</h1>
+  <p>Öyrən • Təkrar et • Uğur qazan</p>
 </header>
 
-<section class="hero" id="hero">
-  <span>TƏHSİL PLATFORMASI</span>
-  <h1>Qəbul İmtahanına<br>Hazırlaş, Uğura Çat!</h1>
-  <p>Peşəkar məzmun, testlər və ətraflı izahlarla biliklərini yoxla.</p>
-  <button class="primary" style="width:auto;background:white;color:#0649ad"
-    onclick="openPage('math')">🚀 Başla →</button>
+<main class="container">
+
+<section id="home">
+  <h2>Tədris bölmələri</h2>
+  <p class="small">Davam etmək istədiyin bölməni seç.</p>
+  <div class="cards">
+    <button class="card blue" onclick="openPage('math')">
+      <h2>🔵 Riyaziyyat</h2>
+      <p>Qaydalar və mövzu testləri</p>
+    </button>
+    <button class="card green" onclick="openPage('verbal')">
+      <h2>🟢 Verbal</h2>
+      <p>Məntiq, mətn və analogiyalar</p>
+    </button>
+    <button class="card purple" onclick="openPage('years')">
+      <h2>🟣 İmtahan testləri</h2>
+      <p>2011–2026-cı illərin testləri</p>
+    </button>
+    <button class="card orange" onclick="openPage('homework')">
+      <h2>🟠 Ev tapşırığı</h2>
+      <p>Dərslər üzrə tapşırıqlar</p>
+    </button>
+    <button class="card cyan" onclick="openPage('mock')">
+      <h2>🩵 Sınaq imtahanı</h2>
+      <p>Biliklərini yoxla</p>
+    </button>
+  </div>
 </section>
 
-<main>
-
-<div class="cards" id="homeCards">
-
-  <article class="card">
-    <div class="symbol">▦</div>
-    <h2>Riyaziyyat</h2>
-    <p>5 əsas mövzu üzrə dərslər, testlər və qaydalar</p>
-    <button class="primary" onclick="openPage('math')">Testlər</button>
-    <button class="secondary" onclick="openPage('rules')">Qaydalar</button>
-  </article>
-
-  <article class="card">
-    <div class="symbol">♧</div>
-    <h2>Verbal</h2>
-    <p>Məntiq, Mətn və Analogiyalar</p>
-    <button class="secondary" onclick="openPage('verbal')">Bölmələrə bax</button>
-  </article>
-
-  <article class="card">
-    <div class="symbol">▤</div>
-    <h2>İmtahan Testləri</h2>
-    <p>2011–2026-cı illərin imtahan testləri</p>
-    <button class="primary" onclick="openPage('years')">İlləri gör</button>
-  </article>
-
-  <article class="card">
-    <div class="symbol">⌂</div>
-    <h2>Ev Tapşırığı</h2>
-    <p>Hər dərs üzrə 20 suallıq tapşırıqlar</p>
-    <button class="primary" onclick="openPage('homework')">Başla →</button>
-  </article>
-
-  <article class="card">
-    <div class="symbol">★</div>
-    <h2>Sınaq</h2>
-    <p>Ən çətin suallarla özünü sına!</p>
-    <button class="primary" onclick="openPage('mock')">Sınaqlara bax</button>
-  </article>
-
-</div>
-
-<section class="panel" id="math">
-  <button class="back" onclick="home()">← Geri</button>
-  <h1>Riyaziyyat</h1>
-  <p>Mövzunu seç, qaydaları oxu və testləri həll et.</p>
-  <div class="topic-grid" id="mathTopics"></div>
+<section id="math" class="panel">
+  <button class="back" onclick="goHome()">← Geri</button>
+  <h2>🔵 Riyaziyyat</h2>
+  <button class="action" onclick="showTopics('test')">📝 Testlər</button>
+  <button class="action" onclick="showTopics('rule')">📖 Qaydalar</button>
+  <div id="mathTopics"></div>
 </section>
 
-<section class="panel" id="rules">
-  <button class="back" onclick="openPage('math')">← Geri</button>
-  <h1>Qaydalar</h1>
-  <div class="topic-grid" id="ruleTopics"></div>
-</section>
-
-<section class="panel" id="lesson">
+<section id="lesson" class="panel">
   <button class="back" onclick="openPage('math')">← Mövzular</button>
-  <h1 id="lessonTitle"></h1>
+  <h2 id="lessonTitle"></h2>
   <div id="lessonRules"></div>
-  <button class="primary" onclick="startQuiz('lesson')">
-    Bu mövzudan testə başla
-  </button>
+  <button class="primary" onclick="startTopicQuiz()">Bu mövzudan testə başla</button>
 </section>
 
-<section class="panel" id="verbal">
-  <button class="back" onclick="home()">← Geri</button>
-  <h1>Verbal</h1>
-  <div class="topic-grid" id="verbalTopics"></div>
+<section id="verbal" class="panel">
+  <button class="back" onclick="goHome()">← Geri</button>
+  <h2>🟢 Verbal</h2>
+  <div id="verbalList"></div>
 </section>
 
-<section class="panel" id="years">
-  <button class="back" onclick="home()">← Geri</button>
-  <h1>İmtahan testləri</h1>
-  <div class="topic-grid" id="yearTopics"></div>
+<section id="years" class="panel">
+  <button class="back" onclick="goHome()">← Geri</button>
+  <h2>🟣 İmtahan testləri</h2>
+  <p class="small">İmtahan ilini seç.</p>
+  <div id="yearList"></div>
 </section>
 
-<section class="panel" id="homework">
-  <button class="back" onclick="home()">← Geri</button>
-  <h1>Ev tapşırığı</h1>
-  <p>Tapşırıq üçün mövzu seç.</p>
-  <div class="topic-grid" id="homeworkTopics"></div>
+<section id="homework" class="panel">
+  <button class="back" onclick="goHome()">← Geri</button>
+  <h2>🟠 Ev tapşırığı</h2>
+  <p class="small">Mövzunu seç. Hər tapşırıq 20 sualdan ibarətdir.</p>
+  <div id="homeworkList"></div>
 </section>
 
-<section class="panel" id="mock">
-  <button class="back" onclick="home()">← Geri</button>
-  <h1>Sınaqlar</h1>
-  <div class="topic-grid" id="mockTopics"></div>
+<section id="mock" class="panel">
+  <button class="back" onclick="goHome()">← Geri</button>
+  <h2>🩵 Sınaq imtahanı</h2>
+  <button class="topic" onclick="startMock()">⭐ Sınaq 1 — Başla</button>
+  <button class="topic" onclick="notice('Sınaq 2')">Sınaq 2 — Hələ əlavə edilməyib</button>
+  <button class="topic" onclick="notice('Sınaq 3')">Sınaq 3 — Hələ əlavə edilməyib</button>
 </section>
 
-<section class="panel" id="quiz">
-  <button class="back" onclick="home()">← Ana səhifə</button>
-  <h2 id="quizTitle"></h2>
+<section id="quiz" class="panel">
+  <button class="back" onclick="leaveQuiz()">← Geri</button>
+  <h2 id="quizTitle">Test</h2>
   <div class="progress"><span id="progress"></span></div>
-  <p id="counter"></p>
-  <div class="question" id="questionText"></div>
-  <div class="answers" id="answers"></div>
+  <p class="small" id="counter"></p>
+  <div class="question" id="question"></div>
+  <div id="answers"></div>
   <div id="feedback"></div>
-  <button class="primary" id="submitBtn" onclick="submitAnswer()">
-    Cavabı yoxla
-  </button>
-  <button class="secondary" id="nextBtn" onclick="nextQuestion()" style="display:none">
-    Növbəti sual →
-  </button>
+  <button class="primary" id="check" onclick="checkAnswer()" disabled>Cavabı yoxla</button>
+  <button class="primary hidden" id="next" onclick="nextQuestion()">Növbəti sual →</button>
 </section>
 
-<section class="panel" id="result">
-  <h1>Nəticə</h1>
-  <div id="resultText"></div>
-  <button class="primary" onclick="home()">Ana səhifəyə qayıt</button>
+<section id="result" class="panel">
+  <h2>🎉 Test nəticəsi</h2>
+  <h3 id="scoreText"></h3>
+  <p id="resultDetails"></p>
+  <button class="primary" onclick="goHome()">Ana səhifəyə qayıt</button>
 </section>
 
 </main>
 
 <footer>
-  Qəbul İmtahanı • Bilik səni zirvəyə aparır!
-  <br>
+  Qəbul İmtahanı<br>
+  Əlaqə: +995 555 93 65 47<br>
   Hazırlayan: Haldun Məmmədov
 </footer>
 
 <script>
-const topics = [
-  'Natural ədədlər',
-  'Tam ədədlər',
-  'Rasional ədədlər',
-  'İrrasional ədədlər',
-  'Həqiqi ədədlər'
+"use strict";
+
+const topics=[
+ "Natural ədədlər",
+ "Tam ədədlər",
+ "Rasional ədədlər",
+ "İrrasional ədədlər",
+ "Həqiqi ədədlər"
 ];
 
-const ruleData = {
-'Natural ədədlər':[
-'Natural ədədlər saymaq üçün istifadə olunan ədədlərdir: 1, 2, 3, 4, ... Bəzi təriflərdə 0 da natural ədədlərə daxil edilir.',
-'Ədəd oxunda sağda yerləşən ədəd daha böyükdür.',
-'Cüt ədədlər 2-yə bölünür, tək ədədlər isə 2-yə bölünmür.',
-'Sadə ədədin yalnız iki müsbət böləni var: 1 və özü. 1 sadə ədəd deyil.',
-'ƏBOB ortaq bölənlərin ən böyüyü, ƏKOB isə ortaq qatların ən kiçiyidir.',
-'2-yə bölünmə: son rəqəm cüt olmalıdır. 5-ə bölünmə: son rəqəm 0 və ya 5 olmalıdır.',
-'3-ə və 9-a bölünmə: rəqəmlərin cəmi uyğun olaraq 3-ə və 9-a bölünməlidir.',
-'10-a bölünmə: ədədin son rəqəmi 0 olmalıdır.',
-'İki natural ədədin hasili onların hər ikisindən kiçik olmur.',
-'Qalıqlı bölmədə bölünən = bölən × qismət + qalıq.'
+const rules={
+"Natural ədədlər":[
+"Natural ədədlər saymaq üçün istifadə olunur: 1, 2, 3, 4, ...",
+"Ədəd oxunda sağda yerləşən ədəd daha böyükdür.",
+"Cüt ədədlər 2-yə qalıqsız bölünür.",
+"Tək ədədlər 2-yə qalıqsız bölünmür.",
+"Sadə ədədin yalnız iki müsbət böləni var: 1 və özü. 1 sadə deyil.",
+"2-yə bölünmə: son rəqəm cüt olmalıdır.",
+"5-ə bölünmə: son rəqəm 0 və ya 5 olmalıdır.",
+"3-ə bölünmə: rəqəmlərin cəmi 3-ə bölünməlidir.",
+"9-a bölünmə: rəqəmlərin cəmi 9-a bölünməlidir.",
+"Qalıqlı bölmə: bölünən = bölən × qismət + qalıq."
 ],
-'Tam ədədlər':[
-'Tam ədədlərə mənfi ədədlər, sıfır və müsbət ədədlər daxildir.',
-'Ədəd oxunda sağda yerləşən ədəd daha böyükdür. Məsələn, −2 > −5.',
-'Əks ədədlərin cəmi sıfırdır.',
-'Modul ədədin sıfırdan məsafəsidir və mənfi olmur: |−7|=7.',
-'Eyni işarəli ədədlər toplanarkən modullar toplanır və ortaq işarə saxlanılır.',
-'Müxtəlif işarəli ədədlər toplanarkən modullar çıxılır və böyük modulun işarəsi götürülür.',
-'Çıxma əməliyyatı əks ədədin toplanması ilə əvəz edilə bilər.',
-'Eyni işarəli ədədlərin hasili müsbət, müxtəlif işarəli ədədlərin hasili mənfidir.',
-'Sıfıra bölmək olmaz.',
-'Mənfi ədədin kvadratı müsbət, kubu isə mənfidir.'
+"Tam ədədlər":[
+"Tam ədədlərə mənfi ədədlər, sıfır və müsbət ədədlər daxildir.",
+"Ədəd oxunda sağda olan ədəd daha böyükdür.",
+"Əks ədədlərin cəmi sıfırdır.",
+"Modul ədədin sıfırdan məsafəsidir: |−7|=7.",
+"Eyni işarəli ədədlər toplanarkən modullar toplanır.",
+"Müxtəlif işarəli ədədlər toplanarkən modullar çıxılır.",
+"Çıxma əks ədədin toplanması ilə əvəz edilə bilər.",
+"Eyni işarəli ədədlərin hasili müsbətdir.",
+"Müxtəlif işarəli ədədlərin hasili mənfidir.",
+"Sıfıra bölmək olmaz."
 ],
-'Rasional ədədlər':[
-'Rasional ədəd m/n şəklində yazıla bilər. Burada m və n tam ədədlərdir, n sıfırdan fərqlidir.',
-'Sonlu onluq kəsrlər rasional ədədlərdir.',
-'Dövri onluq kəsrlər də rasional ədədlərdir.',
-'Kəsrləri toplamaq və çıxmaq üçün ortaq məxrəcə gətirmək lazımdır.',
-'Kəsrləri vurarkən surətlər və məxrəclər bir-birinə vurulur.',
-'Kəsrə bölmək üçün ikinci kəsr tərsinə çevrilib vurulur.',
-'Məxrəc heç vaxt sıfır ola bilməz.',
-'Adi kəsri onluq kəsrə çevirmək üçün surəti məxrəcə bölmək lazımdır.',
-'Kəsrin surəti və məxrəci eyni sıfırdan fərqli ədədə vurularsa, kəsrin qiyməti dəyişməz.',
-'Mənfi kəsrləri müqayisə edərkən işarəyə diqqət etmək lazımdır.'
+"Rasional ədədlər":[
+"Rasional ədəd a/b şəklində yazıla bilər. b sıfırdan fərqli olmalıdır.",
+"Sonlu onluq kəsrlər rasionaldır.",
+"Dövri onluq kəsrlər rasionaldır.",
+"Kəsrləri toplamaq üçün ortaq məxrəcə gətirmək lazımdır.",
+"Kəsrləri vurarkən surətlər və məxrəclər vurulur.",
+"Kəsrə bölərkən ikinci kəsr tərsinə çevrilərək vurulur.",
+"Məxrəc sıfır ola bilməz.",
+"Adi kəsri onluq kəsrə çevirmək üçün surət məxrəcə bölünür.",
+"Surət və məxrəc eyni sıfırdan fərqli ədədə vurularsa, kəsrin qiyməti dəyişmir.",
+"0,5 = 1/2 və 0,25 = 1/4."
 ],
-'İrrasional ədədlər':[
-'İrrasional ədəd iki tam ədədin nisbəti kimi yazıla bilməyən həqiqi ədəddir.',
-'Onluq yazılışı sonsuz və dövri olmayan kəsrdir.',
-'√2, √3 və π irrasional ədədlərə nümunədir.',
-'Tam kvadratın kvadrat kökü tam ədəd ola bilər: √25=5.',
-'Kökaltı ifadəni sadələşdirərkən tam kvadrat vuruqları ayırmaq lazımdır.',
-'İrrasional ədədlər həqiqi ədədlər çoxluğuna daxildir.',
-'İki irrasional ədədin cəmi həmişə irrasional olmur. Məsələn, √2 + (−√2)=0.',
-'İrrasional ədədlərin onluq yazılışında dövri təkrar yoxdur.'
+"İrrasional ədədlər":[
+"İrrasional ədəd iki tam ədədin nisbəti kimi yazıla bilməz.",
+"Onluq yazılışı sonsuz və dövri olmayan ədəddir.",
+"√2, √3 və π irrasional ədədlərə nümunədir.",
+"√25=5, çünki 5²=25.",
+"Tam kvadrat olmayan natural ədədin kvadrat kökü irrasionaldır.",
+"İrrasional ədədlər həqiqi ədədlərə daxildir.",
+"İki irrasional ədədin cəmi həmişə irrasional olmur.",
+"√2 + (−√2)=0.",
+"π təqribən 3,14-ə bərabərdir."
 ],
-'Həqiqi ədədlər':[
-'Həqiqi ədədlər rasional və irrasional ədədlərin birləşməsidir.',
-'Hər həqiqi ədəd ədəd oxunda bir nöqtəyə uyğundur.',
-'Ədəd oxunda sağda yerləşən ədəd daha böyükdür.',
-'(a,b) intervalında uclar daxil deyil.',
-'[a,b] intervalında hər iki uc daxildir.',
-'[a,b) intervalında sol uc daxildir, sağ uc daxil deyil.',
-'|x| x-in sıfırdan məsafəsidir.',
-'|x|=a tənliyində a müsbətdirsə, x=a və x=−a olur.',
-'√(a²)=|a|.',
-'Həqiqi ədədlər üzərində toplama, çıxma, vurma və sıfırdan fərqli ədədə bölmə aparıla bilər.'
+"Həqiqi ədədlər":[
+"Həqiqi ədədlər rasional və irrasional ədədlərin birləşməsidir.",
+"Hər həqiqi ədəd ədəd oxunda bir nöqtəyə uyğundur.",
+"Ədəd oxunda sağda olan ədəd daha böyükdür.",
+"(a,b) intervalında uclar daxil deyil.",
+"[a,b] intervalında hər iki uc daxildir.",
+"[a,b) intervalında sol uc daxildir, sağ uc daxil deyil.",
+"|x| x-in sıfırdan məsafəsidir.",
+"|x|=5 tənliyinin həlləri x=5 və x=−5-dir.",
+"√(a²)=|a|.",
+"Sıfırdan fərqli ədədə bölmək mümkündür."
 ]
 };
 
-let currentTopic = topics[0];
-let quiz = [];
-let qIndex = 0;
-let score = 0;
-let wrong = 0;
-let selected = null;
-let answered = false;
-let quizMode = 'lesson';
+let currentTopic=topics[0];
+let mode="topic";
+let returnPage="math";
+let questions=[];
+let index=0;
+let selected=-1;
+let correct=0;
+let wrong=0;
+let answered=false;
 
-function hideAll(){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
-  document.getElementById('homeCards').style.display='none';
-  document.getElementById('hero').style.display='none';
+const $=id=>document.getElementById(id);
+
+function hidePages(){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+ $("home").classList.add("hidden");
 }
 
-function home(){
-  hideAll();
-  document.getElementById('homeCards').style.display='grid';
-  document.getElementById('hero').style.display='block';
-  document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
+function goHome(){
+ hidePages();
+ $("home").classList.remove("hidden");
 }
 
 function openPage(id){
-  hideAll();
-  const panel=document.getElementById(id);
-  if(panel) panel.classList.add('show');
-  if(id==='math'||id==='rules') buildTopics();
-  if(id==='verbal') buildVerbal();
-  if(id==='years') buildYears();
-  if(id==='homework') buildHomework();
-  if(id==='mock') buildMock();
-  document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
+ hidePages();
+ $(id).classList.add("active");
+ if(id==="math")showTopics("test");
+ if(id==="verbal")buildVerbal();
+ if(id==="years")buildYears();
+ if(id==="homework")buildHomework();
 }
 
-function toggleContact(){
-  const c=document.getElementById('contact');
-  c.style.display=c.style.display==='block'?'none':'block';
+function notice(name){
+ alert(name+" bölməsinə suallar hələ əlavə edilməyib.");
 }
 
-function buildTopics(){
-  const html=topics.map(t=>
-    `<button class="topic" onclick="showLesson('${t}')">
-      📘 ${t}<br><small>Qaydalar və testlər →</small>
-    </button>`
-  ).join('');
-  document.getElementById('mathTopics').innerHTML=html;
-  document.getElementById('ruleTopics').innerHTML=html;
+function showTopics(type){
+ const box=$("mathTopics");
+ box.innerHTML="";
+ topics.forEach(topic=>{
+  const b=document.createElement("button");
+  b.className="topic";
+  b.textContent=(type==="rule"?"📖 ":"📝 ")+topic;
+  b.onclick=()=>type==="rule"?showLesson(topic):startQuiz("topic",topic,50);
+  box.appendChild(b);
+ });
 }
 
 function showLesson(topic){
-  currentTopic=topic;
-  hideAll();
-  document.getElementById('lesson').classList.add('show');
-  document.getElementById('lessonTitle').textContent=topic;
-  document.getElementById('lessonRules').innerHTML=
-    ruleData[topic].map((r,i)=>
-      `<div class="rule"><b>Qayda ${i+1}.</b> ${r}</div>`
-    ).join('');
+ currentTopic=topic;
+ hidePages();
+ $("lesson").classList.add("active");
+ $("lessonTitle").textContent=topic+" — Qaydalar";
+ $("lessonRules").innerHTML="";
+ rules[topic].forEach((rule,i)=>{
+  const div=document.createElement("div");
+  div.className="rule";
+  div.innerHTML="<b>Qayda "+(i+1)+".</b> "+rule;
+  $("lessonRules").appendChild(div);
+ });
+}
+
+function startTopicQuiz(){
+ startQuiz("topic",currentTopic,50);
 }
 
 function buildVerbal(){
-  document.getElementById('verbalTopics').innerHTML=
-    ['Məntiq','Mətn','Analogiyalar'].map(t=>
-      `<div class="topic">🧠 ${t}
-      <p>Hələ suallar əlavə olunmayıb.</p></div>`
-    ).join('');
+ $("verbalList").innerHTML="";
+ ["Məntiq","Mətn","Analogiyalar"].forEach(name=>{
+  const b=document.createElement("button");
+  b.className="topic";
+  b.textContent=name+" — Hələ suallar əlavə olunmayıb";
+  b.onclick=()=>notice(name);
+  $("verbalList").appendChild(b);
+ });
 }
 
 function buildYears(){
-  document.getElementById('yearTopics').innerHTML=
-    Array.from({length:16},(_,i)=>2011+i).map(y=>
-      `<div class="topic">📄 ${y}-ci il
-      <p>Hələ suallar əlavə olunmayıb.</p></div>`
-    ).join('');
+ $("yearList").innerHTML="";
+ for(let year=2011;year<=2026;year++){
+  const b=document.createElement("button");
+  b.className="topic";
+  b.textContent=year+"-ci il";
+  b.onclick=()=>notice(year+"-ci il imtahan testləri");
+  $("yearList").appendChild(b);
+ }
 }
 
 function buildHomework(){
-  document.getElementById('homeworkTopics').innerHTML=
-    topics.map(t=>
-      `<button class="topic" onclick="startQuiz('homework','${t}')">
-      ✏️ ${t}<br><small>20 suallıq tapşırıq →</small></button>`
-    ).join('');
+ $("homeworkList").innerHTML="";
+ topics.forEach(topic=>{
+  const b=document.createElement("button");
+  b.className="topic";
+  b.textContent="✏️ "+topic+" — 20 sual";
+  b.onclick=()=>startQuiz("homework",topic,20);
+  $("homeworkList").appendChild(b);
+ });
 }
 
-function buildMock(){
-  document.getElementById('mockTopics').innerHTML=`
-    <button class="topic" onclick="startQuiz('mock')">
-      ⭐ Sınaq 1 <p>Çətin səviyyəli suallar</p>
-    </button>
-    <div class="topic">⭐ Sınaq 2
-      <p>Hələ sınaq əlavə edilməyib.</p>
-    </div>
-    <div class="topic">⭐ Sınaq 3
-      <p>Hələ sınaq əlavə edilməyib.</p>
-    </div>`;
+function startMock(){
+ const mixed=[];
+ for(let i=0;i<25;i++)mixed.push(makeQuestion(topics[i%5],true,i));
+ startQuiz("mock",null,25,mixed);
 }
 
-function shuffle(arr){
-  return arr.sort(()=>Math.random()-.5);
+function shuffle(array){
+ const a=[...array];
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
 }
 
-function makeQuestion(topic,hard=false){
-  let a,b,q,answer,why,options;
+function makeQuestion(topic,hard=false,seed=0){
+ const n=seed+1;
+ let q,answer,why,opts;
 
-  if(topic==='İrrasional ədədlər'){
-    const items=[
-      ['Aşağıdakılardan hansı irrasional ədəddir?',['√2','0,5','3/4','0,333...'],'√2','√2 sonsuz və dövri olmayan onluq kəsrdir.'],
-      ['π hansı ədəd növüdür?',['İrrasional','Natural','Tam','Rasional'],'İrrasional','π irrasional ədəddir.'],
-      ['√49 neçədir?',['7','6','8','9'],'7','7×7=49 olduğuna görə √49=7.']
-    ];
-    const x=items[Math.floor(Math.random()*items.length)];
-    return {q:x[0],opts:x[1],a:x[2],why:x[3]};
-  }
-
-  if(topic==='Rasional ədədlər'){
-    const items=[
-      ['Aşağıdakılardan hansı rasionaldır?',['3/4','√2','π','√5'],'3/4','3/4 iki tam ədədin nisbətidir.'],
-      ['0,25 hansı kəsrə bərabərdir?',['1/4','1/2','1/5','3/4'],'1/4','0,25=25/100=1/4.'],
-      ['1/2 + 1/2 = ?',['1','2','1/2','0'],'1','1/2+1/2=1.']
-    ];
-    const x=items[Math.floor(Math.random()*items.length)];
-    return {q:x[0],opts:x[1],a:x[2],why:x[3]};
-  }
-
-  if(topic==='Həqiqi ədədlər'){
-    const items=[
-      ['Həqiqi ədədlər hansı çoxluqları birləşdirir?',['Rasional və irrasional','Yalnız natural','Yalnız tam','Yalnız mənfi'],'Rasional və irrasional','Həqiqi ədədlər rasional və irrasional ədədlərdən ibarətdir.'],
-      ['√(5²) neçədir?',['5','−5','25','10'],'5','√(5²)=|5|=5.'],
-      ['Ədəd oxunda sağda olan ədəd necədir?',['Daha böyük','Daha kiçik','Həmişə mənfi','Sıfır'],'Daha böyük','Ədəd oxunda sağa doğru ədədlər artır.']
-    ];
-    const x=items[Math.floor(Math.random()*items.length)];
-    return {q:x[0],opts:x[1],a:x[2],why:x[3]};
-  }
-
-  if(topic==='Tam ədədlər'){
-    const items=[
-      ['−3 və −8 ədədlərindən hansı böyükdür?',['−3','−8','Bərabərdir','Heç biri'],'−3','−3 ədəd oxunda −8-in sağında yerləşir.'],
-      ['|−12| neçədir?',['12','−12','0','24'],'12','Modul sıfırdan məsafədir.'],
-      ['−4 + 7 = ?',['3','−3','11','−11'],'3','Müxtəlif işarəli ədədlərdə modullar çıxılır: 7−4=3.']
-    ];
-    const x=items[Math.floor(Math.random()*items.length)];
-    return {q:x[0],opts:x[1],a:x[2],why:x[3]};
-  }
-
-  a=hard?12+Math.floor(Math.random()*30):2+Math.floor(Math.random()*30);
-  b=hard?3+Math.floor(Math.random()*12):2+Math.floor(Math.random()*15);
-
-  const type=Math.floor(Math.random()*4);
-  if(type===0){
-    answer=a+b;q=`${a} + ${b} = ?`;why=`${a}+${b}=${answer}.`;
-  }else if(type===1){
-    if(b>a)[a,b]=[b,a];
-    answer=a-b;q=`${a} − ${b} = ?`;why=`${a}−${b}=${answer}.`;
-  }else if(type===2){
-    answer=a*b;q=`${a} × ${b} = ?`;why=`${a}×${b}=${answer}.`;
-  }else{
-    answer=a;q=`${a*b} ÷ ${b} = ?`;why=`${a*b}÷${b}=${answer}.`;
-  }
-
-  options=[answer,answer+2,answer-1,answer+5];
-  return {q,opts:shuffle(options),a:answer,why};
+ if(topic==="Natural ədədlər"){
+  const a=hard?12+n:5+n;
+  const b=hard?3+n%8:2+n%5;
+  const type=n%4;
+  if(type===0){q=a+" + "+b+" = ?";answer=a+b;why="Toplama: "+a+" + "+b+" = "+answer;}
+  else if(type===1){q=(a+b)+" − "+b+" = ?";answer=a;why="Çıxma: "+(a+b)+" − "+b+" = "+a;}
+  else if(type===2){q=a+" × "+b+" = ?";answer=a*b;why="Vurma: "+a+" × "+b+" = "+answer;}
+  else{q=(a*b)+" : "+b+" = ?";answer=a;why="Bölmə: "+(a*b)+" : "+b+" = "+a;}
+  opts=[answer,answer+2,answer+1,Math.max(0,answer-2)];
+ }else if(topic==="Tam ədədlər"){
+  const a=n+4,b=n+2;
+  const data=[
+   ["−"+a+" + "+b+" = ?",-a+b,"Müxtəlif işarəli ədədləri toplayırıq."],
+   ["−"+a+" − "+b+" = ?",-a-b,"Mənfi ədəddən müsbət ədəd çıxıldıqda modul artır."],
+   ["−"+a+" × 2 = ?",-a*2,"Mənfi ilə müsbətin hasili mənfidir."],
+   ["−"+(a*3)+" : 3 = ?",-a,"Mənfi ədədi müsbətə böləndə nəticə mənfidir."]
+  ][n%4];
+  [q,answer,why]=data;
+  opts=[answer,answer+2,answer-2,Math.abs(answer)];
+ }else if(topic==="Rasional ədədlər"){
+  const data=[
+   ["1/2 + 1/2 = ?","1","Məxrəclər eyni olduqda surətlər toplanır.",["1","1/2","2","0"]],
+   ["0,25 hansı kəsrə bərabərdir?","1/4","0,25 = 25/100 = 1/4.",["1/4","1/2","1/5","3/4"]],
+   ["Aşağıdakılardan hansı rasionaldır?","3/5","3/5 iki tam ədədin nisbətidir.",["√2","π","3/5","√3"]],
+   ["1/4 + 1/4 = ?","1/2","1/4 + 1/4 = 2/4 = 1/2.",["1/2","1/4","1","2"]]
+  ][n%4];
+  [q,answer,why,opts]=data;
+ }else if(topic==="İrrasional ədədlər"){
+  const data=[
+   ["Aşağıdakılardan hansı irrasionaldır?","√2","√2 sonsuz və dövri olmayan onluq kəsrə malikdir.",["1/2","0,5","√2","4"]],
+   ["π hansı ədəd növüdür?","İrrasional","π irrasional ədəddir.",["Natural","Tam","Rasional","İrrasional"]],
+   ["√49 neçədir?","7","7 × 7 = 49.",["6","7","8","9"]],
+   ["Hansı ədəd irrasionaldır?","√3","√3 tam kvadratın kökü deyil.",["√9","2","√3","0,25"]]
+  ][n%4];
+  [q,answer,why,opts]=data;
+ }else{
+  const data=[
+   ["Həqiqi ədədlər hansı çoxluqları birləşdirir?","Rasional və irrasional","Həqiqi ədədlər bu iki çoxluğun birləşməsidir.",["Yalnız natural","Yalnız tam","Rasional və irrasional","Yalnız mənfi"]],
+   ["√(5²) neçədir?","5","√(5²)=|5|=5.",["5","−5","25","10"]],
+   ["−5 hansı ədəd çoxluğuna daxildir?","Həqiqi","−5 tam və eyni zamanda həqiqi ədəddir.",["Natural","Həqiqi","İrrasional","Heç biri"]],
+   ["0,75 hansı ədəd növüdür?","Rasional","0,75=75/100=3/4.",["İrrasional","Rasional","Natural","Heç biri"]]
+  ][n%4];
+  [q,answer,why,opts]=data;
+ }
+ return {q,answer:String(answer),why,opts:shuffle(opts.map(String))};
 }
 
-function startQuiz(mode,topic=currentTopic){
-  quizMode=mode;
-  currentTopic=topic;
-  const count=mode==='homework'?20:mode==='mock'?25:50;
-  quiz=Array.from({length:count},(_,i)=>{
-    const t=mode==='mock'?topics[i%topics.length]:topic;
-    return makeQuestion(t,mode==='mock');
-  });
-  qIndex=0;
-  score=0;
-  wrong=0;
-  hideAll();
-  document.getElementById('quiz').classList.add('show');
-  document.getElementById('quizTitle').textContent=
-    mode==='mock'?'Sınaq 1':
-    mode==='homework'?'Ev tapşırığı: '+topic:
-    'Testlər: '+topic;
-  showQuestion();
+function startQuiz(which,topic,count,provided){
+ mode=which;
+ returnPage=which==="homework"?"homework":which==="mock"?"mock":"math";
+ if(topic)currentTopic=topic;
+ questions=provided||Array.from({length:count},(_,i)=>makeQuestion(topic,false,i));
+ index=0;correct=0;wrong=0;
+ hidePages();
+ $("quiz").classList.add("active");
+ $("quizTitle").textContent=which==="mock"?"Sınaq 1":which==="homework"?"Ev tapşırığı: "+topic:"Testlər: "+topic;
+ renderQuestion();
 }
 
-function showQuestion(){
-  selected=null;
-  answered=false;
-  const q=quiz[qIndex];
-  document.getElementById('counter').textContent=
-    `Sual ${qIndex+1} / ${quiz.length}`;
-  document.getElementById('progress').style.width=
-    (qIndex/quiz.length*100)+'%';
-  document.getElementById('questionText').textContent=q.q;
-  document.getElementById('answers').innerHTML=q.opts.map((o,i)=>
-    `<button class="answer" onclick="chooseAnswer(${i})">
-      ${'ABCD'[i]}) ${o}
-    </button>`
-  ).join('');
-  document.getElementById('feedback').innerHTML='';
-  document.getElementById('submitBtn').style.display='block';
-  document.getElementById('nextBtn').style.display='none';
+function renderQuestion(){
+ selected=-1;answered=false;
+ const q=questions[index];
+ $("counter").textContent="Sual "+(index+1)+" / "+questions.length;
+ $("progress").style.width=(index/questions.length*100)+"%";
+ $("question").textContent=q.q;
+ $("answers").innerHTML="";
+ $("feedback").innerHTML="";
+ $("check").classList.remove("hidden");
+ $("check").disabled=true;
+ $("next").classList.add("hidden");
+
+ q.opts.forEach((option,i)=>{
+  const b=document.createElement("button");
+  b.className="answer";
+  b.textContent="ABCD"[i]+") "+option;
+  b.onclick=()=>{
+   if(answered)return;
+   selected=i;
+   document.querySelectorAll(".answer").forEach(x=>x.classList.remove("selected"));
+   b.classList.add("selected");
+   $("check").disabled=false;
+  };
+  $("answers").appendChild(b);
+ });
 }
 
-function chooseAnswer(i){
-  if(answered)return;
-  selected=i;
-  document.querySelectorAll('.answer').forEach((b,index)=>{
-    b.classList.toggle('selected',index===i);
-  });
+function checkAnswer(){
+ if(selected<0||answered)return;
+ answered=true;
+ const q=questions[index];
+ const chosen=q.opts[selected];
+ const isCorrect=chosen===q.answer;
+ if(isCorrect)correct++;else wrong++;
+
+ document.querySelectorAll(".answer").forEach(b=>{
+  const value=b.textContent.slice(3);
+  if(value===q.answer)b.classList.add("correct");
+  else if(value===chosen)b.classList.add("wrong");
+ });
+
+ if(mode==="mock"){
+  $("feedback").innerHTML='<div class="feedback '+(isCorrect?"good":"bad")+'">'+(isCorrect?"✓ Düzgün cavab":"✗ Yanlış cavab")+"</div>";
+ }else{
+  $("feedback").innerHTML='<div class="feedback '+(isCorrect?"good":"bad")+'">'+
+   (isCorrect?"✓ Düzgün cavab!":"✗ Yanlış cavab. Düzgün cavab: "+q.answer)+
+   "<br>"+q.why+"</div>";
+ }
+ $("check").classList.add("hidden");
+ $("next").classList.remove("hidden");
+ $("next").textContent=index===questions.length-1?"Nəticəni göstər":"Növbəti sual →";
 }
 
-function submitAnswer(){
-  if(selected===null){
-    document.getElementById('feedback').innerHTML=
-      '<div class="feedback bad">Zəhmət olmasa cavab seç.</div>';
-    return;
-  }
+function nextQuestion(){
+ if(!answered)return;
+ if(index<questions.length-1){
+  index++;
+  renderQuestion();
+ }else showResult();
+}
 
-  answered=true;
-  const q=quiz[qIndex];
-  const correct=String(q.opts[selected])===String(q.a);
+function showResult(){
+ hidePages();
+ $("result").classList.add("active");
+ $("scoreText").textContent=correct+" doğru / "+wrong+" yanlış";
+ $("resultDetails").textContent="Ümumi sual sayı: "+questions.length;
+ $("progress").style.width="100%";
+}
 
-  if(correct)score++;
-  else wrong++;
+function leaveQuiz(){
+ openPage(returnPage);
+}
 
-  document.querySelectorAll('.answer').forEach((b,i)=>{
-    if(String(q.opts[i])===String(q.a))b.classList.add('correct');
-  });
-
-  if(quizMode==='mock'){
-    document.getElementById('feedback').innerHTML=
-      `<div class="feedback ${correct?'good':'bad'}">
-      ${corre
+goHome();
+</script>
+</body>
+</html>
