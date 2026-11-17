@@ -3,490 +3,531 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZQI Testlər - 9-cu sinif</title>
-
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riyaziyyat və Verbal Testləri</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#08090d;color:white;
- font-family:Arial,sans-serif;min-height:100vh
-}
-header{
- background:#111;border-bottom:1px solid #b58b35;
- padding:20px;text-align:center
-}
-.logo{color:#e7bd55;font-size:28px;font-weight:bold}
-header p{color:#aaa;margin:7px}
-.container{max-width:750px;margin:25px auto;padding:15px}
-h2{color:#e7bd55}
-.panel{
- background:#141414;border:1px solid #35302a;
- border-radius:14px;padding:20px;margin-bottom:20px
-}
-input{
- width:100%;padding:14px;background:#090909;
- color:white;border:1px solid #555;border-radius:9px;
- font-size:16px
-}
-button{
- width:100%;padding:14px;border:0;border-radius:10px;
- background:#d6aa42;color:#111;font-size:16px;
- font-weight:bold;cursor:pointer;margin-top:12px
-}
-button:disabled{opacity:.5;cursor:not-allowed}
-.info{
- display:flex;justify-content:space-between;
- gap:10px;flex-wrap:wrap
-}
-.info span{color:#e7bd55}
-.progress{
- background:#292929;height:8px;border-radius:20px;
- margin:15px 0;overflow:hidden
-}
-.progress div{
- height:100%;background:#d6aa42;width:0%;
- transition:width .3s
-}
-.question{
- background:#151515;border:1px solid #34302a;
- border-radius:12px;padding:18px;margin:15px 0
-}
-.question h3{font-size:19px;line-height:1.6}
-.options{display:grid;gap:9px}
-.option{
- border:1px solid #414141;background:#202020;
- padding:14px;border-radius:9px;color:white;
- text-align:left;cursor:pointer;font-size:15px
-}
-.option.selected{
- border-color:#d6aa42;color:#ffe49a
-}
-.option.correct{
- background:#183a29;border-color:#27ae60
-}
-.option.wrong{
- background:#481c1c;border-color:#e74c3c
-}
-.feedback{margin-top:12px;font-weight:bold;line-height:1.6}
-table{width:100%;border-collapse:collapse;margin-top:15px}
-td,th{
- padding:12px;border-bottom:1px solid #383838;
- text-align:left
-}
-th{color:#e7bd55}
+body{margin:0;background:#f2f6fc;color:#172b49;font-family:Arial,sans-serif}
+header{background:#173e73;color:white;text-align:center;padding:28px 15px}
+header h1{margin:0 0 9px;font-size:25px}
+header p{margin:0;color:#d9e7fa}
+main{max-width:850px;margin:25px auto;padding:0 14px}
+.panel{background:white;padding:22px;border-radius:15px;box-shadow:0 4px 18px #183e7012}
 .hidden{display:none!important}
-footer{text-align:center;color:#777;padding:25px}
+h2{color:#173e73;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px}
+button{cursor:pointer;font-size:16px;font-weight:bold;border:0;border-radius:11px;padding:17px;background:#edf3fc;color:#173e73;transition:.2s}
+button:hover{background:#dce9fc}
+.main-card{min-height:120px;font-size:19px}
+.back{background:#173e73;color:white;margin-top:18px}
+.back:hover{background:#24558f}
+.question{font-size:19px;font-weight:bold;line-height:1.6;margin:22px 0}
+.option{display:block;width:100%;text-align:left;margin:10px 0;background:#f4f7fc;border:1px solid #dce5f1}
+.option.selected{background:#dceaff;border:2px solid #2765ad}
+.option:disabled{cursor:default;opacity:1}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.actions button{flex:1}
+.primary{background:#173e73;color:white}
+.primary:hover{background:#285a94}
+.feedback{padding:15px;border-radius:10px;margin-top:16px;line-height:1.6}
+.correct{background:#e3f7e9;color:#176a35}
+.wrong{background:#ffeded;color:#a32929}
+.progress{color:#718096;font-size:14px}
+footer{text-align:center;color:#77869a;padding:25px}
 </style>
 </head>
-
 <body>
 
 <header>
- <div class="logo">ZQİ</div>
- <h2>9-cu sinif Riyaziyyat Testləri</h2>
- <p>Zogadiunarebi Qəbul İmtahanı</p>
+<h1>📚 Testlərə Hazırlıq</h1>
+<p>Öyrən, inkişaf et, uğur qazan!</p>
 </header>
 
-<div class="container">
+<main>
 
-<section class="panel" id="startPanel">
- <h2>📚 Testə başla</h2>
- <p>İştirakçı adını yaz:</p>
- <input id="studentName" maxlength="30" placeholder="Ad və soyad">
- <p>20 sual • Vaxt məhdudiyyəti yoxdur • Maksimum 100 bal</p>
- <button id="startBtn">Testə başla</button>
- <p id="status"></p>
-</section>
-
-<section class="panel hidden" id="testPanel">
-
- <div class="info">
-  <span id="number">1/20</span>
-  <span>Xal: <b id="score">0</b> / 100</span>
- </div>
-
- <div class="progress">
-  <div id="bar"></div>
- </div>
-
- <div class="question">
-  <h3 id="questionText"></h3>
-  <div class="options" id="options"></div>
- </div>
-
- <p id="feedback" class="feedback"></p>
-
- <button id="submitBtn" disabled>
-  Cavabı göndər
- </button>
-
- <button id="nextBtn" class="hidden">
-  Növbəti sual
- </button>
-
-</section>
-
-<section class="panel hidden" id="resultPanel">
- <h2>🏆 Test tamamlandı!</h2>
- <h2 id="finalScore">0 / 100</h2>
- <p id="correctCount"></p>
- <button id="restartBtn">Yenidən başla</button>
-</section>
-
-<section class="panel">
- <h2>🏆 Reytinq cədvəli</h2>
-
- <div style="overflow-x:auto">
- <table>
-  <thead>
-   <tr>
-    <th>Yer</th>
-    <th>Şagird</th>
-    <th>Düzgün</th>
-    <th>Bal</th>
-   </tr>
-  </thead>
-  <tbody id="ranking">
-   <tr><td colspan="4">Yüklənir...</td></tr>
-  </tbody>
- </table>
- </div>
-</section>
-
+<section id="home" class="panel">
+<h2>Əsas bölmələr</h2>
+<div class="grid">
+<button class="main-card" data-page="math">📐<br>Riyaziyyat testləri</button>
+<button class="main-card" data-page="verbal">🧠<br>Verbal</button>
 </div>
+</section>
 
-<footer>
- ZQİ © 2026 | Hazırladı: Haldun Məmmədov
-</footer>
+<section id="math" class="panel hidden">
+<h2>Riyaziyyat testləri</h2>
+<p>Test etmək istədiyin mövzunu seç.</p>
+<div id="topics" class="grid"></div>
+<button class="back" data-page="home">← Geri</button>
+</section>
+
+<section id="verbal" class="panel hidden">
+<h2>Verbal bölməsi</h2>
+<p>Verbal testləri tezliklə əlavə olunacaq.</p>
+<button class="back" data-page="home">← Geri</button>
+</section>
+
+<section id="quiz" class="panel hidden">
+<div class="progress" id="progress"></div>
+<h2 id="quizTitle"></h2>
+<div class="question" id="question"></div>
+<div id="options"></div>
+<div id="feedback"></div>
+<div class="actions">
+<button id="check" class="primary">Cavabı yoxla</button>
+<button id="next" class="primary hidden">Növbəti sual →</button>
+</div>
+<button class="back" data-page="math">Mövzulara qayıt</button>
+</section>
+
+<section id="result" class="panel hidden">
+<h2>Test tamamlandı!</h2>
+<div id="resultText"></div>
+<div class="actions">
+<button id="retry" class="primary">Yenidən başla</button>
+<button class="back" data-page="math">Mövzulara qayıt</button>
+</div>
+</section>
+
+</main>
+
+<footer>Riyaziyyat və Verbal testləri</footer>
 
 <script>
+"use strict";
 
-// FIREBASE
-const firebaseConfig = {
- apiKey: "AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
- authDomain: "zqi-riyaziyyat.firebaseapp.com",
- projectId: "zqi-riyaziyyat",
- storageBucket: "zqi-riyaziyyat.firebasestorage.app",
- messagingSenderId: "228687771538",
- appId: "1:228687771538:web:4b4c31d993b0614ca6334b",
- measurementId: "G-MT0Q1DP79N"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// 20 TEST SUALI
-const questions = [
-
-["2x + 5 = 15. x neçədir?",
-["3","5","7","10"],1,
-"2x=10, x=5."],
-
-["√144 neçədir?",
-["10","11","12","14"],2,
-"12 × 12 = 144."],
-
-["25%-i 80 olan ədəd neçədir?",
-["200","240","300","320"],3,
-"80 ÷ 0.25 = 320."],
-
-["3² + 4² = ?",
-["12","25","49","36"],1,
-"9 + 16 = 25."],
-
-["x² = 49 olarsa, x-in həlləri hansıdır?",
-["7","-7","7 və -7","49"],2,
-"x = ±7."],
-
-["5(2x - 1) = 15. x neçədir?",
-["1","2","3","4"],1,
-"10x - 5 = 15, x = 2."],
-
-["1/2 + 1/4 = ?",
-["1/4","2/4","3/4","1"],2,
-"2/4 + 1/4 = 3/4."],
-
-["200-ün 15%-i neçədir?",
-["15","20","25","30"],3,
-"200 × 0.15 = 30."],
-
-["3x - 7 = 8. x neçədir?",
-["3","4","5","6"],2,
-"3x=15, x=5."],
-
-["Düzbucaqlının tərəfləri 6 və 8-dir. Sahəsi neçədir?",
-["14","28","48","56"],2,
-"Sahə = 6 × 8 = 48."],
-
-["(a+b)² düsturu hansıdır?",
-["a²+b²","a²+2ab+b²","a²-2ab+b²","2a+2b"],1,
-"(a+b)² = a²+2ab+b²."],
-
-["√225 neçədir?",
-["12","13","14","15"],3,
-"15 × 15 = 225."],
-
-["2³ × 2² = ?",
-["16","24","32","64"],2,
-"Eyni əsaslı qüvvətlər vurulduqda üstlər toplanır: 2⁵=32."],
-
-["Bir üçbucağın bucaqları 50° və 60°-dir. Üçüncü bucaq neçədir?",
-["60°","70°","80°","90°"],1,
-"180° - 50° - 60° = 70°."],
-
-["|−12| neçədir?",
-["-12","0","12","24"],2,
-"Modul ədədin müsbət qiymətidir."],
-
-["4x = 36. x neçədir?",
-["6","7","8","9"],3,
-"36 ÷ 4 = 9."],
-
-["0.4 × 50 = ?",
-["10","15","20","25"],2,
-"0.4 × 50 = 20."],
-
-["3/5 kəsrinin faizi neçədir?",
-["30%","40%","50%","60%"],3,
-"3 ÷ 5 × 100 = 60%."],
-
-["Kvadratın tərəfi 7 sm-dir. Perimetri neçədir?",
-["14","21","28","49"],2,
-"P = 4 × 7 = 28 sm."],
-
-["2x + 3 = 17. x neçədir?",
-["5","6","7","8"],2,
-"2x=14, x=7."]
-
+const topicNames = [
+"Natural ədədlər",
+"Rasional ədədlər",
+"İrrasional ədədlər",
+"Tam ədədlər",
+"Həqiqi ədədlər"
 ];
 
-// DƏYİŞƏNLƏR
-let index=0;
-let score=0;
-let correct=0;
-let selected=null;
-let student="";
-let locked=false;
+let questions = [];
+let currentTopic = 0;
+let currentIndex = 0;
+let score = 0;
+let selected = null;
+let answered = false;
 
-const $=id=>document.getElementById(id);
-
-// HTML TƏHLÜKƏSİZLİYİ
-function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;",
- "<":"&lt;",
- ">":"&gt;",
- '"':"&quot;",
- "'":"&#39;"
- })[c]);
+function showPage(id){
+ document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+ window.scrollTo(0,0);
 }
 
-// REYTİNQ
-db.collection("quizResults")
-.orderBy("score","desc")
-.limit(30)
-.onSnapshot(snapshot=>{
+function makeQuestion(text,correct,wrong,explanation){
+ let choices=[String(correct),...wrong.map(String)];
+ choices=[...new Set(choices)];
+ let extras=["Heç biri","Məlumat kifayət deyil","0"];
+ for(const x of extras){
+  if(choices.length>=4)break;
+  if(!choices.includes(x))choices.push(x);
+ }
+ choices=choices.slice(0,4);
+ for(let i=choices.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [choices[i],choices[j]]=[choices[j],choices[i]];
+ }
+ return {
+  text,
+  choices,
+  answer:String(correct),
+  explanation
+ };
+}
 
- const rows=snapshot.docs.map(d=>d.data());
+function generateNatural(){
+ let arr=[];
+ for(let i=1;i<=50;i++){
+  let a=i+5,b=i+3;
+  switch(i%5){
+   case 0:
+    arr.push(makeQuestion(
+     `${a} + ${b} ifadəsinin qiymətini tapın.`,
+     a+b,[a+b+2,a+b-1,a+b+5],
+     `${a} + ${b} = ${a+b}.`
+    ));
+    break;
+   case 1:
+    arr.push(makeQuestion(
+     `${a*3} − ${b} ifadəsini hesablayın.`,
+     a*3-b,[a*3-b+2,a*3-b-3,a*3-b+5],
+     `${a*3} − ${b} = ${a*3-b}.`
+    ));
+    break;
+   case 2:
+    arr.push(makeQuestion(
+     `${a} × ${b} hasilini tapın.`,
+     a*b,[a*b+2,a*b-2,a*b+5],
+     `${a} × ${b} = ${a*b}.`
+    ));
+    break;
+   case 3:
+    arr.push(makeQuestion(
+     `${a*b} : ${a} bölməsinin nəticəsi neçədir?`,
+     b,[b+2,b-1,b+3],
+     `${a*b} : ${a} = ${b}.`
+    ));
+    break;
+   case 4:
+    arr.push(makeQuestion(
+     `${a} və ${b} ədədlərinin ən böyük ortaq bölənini tapın.`,
+     gcd(a,b),[1,2,3,5].filter(x=>x!==gcd(a,b)),
+     `Ən böyük ortaq bölən ${gcd(a,b)}-dir.`
+    ));
+    break;
+  }
+ }
+ return arr;
+}
 
- $("ranking").innerHTML=rows.length
- ? rows.map((r,i)=>`
- <tr>
- <td>${i+1}</td>
- <td>${escapeHTML(r.name)}</td>
- <td>${r.correct}/20</td>
- <td>${r.score}</td>
- </tr>
- `).join("")
- : '<tr><td colspan="4">Hələ nəticə yoxdur.</td></tr>';
+function gcd(a,b){
+ while(b){let t=b;b=a%b;a=t}
+ return a;
+}
 
-},error=>{
- console.error(error);
- $("ranking").innerHTML=
- '<tr><td colspan="4">Reytinq yüklənmədi.</td></tr>';
-});
+function generateRational(){
+ let arr=[];
+ for(let i=1;i<=50;i++){
+  let n=i+1;
+  switch(i%5){
+   case 0:{
+    let value=(n/10).toFixed(1);
+    arr.push(makeQuestion(
+     `${value} onluq kəsrini adi kəsr şəklində göstərin.`,
+     fraction(n,10),
+     [fraction(n+1,10),fraction(n,100),fraction(n+2,10)],
+     `${value} = ${fraction(n,10)}.`
+    ));
+    break;
+   }
+   case 1:{
+    let a=n,b=n+2;
+    arr.push(makeQuestion(
+     `${a}/10 + ${b}/10 cəmini tapın.`,
+     `${a+b}/10`,
+     [`${a+b+1}/10`,`${a+b-1}/10`,`${a+b}/100`],
+     `Məxrəclər eynidir: (${a}+${b})/10 = ${a+b}/10.`
+    ));
+    break;
+   }
+   case 2:{
+    let a=n+4,b=n;
+    arr.push(makeQuestion(
+     `${a}/10 − ${b}/10 fərqini tapın.`,
+     `${a-b}/10`,
+     [`${a-b+1}/10`,`${a-b+2}/10`,`${a+b}/10`],
+     `(${a}−${b})/10 = ${a-b}/10.`
+    ));
+    break;
+   }
+   case 3:{
+    let a=n+1;
+    arr.push(makeQuestion(
+     `${a}/10 kəsrinin onluq yazılışı hansıdır?`,
+     (a/10).toFixed(1),
+     [(a/100).toFixed(2),((a+1)/10).toFixed(1),((a+2)/10).toFixed(1)],
+     `${a}/10 = ${(a/10).toFixed(1)}.`
+    ));
+    break;
+   }
+   case 4:{
+    let a=n+2;
+    arr.push(makeQuestion(
+     `${a}/10 kəsri ilə 1 ədədini müqayisə edin.`,
+     a>10?"1-dən böyükdür":a===10?"1-ə bərabərdir":"1-dən kiçikdir",
+     ["1-dən böyükdür","1-ə bərabərdir","1-dən kiçikdir"].filter(x=>x!==(a>10?"1-dən böyükdür":a===10?"1-ə bərabərdir":"1-dən kiçikdir")),
+     `Məxrəc 10 olduğuna görə surəti 10 ilə müqayisə edirik.`
+    ));
+    break;
+   }
+  }
+ }
+ return arr;
+}
 
-// TESTƏ BAŞLA
-$("startBtn").onclick=()=>{
+function fraction(a,b){
+ let d=gcd(a,b);
+ return `${a/d}/${b/d}`;
+}
 
- student=$("studentName").value.trim();
+function generateIrrational(){
+ let arr=[];
+ for(let i=1;i<=50;i++){
+  let n=i+2;
+  switch(i%5){
+   case 0:{
+    let value=n*n;
+    arr.push(makeQuestion(
+     `√${value} ifadəsinin qiymətini tapın.`,
+     n,[n+1,n-1,n+2],
+     `${n} × ${n} = ${value}, buna görə √${value} = ${n}.`
+    ));
+    break;
+   }
+   case 1:{
+    let value=n*n+1;
+    arr.push(makeQuestion(
+     `√${value} rasionaldır, yoxsa irrasional?`,
+     "İrrasional",
+     ["Rasional","Natural","Tam"],
+     `${value} tam kvadrat olmadığı üçün onun kvadrat kökü irrasionaldır.`
+    ));
+    break;
+   }
+   case 2:{
+    let value=n*n;
+    arr.push(makeQuestion(
+     `√${value} hansı ədədə bərabərdir?`,
+     n,[n+2,n-2,n+3],
+     `√${value} = ${n}, çünki ${n}² = ${value}.`
+    ));
+    break;
+   }
+   case 3:{
+    let value=n*n+2;
+    arr.push(makeQuestion(
+     `Aşağıdakılardan hansı irrasional ədəddir?`,
+     `√${value}`,
+     [`√${n*n}`,`${n}/2`,`${n+1}`],
+     `√${value} tam kvadratın kökü olmadığı üçün irrasionaldır.`
+    ));
+    break;
+   }
+   case 4:{
+    arr.push(makeQuestion(
+     `π ədədi hansı ədəd növünə aiddir?`,
+     "İrrasional",
+     ["Natural","Tam","Rasional"],
+     "π sonsuz və dövri olmayan onluq kəsrdir, buna görə irrasionaldır."
+    ));
+    break;
+   }
+  }
+ }
+ return arr;
+}
 
- if(!student){
-  alert("Adını daxil et!");
+function generateIntegers(){
+ let arr=[];
+ for(let i=1;i<=50;i++){
+  let a=i+4,b=i+2;
+  switch(i%5){
+   case 0:
+    arr.push(makeQuestion(
+     `|−${a}| ifadəsinin qiyməti neçədir?`,
+     a,[-a,a+1,a-1],
+     `Mənfi ədədin modulunu taparkən müsbət qiymət alınır: ${a}.`
+    ));
+    break;
+   case 1:
+    arr.push(makeQuestion(
+     `(−${a}) + ${b} ifadəsini hesablayın.`,
+     b-a,[a+b,a-b,b-a+2],
+     `−${a} + ${b} = ${b-a}.`
+    ));
+    break;
+   case 2:
+    arr.push(makeQuestion(
+     `(−${a}) × (−${b}) hasilini tapın.`,
+     a*b,[-a*b,a*b+2,a*b-1],
+     "İki mənfi ədədin hasili müsbət olur."
+    ));
+    break;
+   case 3:
+    arr.push(makeQuestion(
+     `${a} − ${b*2} ifadəsinin qiymətini tapın.`,
+     a-b*2,[b*2-a,a-b,a+b],
+     `${a} − ${b*2} = ${a-b*2}.`
+    ));
+    break;
+   case 4:
+    arr.push(makeQuestion(
+     `−${a} və −${b} ədədlərindən hansı böyükdür?`,
+     a>b?`−${b}`:`−${a}`,
+     [a>b?`−${a}`:`−${b}`,"0","1"],
+     "Mənfi ədədlərdə sıfıra daha yaxın olan ədəd daha böyükdür."
+    ));
+    break;
+  }
+ }
+ return arr;
+}
+
+function generateReal(){
+ let arr=[];
+ for(let i=1;i<=50;i++){
+  let n=i+2;
+  switch(i%5){
+   case 0:
+    arr.push(makeQuestion(
+     `${n} hansı ədəd çoxluğuna daxildir?`,
+     "Natural, tam, rasional və həqiqi",
+     ["Yalnız irrasional","Yalnız rasional","Yalnız tam"],
+     `${n} müsbət tam ədəd olduğuna görə natural, tam, rasional və həqiqidir.`
+    ));
+    break;
+   case 1:
+    arr.push(makeQuestion(
+     `−${n} hansı ədəd çoxluğuna daxildir?`,
+     "Tam, rasional və həqiqi",
+     ["Natural və irrasional","Yalnız natural","Yalnız irrasional"],
+     `Mənfi tam ədədlər rasional və həqiqi ədədlərdir, natural deyillər.`
+    ));
+    break;
+   case 2:
+    arr.push(makeQuestion(
+     `${n}/2 hansı ədəd növünə aiddir?`,
+     "Rasional və həqiqi",
+     ["İrrasional və natural","Yalnız tam","Yalnız natural"],
+     "İki tam ədədin nisbəti şəklində yazıldığı üçün rasionaldır."
+    ));
+    break;
+   case 3:
+    arr.push(makeQuestion(
+     `√${n*n+1} hansı ədəd növüdür?`,
+     "İrrasional və həqiqi",
+     ["Natural və tam","Rasional və tam","Yalnız natural"],
+     `${n*n+1} tam kvadrat olmadığı üçün kökü irrasionaldır.`
+    ));
+    break;
+   case 4:
+    arr.push(makeQuestion(
+     `Aşağıdakılardan hansı həqiqi ədəddir?`,
+     "√2",
+     ["Mənası olmayan ifadə","Yalnız xəyali ədəd","Heç biri"],
+     "√2 irrasional olsa da, həqiqi ədəddir."
+    ));
+    break;
+  }
+ }
+ return arr;
+}
+
+const generators=[
+ generateNatural,
+ generateRational,
+ generateIrrational,
+ generateIntegers,
+ generateReal
+];
+
+function createTopics(){
+ const container=document.getElementById("topics");
+ topicNames.forEach((name,index)=>{
+  const button=document.createElement("button");
+  button.textContent=name;
+  button.dataset.topic=index;
+  container.appendChild(button);
+ });
+}
+
+function startQuiz(index){
+ currentTopic=index;
+ questions=generators[index]();
+ currentIndex=0;
+ score=0;
+ showPage("quiz");
+ renderQuestion();
+}
+
+function renderQuestion(){
+ selected=null;
+ answered=false;
+ const q=questions[currentIndex];
+ document.getElementById("quizTitle").textContent=topicNames[currentTopic];
+ document.getElementById("progress").textContent=
+  `Sual ${currentIndex+1} / ${questions.length}`;
+ document.getElementById("question").textContent=q.text;
+ document.getElementById("feedback").innerHTML="";
+ document.getElementById("check").classList.remove("hidden");
+ document.getElementById("next").classList.add("hidden");
+
+ const container=document.getElementById("options");
+ container.innerHTML="";
+ q.choices.forEach((choice,index)=>{
+  const button=document.createElement("button");
+  button.className="option";
+  button.textContent=String.fromCharCode(65+index)+") "+choice;
+  button.dataset.choice=index;
+  container.appendChild(button);
+ });
+}
+
+function selectOption(index){
+ if(answered)return;
+ selected=index;
+ document.querySelectorAll(".option").forEach((button,i)=>{
+  button.classList.toggle("selected",i===index);
+ });
+}
+
+function checkAnswer(){
+ if(selected===null){
+  alert("Zəhmət olmasa cavab variantı seçin.");
+  return;
+ }
+ if(answered)return;
+ answered=true;
+ const q=questions[currentIndex];
+ const selectedText=q.choices[selected];
+ const isCorrect=selectedText===q.answer;
+ if(isCorrect)score++;
+
+ document.querySelectorAll(".option").forEach(button=>{
+  button.disabled=true;
+ });
+
+ const feedback=document.getElementById("feedback");
+ feedback.className="feedback "+(isCorrect?"correct":"wrong");
+ feedback.innerHTML=
+  `<strong>${isCorrect?"✓ Doğru cavab!":"✗ Yanlış cavab!"}</strong><br>`+
+  `Düzgün cavab: <strong>${q.answer}</strong><br>`+
+  `İzah: ${q.explanation}`;
+
+ document.getElementById("check").classList.add("hidden");
+ document.getElementById("next").classList.remove("hidden");
+}
+
+function nextQuestion(){
+ if(currentIndex<questions.length-1){
+  currentIndex++;
+  renderQuestion();
+ }else{
+  document.getElementById("resultText").innerHTML=
+   `<h3>${topicNames[currentTopic]}</h3>`+
+   `<p>50 sualdan <strong>${score}</strong> düzgün cavab verdin.</p>`+
+   `<p>Yanlış cavabların sayı: <strong>${50-score}</strong></p>`;
+  showPage("result");
+ }
+}
+
+document.addEventListener("click",event=>{
+ const pageButton=event.target.closest("[data-page]");
+ if(pageButton){
+  showPage(pageButton.dataset.page);
   return;
  }
 
- index=0;
- score=0;
- correct=0;
-
- $("startPanel").classList.add("hidden");
- $("resultPanel").classList.add("hidden");
- $("testPanel").classList.remove("hidden");
-
- showQuestion();
-};
-
-// SUALI GÖSTƏR
-function showQuestion(){
-
- selected=null;
- locked=false;
-
- const q=questions[index];
-
- $("number").textContent=(index+1)+"/20";
- $("score").textContent=score;
- $("bar").style.width=((index)/20*100)+"%";
-
- $("questionText").textContent=q[0];
- $("feedback").textContent="";
-
- $("submitBtn").disabled=true;
- $("submitBtn").classList.remove("hidden");
- $("nextBtn").classList.add("hidden");
-
- $("options").innerHTML=q[1].map((option,i)=>`
- <button class="option" data-index="${i}">
- ${"ABCD"[i]}. ${option}
- </button>
- `).join("");
-
- document.querySelectorAll(".option").forEach(button=>{
-
-  button.onclick=()=>{
-
-   if(locked)return;
-
-   selected=Number(button.dataset.index);
-
-   document.querySelectorAll(".option").forEach(b=>{
-    b.classList.toggle("selected",b===button);
-   });
-
-   $("submitBtn").disabled=false;
-  };
-
- });
-
-}
-
-// CAVABI YOXLAMA
-function checkAnswer(){
-
- if(locked || selected===null)return;
-
- locked=true;
-
- const q=questions[index];
- const isCorrect=selected===q[2];
-
- if(isCorrect){
-  correct++;
-  score+=5;
+ const topicButton=event.target.closest("[data-topic]");
+ if(topicButton){
+  startQuiz(Number(topicButton.dataset.topic));
+  return;
  }
 
- document.querySelectorAll(".option").forEach((button,i)=>{
-
-  button.disabled=true;
-
-  if(i===q[2]){
-   button.classList.add("correct");
-  }else if(i===selected){
-   button.classList.add("wrong");
-  }
-
- });
-
- $("score").textContent=score;
-
- $("feedback").textContent=
- (isCorrect?"Düzgün cavab! ":"Səhv cavab! ")+q[3];
-
- $("submitBtn").classList.add("hidden");
- $("nextBtn").classList.remove("hidden");
-
- $("nextBtn").textContent=
- index===19?"Nəticəni göstər":"Növbəti sual";
-}
-
-$("submitBtn").onclick=checkAnswer;
-
-// NÖVBƏTİ SUAL
-$("nextBtn").onclick=()=>{
-
- if(!locked)return;
-
- if(index<19){
-
-  index++;
-  showQuestion();
-
- }else{
-
-  finishTest();
-
+ const choiceButton=event.target.closest("[data-choice]");
+ if(choiceButton){
+  selectOption(Number(choiceButton.dataset.choice));
  }
+});
 
-};
+document.getElementById("check").addEventListener("click",checkAnswer);
+document.getElementById("next").addEventListener("click",nextQuestion);
+document.getElementById("retry").addEventListener("click",()=>startQuiz(currentTopic));
 
-// TESTİN SONU
-async function finishTest(){
-
- $("testPanel").classList.add("hidden");
- $("resultPanel").classList.remove("hidden");
-
- $("bar").style.width="100%";
-
- $("finalScore").textContent=score+" / 100";
-
- $("correctCount").textContent=
- "Düzgün cavab: "+correct+" / 20";
-
- $("status").textContent="Nəticə yadda saxlanılır...";
-
- try{
-
-  await db.collection("quizResults").add({
-
-   name:student,
-   score:score,
-   correct:correct,
-   total:20,
-   createdAt:
-   firebase.firestore.FieldValue.serverTimestamp()
-
-  });
-
-  $("status").textContent=
-  "Nəticən uğurla yadda saxlanıldı!";
-
- }catch(error){
-
-  console.error(error);
-
-  $("status").textContent=
-  "Nəticə yadda saxlanmadı. Firebase icazələrini yoxla.";
-
- }
-
-}
-
-// YENİDƏN BAŞLA
-$("restartBtn").onclick=()=>{
-
- $("resultPanel").classList.add("hidden");
- $("startPanel").classList.remove("hidden");
-
- $("studentName").value=student;
- $("status").textContent="";
-
-};
-
+createTopics();
+showPage("home");
 </script>
 </body>
 </html>
