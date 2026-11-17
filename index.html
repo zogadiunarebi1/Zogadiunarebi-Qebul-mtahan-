@@ -207,7 +207,7 @@ footer strong{color:#1769c2}
  <p>Hazırlayan: <strong>Haldun Məmmədov</strong></p>
 </footer>
 
-<script>
+  script>
 const topics=[
 {
 title:"Natural ədədlər",symbol:"N",desc:"Saymaq üçün istifadə olunan ədədlər.",
@@ -275,111 +275,4 @@ document.getElementById("menu").addEventListener("click",function(e){if(e.target
 document.getElementById("year").textContent=new Date().getFullYear();
 
 function showExamYear(year){
- document.getElementById("exam-title").textContent=year+"-ci il imtahan testləri";
- showPage("exam-empty");
-}
-
-function renderTopics(){
- const rules=document.getElementById("topic-list");
- const tests=document.getElementById("test-topic-list");
- topics.forEach((t,i)=>{
-  const ruleButton=document.createElement("button");
-  ruleButton.className="topic";
-  ruleButton.innerHTML="<strong>"+(i+1)+". "+t.title+"</strong><small>"+t.desc+"</small>";
-  ruleButton.addEventListener("click",()=>openLesson(i));
-  rules.appendChild(ruleButton);
-
-  const testButton=document.createElement("button");
-  testButton.className="topic";
-  testButton.innerHTML="<strong>📝 "+t.title+"</strong><small>50 suallıq testə başla</small>";
-  testButton.addEventListener("click",()=>startTest(i));
-  tests.appendChild(testButton);
- });
-}
-
-function openLesson(index){
- const t=topics[index];
- const html=`
- <div class="card">
-  <h2>${t.title}</h2><p>${t.desc}</p>
-  <h3 style="margin-top:22px">📖 Qayda və izah</h3><p>${t.rule}</p>
-  <div class="formula">${t.formula}</div>
-  <h3>📝 Nümunələr</h3>
-  ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
-  <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
- </div>
- <div class="card">
-  <h2>✍️ Mövzu testi</h2><p>Qısa yoxlama suallarını cavablandır.</p>
-  <form id="topic-test">
-  ${t.questions.map((q,i)=>`
-   <div class="quiz-question"><p><b>${i+1}. ${q[0]}</b></p>
-   ${q[1].map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}">${o}</label>`).join("")}
-   </div>`).join("")}
-   <button class="primary" type="submit">Cavabları yoxla</button>
-  </form>
-  <div class="result" id="topic-result"></div>
- </div>`;
- document.getElementById("lesson-content").innerHTML=html;
- showPage("lesson");
- document.getElementById("topic-test").addEventListener("submit",function(e){
-  e.preventDefault();let score=0,output="";
-  t.questions.forEach((q,i)=>{
-   const selected=this.querySelector('input[name="q'+i+'"]:checked');
-   const ok=selected&&Number(selected.value)===q[2];if(ok)score++;
-   output+=`<div class="example"><b class="${ok?'correct':'wrong'}">${i+1}. ${ok?'✓ Düzgün':'✗ Yanlış'}</b><p>${q[3]}</p></div>`;
-  });
-  const result=document.getElementById("topic-result");
-  result.innerHTML="<h3>Nəticə: "+score+" / "+t.questions.length+"</h3>"+output;
-  result.style.display="block";
-  this.querySelectorAll("input").forEach(x=>x.disabled=true);
-  this.querySelector("button[type=submit]").disabled=true;
- });
-}
-
-/* 50 suallıq testlərin yaradılması */
-let activeTopic=0;
-let testQuestions=[];
-let currentQuestion=0;
-let correctAnswers=0;
-let answerLocked=false;
-
-function makeQuestions(topicIndex){
- const questions=[];
- for(let n=1;n<=50;n++){
-  let q;
-  if(topicIndex===0){
-   const a=n+3;
-   const variants=[
-    {text:`Hansı natural ədəddir?`,opts:[`-${a}`,`${a+4}`,`${a},5`],ans:1,why:`${a+4} müsbət tam sayma ədədidir, buna görə natural ədəddir.`},
-    {text:`${a} ədədindən sonra gələn natural ədəd hansıdır?`,opts:[`${a-1}`,`${a+1}`,`${a+2}`],ans:1,why:`Natural ədədlər ardıcıllığında ${a}-dən sonra ${a+1} gəlir.`},
-    {text:`${a+1} ədədindən əvvəl gələn natural ədəd hansıdır?`,opts:[`${a}`,`${a+2}`,`${a+3}`],ans:0,why:`${a+1}-dən bir vahid çıxırıq: ${a+1}-1=${a}.`},
-    {text:`${a} və ${a+2} ədədlərindən hansı böyükdür?`,opts:[`${a}`,`${a+2}`,`Bərabərdir`],ans:1,why:`${a+2}, ${a}-dən 2 vahid böyükdür.`},
-    {text:`${a} + 5 neçədir?`,opts:[`${a+4}`,`${a+5}`,`${a+6}`],ans:1,why:`Toplama aparırıq: ${a}+5=${a+5}.`}
-   ];
-   q=variants[(n-1)%variants.length];
-  }else if(topicIndex===1){
-   const a=n+2;
-   const variants=[
-    {text:`Hansı tam ədəddir?`,opts:[`${a},5`,`-${a}`,`1/${a}`],ans:1,why:`-${a} mənfi tam ədəddir. Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir.`},
-    {text:`-${a} + ${a+2} neçədir?`,opts:[`2`,`-2`,`0`],ans:0,why:`-${a}+${a+2}=2.`},
-    {text:`${a} - ${a+3} neçədir?`,opts:[`3`,`-3`,`0`],ans:1,why:`${a}-${a+3}=-3.`},
-    {text:`-${a} ədədinin əksi hansıdır?`,opts:[`${a}`,`-${a}`,`0`],ans:0,why:`Əks ədədlərin cəmi sıfırdır. -${a} ədədinin əksi ${a}-dır.`},
-    {text:`Hansı ədəd nə müsbət, nə də mənfidir?`,opts:[`-1`,`0`,`1`],ans:1,why:`Sıfır nə müsbət, nə də mənfi tam ədəddir.`}
-   ];
-   q=variants[(n-1)%variants.length];
-  }else if(topicIndex===2){
-   const a=n+1;
-   const variants=[
-    {text:`Hansı rasional ədəddir?`,opts:[`√2`,`0,5`,`π`],ans:1,why:`0,5 sonlu onluq kəsrdir və 1/2 şəklində yazılır. Buna görə rasionaldır.`},
-    {text:`${a}/2 kəsrində məxrəc hansıdır?`,opts:[`${a}`,`2`,`1`],ans:1,why:`Kəsrin aşağı hissəsi məxrəc adlanır. Bu kəsrdə məxrəc 2-dir.`},
-    {text:`Hansı kəsr 1/2-yə bərabərdir?`,opts:[`2/3`,`3/6`,`2/5`],ans:1,why:`3/6 kəsrini 3-ə ixtisar etdikdə 1/2 alınır.`},
-    {text:`0,25 kəsr şəklində necə yazılır?`,opts:[`1/2`,`1/4`,`3/4`],ans:1,why:`0,25=25/100=1/4.`},
-    {text:`Hansı ədəd rasional deyil?`,opts:[`3/4`,`-5`,`√2`],ans:2,why:`√2 sonsuz və dövri olmayan onluq yazılışa malikdir, ona görə irrasionaldır.`}
-   ];
-   q=variants[(n-1)%variants.length];
-  }else if(topicIndex===3){
-   const k=n+1;
-   const variants=[
-    {text:`Hansı irrasional ədəddir?`,opts:[`√${k*k}`,`√2`,`5`],ans:1,why:`√2 tam kvadratın kökü deyil və irrasionaldır.`},
-    {text:`√${k*k} neçədir?`,opts:[`${k}`,`${k+1}`,`${k*k}`],ans:0,why:`${k*k} ədədinin kvadrat kökü ${k}-dir. Bu, rasional ədəddir.`},
-    {text:`π hansı ədəd növüdür?`,opts:[`Natural`,`Tam`,`İrrasional`],ans:2,why:`π sonsuz və dövri olmayan onluq kəsrdir, irrasio
+ document.getElementById("exam-title").textContent=year+"-ci il imtahan
