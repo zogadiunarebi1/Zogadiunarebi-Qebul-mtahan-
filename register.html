@@ -7,215 +7,72 @@
 <title>ZQİ | Qaydalar</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+background:#0b0d12;color:white;min-height:100vh
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #0b0d12;
-  color: white;
-  min-height: 100vh;
+header{
+background:#111722;border-bottom:1px solid #b89545;
+padding:22px 15px;text-align:center
 }
-
-header {
-  background: #111722;
-  border-bottom: 1px solid #b89545;
-  padding: 22px 15px;
-  text-align: center;
+.logo{color:#e6bd60;font-size:30px;font-weight:bold;letter-spacing:4px}
+header p{color:#aaa;margin-top:7px;font-size:13px}
+.container{max-width:900px;margin:auto;padding:25px 15px}
+h1{text-align:center;color:#e6bd60;margin-bottom:10px;font-size:25px}
+.subtitle{text-align:center;color:#aaa;margin-bottom:25px;font-size:14px}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+button{
+cursor:pointer;border:1px solid #725c31;background:#171d28;
+color:white;padding:18px 12px;border-radius:12px;font-size:16px;
+transition:.2s
 }
-
-.logo {
-  color: #e6bd60;
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: 4px;
+button:hover{background:#283143;border-color:#e6bd60}
+.main-button{min-height:125px;font-size:19px;font-weight:bold}
+.main-button span{
+display:block;color:#e6bd60;font-size:30px;margin-bottom:10px
 }
-
-header p {
-  color: #aaa;
-  margin-top: 7px;
-  font-size: 13px;
+.back{background:#252d3b;margin-bottom:20px;padding:12px 20px}
+.lesson-list{display:grid;grid-template-columns:1fr;gap:12px}
+.lesson-button{text-align:left;display:flex;align-items:center;gap:13px}
+.lesson-number{
+background:#b89545;color:#111;border-radius:8px;
+min-width:35px;height:35px;display:grid;place-items:center;font-weight:bold
 }
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 25px 15px;
+.page{display:none}
+.page.active{display:block}
+.lesson-content{
+background:#151b25;border:1px solid #343c49;
+padding:22px;border-radius:14px;margin-top:15px;line-height:1.8
 }
-
-h1 {
-  text-align: center;
-  color: #e6bd60;
-  margin-bottom: 10px;
-  font-size: 25px;
+.lesson-content h2{color:#e6bd60;margin-bottom:15px;font-size:23px}
+.lesson-content h3{color:#e6bd60;margin-top:22px;margin-bottom:10px}
+.lesson-content p{color:#e1e1e1;margin:10px 0}
+.formula{
+background:#222c3b;border-left:4px solid #e6bd60;
+padding:14px;margin:15px 0;border-radius:7px;
+color:#f3d58c;font-size:17px;text-align:center
 }
-
-.subtitle {
-  text-align: center;
-  color: #aaa;
-  margin-bottom: 25px;
-  font-size: 14px;
+.example{
+background:#192b27;border-left:4px solid #4ca987;
+padding:13px;margin:12px 0;border-radius:7px
 }
-
-.menu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+.note{
+background:#302819;border-left:4px solid #e6bd60;
+padding:13px;margin:15px 0;border-radius:7px
 }
-
-button {
-  cursor: pointer;
-  border: 1px solid #725c31;
-  background: #171d28;
-  color: white;
-  padding: 18px 12px;
-  border-radius: 12px;
-  font-size: 16px;
-  transition: .2s;
+.number-line{
+overflow-x:auto;text-align:center;padding:15px 5px;
+color:#e6bd60;font-size:17px;white-space:nowrap
 }
-
-button:hover {
-  background: #283143;
-  border-color: #e6bd60;
+footer{
+text-align:center;padding:25px 10px;color:#777;
+font-size:12px;border-top:1px solid #252b35;margin-top:40px
 }
-
-.main-button {
-  min-height: 125px;
-  font-size: 19px;
-  font-weight: bold;
-}
-
-.main-button span {
-  display: block;
-  color: #e6bd60;
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.back {
-  background: #252d3b;
-  margin-bottom: 20px;
-  padding: 12px 20px;
-}
-
-.lesson-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.lesson-button {
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.lesson-number {
-  background: #b89545;
-  color: #111;
-  border-radius: 8px;
-  min-width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  font-weight: bold;
-}
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-.lesson-content {
-  background: #151b25;
-  border: 1px solid #343c49;
-  padding: 22px;
-  border-radius: 14px;
-  line-height: 1.8;
-  margin-top: 15px;
-}
-
-.lesson-content h2 {
-  color: #e6bd60;
-  margin-bottom: 15px;
-  font-size: 23px;
-}
-
-.lesson-content h3 {
-  color: #e6bd60;
-  margin-top: 22px;
-  margin-bottom: 10px;
-}
-
-.lesson-content p {
-  color: #e1e1e1;
-  margin: 10px 0;
-}
-
-.formula {
-  background: #222c3b;
-  border-left: 4px solid #e6bd60;
-  padding: 14px;
-  margin: 15px 0;
-  border-radius: 7px;
-  color: #f3d58c;
-  font-size: 17px;
-  text-align: center;
-}
-
-.example {
-  background: #192b27;
-  border-left: 4px solid #4ca987;
-  padding: 13px;
-  margin: 12px 0;
-  border-radius: 7px;
-}
-
-.note {
-  background: #302819;
-  border-left: 4px solid #e6bd60;
-  padding: 13px;
-  margin: 15px 0;
-  border-radius: 7px;
-}
-
-.number-line {
-  overflow-x: auto;
-  text-align: center;
-  padding: 15px 5px;
-  color: #e6bd60;
-  font-size: 17px;
-  white-space: nowrap;
-}
-
-footer {
-  text-align: center;
-  padding: 25px 10px;
-  color: #777;
-  font-size: 12px;
-  border-top: 1px solid #252b35;
-  margin-top: 40px;
-}
-
-@media(max-width:500px) {
-  .container {
-    padding: 20px 12px;
-  }
-
-  .lesson-content {
-    padding: 16px;
-  }
-
-  .main-button {
-    font-size: 16px;
-  }
+@media(max-width:500px){
+.container{padding:20px 12px}
+.lesson-content{padding:16px}
+.main-button{font-size:16px}
 }
 </style>
 </head>
@@ -223,408 +80,239 @@ footer {
 <body>
 
 <header>
-  <div class="logo">ZQİ</div>
-  <p>Zogadiunarebi Qəbul İmtahanı</p>
+<div class="logo">ZQİ</div>
+<p>Zogadiunarebi Qəbul İmtahanı</p>
 </header>
 
 <div class="container">
 
 <!-- ANA SƏHİFƏ -->
-
 <section id="home" class="page active">
-
 <h1>Qaydalar bölməsi</h1>
 <p class="subtitle">Öyrənmək istədiyiniz bölməni seçin</p>
 
 <div class="menu">
-
 <button class="main-button" onclick="showPage('math')">
-<span>∑</span>
-Riyaziyyat Qaydalar
+<span>∑</span>Riyaziyyat Qaydalar
 </button>
 
 <button class="main-button" onclick="showPage('verbal')">
-<span>📚</span>
-Verbal Qaydalar
+<span>📚</span>Verbal Qaydalar
 </button>
-
 </div>
 </section>
 
-
-<!-- RİYAZİYYAT DƏRSLƏRİ -->
-
+<!-- RİYAZİYYAT -->
 <section id="math" class="page">
-
-<button class="back" onclick="showPage('home')">
-← Geri
-</button>
-
+<button class="back" onclick="showPage('home')">← Geri</button>
 <h1>Riyaziyyat Qaydalar</h1>
 <p class="subtitle">Öyrənmək istədiyiniz dərsi seçin</p>
 
 <div class="lesson-list">
 
 <button class="lesson-button" onclick="showPage('natural')">
-<span class="lesson-number">01</span>
-Natural ədədlər
+<span class="lesson-number">01</span>Natural ədədlər
 </button>
 
 <button class="lesson-button" onclick="showPage('integers')">
-<span class="lesson-number">02</span>
-Tam ədədlər və onların müqayisəsi
+<span class="lesson-number">02</span>Tam ədədlər və onların müqayisəsi
 </button>
 
 <button class="lesson-button" onclick="showPage('rational')">
-<span class="lesson-number">03</span>
-Rasional ədədlər
+<span class="lesson-number">03</span>Rasional ədədlər
 </button>
 
 <button class="lesson-button" onclick="showPage('irrational')">
-<span class="lesson-number">04</span>
-İrrasional və həqiqi ədədlər
+<span class="lesson-number">04</span>İrrasional ədədlər
+</button>
+
+<button class="lesson-button" onclick="showPage('real')">
+<span class="lesson-number">05</span>Həqiqi ədədlər
 </button>
 
 </div>
 </section>
 
-
 <!-- VERBAL -->
-
 <section id="verbal" class="page">
-
-<button class="back" onclick="showPage('home')">
-← Geri
-</button>
-
+<button class="back" onclick="showPage('home')">← Geri</button>
 <h1>Verbal Qaydalar</h1>
-
 <div class="lesson-content">
 <h2>Tezliklə əlavə olunacaq!</h2>
 <p>Verbal qaydalar bölməsinə dərslər və izahlar yaxın zamanda əlavə ediləcək.</p>
 </div>
-
 </section>
 
-
-<!-- NATURAL ƏDƏDLƏR -->
-
+<!-- NATURAL -->
 <section id="natural" class="page">
-
-<button class="back" onclick="showPage('math')">
-← Bütün dərslər
-</button>
-
+<button class="back" onclick="showPage('math')">← Bütün dərslər</button>
 <div class="lesson-content">
 
 <h2>01. Natural ədədlər</h2>
 
-<p>
-Natural ədədlər — saymaq üçün istifadə olunan ədədlərə deyilir.
-</p>
+<p>Natural ədədlər saymaq üçün istifadə olunan ədədlərə deyilir.</p>
 
-<p>
-Natural ədədlər çoxluğu N hərfi ilə işarə olunur.
-Çoxluq 1-dən başlayır və sonsuzdur.
-</p>
+<p>Natural ədədlər çoxluğu N hərfi ilə işarə olunur.</p>
 
-<div class="formula">
-N = {1, 2, 3, 4, 5, ...}
-</div>
-
-<p>
-Natural ədədlər tək və cüt olur.
-</p>
-
-<h3>Tək və cüt ədədlər</h3>
-
-<p>
-Sonu 0, 2, 4, 6 və 8 rəqəmlərindən biri ilə bitən natural ədədlərə cüt ədədlər deyilir.
-</p>
-
-<div class="example">
-<b>Nümunə:</b>
-<br>
-20, 22, 344, 256, 728
-</div>
-
-<p>
-Sonu 1, 3, 5, 7 və 9 rəqəmlərindən biri ilə bitən natural ədədlərə tək ədədlər deyilir.
-</p>
-
-<div class="example">
-<b>Nümunə:</b>
-<br>
-21, 53, 125, 987, 889
-</div>
-
-<h3>Yadda saxla</h3>
+<div class="formula">N = {1, 2, 3, 4, 5, ...}</div>
 
 <div class="note">
-Natural ədədlər 1-dən başlayır.
-<br>
-N = {1, 2, 3, ...}
-<br>
-0 natural ədəd deyil.
+Natural ədədlər 1-dən başlayır və sonsuzdur.
+<br>0 natural ədəd deyil.
 </div>
 
 </div>
 </section>
 
-
 <!-- TAM ƏDƏDLƏR -->
-
 <section id="integers" class="page">
-
-<button class="back" onclick="showPage('math')">
-← Bütün dərslər
-</button>
-
+<button class="back" onclick="showPage('math')">← Bütün dərslər</button>
 <div class="lesson-content">
 
-<h2>02. Tam ədədlər</h2>
+<h2>02. Tam ədədlər və onların müqayisəsi</h2>
 
-<p>
-Natural ədədlər, onların əksi və 0 birlikdə tam ədədlər çoxluğunu əmələ gətirir.
-</p>
+<p>Natural ədədlər, onların əksi və 0 birlikdə tam ədədlər çoxluğunu əmələ gətirir.</p>
 
-<p>
-Tam ədədlər çoxluğu Z hərfi ilə işarə olunur.
-</p>
+<p>Tam ədədlər çoxluğu Z hərfi ilə işarə olunur.</p>
 
-<div class="formula">
-Z = {..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...}
-</div>
+<div class="formula">Z = {..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...}</div>
 
 <h3>Tam ədədlərin müqayisəsi</h3>
 
-<p>
-İki tam ədədi müqayisə etmək üçün onları ədəd oxu üzərində təsvir etmək olar.
-</p>
-
-<p>
-Ədəd oxu üzərində sağda yerləşən ədəd böyük, solda yerləşən ədəd isə kiçikdir.
-</p>
+<p>Ədəd oxunda sağda yerləşən ədəd böyük, solda yerləşən ədəd isə kiçikdir.</p>
 
 <div class="number-line">
 ← -6 — -5 — -4 — -3 — -2 — -1 — 0 — 1 — 2 — 3 — 4 — 5 — 6 →
 </div>
 
 <div class="example">
-<b>Nümunələr:</b>
-<br>
-4 < 6
-<br>
-3 > 2
-<br>
-0 < 3
-<br>
--2 < 4
-<br>
--2 < 0
-<br>
--6 < -4
-<br>
+<b>Nümunələr:</b><br>
+4 < 6<br>
+3 > 2<br>
+0 < 3<br>
+-2 < 4<br>
+-2 < 0<br>
+-6 < -4<br>
 -3 > -4
 </div>
 
-<h3>Tam ədədlərin müqayisə qaydaları</h3>
+<h3>Müqayisə qaydaları</h3>
 
-<p>
-<b>1.</b> Hər bir müsbət ədəd sıfırın sağında yerləşir, deməli, istənilən müsbət ədəd sıfırdan böyükdür.
-</p>
-
+<p>1. İstənilən müsbət ədəd sıfırdan böyükdür.</p>
 <div class="formula">Müsbət ədəd > 0</div>
 
-<p>
-<b>2.</b> Hər bir mənfi ədəd sıfırın solunda yerləşir, deməli, istənilən mənfi ədəd sıfırdan kiçikdir.
-</p>
-
+<p>2. İstənilən mənfi ədəd sıfırdan kiçikdir.</p>
 <div class="formula">Mənfi ədəd < 0</div>
 
-<p>
-<b>3.</b> Sıfır istənilən mənfi ədəddən böyük və istənilən müsbət ədəddən kiçikdir.
-</p>
+<p>3. Sıfır istənilən mənfi ədəddən böyük, müsbət ədəddən kiçikdir.</p>
+<div class="formula">Mənfi ədəd < 0 < Müsbət ədəd</div>
 
-<div class="formula">
-Mənfi ədəd < 0 < Müsbət ədəd
-</div>
-
-<p>
-<b>4.</b> İki mənfi ədəddən modulu böyük olan ədəd kiçik, modulu kiçik olan ədəd böyükdür.
-</p>
+<p>4. İki mənfi ədəddən modulu böyük olan ədəd kiçikdir.</p>
 
 <div class="example">
-<b>Nümunə:</b>
-<br>
--10 < -4
-<br>
+<b>Nümunə:</b><br>
+-10 < -4<br>
 Çünki 10 > 4.
-</div>
-
-<div class="note">
-<b>Qeyd:</b> Ədəd oxu üzərində iki mənfi ədəddən koordinat başlanğıcına daha yaxın olan ədəd digərindən böyükdür.
 </div>
 
 </div>
 </section>
 
-
-<!-- RASİONAL ƏDƏDLƏR -->
-
+<!-- RASİONAL -->
 <section id="rational" class="page">
-
-<button class="back" onclick="showPage('math')">
-← Bütün dərslər
-</button>
-
+<button class="back" onclick="showPage('math')">← Bütün dərslər</button>
 <div class="lesson-content">
 
 <h2>03. Rasional ədədlər</h2>
 
-<p>
-Rasional ədədlər — dövri onluq kəsr şəklində olan ədədlərə deyilir.
-</p>
+<p>Rasional ədədlər iki tam ədədin nisbəti şəklində ifadə edilə bilən ədədlərdir.</p>
 
-<p>
-Yəni istənilən natural ədəd, tam ədəd və kəsr ədəd rasionaldır.
-</p>
+<p>Rasional ədədlər çoxluğu Q hərfi ilə işarə olunur.</p>
 
-<p>
-Rasional ədədlər çoxluğu Q hərfi ilə işarə olunur.
-</p>
+<div class="formula">Q = {m/n | m ∈ Z, n ∈ N}</div>
 
-<div class="formula">
-Q = { m/n | m ∈ Z, n ∈ N }
-</div>
-
-<p>
-Burada m tam ədəd, n isə sıfırdan fərqli natural ədəddir.
-</p>
+<p>Burada m tam ədəd, n isə sıfırdan fərqli natural ədəddir.</p>
 
 <h3>Rasional ədədlərə nümunələr</h3>
 
 <div class="example">
-1, 2, 3, 4
-<br>
--1, -2, -5
-<br>
-1/2, 3/4, 7/9
-<br>
+1, 2, 3, 4<br>
+-1, -2, -5<br>
+1/2, 3/4, 7/9<br>
 0,5 ; 0,25 ; 0,(7)
 </div>
 
-<p>
-Sonlu onluq kəsrlər və sonsuz dövri onluq kəsrlər rasional ədədlərdir.
-</p>
+<p>Sonlu onluq kəsrlər və sonsuz dövri onluq kəsrlər rasional ədədlərdir.</p>
 
-<div class="formula">
-0,(7) = 7/9
+<div class="formula">0,(7) = 7/9</div>
+
+<div class="note">Rasional ədədlər kəsr şəklində ifadə oluna bilir.</div>
+
+</div>
+</section>
+
+<!-- İRRASİONAL -->
+<section id="irrational" class="page">
+<button class="back" onclick="showPage('math')">← Bütün dərslər</button>
+<div class="lesson-content">
+
+<h2>04. İrrasional ədədlər</h2>
+
+<p>İrrasional ədədlər dövri olmayan sonsuz onluq kəsr şəklində olan ədədlərdir.</p>
+
+<p>Bu ədədlər iki tam ədədin nisbəti şəklində ifadə edilə bilməz.</p>
+
+<div class="example">
+<b>Nümunələr:</b><br>
+√2<br>
+√10<br>
+π ≈ 3,14159...<br>
+1,2754091...
 </div>
 
+<p>İrrasional ədədlərin onluq yazılışı sonsuzdur və dövr etmir.</p>
+
 <div class="note">
-Rasional ədədlər kəsr şəklində ifadə oluna bilir.
+Rasional ədədlərdən fərqli olaraq irrasional ədədləri adi kəsr şəklində dəqiq ifadə etmək mümkün deyil.
 </div>
 
 </div>
 </section>
 
-
-<!-- İRRASİONAL VƏ HƏQİQİ -->
-
-<section id="irrational" class="page">
-
-<button class="back" onclick="showPage('math')">
-← Bütün dərslər
-</button>
-
+<!-- HƏQİQİ -->
+<section id="real" class="page">
+<button class="back" onclick="showPage('math')">← Bütün dərslər</button>
 <div class="lesson-content">
 
-<h2>04. İrrasional ədədlər</h2>
+<h2>05. Həqiqi ədədlər</h2>
 
-<p>
-İrrasional ədədlər — dövri olmayan sonsuz onluq kəsrə deyilir.
-</p>
+<p>Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu əmələ gətirir.</p>
 
-<p>
-Məsələn:
-</p>
+<p>Həqiqi ədədlər R hərfi ilə işarə olunur.</p>
 
-<div class="example">
-1,2754091...
-<br>
-0,070070007...
-<br>
-√2
-<br>
-√10
-<br>
-π (pi)
-</div>
+<div class="formula">R = Q ∪ I</div>
 
-<p>
-İrrasional ədədlərə π (pi)-ni də əlavə etmək olar.
-</p>
-
-<p>
-İrrasional ədədlər I hərfi ilə işarə olunur.
-</p>
-
-<h3>Rasional və irrasional ədədlərin fərqi</h3>
+<h3>Həqiqi ədədlərə nümunələr</h3>
 
 <div class="example">
-0,(7) = 7/9 — rasional ədəddir.
-<br><br>
-0,78564935210896... — irrasional ədəddir.
-</div>
-
-<p>
-Məsələn, π-nin sonu yoxdur.
-</p>
-
-<div class="formula">
-π ≈ 3,14159...
-</div>
-
-<h2>Həqiqi ədədlər</h2>
-
-<p>
-Rasional və irrasional ədədlərə birlikdə həqiqi ədədlər deyilir.
-</p>
-
-<p>
-Həqiqi ədədlər R hərfi ilə işarə olunur.
-</p>
-
-<div class="formula">
-R = Q ∪ I
+Natural ədədlər: 1, 2, 3, 4...<br><br>
+Tam ədədlər: -3, -2, -1, 0, 1...<br><br>
+Rasional ədədlər: 1/2, 0,75, 2/3...<br><br>
+İrrasional ədədlər: √2, √3, π...
 </div>
 
 <h3>Ədədlər çoxluğunun quruluşu</h3>
 
-<div class="example">
-<b>R — Həqiqi ədədlər</b>
-<br><br>
-├── Q — Rasional ədədlər
-<br>
-│　 └── Z — Tam ədədlər
-<br>
-│　　　└── N — Natural ədədlər
-<br><br>
-└── I — İrrasional ədədlər
+<div class="formula">
+N ⊂ Z ⊂ Q ⊂ R
 </div>
 
-<div class="note">
-<b>Yadda saxla:</b>
-<br>
-N — Natural ədədlər
-<br>
-Z — Tam ədədlər
-<br>
-Q — Rasional ədədlər
-<br>
-I — İrrasional ədədlər
-<br>
+<div class="example">
+<b>Yadda saxla:</b><br>
+N — Natural ədədlər<br>
+Z — Tam ədədlər<br>
+Q — Rasional ədədlər<br>
+I — İrrasional ədədlər<br>
 R — Həqiqi ədədlər
 </div>
 
@@ -640,17 +328,13 @@ Riyaziyyat Qaydalar
 </footer>
 
 <script>
-
 function showPage(pageId) {
-
-  // Bütün səhifələri gizlət
   const pages = document.querySelectorAll('.page');
 
   pages.forEach(function(page) {
     page.classList.remove('active');
   });
 
-  // Seçilmiş səhifəni göstər
   const selectedPage = document.getElementById(pageId);
 
   if (selectedPage) {
@@ -660,9 +344,7 @@ function showPage(pageId) {
       behavior: 'smooth'
     });
   }
-
 }
-
 </script>
 
 </body>
