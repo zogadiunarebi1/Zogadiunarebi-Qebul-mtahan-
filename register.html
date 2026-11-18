@@ -2,181 +2,668 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZQİ | Qeydiyyat</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      background: #090909;
-      color: #f5f5f5;
-      font-family: Arial, sans-serif;
-    }
-    .card {
-      width: 100%;
-      max-width: 440px;
-      padding: 26px;
-      background: #151515;
-      border: 1px solid #b89035;
-      border-radius: 18px;
-    }
-    h1 { text-align: center; color: #e5bd58; }
-    p { text-align: center; color: #bbb; }
-    input, button {
-      width: 100%;
-      padding: 13px;
-      margin-top: 12px;
-      border-radius: 9px;
-      font-size: 15px;
-    }
-    input {
-      color: white;
-      background: #222;
-      border: 1px solid #444;
-    }
-    button {
-      color: #111;
-      background: #e5bd58;
-      border: 0;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #message { line-height: 1.5; overflow-wrap: anywhere; }
-    a { color: #e5bd58; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZQİ | Qaydalar</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b0d12;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  background: #111722;
+  border-bottom: 1px solid #b89545;
+  padding: 22px 15px;
+  text-align: center;
+}
+
+.logo {
+  color: #e6bd60;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+header p {
+  color: #aaa;
+  margin-top: 7px;
+  font-size: 13px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 25px 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #e6bd60;
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #725c31;
+  background: #171d28;
+  color: white;
+  padding: 18px 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: .2s;
+}
+
+button:hover {
+  background: #283143;
+  border-color: #e6bd60;
+}
+
+.main-button {
+  min-height: 125px;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.main-button span {
+  display: block;
+  color: #e6bd60;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.back {
+  background: #252d3b;
+  margin-bottom: 20px;
+  padding: 12px 20px;
+}
+
+.lesson-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.lesson-button {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.lesson-number {
+  background: #b89545;
+  color: #111;
+  border-radius: 8px;
+  min-width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.lesson-content {
+  background: #151b25;
+  border: 1px solid #343c49;
+  padding: 22px;
+  border-radius: 14px;
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+.lesson-content h2 {
+  color: #e6bd60;
+  margin-bottom: 15px;
+  font-size: 23px;
+}
+
+.lesson-content h3 {
+  color: #e6bd60;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+.lesson-content p {
+  color: #e1e1e1;
+  margin: 10px 0;
+}
+
+.formula {
+  background: #222c3b;
+  border-left: 4px solid #e6bd60;
+  padding: 14px;
+  margin: 15px 0;
+  border-radius: 7px;
+  color: #f3d58c;
+  font-size: 17px;
+  text-align: center;
+}
+
+.example {
+  background: #192b27;
+  border-left: 4px solid #4ca987;
+  padding: 13px;
+  margin: 12px 0;
+  border-radius: 7px;
+}
+
+.note {
+  background: #302819;
+  border-left: 4px solid #e6bd60;
+  padding: 13px;
+  margin: 15px 0;
+  border-radius: 7px;
+}
+
+.number-line {
+  overflow-x: auto;
+  text-align: center;
+  padding: 15px 5px;
+  color: #e6bd60;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 10px;
+  color: #777;
+  font-size: 12px;
+  border-top: 1px solid #252b35;
+  margin-top: 40px;
+}
+
+@media(max-width:500px) {
+  .container {
+    padding: 20px 12px;
+  }
+
+  .lesson-content {
+    padding: 16px;
+  }
+
+  .main-button {
+    font-size: 16px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <main class="card">
-    <h1>ZQİ</h1>
-    <p>Zogadiunarebi Qəbul İmtahanı</p>
 
-    <form id="registerForm">
-      <input id="firstName" placeholder="Ad" required>
-      <input id="lastName" placeholder="Soyad" required>
-      <input id="username" placeholder="İstifadəçi adı" required>
-      <input id="email" type="email" placeholder="E-poçt" required>
-      <input id="password" type="password"
-        placeholder="Şifrə (ən azı 6 simvol)" minlength="6" required>
-      <input id="confirmPassword" type="password"
-        placeholder="Şifrəni təkrar yaz" minlength="6" required>
-      <button id="submitBtn" type="submit">Qeydiyyatdan keç</button>
-    </form>
+<header>
+  <div class="logo">ZQİ</div>
+  <p>Zogadiunarebi Qəbul İmtahanı</p>
+</header>
 
-    <p id="message" role="status"></p>
-    <p>Hesabın var? <a href="login.html">Daxil ol</a></p>
-  </main>
+<div class="container">
 
-  <script type="module">
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+<!-- ANA SƏHİFƏ -->
 
-    import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      updateProfile,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+<section id="home" class="page active">
 
-    import {
-      getFirestore,
-      doc,
-      setDoc,
-      serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+<h1>Qaydalar bölməsi</h1>
+<p class="subtitle">Öyrənmək istədiyiniz bölməni seçin</p>
 
-    const firebaseConfig={
-  apiKey:"AIzaSyBm1m0thTELb_p_uPejwaHEAuLJo-j5uaE",
-  authDomain:"zqi-riyaziyyat.firebaseapp.com",
-  projectId:"zqi-riyaziyyat",
-  storageBucket:"zqi-riyaziyyat.firebasestorage.app",
-  messagingSenderId:"228687771538",
-  appId:"1:228687771538:web:4b4c31d993b0614ca6334b",
-  measurementId:"G-MT0Q1DP79N"
-};
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+<div class="menu">
 
-    const form = document.getElementById("registerForm");
-    const message = document.getElementById("message");
-    const submitBtn = document.getElementById("submitBtn");
+<button class="main-button" onclick="showPage('math')">
+<span>∑</span>
+Riyaziyyat Qaydalar
+</button>
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
+<button class="main-button" onclick="showPage('verbal')">
+<span>📚</span>
+Verbal Qaydalar
+</button>
 
-      const firstName = document.getElementById("firstName").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
+</div>
+</section>
 
-      if (password !== confirmPassword) {
-        message.textContent = "Şifrələr uyğun gəlmir.";
-        return;
-      }
 
-      submitBtn.disabled = true;
-      message.textContent = "Qeydiyyat yaradılır...";
+<!-- RİYAZİYYAT DƏRSLƏRİ -->
 
-      let user = null;
+<section id="math" class="page">
 
-      try {
-        const credential = await createUserWithEmailAndPassword(
-          auth, email, password
-        );
-        user = credential.user;
+<button class="back" onclick="showPage('home')">
+← Geri
+</button>
 
-        await updateProfile(user, {
-          displayName: `${firstName} ${lastName}`
-        });
+<h1>Riyaziyyat Qaydalar</h1>
+<p class="subtitle">Öyrənmək istədiyiniz dərsi seçin</p>
 
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          firstName,
-          lastName,
-          name: `${firstName} ${lastName}`,
-          username,
-          email,
-          status: "pending",
-          createdAt: serverTimestamp()
-        });
+<div class="lesson-list">
 
-        await signOut(auth);
+<button class="lesson-button" onclick="showPage('natural')">
+<span class="lesson-number">01</span>
+Natural ədədlər
+</button>
 
-        message.textContent =
-          "Qeydiyyat tamamlandı. Admin təsdiqini gözləyirsən.";
-        form.reset();
+<button class="lesson-button" onclick="showPage('integers')">
+<span class="lesson-number">02</span>
+Tam ədədlər və onların müqayisəsi
+</button>
 
-      } catch (error) {
-        // Məlumat bazasına yazılma uğursuz olarsa,
-        // yarımçıq hesabı silinmədən saxlamaq əvəzinə xəbər veririk.
-        console.error(error);
+<button class="lesson-button" onclick="showPage('rational')">
+<span class="lesson-number">03</span>
+Rasional ədədlər
+</button>
 
-        if (user) {
-          message.textContent =
-            "Hesab yaradıldı, amma məlumatlar saxlanmadı. " +
-            "Yenidən qeydiyyat etməzdən əvvəl adminlə əlaqə saxla.";
-        } else if (error.code === "auth/email-already-in-use") {
-          message.textContent = "Bu e-poçt artıq qeydiyyatdan keçib.";
-        } else if (error.code === "auth/weak-password") {
-          message.textContent = "Daha güclü şifrə seç.";
-        } else if (error.code === "auth/operation-not-allowed") {
-          message.textContent =
-            "Firebase-də Email/Password giriş üsulunu aktivləşdir.";
-        } else {
-          message.textContent = "Xəta: " + error.message;
-        }
-      } finally {
-        submitBtn.disabled = false;
-      }
+<button class="lesson-button" onclick="showPage('irrational')">
+<span class="lesson-number">04</span>
+İrrasional və həqiqi ədədlər
+</button>
+
+</div>
+</section>
+
+
+<!-- VERBAL -->
+
+<section id="verbal" class="page">
+
+<button class="back" onclick="showPage('home')">
+← Geri
+</button>
+
+<h1>Verbal Qaydalar</h1>
+
+<div class="lesson-content">
+<h2>Tezliklə əlavə olunacaq!</h2>
+<p>Verbal qaydalar bölməsinə dərslər və izahlar yaxın zamanda əlavə ediləcək.</p>
+</div>
+
+</section>
+
+
+<!-- NATURAL ƏDƏDLƏR -->
+
+<section id="natural" class="page">
+
+<button class="back" onclick="showPage('math')">
+← Bütün dərslər
+</button>
+
+<div class="lesson-content">
+
+<h2>01. Natural ədədlər</h2>
+
+<p>
+Natural ədədlər — saymaq üçün istifadə olunan ədədlərə deyilir.
+</p>
+
+<p>
+Natural ədədlər çoxluğu N hərfi ilə işarə olunur.
+Çoxluq 1-dən başlayır və sonsuzdur.
+</p>
+
+<div class="formula">
+N = {1, 2, 3, 4, 5, ...}
+</div>
+
+<p>
+Natural ədədlər tək və cüt olur.
+</p>
+
+<h3>Tək və cüt ədədlər</h3>
+
+<p>
+Sonu 0, 2, 4, 6 və 8 rəqəmlərindən biri ilə bitən natural ədədlərə cüt ədədlər deyilir.
+</p>
+
+<div class="example">
+<b>Nümunə:</b>
+<br>
+20, 22, 344, 256, 728
+</div>
+
+<p>
+Sonu 1, 3, 5, 7 və 9 rəqəmlərindən biri ilə bitən natural ədədlərə tək ədədlər deyilir.
+</p>
+
+<div class="example">
+<b>Nümunə:</b>
+<br>
+21, 53, 125, 987, 889
+</div>
+
+<h3>Yadda saxla</h3>
+
+<div class="note">
+Natural ədədlər 1-dən başlayır.
+<br>
+N = {1, 2, 3, ...}
+<br>
+0 natural ədəd deyil.
+</div>
+
+</div>
+</section>
+
+
+<!-- TAM ƏDƏDLƏR -->
+
+<section id="integers" class="page">
+
+<button class="back" onclick="showPage('math')">
+← Bütün dərslər
+</button>
+
+<div class="lesson-content">
+
+<h2>02. Tam ədədlər</h2>
+
+<p>
+Natural ədədlər, onların əksi və 0 birlikdə tam ədədlər çoxluğunu əmələ gətirir.
+</p>
+
+<p>
+Tam ədədlər çoxluğu Z hərfi ilə işarə olunur.
+</p>
+
+<div class="formula">
+Z = {..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...}
+</div>
+
+<h3>Tam ədədlərin müqayisəsi</h3>
+
+<p>
+İki tam ədədi müqayisə etmək üçün onları ədəd oxu üzərində təsvir etmək olar.
+</p>
+
+<p>
+Ədəd oxu üzərində sağda yerləşən ədəd böyük, solda yerləşən ədəd isə kiçikdir.
+</p>
+
+<div class="number-line">
+← -6 — -5 — -4 — -3 — -2 — -1 — 0 — 1 — 2 — 3 — 4 — 5 — 6 →
+</div>
+
+<div class="example">
+<b>Nümunələr:</b>
+<br>
+4 < 6
+<br>
+3 > 2
+<br>
+0 < 3
+<br>
+-2 < 4
+<br>
+-2 < 0
+<br>
+-6 < -4
+<br>
+-3 > -4
+</div>
+
+<h3>Tam ədədlərin müqayisə qaydaları</h3>
+
+<p>
+<b>1.</b> Hər bir müsbət ədəd sıfırın sağında yerləşir, deməli, istənilən müsbət ədəd sıfırdan böyükdür.
+</p>
+
+<div class="formula">Müsbət ədəd > 0</div>
+
+<p>
+<b>2.</b> Hər bir mənfi ədəd sıfırın solunda yerləşir, deməli, istənilən mənfi ədəd sıfırdan kiçikdir.
+</p>
+
+<div class="formula">Mənfi ədəd < 0</div>
+
+<p>
+<b>3.</b> Sıfır istənilən mənfi ədəddən böyük və istənilən müsbət ədəddən kiçikdir.
+</p>
+
+<div class="formula">
+Mənfi ədəd < 0 < Müsbət ədəd
+</div>
+
+<p>
+<b>4.</b> İki mənfi ədəddən modulu böyük olan ədəd kiçik, modulu kiçik olan ədəd böyükdür.
+</p>
+
+<div class="example">
+<b>Nümunə:</b>
+<br>
+-10 < -4
+<br>
+Çünki 10 > 4.
+</div>
+
+<div class="note">
+<b>Qeyd:</b> Ədəd oxu üzərində iki mənfi ədəddən koordinat başlanğıcına daha yaxın olan ədəd digərindən böyükdür.
+</div>
+
+</div>
+</section>
+
+
+<!-- RASİONAL ƏDƏDLƏR -->
+
+<section id="rational" class="page">
+
+<button class="back" onclick="showPage('math')">
+← Bütün dərslər
+</button>
+
+<div class="lesson-content">
+
+<h2>03. Rasional ədədlər</h2>
+
+<p>
+Rasional ədədlər — dövri onluq kəsr şəklində olan ədədlərə deyilir.
+</p>
+
+<p>
+Yəni istənilən natural ədəd, tam ədəd və kəsr ədəd rasionaldır.
+</p>
+
+<p>
+Rasional ədədlər çoxluğu Q hərfi ilə işarə olunur.
+</p>
+
+<div class="formula">
+Q = { m/n | m ∈ Z, n ∈ N }
+</div>
+
+<p>
+Burada m tam ədəd, n isə sıfırdan fərqli natural ədəddir.
+</p>
+
+<h3>Rasional ədədlərə nümunələr</h3>
+
+<div class="example">
+1, 2, 3, 4
+<br>
+-1, -2, -5
+<br>
+1/2, 3/4, 7/9
+<br>
+0,5 ; 0,25 ; 0,(7)
+</div>
+
+<p>
+Sonlu onluq kəsrlər və sonsuz dövri onluq kəsrlər rasional ədədlərdir.
+</p>
+
+<div class="formula">
+0,(7) = 7/9
+</div>
+
+<div class="note">
+Rasional ədədlər kəsr şəklində ifadə oluna bilir.
+</div>
+
+</div>
+</section>
+
+
+<!-- İRRASİONAL VƏ HƏQİQİ -->
+
+<section id="irrational" class="page">
+
+<button class="back" onclick="showPage('math')">
+← Bütün dərslər
+</button>
+
+<div class="lesson-content">
+
+<h2>04. İrrasional ədədlər</h2>
+
+<p>
+İrrasional ədədlər — dövri olmayan sonsuz onluq kəsrə deyilir.
+</p>
+
+<p>
+Məsələn:
+</p>
+
+<div class="example">
+1,2754091...
+<br>
+0,070070007...
+<br>
+√2
+<br>
+√10
+<br>
+π (pi)
+</div>
+
+<p>
+İrrasional ədədlərə π (pi)-ni də əlavə etmək olar.
+</p>
+
+<p>
+İrrasional ədədlər I hərfi ilə işarə olunur.
+</p>
+
+<h3>Rasional və irrasional ədədlərin fərqi</h3>
+
+<div class="example">
+0,(7) = 7/9 — rasional ədəddir.
+<br><br>
+0,78564935210896... — irrasional ədəddir.
+</div>
+
+<p>
+Məsələn, π-nin sonu yoxdur.
+</p>
+
+<div class="formula">
+π ≈ 3,14159...
+</div>
+
+<h2>Həqiqi ədədlər</h2>
+
+<p>
+Rasional və irrasional ədədlərə birlikdə həqiqi ədədlər deyilir.
+</p>
+
+<p>
+Həqiqi ədədlər R hərfi ilə işarə olunur.
+</p>
+
+<div class="formula">
+R = Q ∪ I
+</div>
+
+<h3>Ədədlər çoxluğunun quruluşu</h3>
+
+<div class="example">
+<b>R — Həqiqi ədədlər</b>
+<br><br>
+├── Q — Rasional ədədlər
+<br>
+│　 └── Z — Tam ədədlər
+<br>
+│　　　└── N — Natural ədədlər
+<br><br>
+└── I — İrrasional ədədlər
+</div>
+
+<div class="note">
+<b>Yadda saxla:</b>
+<br>
+N — Natural ədədlər
+<br>
+Z — Tam ədədlər
+<br>
+Q — Rasional ədədlər
+<br>
+I — İrrasional ədədlər
+<br>
+R — Həqiqi ədədlər
+</div>
+
+</div>
+</section>
+
+</div>
+
+<footer>
+ZQİ | Zogadiunarebi Qəbul İmtahanı
+<br><br>
+Riyaziyyat Qaydalar
+</footer>
+
+<script>
+
+function showPage(pageId) {
+
+  // Bütün səhifələri gizlət
+  const pages = document.querySelectorAll('.page');
+
+  pages.forEach(function(page) {
+    page.classList.remove('active');
+  });
+
+  // Seçilmiş səhifəni göstər
+  const selectedPage = document.getElementById(pageId);
+
+  if (selectedPage) {
+    selectedPage.classList.add('active');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
-  </script>
+  }
+
+}
+
+</script>
+
 </body>
 </html>
