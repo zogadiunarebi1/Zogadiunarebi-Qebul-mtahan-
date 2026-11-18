@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Öyrən - 18 Dərs</title><style>body{margin:0;background:#f2f4f8;padding:14px;font-family:Arial;color:#222}h1,h2{text-align:center}.card{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer}.card b{font-size:17px}.card span{color:#888;font-size:13px}button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:8px}.pri{background:#6a00ff;color:#fff}.sec{background:#eee}.opt{background:#fff;border:2px solid #eee;text-align:left}.opt.corr{background:#d4edda;border-color:#28a745}.opt.wrong{background:#f8d7da;border-color:#dc3545}.bar{background:#eee;height:18px;border-radius:99px;overflow:hidden;margin:10px 0}.fill{background:#28a745;height:100%;width:0%;transition:.3s}.box{background:#fff;border-radius:14px;padding:14px}.iz{background:#fff3cd;border-left:4px solid #ffc107;padding:10px;border-radius:8px;margin-top:10px;display:none}.hide{display:none}.cen{text-align:center}.big{font-size:42px}.res{font-size:18px;line-height:1.8}</style></head><body>
+<div id="list"><h1>📚 18 Dərs</h1><p class="cen">Dərsi seç, qaydanı oxu, sonra testə başla</p><div id="lessons"></div></div>
+<div id="lesson" class="hide"><button class="sec" onclick="show('list')">← Bütün dərslər</button><div class="box"><h2 id="lt"></h2><p id="lc" style="line-height:1.7;font-size:15px"></p><button class="pri" onclick="startQuiz()">▶️ Testə Başla</button></div></div>
+<div id="quiz" class="hide"><button class="sec" onclick="show('lesson')">← Dərsə qayıt</button><div class="box"><div style="display:flex;justify-content:space-between"><b id="qnum"></b><b id="score">✅ 0 / 10</b></div><div class="bar"><div class="fill" id="fill"></div></div><h3 id="qtext"></h3><div id="opts"></div><button class="sec" onclick="showIzah()">💡 İzah</button><div class="iz" id="izah"></div><button class="pri hide" id="nextBtn" onclick="nextQ()">Növbəti ➡️</button></div></div>
+<div id="result" class="hide"><div class="box cen"><div class="big">🎉</div><h2>Test Bitdi!</h2><div class="res" id="resText"></div><button class="pri" onclick="startQuiz()">🔄 Yenidən Başla</button><button class="sec" onclick="show('list')">📚 Digər Dərslər</button></div></div>
+<script>
+const L=[
+{ t:"1. Natural Ədədlər", c:"Natural ədədlər saymaq üçün istifadə olunur. N = {1,2,3,4,...} 0, mənfi və kəsr natural deyil.", q:[
+["Hansı natural ədəddir?","5","0","-3","2.5","Natural ədədlər 1-dən başlayır: 1,2,3,4,5... 0 natural deyil."],
+["N çoxluğu hansıdır?","{1,2,3,...}","{0,1,2...}","{-1,0,1}","{1.5,2.5}","N = {1,2,3,4,5,...}"],
+["Hansı natural deyil?","-2","7","100","1","Mənfi ədədlər natural deyil."],
+["Ən kiçik natural ədəd?","1","0","-1","2","Ən kiçik natural 1-dir."],
+["27 naturaldır?","Bəli","Xeyr","Bəzən","Yalnız cüt","27 saymaq üçün istifadə olunur, naturaldır."]]},
+{ t:"2. Rasional Ədədlər", c:"Rasional ədədlər dövrü onluq kəsr şəklində olan ədədlərdir. Q ilə işarə olunur. Hər natural və tam ədəd rasionaldır.", q:[
+["Hansı rasionaldır?","1/2","π","√2","0.7856...","1/2 = 0,5 dövrü kəsrdir, rasionaldır."],
+["Q nədir?","Rasional","İrrasional","Natural","Tam","Q - rasional ədədlər çoxluğudur."],
+["0,(7) hansıdır?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","0,(7)=7/9 dövrüdür, rasionaldır."]]},
+{ t:"3. İrrasional Ədədlər", c:"İrrasional ədədlər dövrü olmayan sonsuz onluq kəsrdir. Məs: √2, π. I ilə işarə olunur.", q:[
+["Hansı irrasionaldır?","√2","1/2","3","0.5","√2 dövrü olmayan sonsuz kəsrdir."],
+["π hansıdır?","İrrasional","Rasional","Natural","Tam","π ≈ 3.14159... dövrü deyil."],
+["0.7856... hansıdır?","İrrasional","Rasional","Natural","Tam","Dövrü olmayan sonsuz kəsr irrasionaldır."]]},
+{ t:"4. Həqiqi Ədədlər", c:"Rasional + İrrasional = Həqiqi. R ilə işarə olunur. N ⊂ Z ⊂ Q ⊂ R", q:[
+["Həqiqi ədədlər hansılardır?","Rasional + İrrasional","Yalnız natural","Yalnız tam","Yalnız kəsr","Rasional və irrasional birlikdə həqiqidir."],
+["R nədir?","Həqiqi","Rasional","İrrasional","Natural","R - həqiqi ədədlər."],
+["N ⊂ Z ⊂ Q ⊂ R doğrudur?","Bəli","Xeyr","Tərsidir","Yalnız N","Bəli, bu ardıcıllıq doğrudur."]]},
+{ t:"5. Tam Ədədlər", c:"Tam ədədlər: Natural + 0 + mənfi ədədlər. Z = {...,-2,-1,0,1,2,...}", q:[
+["Hansı tamdır?","-5","1.5","√2","π","-5 tam ədəddir."],
+["Z nədir?","Tam","Natural","Rasional","Həqiqi","Z - tam ədədlər."],
+["0 tamdır?","Bəli","Xeyr","Natural deyil","Mənfidir","0 tam ədəddir."]]},
+{ t:"6. Əks Ədədlər", c:"Yalnız işarəsinə görə fərqlənən ədədlər əksdir. 5-in əksi -5, -5-in əksi 5. -(-a)=a", q:[
+["5-in əksi?","-5","5","1/5","0","5-in əksi -5-dir."],
+["-(-7) = ?","7","-7","0","1","İki mənfi plus edir: -(-7)=7"],
+["0-ın əksi?","0","1","-1","-0","0-ın əksi özüdür."]]},
+{ t:"7. Qarşılıqlı Əks", c:"Cəmi 0-a bərabər olan ədədlər qarşılıqlı əksdir. a + (-a) = 0", q:[
+["-5 + 5 = ?","0","10","-10","1","Əks ədədlərin cəmi 0-dır."],
+["Hansı qarşılıqlı əksdir?","-3 və 3","2 və 3","-2 və 2","1 və 2","-3+3=0"],
+["a + (-a) = ?","0","2a","1","-1","Qarşılıqlı əkslərin cəmi 0-dır."]]},
+{ t:"8. Qarşılıqlı Tərs", c:"Hasili 1-ə bərabər olan ədədlər qarşılıqlı tərsdir. 2/3-ün tərsi 3/2, 5-in tərsi 1/5", q:[
+["2/3-ün tərsi?","3/2","2/3","-2/3","1","2/3 • 3/2 = 1"],
+["5-in tərsi?","1/5","5","-5","0","5 • 1/5 = 1"],
+["1-in tərsi?","1","0","-1","2","Vahidin tərsi özüdür."]]},
+{ t:"9. Qalıqlı Bölmə", c:"a = b•q + r, r < b. Qalıq həmişə böləndən kiçikdir. Məs: 42 = 8•5 + 2", q:[
+["42 : 8-də qalıq?","2","5","8","42","42 = 8•5 + 2, qalıq 2"],
+["Qalıq necə olmalıdır?","Böləndən kiçik","Böləndən böyük","Bərabər","0","Qalıq həmişə böləndən kiçikdir."],
+["a = b•q + r-də r nədir?","Qalıq","Bölən","Qismət","Bölünən","r - qalıqdır."]]},
+{ t:"10. Bölünmə Əlamətləri", c:"2-yə: cüt. 3-ə: rəqəm cəmi 3-ə bölünür. 5-ə: sonu 0 və ya 5. 9-a: rəqəm cəmi 9-a bölünür. 10-a: sonu 0", q:[
+["Hansı 2-yə bölünür?","34","33","35","37","Cüt ədədlər 2-yə bölünür."],
+["222 hansına bölünür?","3-ə","5-ə","10-a","4-ə","2+2+2=6, 6 3-ə bölünür."],
+["Hansı 5-ə bölünür?","615","612","613","614","Sonu 5 olan 5-ə bölünür."],
+["Hansı 10-a bölünür?","2560","2561","2562","2563","Sonu 0 olan 10-a bölünür."]]},
+{ t:"11. ƏBOB", c:"Ən Böyük Ortaq Bölən. ƏBOB(48,72)=24. Ortaq vuruqların kiçik qüvvəti.", q:[
+["ƏBOB(48,72) = ?","24","144","12","48","Ortaq: 2•2•2•3=24"],
+["ƏBOB(30,120) = ?","30","120","10","60","120 30-a bölünürsə ƏBOB=30"],
+["ƏBOB(16,21) = ?","1","16","21","7","16 və 21 qarşılıqlı sadədir."]]},
+{ t:"12. ƏKOB", c:"Ən Kiçik Ortaq Bölünən. ƏKOB(48,72)=144. ƏBOB • ƏKOB = a•b", q:[
+["ƏKOB(48,72) = ?","144","24","48","72","72•2=144"],
+["ƏKOB(30,120) = ?","120","30","60","10","120 30-a bölünürsə ƏKOB=120"],
+["ƏBOB • ƏKOB = ?","a•b","a+b","a-b","a/b","Əsas düstur: ƏBOB•ƏKOB=a•b"]]},
+{ t:"13. Tam Ədədlərin Müqayisəsi", c:"Sağda olan böyük, solda olan kiçikdir. Mənfi ədədlərdə modulu böyük olan kiçikdir. -10 < -4", q:[
+["Hansı böyükdür?","-4 > -10","-10 > -4","-4 = -10","-10 > 0","0-a yaxın mənfi böyükdür."],
+["-2 və 4?","-2 < 4","-2 > 4","-2 = 4","4 < -2","Hər mənfi müsbətdən kiçikdir."],
+["4 və 6?","4 < 6","4 > 6","4 = 6","6 < 4","Ədəd oxunda sağda olan böyükdür."]]},
+{ t:"14. Tək və Cüt Ədədlər", c:"Sonu 0,2,4,6,8 - cüt. Sonu 1,3,5,7,9 - tək. T+T=C, T×T=T, C×C=C", q:[
+["Hansı cütdür?","728","889","987","125","Sonu 8 olan cütdür."],
+["Hansı təkdir?","889","728","356","20","Sonu 9 olan təkdir."],
+["T + T = ?","C","T","0","1","Tək + Tək = Cüt"],
+["T × C = ?","C","T","1","0","Tək × Cüt = Cüt"]]},
+{ t:"15. Kəsrlər", c:"a/b - adi kəsr. a - surət, b - məxrəc. a<b düzgün, a>b düzgün olmayan. Məs: 2/3 düzgün, 5/3 düzgün olmayan.", q:[
+["2/3 hansıdır?","Düzgün","Düzgün olmayan","Tam","Natural","Surət < məxrəc = düzgün"],
+["5/3 hansıdır?","Düzgün olmayan","Düzgün","Tam","Natural","Surət > məxrəc = düzgün olmayan"],
+["a/b-d
