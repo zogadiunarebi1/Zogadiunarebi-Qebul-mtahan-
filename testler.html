@@ -1,232 +1,253 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Testlər</title>
+<title>Testler</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#eaf4ff;font-family:Arial;overflow-x:hidden}
-.top{background:linear-gradient(135deg,#007bff,#00bfff);color:#fff;text-align:center;padding:28px 12px 22px;border-radius:0 0 28px 28px}
-.top h1{margin:0;font-size:28px}.top p{margin:8px 0 0;opacity:.9}
-.sym{position:fixed;font-size:30px;font-weight:900;color:#007bff;opacity:.15;z-index:0}
-.card{position:relative;z-index:1;display:block;margin:14px;padding:22px;border-radius:20px;text-decoration:none;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.18);cursor:pointer}
-.card b{font-size:25px}.card p{margin:8px 0 0;font-size:15px;opacity:.95}
-.verbal{background:linear-gradient(135deg,#ffcc00,#ff3b30)}
-.math{background:linear-gradient(135deg,#007bff,#00c853)}
-.icon{font-size:42px}
-.foot{text-align:center;color:#007bff;font-weight:bold;padding:12px}
+body{margin:0;background:#eaf4ff;font-family:Arial}
+.top{background:#007bff;color:#fff;text-align:center;padding:28px 10px;border-radius:0 0 28px 28px}
+.top h1{margin:0;font-size:28px}
 .wrap{max-width:620px;margin:0 auto;padding:14px}
+.card{display:block;margin:14px;padding:22px;border-radius:20px;color:#fff;text-decoration:none;cursor:pointer}
+.card b{font-size:25px}
+.math{background:linear-gradient(135deg,#007bff,#00c853)}
+.verbal{background:linear-gradient(135deg,#ffcc00,#ff3b30)}
 .back{display:block;background:#fff;padding:14px;border-radius:14px;text-align:center;color:#007bff;font-weight:bold;cursor:pointer;margin-bottom:12px}
 h2{text-align:center;color:#007bff}
-a.item,.item{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;color:#222;font-weight:bold;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:6px solid #007bff;cursor:pointer}
-.num{width:40px;height:40px;min-width:40px;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
-.item span{color:#888;font-size:13px;font-weight:normal}
-.c1{border-color:#ff3b30}.c1 .num{background:#ff3b30}
-.c2{border-color:#ff9500}.c2 .num{background:#ff9500}
-.c3{border-color:#ffcc00}.c3 .num{background:#ffcc00;color:#222}
-.c4{border-color:#00c853}.c4 .num{background:#00c853}
-.c5{border-color:#007bff}.c5 .num{background:#007bff}
-.c6{border-color:#7b2ff7}.c6 .num{background:#7b2ff7}
-.c7{border-color:#e91e63}.c7 .num{background:#e91e63}
-.c8{border-color:#00bcd4}.c8 .num{background:#00bcd4}
-.c9{border-color:#795548}.c9 .num{background:#795548}
-.vbox{background:linear-gradient(135deg,#ffcc00,#ff3b30);color:#fff;padding:24px;border-radius:20px;text-align:center;margin-top:14px}
+.item{display:flex;gap:12px;background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;font-weight:bold;cursor:pointer;align-items:center}
+.num{width:40px;height:40px;min-width:40px;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center}
+.c1 .num{background:#ff3b30}.c2 .num{background:#ff9500}.c3 .num{background:#00c853}.c4 .num{background:#007bff}.c5 .num{background:#7b2ff7}.c6 .num{background:#e91e63}
 button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:bold;font-size:16px;margin-top:8px;cursor:pointer}
 .pri{background:linear-gradient(135deg,#007bff,#00c853);color:#fff}
-.qaydaBtn{background:#eaf4ff;border:2px solid #007bff;color:#007bff}
-.qaydaBox{background:#eaf4ff;border-radius:14px;padding:12px;line-height:1.65;display:none;margin-top:10px}
-.tip{background:#fff8dc;border-radius:10px;padding:10px;margin-top:10px}
-.ex{background:#e8f5e9;border-radius:10px;padding:10px;margin-top:10px}
-.opt{background:#fff;border:2px solid #e5e5e5;text-align:left}
+.opt{background:#fff;border:2px solid #ddd;text-align:left}
 .ok{background:#d4edda!important;border-color:#28a745!important}
 .no{background:#f8d7da!important;border-color:#dc3545!important}
-.iz{background:#fff3cd;border-radius:10px;padding:12px;margin-top:10px;display:none;line-height:1.7}
+.iz{background:#fff3cd;border-radius:10px;padding:12px;margin-top:10px;display:none}
 .hide{display:none}
 .bar{background:#eee;height:10px;border-radius:99px;overflow:hidden}
-.fill{background:linear-gradient(90deg,#007bff,#00c853);height:100%;width:0%}
-.white{background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.fill{background:#007bff;height:100%;width:0%}
+.white{background:#fff;border-radius:20px;padding:16px}
+.qbox{background:#eaf4ff;border-radius:12px;padding:12px;line-height:1.6;display:none;margin-top:10px}
 </style>
 </head>
 <body>
-<span class="sym" style="top:10px;left:12px">×</span>
-<span class="sym" style="top:70px;right:14px">÷</span>
-<span class="sym" style="top:200px;left:8px">+</span>
-<span class="sym" style="top:300px;right:10px">−</span>
-<span class="sym" style="top:400px;left:14px">×</span>
-<span class="sym" style="top:500px;right:16px">÷</span>
 
-<!-- 1. ƏSAS SƏHİFƏ -->
-<div id="page-home">
-<div class="top"><h1>📚 Testlər</h1><p>Riyaziyyat • Verbal</p></div>
+<div id="p-home">
+<div class="top"><h1>Testler</h1><p>Riyaziyyat - Verbal</p></div>
 <div class="wrap">
-<div class="card math" onclick="show('math')"><div class="icon">🧮</div><b>Riyaziyyat</b><p>18 bölmə • Hər bölmədə 20 sual • İzahlı</p><p>👉 Başla</p></div>
-<div class="card verbal" onclick="show('verbal')"><div class="icon">🗣️</div><b>Verbal</b><p>Məntiq • Mətnlər • Analogiyalar</p><p>👉 Başla</p></div>
-<div class="foot">× ÷ + − • Testlər</div>
+<div class="card math" onclick="go('math')"><b>Riyaziyyat</b><br>18 bolme - Her bolmede 20 sual</div>
+<div class="card verbal" onclick="go('verbal')"><b>Verbal</b><br>Mentiq - Metnler - Analogiyalar</div>
 </div>
 </div>
 
-<!-- 2. RİYAZİYYAT 18 BÖLMƏ -->
-<div id="page-math" class="hide"><div class="wrap">
-<div class="back" onclick="show('home')">← Geri</div>
-<h2>🧮 Riyaziyyat • 18 Bölmə</h2>
+<div id="p-math" class="hide"><div class="wrap">
+<div class="back" onclick="go('home')">Geri</div>
+<h2>Riyaziyyat - 18 Bolme</h2>
 <div id="mathList"></div>
 </div></div>
 
-<!-- 3. VERBAL 3 BÖLMƏ -->
-<div id="page-verbal" class="hide"><div class="wrap">
-<div class="back" onclick="show('home')">← Geri</div>
-<h2 style="color:#d32f2f">🗣️ Verbal • 3 Bölmə</h2>
-<div class="item" style="border-color:#ff3b30" onclick="showVerbal('Məntiq')"><div class="num" style="background:#ff3b30">🧠</div><div>Məntiq<br><span>Bas və bax</span></div></div>
-<div class="item" style="border-color:#ff9500" onclick="showVerbal('Mətnlər')"><div class="num" style="background:#ff9500">📖</div><div>Mətnlər<br><span>Bas və bax</span></div></div>
-<div class="item" style="border-color:#ffcc00" onclick="showVerbal('Analogiyalar')"><div class="num" style="background:#ffcc00;color:#222">🔗</div><div>Analogiyalar<br><span>Bas və bax</span></div></div>
-<div class="vbox hide" id="vmsg"><h2 id="vtitle" style="color:#fff;margin:0">Məntiq</h2><p style="font-size:19px">Suallar tezliklə əlavə olunacaq ⏳</p><p>Azca səbr elə, hazırlanır...</p><button onclick="document.getElementById('vmsg').classList.add('hide')" style="background:#fff">Bağla</button></div>
+<div id="p-verbal" class="hide"><div class="wrap">
+<div class="back" onclick="go('home')">Geri</div>
+<h2 style="color:#d32f2f">Verbal - 3 Bolme</h2>
+<div class="item" onclick="vshow('Mentiq')"><div class="num" style="background:#ff3b30">1</div><div>Mentiq</div></div>
+<div class="item" onclick="vshow('Metnler')"><div class="num" style="background:#ff9500">2</div><div>Metnler</div></div>
+<div class="item" onclick="vshow('Analogiyalar')"><div class="num" style="background:#00c853">3</div><div>Analogiyalar</div></div>
+<div id="vmsg" class="hide" style="background:linear-gradient(135deg,#ffcc00,#ff3b30);color:#fff;padding:22px;border-radius:20px;text-align:center">
+<h2 id="vtitle" style="color:#fff">Mentiq</h2>
+<p>Suallar tezlikle elave olunacaq</p>
+</div>
 </div></div>
 
-<!-- 4. TEST SƏHİFƏSİ -->
-<div id="page-test" class="hide"><div class="wrap"><div class="white">
-<div class="back" onclick="show('math')" style="background:#eaf4ff">← 18 Bölmə</div>
-<h2 id="lt">Yüklənir...</h2>
-<button class="qaydaBtn" id="qaydaBtn">📖 Qaydaya bax</button>
-<div class="qaydaBox" id="qaydaBox"><div id="lc"></div><div class="tip" id="qeyd"></div><div class="ex" id="misal"></div></div>
-<div id="quiz">
+<div id="p-test" class="hide"><div class="wrap"><div class="white">
+<div class="back" onclick="go('math')" style="background:#eaf4ff">18 Bolme</div>
+<h2 id="lt"></h2>
+<button onclick="tog()" style="background:#eaf4ff;color:#007bff;border:2px solid #007bff">Qaydaya bax</button>
+<div class="qbox" id="qbox"><div id="lc"></div><div id="qeyd" style="background:#fff8dc;padding:10px;margin-top:8px;border-radius:8px"></div><div id="misal" style="background:#e8f5e9;padding:10px;margin-top:8px;border-radius:8px"></div></div>
 <div style="display:flex;justify-content:space-between;margin-top:12px"><b id="qn"></b><b id="sc"></b></div>
 <div class="bar"><div class="fill" id="fill"></div></div>
 <h3 id="qt"></h3>
 <div id="opts"></div>
 <div class="iz" id="iz"></div>
-<button class="pri hide" id="nxt">Növbəti ➡️</button>
-</div>
-<div id="res" class="hide" style="text-align:center"><h2>🎉 Nəticə</h2><div id="resT" style="line-height:1.8;font-size:18px"></div><button class="pri" id="again">🔄 Yenidən - 20 Sual</button><br><div class="back" onclick="show('math')" style="background:#eaf4ff;margin-top:10px">📚 Digər Bölmələr</div></div>
+<button class="pri hide" id="nxt">Novbeti</button>
+<div id="res" class="hide" style="text-align:center"><h2>Netice</h2><div id="resT" style="line-height:1.8"></div><button class="pri" id="again">Yeniden - 20 Sual</button></div>
 </div></div></div>
 
 <script>
-var DATA=[
-["1. Natural ədədlər","Natural ədədlər saymaq üçündür. N = {1,2,3,4,...} 1-dən başlayır, sonsuzdur.","💡 0 natural deyil. 1 nə sadə, nə mürəkkəbdir.","📌 300 = 2²•3•5² → Bölən sayı = 18"],
-["2. Tam ədədlər","Natural + 0 + mənfi = Tam. Z = {...,-2,-1,0,1,2,...}","💡 Hər natural tamdır.","📌 -5, 0, 7 tamdır. 1.5 tam deyil."],
-["3. Rasional ədədlər","Adi kəsr şəklində yazıla bilən ədədlərdir. Q ilə işarə olunur.","💡 Hər natural və tam ədəd rasionaldır.","📌 1/2, 4/5, 0,(7) rasionaldır."],
-["4. İrrasional ədədlər","Dövrü olmayan sonsuz onluq kəsrdir. I ilə işarə olunur.","💡 Onu adi kəsr kimi yazmaq olmur.","📌 √2, √3, π irrasionaldır."],
-["5. Həqiqi ədədlər","Rasional + İrrasional = Həqiqi. R ilə işarə olunur. N ⊂ Z ⊂ Q ⊂ R","💡 R = Q ∪ I","📌 5, -3, 1/2, √2, π hamısı həqiqidir."],
-["6. Əks ədədlər","Yalnız işarəsinə görə fərqlənən ədədlərdir.","💡 -(-a) = a. 0-ın əksi özüdür.","📌 5 → -5, -5 → 5, -(-7) = 7"],
-["7. Qarşılıqlı əks ədədlər","Cəmi 0 olan ədədlərdir. a + (-a) = 0","💡 Əkslərin cəmi 0-dır.","📌 -5 + 5 = 0"],
-["8. Qarşılıqlı tərs ədədlər","Hasili 1 olan ədədlərdir. a • 1/a = 1","💡 1-in tərsi özüdür. 0-ın tərsi yoxdur.","📌 2/3 → 3/2, 5 → 1/5, 0,8 → 1,25, 2 1/3 → 3/5"],
-["9. Qalıqlı bölmə","a = b•q + r, r < b","💡 Qalıq həmişə böləndən kiçikdir.","📌 42 = 8•5 + 2"],
-["10. Bölünmə əlamətləri","2: cüt • 3: rəqəm cəmi 3-ə • 4: son 2 rəqəm 4-ə • 5: sonu 0/5 • 6: həm 2, həm 3 • 9: rəqəm cəmi 9-a • 10: sonu 0","💡 306 həm 2-yə, həm 3-ə → 6-ya bölünür.","📌 512, 5124, 13716 - 4-ə bölünür."],
-["11. ƏBOB","Ən Böyük Ortaq Bölən. Hər ikisini sadə vuruqlara ayırıb ortaqları vururuq.","💡 a, b-yə bölünürsə ƏBOB = a","📌 48=2⁴•3, 72=2³•3² → ƏBOB = 24"],
-["12. ƏKOB","Ən Kiçik Ortaq Bölünən. Böyük ədədi götürüb olmayan vuruqları vururuq.","💡 ƏBOB • ƏKOB = a • b","📌 ƏKOB(48,72) = 144"],
-["13. Tam ədədlərin müqayisəsi","Ədəd oxunda sağda olan böyük, solda olan kiçikdir.","💡 Mənfilərdə modulu böyük olan kiçikdir.","📌 -10 < -4, 1 > -10"],
-["14. Tək və cüt ədədlər","Sonu 0,2,4,6,8 → cüt. Sonu 1,3,5,7,9 → tək.","💡 T+T=C, T+C=T, C+C=C, T×T=T, T×C=C, C×C=C","📌 Cüt: 20,32,344. Tək: 21,53,125"],
-["15. Kəsrlər","a/b - a surət, b məxrəc. a<b düzgün, a>b düzgün olmayan.","💡 a/b = a ÷ b. Düzgün < 1","📌 Düzgün: 2/3. Düzgün olmayan: 5/3"],
-["16. Kəsrin əsas xassəsi","Surət və məxrəci eyni ədədə vur/böl, kəsr dəyişməz.","💡 Qiymət dəyişmir.","📌 12/17 = 48/68"],
-["17. Kəsrlərin ixtisarı","Surət və məxrəci ortaq bölənə bölməkdir.","💡 ƏBOB(60,90)=30","📌 60/90 = 2/3"],
-["18. Kəsrlərin müqayisəsi","I: Məxrəc eyni → surəti böyük olan böyük. II: Surət eyni → məxrəci kiçik olan böyük. III: Çarpaz vurma.","💡 Əvvəlcə bərabərləşdir, sonra müqayisə et.","📌 3/7<5/7, 3/7>3/11, 7/8>5/6"]
+var TITLES=["Natural ededler","Tam ededler","Rasional ededler","Irrasional ededler","Heqiqi ededler","Eks ededler","Qarsiliqli eks ededler","Qarsiliqli ters ededler","Qaliqli bolme","Bolunme elametleri","EBOB","EKOB","Tam ededlerin muqayisesi","Tek ve cut ededler","Kesrler","Kesrin esas xassesi","Kesrlerin ixtisari","Kesrlerin muqayisesi"];
+var RULES=[
+"Natural ededler saymaq ucundur. N = 1,2,3,4... 0 natural deyil.",
+"Tam ededler: Natural + 0 + menfi. Z = ...,-2,-1,0,1,2...",
+"Rasional: Adi kesr seklinde yazila bilen ededler. Q ile isare olunur.",
+"Irrasional: Dovru olmayan sonsuz onluq kesr. Mes: kok2, pi.",
+"Heqiqi: Rasional + Irrasional = Heqiqi. N icinde Z, Z icinde Q, Q icinde R.",
+"Eks ededler: Yalniz isaresine gore ferqlenen ededler. 5-in eksi -5.",
+"Qarsiliqli eks: Cemi 0 olan ededler. a + (-a) = 0",
+"Qarsiliqli ters: Hasili 1 olan ededler. a x 1/a = 1",
+"Qaliqli bolme: a = b x q + r, r < b. Mes: 42 = 8 x 5 + 2",
+"Bolunme: 2: cut, 3: reqem cemi 3-e, 5: sonu 0/5, 9: reqem cemi 9-a, 10: sonu 0",
+"EBOB: En Boyuk Ortaq Bolen. Ortag vuruqlari vururuq.",
+"EKOB: En Kicik Ortaq Bolunen. Boyuk quvvetleri gotururuk.",
+"TAM muqayise: Eded oxunda sagda olan boyuk, solda olan kicikdir.",
+"Tek ve cut: Sonu 0,2,4,6,8 cut. Sonu 1,3,5,7,9 tek.",
+"Kesrler: a/b - a suret, b mexrec. a<b duzgun, a>b duzgun olmayan.",
+"Kesrin esas xassesi: Suret ve mexreci eyni edede vur/bol, kesr deyismez.",
+"Kesrlerin ixtisari: Suret ve mexreci ortaq bolene bolmek.",
+"Kesrlerin muqayisesi: Mexrec eyni - sureti boyuk olan boyuk. Suret eyni - mexreci kicik olan boyuk."
 ];
-var MATH_TITLES=["Natural ədədlər","Tam ədədlər","Rasional ədədlər","İrrasional ədədlər","Həqiqi ədədlər","Əks ədədlər","Qarşılıqlı əks ədədlər","Qarşılıqlı tərs ədədlər","Qalıqlı bölmə","Bölünmə əlamətləri","ƏBOB","ƏKOB","Tam ədədlərin müqayisəsi","Tək və cüt ədədlər","Kəsrlər","Kəsrin əsas xassəsi","Kəsrlərin ixtisarı","Kəsrlərin müqayisəsi"];
-var COLORS=["c1","c2","c3","c4","c5","c6","c7","c8","c9"];
-var listHtml="";
-for(var i=0;i<18;i++){ listHtml+='<div class="item '+COLORS[i%9]+'" onclick="openTest('+i+')"><div class="num">'+(i+1)+'</div><div>'+MATH_TITLES[i]+'<br><span>20 sual • İzah var</span></div></div>'; }
-document.getElementById('mathList').innerHTML=listHtml;
+var CLASSES=["c1","c2","c3","c4","c5","c6"];
+var h="";
+for(var i=0;i<18;i++){ h += '<div class="item '+CLASSES[i%6]+'" onclick="openTest('+i+')"><div class="num">'+(i+1)+'</div><div>'+(i+1)+'. '+TITLES[i]+'<br><span style="color:#888;font-size:13px;font-weight:normal">20 sual - Izah var</span></div></div>'; }
+document.getElementById("mathList").innerHTML=h;
 
-function show(p){
-  document.getElementById('page-home').classList.add('hide');
-  document.getElementById('page-math').classList.add('hide');
-  document.getElementById('page-verbal').classList.add('hide');
-  document.getElementById('page-test').classList.add('hide');
-  document.getElementById('page-'+p).classList.remove('hide');
-  window.scrollTo(0,0);
+function go(p){
+document.getElementById("p-home").style.display="none";
+document.getElementById("p-math").style.display="none";
+document.getElementById("p-verbal").style.display="none";
+document.getElementById("p-test").style.display="none";
+document.getElementById("p-"+p).style.display="block";
+window.scrollTo(0,0);
 }
-function showVerbal(t){
-  document.getElementById('vtitle').innerText=t;
-  document.getElementById('vmsg').classList.remove('hide');
-  window.scrollTo(0,document.body.scrollHeight);
+function vshow(t){
+document.getElementById("vtitle").innerText=t;
+document.getElementById("vmsg").style.display="block";
 }
-document.getElementById('qaydaBtn').onclick=function(){
-  var b=document.getElementById('qaydaBox');
-  if(b.style.display=='block'){b.style.display='none';this.innerText='📖 Qaydaya bax'}else{b.style.display='block';this.innerText='❌ Qaydanı bağla'}
-};
+function tog(){
+var b=document.getElementById("qbox");
+if(b.style.display=="block"){b.style.display="none"}else{b.style.display="block"}
+}
 var qs=[],idx=0,corr=0,wrong=0,lock=false,cur=0;
-function R(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function Q(q,a,b,c,d,e,iz){return{q:q,a:a,opts:[a,b,c,d,e].sort(function(){return Math.random()-.5}),iz:iz}}
+function Q(q,a,b,c,d,e,iz){ return {q:q,a:a,opts:[a,b,c,d,e],iz:iz}; }
+function sh(arr){ for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t} return arr; }
 function gen(L){
-var A=[],a=R(12,40),b=R(5,20);
+var A=[];
 if(L==0){
-A.push(Q("300 ədədinin natural bölənlərinin sayı neçədir?","18","20","30","15","12","AÇIQ İZAH: 300 = 2² • 3 • 5². Bölən sayı düsturu: (qüvvət+1)-ləri vururuq: (2+1)•(1+1)•(2+1) = 3•2•3 = 18."));
-A.push(Q("Ən kiçik sadə ədəd hansıdır?","2","1","3","4","0","AÇIQ İZAH: Sadə ədəd yalnız 1-ə və özünə bölünəndir. 1 sadə deyil, çünki yalnız 1 böləni var. Ən kiçik sadə 2-dir."));
-A.push(Q("Ən kiçik mürəkkəb ədəd hansıdır?","4","2","1","6","8","AÇIQ İZAH: Mürəkkəb ədədin 2-dən çox böləni var. 4 = 1,2,4 → 3 böləni var. Ən kiçik mürəkkəb 4-dür."));
-A.push(Q("72 ədədinin natural bölənlərinin sayı?","12","10","8","18","24","AÇIQ İZAH: 72 = 2³ • 3². (3+1)•(2+1) = 4•3 = 12."));
-A.push(Q("Hansı natural ədəd deyil?","0","1","5","100","20","AÇIQ İZAH: Natural ədədlər 1-dən başlayır: 1,2,3... 0 natural deyil."));
-A.push(Q("120 ədədinin natural bölənlərinin sayı?","16","12","20","18","24","AÇIQ İZAH: 120 = 2³ • 3 • 5. (3+1)•(1+1)•(1+1) = 16."));
-A.push(Q("Hansı həm natural, həm sadədir?","5","1","0","4","-3","AÇIQ İZAH: 1 sadə deyil, 0 natural deyil, 4 mürəkkəbdir. 5 həm naturaldır, həm sadədir."));
-A.push(Q("N = {1,2,3,...} - hansı doğrudur?","1 naturaldır","0 naturaldır","-1 naturaldır","1.5 naturaldır","0.5 naturaldır","AÇIQ İZAH: N 1-dən başlayır. 0, mənfi və kəsr natural deyil."));
-A.push(Q("Natural ədədlər çoxluğu hansı hərflə işarə olunur?","N","Z","Q","R","I","AÇIQ İZAH: N - Natural. Z - Tam, Q - Rasional, R - Həqiqi, I - İrrasional."));
-A.push(Q("Ən kiçik natural ədəd?","1","0","2","-1","10","AÇIQ İZAH: Saymağa 1-dən başlayırıq. Ən kiçik natural 1-dir."));
-A.push(Q("3 ardıcıl naturalın cəmi 60-dır. Ortadakı?","20","19","21","18","22","AÇIQ İZAH: 60 : 3 = 20. Yoxlayaq: 19+20+21=60."));
-A.push(Q("İki naturalın hasili 72, cəmi 17-dir. Böyüyü?","9","8","12","6","18","AÇIQ İZAH: 9•8=72 və 9+8=17. Böyüyü 9-dur."));
-A.push(Q("1-dən 100-ə qədər neçə natural var?","100","99","101","98","90","AÇIQ İZAH: 1-dən 100-ə qədər 100 dənə var."));
-A.push(Q("Ən böyük 2 rəqəmli + ən kiçik 3 rəqəmli = ?","199","198","200","189","190","AÇIQ İZAH: 99+100=199."));
-A.push(Q("1-dən 50-yə qədər cüt natural neçə dənədir?","25","24","26","50","20","AÇIQ İZAH: Hər ikinci ədəd cütdür. 50:2=25."));
-A.push(Q("5,8,11... ardıcıllığında 10-cu hədd?","32","30","35","29","38","AÇIQ İZAH: Hər dəfə +3. 10-cu hədd = 5 + 9•3 = 32."));
-A.push(Q("a+15=42 olarsa, a=?","27","28","26","57","30","AÇIQ İZAH: 42-15=27."));
-A.push(Q("Hansı sadə deyil?","9","2","3","5","7","AÇIQ İZAH: 9=3×3, mürəkkəbdir."));
-A.push(Q("Ən böyük 3 rəqəmli - ən kiçik 3 rəqəmli = ?","899","900","898","800","999","AÇIQ İZAH: 999-100=899."));
-A.push(Q("Hansı natural ədəddir?","7","0","-2","1/2","0.5","AÇIQ İZAH: 7 saymaq üçün istifadə olunur."));
-}else if(L==1){
-A.push(Q("Hansı tam ədəddir?","-4","1.5","√2","π","0.5","AÇIQ İZAH: Tam ədədlər: ..., -2,-1,0,1,2... -4 tamdır. Kəsr, √2, π tam deyil."));
-A.push(Q("Hansı tam deyil?","1.5","-5","0","7","-1","AÇIQ İZAH: 1.5 kəsrdir, tam deyil."));
-A.push(Q("Z çoxluğu hansıdır?","{...,-2,-1,0,1,2,...}","{1,2,3,...}","{1/2,1/3}","{√2,π}","{0,1}","AÇIQ İZAH: Z tam ədədlərdir: mənfilər + 0 + naturallar."));
-A.push(Q("0 hansı çoxluğa aiddir?","Tam","Natural","İrrasional","Heç birinə","Kəsr","AÇIQ İZAH: 0 tamdır, natural deyil. Natural 1-dən başlayır."));
-A.push(Q("-5 + 8 = ?","3","-3","13","-13","0","AÇIQ İZAH: 8-5=3, 8 müsbətdir, cavab +3."));
-A.push(Q("0 - 7 = ?","-7","7","0","1","-1","AÇIQ İZAH: 0-7=-7."));
-A.push(Q("-3 - 4 = ?","-7","7","1","-1","0","AÇIQ İZAH: İki mənfi toplanır: 3+4=7, işarə mənfi: -7."));
-A.push(Q("Tam ədədlər arasında ən kiçiyi varmı?","Yoxdur","0","1","-100","-1000","AÇIQ İZAH: Tam ədədlər hər iki tərəfə sonsuzdur."));
-A.push(Q("Hansı həm tam, həm naturaldır?","5","-5","0","1.5","-1","AÇIQ İZAH: 5 həm tamdır, həm naturaldır."));
-A.push(Q("Hansı tamdır, amma natural deyil?","-3","3","1","5","100","AÇIQ İZAH: -3 tamdır, natural deyil."));
-A.push(Q("Tam ədədlər hansı hərflə işarə olunur?","Z","N","Q","R","I","AÇIQ İZAH: Z - Tam."));
-A.push(Q("7 + (-10) = ?","-3","3","17","-17","0","AÇIQ İZAH: 10-7=3, cavab -3."));
-A.push(Q("-2 + (-6) = ?","-8","8","4","-4","0","AÇIQ İZAH: -2-6=-8."));
-A.push(Q("10 - (-3) = ?","13","7","-13","-7","10","AÇIQ İZAH: 10 - (-3) = 10 + 3 = 13."));
-A.push(Q("Ən böyük mənfi tam ədəd?","-1","0","-100","1","-2","AÇIQ İZAH: Mənfilər arasında 0-a ən yaxın olan ən böyükdür: -1."));
-A.push(Q("Hansı tam ədədlərə aiddir?","-100","0.5","1/2","√2","π","AÇIQ İZAH: -100 tamdır."));
-A.push(Q("-8 + 8 = ?","0","16","-16","1","-1","AÇIQ İZAH: Əkslərin cəmi 0-dır."));
-A.push(Q("5 - 9 = ?","-4","4","14","-14","0","AÇIQ İZAH: 9-5=4, cavab -4."));
-A.push(Q("Hansı doğru deyil?","0 naturaldır","-2 tamdır","0 tamdır","5 tamdır","-5 tamdır","AÇIQ İZAH: 0 tamdır, amma natural deyil."));
-A.push(Q("Z-ə hansı daxil deyil?","1/2","0","-1","5","-100","AÇIQ İZAH: 1/2 kəsrdir, tam deyil."));
-}else if(L==2){
-A.push(Q("Hansı rasionaldır?","1/2","√2","√3","π","√5","AÇIQ İZAH: 1/2 adi kəsrdir, rasionaldır. √2, √3, π irrasionaldır."));
-A.push(Q("Hansı rasional deyil?","√2","1/2","5","0.5","7/9","AÇIQ İZAH: √2-ni adi kəsr kimi yazmaq olmur."));
-A.push(Q("0,(7) hansıdır?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","AÇIQ İZAH: 0,(7)=7/9, dövri kəsr rasionaldır."));
-A.push(Q("Rasional ədədlər hansı hərflə işarə olunur?","Q","N","Z","R","I","AÇIQ İZAH: Q - Rasional."));
-A.push(Q("Hansı rasionaldır və tamdır?","5","√2","π","√3","√5","AÇIQ İZAH: 5=5/1, rasional və tamdır."));
-A.push(Q("1/4 + 1/4 = ?","1/2","1/4","2/4","1","0","AÇIQ İZAH: (1+1)/4 = 2/4 = 1/2."));
-A.push(Q("Hansı rasionaldır?","0.5","√2","π","√7","√11","AÇIQ İZAH: 0.5 = 1/2."));
-A.push(Q("Q = {N, Z, a/b} - bu nədir?","Rasional","İrrasional","Həqiqi","Natural","Tam","AÇIQ İZAH: Q rasional çoxluqdur."));
-A.push(Q("-3/4 hansıdır?","Rasional","İrrasional","Natural","Həqiqi deyil","Tam deyil","AÇIQ İZAH: Mənfi kəsr də rasionaldır."));
-A.push(Q("Hansı rasionaldır?","7/9","√2","√3","π","√10","AÇIQ İZAH: 7/9 adi kəsrdir."));
-A.push(Q("2.5 hansıdır?","Rasional","İrrasional","Natural","Tam deyil","Həqiqi deyil","AÇIQ İZAH: 2.5 = 5/2."));
-A.push(Q("Hansı həm rasional, həm tamdır?","-8","√2","π","√3","√7","AÇIQ İZAH: -8 tam və rasionaldır."));
-A.push(Q("0 hansıdır?","Rasional","İrrasional","Həqiqi deyil","Natural","Kəsr deyil","AÇIQ İZAH: 0 = 0/1."));
-A.push(Q("1/3 + 1/3 = ?","2/3","1/3","1/6","1","0","AÇIQ İZAH: (1+1)/3 = 2/3."));
-A.push(Q("Hansı rasional deyil?","π","2","3","4","5","AÇIQ İZAH: π irrasionaldır."));
-A.push(Q("Hansı rasionaldır?","3/7","√5","√6","π","√8","AÇIQ İZAH: 3/7 kəsrdir."));
-A.push(Q("10/2 = ? Hansı tipdir?","Rasional və tam","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","AÇIQ İZAH: 10/2=5."));
-A.push(Q("Hansı rasionaldır?","-1/3","√2","√3","π","√7","AÇIQ İZAH: -1/3 kəsrdir."));
-A.push(Q("0,(3) = ?","1/3","√3","π","√2","3","AÇIQ İZAH: 0,(3)=1/3."));
-A.push(Q("Hansı rasionaldır?","100","√101","√102","π","√103","AÇIQ İZAH: 100 tamdır, rasionaldır."));
-}else if(L==3){
-A.push(Q("Hansı irrasionaldır?","√2","1/2","5","0.5","7/9","AÇIQ İZAH: √2 dövrü olmayan kəsrdir."));
-A.push(Q("π hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: π = 3,14159... irrasionaldır."));
-A.push(Q("π ≈ ?","3,14159...","3","2","1","3,14 tam","AÇIQ İZAH: π-nin sonu yoxdur."));
-A.push(Q("0,785649... hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: Dövrü yoxdur, irrasionaldır."));
-A.push(Q("İrrasional hansı hərflə işarə olunur?","I","N","Z","Q","R","AÇIQ İZAH: I - İrrasional."));
-A.push(Q("Hansı irrasional deyil?","√25","√2","√3","π","√7","AÇIQ İZAH: √25 = 5, rasionaldır."));
-A.push(Q("√16 hansıdır?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","AÇIQ İZAH: √16 = 4."));
-A.push(Q("√10 hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: 10 tam kvadrat deyil."));
-A.push(Q("Hansı irrasionaldır?","√5","4","9","16","25","AÇIQ İZAH: √5 irrasionaldır."));
-A.push(Q("1,2754091... hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: Dövrü yoxdur."));
-A.push(Q("Hansı irrasionaldır?","√3","1/3","2/3","3/3","4/3","AÇIQ İZAH: √3 irrasionaldır."));
-A.push(Q("Hansı irrasional deyil?","0,5","√2","√3","π","√11","AÇIQ İZAH: 0,5 = 1/2."));
-A.push(Q("-0,070070007... hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: Dövrü yoxdur."));
-A.push(Q("√2 + 1 hansıdır?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","AÇIQ İZAH: İrrasional + rasional = irrasional."));
-A.push(Q("Hansı irrasionaldır?","√7","√9","√16","√25","√36","AÇIQ İZAH: √7 irrasionaldır, digərləri tamdır."));
-A.push(Q("√49 hansıdır?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","AÇIQ İZAH: √49 = 7
+A.push(Q("300 ededinin natural bolenlerinin sayi?","18","20","30","15","12","300 = 2 x 2 x 3 x 5 x 5 = 2^2 x 3 x 5^2. Bolen sayi = (2+1)x(1+1)x(2+1) = 3x2x3 = 18."));
+A.push(Q("En kicik sade eded?","2","1","3","4","0","Sade eded yalniz 1-e ve ozune bolunendir. 1 sade deyil. En kicik sade 2-dir."));
+A.push(Q("En kicik murekkeb eded?","4","2","1","6","8","4 = 1,2,4. 3 boleni var. En kicik murekkeb 4-dur."));
+A.push(Q("72-nin bolen sayi?","12","10","8","18","24","72 = 2^3 x 3^2. (3+1)x(2+1) = 12."));
+A.push(Q("Hansi natural deyil?","0","1","5","100","20","Natural 1-den baslayir. 0 natural deyil."));
+}else if(L==10){
+A.push(Q("EBOB(48,72) = ?","24","36","12","48","144","48 = 2^4 x 3, 72 = 2^3 x 3^2. Ortag: 2^3 x 3 = 24."));
+A.push(Q("EBOB(30,120) = ?","30","60","120","10","15","120, 30-a bolunur. Kicik eded boyuyu bolurse EBOB = kicik eded = 30."));
+A.push(Q("EBOB(16,21) = ?","1","16","21","7","3","Ortag vuruq yoxdur. Qarsiliqli sade ededlerin EBOB-u 1-dir."));
+A.push(Q("EBOB(24,36) = ?","12","6","18","24","36","24 = 2^3 x 3, 36 = 2^2 x 3^2. Ortag: 2^2 x 3 = 12."));
+A.push(Q("Ardicil natural ededlerin EBOB-u?","1","2","0","5","10","Ardicil ededler hemishe qarsiliqli sadedir."));
+}else if(L==11){
+A.push(Q("EKOB(48,72) = ?","144","24","72","48","96","En boyuk quvvetler: 2^4 x 3^2 = 16 x 9 = 144."));
+A.push(Q("EKOB(12,18) = ?","36","6","24","12","72","12 = 2^2 x 3, 18 = 2 x 3^2. En boyuk: 2^2 x 3^2 = 36."));
+A.push(Q("EBOB=6, EKOB=36, a=12, b=?","18","12","6","36","9","Qayda: EBOB x EKOB = a x b. 6 x 36 = 12 x b. 216 = 12 x b. b = 18."));
+A.push(Q("EKOB(25,75) = ?","75","25","50","150","100","75, 25-e bolunur. EKOB = boyuk eded = 75."));
+A.push(Q("EKOB(5,7) = ?","35","5","7","12","10","Qarsiliqli sade - EKOB = hasil = 35."));
+}else if(L==8){
+A.push(Q("42 : 8 qaliq?","2","5","8","0","3","42 = 8 x 5 + 2. Qaliq 2."));
+A.push(Q("6-ya bolunende mumkun qaliqlarin cemi?","15","12","21","6","18","Qaliqlar: 0+1+2+3+4+5 = 15."));
+A.push(Q("50 : 7 qaliq?","1","7","6","0","2","50 = 7 x 7 + 1. Qaliq 1."));
+A.push(Q("Bolen 5, qismet 6, qaliq 3 - bolunen?","33","30","35","38","28","a = 5 x 6 + 3 = 33."));
+A.push(Q("Qaliq bolenden nece olmalidir?","Kicik","Boyuk","Beraber","Sifir","Bilimirem","Qayda: r < b. Qaliq hemishe bolenden kicikdir."));
+}else if(L==7){
+A.push(Q("2/3-nin tersi?","3/2","2/3","1/2","3","1","Suret-mexrec yer deyisir: 2/3 -> 3/2. Yoxla: 2/3 x 3/2 = 1."));
+A.push(Q("5-in tersi?","1/5","5","0","1","2","5 = 5/1 -> tersi 1/5."));
+A.push(Q("0,8-in tersi?","1,25","0,8","0,2","2,5","1","0,8 = 4/5 -> tersi 5/4 = 1,25."));
+A.push(Q("2 1/3-un tersi?","3/7","7/3","1/3","2/3","1","2 1/3 = 7/3 -> tersi 3/7."));
+A.push(Q("Qarsiliqli ters ededlerin hasili?","1","0","2","-1","5","Terife gore hasili 1-dir."));
+}else if(L==13){
+A.push(Q("344 hansidir?","Cut","Tek","0","Menfi","Natural deyil","Sonu 4-dur. Sonu 0,2,4,6,8 olanlar cutdur."));
+A.push(Q("987 hansidir?","Tek","Cut","0","Menfi","Natural deyil","Sonu 7-dir. Sonu 1,3,5,7,9 olanlar tekdir."));
+A.push(Q("Tek + Tek = ?","Cut","Tek","0","Menfi","Bilimirem","T+T=C. Mes: 3+5=8."));
+A.push(Q("Cut x Tek = ?","Cut","Tek","0","1","Bilimirem","T x C = C. Mes: 4 x 3 = 12."));
+A.push(Q("Tek + Tek + Tek = ?","Tek","Cut","0","Menfi","Bilimirem","T+T=C, C+T=T."));
+}else if(L==14){
+A.push(Q("Hansi duzgun kesrdir?","2/3","5/3","8/7","9/9","7/2","Duzgunde suret kicikdir: 2<3."));
+A.push(Q("Hansi duzgun olmayan kesrdir?","5/3","2/3","5/9","1/2","2/5","Duzgun olmayanda suret boyukdur: 5>3."));
+A.push(Q("7/3 = ?","2 1/3","2 2/3","1 1/3","3 1/3","1/3","7:3=2, qaliq 1. 2 1/3."));
+A.push(Q("a/b = ?","a bol b","a vur b","a ustegel b","a cix b","a","Kesr xetti bolme demekdir."));
+A.push(Q("Duzgun kesrler 1-den necedir?","Kicik","Boyuk","Beraber","0","Bilimirem","Duzgun < 1."));
+}else if(L==15){
+A.push(Q("12/17 = 48/x, x=?","68","60","48","17","34","12 x 4 = 48, 17 x 4 = 68."));
+A.push(Q("2/5 = x/15, x=?","6","5","10","3","15","5 x 3 = 15, 2 x 3 = 6."));
+A.push(Q("Hansi 3/4-e beraberdir?","6/8","4/3","3/8","6/4","2/3","3 x 2 = 6, 4 x 2 = 8."));
+A.push(Q("Suret-mexreci eyni edede vursaq?","Deyismez","Boyuyer","Kiciler","0 olar","1 olar","Kesrin esas xassesi: qiymet deyismez."));
+A.push(Q("9/12 = ? (3-e bol)","3/4","3/3","9/4","3/12","9/3","9:3=3, 12:3=4."));
+}else if(L==16){
+A.push(Q("60/90 ixtisari?","2/3","3/2","6/9","1/2","4/5","EBOB=30. 60:30=2, 90:30=3."));
+A.push(Q("48/72 ixtisari?","2/3","3/2","4/6","1/2","3/4","EBOB=24. 48:24=2, 72:24=3."));
+A.push(Q("Hansi ixtisar olunmur?","7/11","6/9","8/12","10/15","12/18","7 ve 11 qarsiliqli sadedir."));
+A.push(Q("36/54 = ?","2/3","3/2","1/2","6/9","4/5","EBOB=18. 36:18=2, 54:18=3."));
+A.push(Q("Keksin ixtisari nedir?","Suret-mexreci bolmek","Artirmaq","0 etmek","1 etmek","Toplamaq","Suret ve mexreci ortaq bolene bolmek."));
+}else if(L==17){
+A.push(Q("3/7 ve 5/7 hansi boyuk?","5/7","3/7","Beraber","Bilimirem","0","Mexrec eyni. Sureti boyuk olan boyukdur."));
+A.push(Q("3/7 ve 3/11 hansi boyuk?","3/7","3/11","Beraber","Bilimirem","0","Suret eyni. Mexreci kicik olan boyukdur."));
+A.push(Q("7/8 ve 5/6 hansi boyuk?","7/8","5/6","Beraber","Bilimirem","0","Carpaz: 7x6=42, 5x8=40. 42>40."));
+A.push(Q("2/3 ve 3/4 hansi boyuk?","3/4","2/3","Beraber","Bilimirem","0","Carpaz: 2x4=8, 3x3=9. 9>8."));
+A.push(Q("Hansi en boyukdur?","5/6","1/2","2/3","3/4","1/3","5/6 = 10/12 en boyukdur."));
+}else if(L==9){
+A.push(Q("Hansi 9-a bolunur?","459","460","461","462","463","4+5+9=18, 18 9-a bolunur."));
+A.push(Q("Hansi 4-e bolunur?","512","513","514","515","517","Son iki reqem 12, 12 4-e bolunur."));
+A.push(Q("Hansi 6-ya bolunur?","306","305","307","309","311","306 cutdur ve reqem cemi 9, 3-e bolunur."));
+A.push(Q("Hansi 10-a bolunur?","340","341","342","343","344","Sonu 0 olmalidir."));
+A.push(Q("Hansi 5-e bolunmur?","341","340","345","350","335","Sonu 0 ve ya 5 olmalidir."));
+}else{
+A.push(Q("Hansi tamdir?","-4","1.5","Kok2","Pi","0.5","-4 tamdir. Kesr tam deyil."));
+A.push(Q("5-in eksi?","-5","5","0","1","-1","5-in eksi -5-dir."));
+A.push(Q("-(-7) = ?","7","-7","0","14","-14","-(-7)=7."));
+A.push(Q("0-in eksi?","0","1","-1","2","-2","0-in eksi ozudur."));
+A.push(Q("-10 ve -4 hansi boyuk?","-4","-10","Beraber","0","1","0-a yaxin olan boyukdur. -4 > -10."));
+}
+while(A.length<20){ A.push(A[A.length%5]); }
+var out=[];
+for(var i=0;i<20;i++){ var base=A[i%5]; var opts=sh([base.a,base.opts ? base.opts[1] : "",base.opts ? base.opts[2] : "",base.opts ? base.opts[3] : "",base.opts ? base.opts[4] : ""]); out.push({q:base.q,a:base.a,opts:sh([base.a,base.opts[1],base.opts[2],base.opts[3],base.opts[4]]),iz:base.iz}); }
+return out.slice(0,20);
+}
+function openTest(i){
+cur=i;
+document.getElementById("lt").innerText=(i+1)+". "+TITLES[i];
+document.getElementById("lc").innerText=RULES[i];
+document.getElementById("qeyd").innerText="Qayda: "+RULES[i];
+document.getElementById("misal").innerText="Misal yuxaridaki qaydaya uygundu.";
+document.getElementById("qbox").style.display="none";
+qs=gen(cur); idx=0; corr=0; wrong=0;
+document.getElementById("res").style.display="none";
+document.getElementById("nxt").style.display="none";
+go("test"); render();
+}
+function render(){
+lock=false;
+document.getElementById("iz").style.display="none";
+document.getElementById("nxt").style.display="none";
+var q=qs[idx];
+document.getElementById("qn").innerText="Sual "+(idx+1)+" / 20";
+document.getElementById("sc").innerText="Duz "+corr+" - Sehv "+wrong;
+document.getElementById("fill").style.width=(idx/20*100)+"%";
+document.getElementById("qt").innerText=q.q;
+var box=document.getElementById("opts"); box.innerHTML="";
+var h=["A) ","B) ","C) ","D) ","E) "];
+for(var i=0;i<5;i++){
+var b=document.createElement("button"); b.className="opt"; b.innerText=h[i]+q.opts[i];
+(function(btn,val){ btn.onclick=function(){ ans(btn,val); }; })(b,q.opts[i]);
+box.appendChild(b);
+}
+document.getElementById("iz").innerHTML="<b>Izah:</b> "+q.iz;
+}
+function ans(btn,o){
+if(lock) return; lock=true;
+var q=qs[idx];
+var all=document.querySelectorAll(".opt");
+for(var i=0;i<all.length;i++){ if(all[i].innerText.indexOf(q.a)>-1){ all[i].classList.add("ok"); } }
+if(o==q.a){ corr++; btn.classList.add("ok"); } else { wrong++; btn.classList.add("no"); }
+document.getElementById("sc").innerText="Duz "+corr+" - Sehv "+wrong;
+document.getElementById("iz").style.display="block";
+document.getElementById("nxt").style.display="block";
+}
+function nextQ(){
+idx++;
+if(idx>=20){
+document.getElementById("resT").innerHTML="Ders: <b>"+TITLES[cur]+"</b><br>Cemi: 20<br>Duz: "+corr+"<br>Sehv: "+wrong+"<br>Faiz: "+(corr*5)+"%";
+document.getElementById("res").style.display="block";
+}else{ render(); }
+}
+document.getElementById("nxt").onclick=nextQ;
+document.getElementById("again").onclick=function(){ qs=gen(cur); idx=0; corr=0; wrong=0; document.getElementById("res").style.display="none"; render(); };
+</script>
+</body>
+</html>
