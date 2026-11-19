@@ -72,3 +72,235 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:bold;font
 <button class="pri" id="nxt" style="display:none">Növbəti ➡️</button>
 <div id="res" style="display:none;text-align:center"><h2>🎉 Nəticə</h2><div id="resT" style="line-height:1.8"></div><button class="pri" id="again">🔄 Yenidən - 20 Sual</button></div>
 </div></div></div>
+<script>
+var TITLES=["Natural ədədlər","Tam ədədlər","Rasional ədədlər","İrrasional ədədlər","Həqiqi ədədlər","Əks ədədlər","Qarşılıqlı əks ədədlər","Qarşılıqlı tərs ədədlər","Qalıqlı bölmə","Bölünmə əlamətləri","ƏBOB","ƏKOB","Tam ədədlərin müqayisəsi","Tək və cüt ədədlər","Kəsrlər","Kəsrin əsas xassəsi","Kəsrlərin ixtisarı","Kəsrlərin müqayisəsi"];
+var RULES=[
+"Natural ədədlər saymaq üçündür. N = {1,2,3,4,...} 1-dən başlayır, sonsuzdur. 0 natural deyil.",
+"Tam ədədlər: Natural + 0 + mənfi. Z = {...,-2,-1,0,1,2,...}",
+"Rasional ədədlər adi kəsr şəklində yazıla bilən ədədlərdir. Q ilə işarə olunur.",
+"İrrasional ədədlər dövrü olmayan sonsuz onluq kəsrdir. Məsələn: √2, π.",
+"Həqiqi ədədlər: Rasional + İrrasional = Həqiqi. N ⊂ Z ⊂ Q ⊂ R.",
+"Əks ədədlər yalnız işarəsinə görə fərqlənən ədədlərdir. 5-in əksi -5-dir.",
+"Qarşılıqlı əks ədədlər cəmi 0 olan ədədlərdir. a + (-a) = 0.",
+"Qarşılıqlı tərs ədədlər hasili 1 olan ədədlərdir. a • 1/a = 1.",
+"Qalıqlı bölmə: a = b • q + r, r < b. Məsələn: 42 = 8 • 5 + 2.",
+"Bölünmə əlamətləri: 2-yə: cüt, 3-ə: rəqəm cəmi 3-ə bölünür, 5-ə: sonu 0 və ya 5, 9-a: rəqəm cəmi 9-a bölünür, 10-a: sonu 0.",
+"ƏBOB: Ən Böyük Ortaq Bölən. Ortaq vuruqları vururuq.",
+"ƏKOB: Ən Kiçik Ortaq Bölünən. Ən böyük qüvvətləri götürürük.",
+"Tam ədədlərin müqayisəsi: Ədəd oxunda sağda olan böyük, solda olan kiçikdir.",
+"Tək və cüt ədədlər: Sonu 0,2,4,6,8 - cüt. Sonu 1,3,5,7,9 - tək.",
+"Kəsrlər: a/b - a surət, b məxrəc. a<b düzgün, a>b düzgün olmayan.",
+"Kəsrin əsas xassəsi: Surət və məxrəci eyni ədədə vurduqda və ya böldükdə kəsr dəyişməz.",
+"Kəsrlərin ixtisarı: Surət və məxrəci ortaq bölənə bölmək.",
+"Kəsrlərin müqayisəsi: Məxrəc eyni - surəti böyük olan böyükdür. Surət eyni - məxrəci kiçik olan böyükdür."
+];
+
+function showPage(p){
+  document.getElementById("p-home").style.display="none";
+  document.getElementById("p-math").style.display="none";
+  document.getElementById("p-verbal").style.display="none";
+  document.getElementById("p-test").style.display="none";
+  document.getElementById("p-"+p).style.display="block";
+  window.scrollTo(0,0);
+}
+document.getElementById("btnMath").addEventListener("click", function(){ showPage("math"); });
+document.getElementById("btnVerbal").addEventListener("click", function(){ showPage("verbal"); });
+document.getElementById("back1").addEventListener("click", function(){ showPage("home"); });
+document.getElementById("back2").addEventListener("click", function(){ showPage("home"); });
+document.getElementById("back3").addEventListener("click", function(){ showPage("math"); });
+var vItems = document.querySelectorAll("[data-v]");
+for(var i=0;i<vItems.length;i++){
+  (function(el){
+    el.addEventListener("click", function(){
+      document.getElementById("vtitle").innerText = el.getAttribute("data-v");
+      document.getElementById("vmsg").style.display="block";
+    });
+  })(vItems[i]);
+}
+document.getElementById("qaydaBtn").addEventListener("click", function(){
+  var b=document.getElementById("qbox");
+  if(b.style.display=="block"){ b.style.display="none"; } else { b.style.display="block"; }
+});
+var CLASSES=["c1","c2","c3","c4","c5","c6"];
+var h="";
+for(var i=0;i<18;i++){
+  h += '<div class="item '+CLASSES[i%6]+'" data-test="'+i+'"><div class="num">'+(i+1)+'</div><div>'+(i+1)+'. '+TITLES[i]+'<br><span style="color:#888;font-size:13px;font-weight:normal">20 sual • İzah var</span></div></div>';
+}
+document.getElementById("mathList").innerHTML=h;
+var tItems = document.querySelectorAll("[data-test]");
+for(var i=0;i<tItems.length;i++){
+  (function(el){
+    el.addEventListener("click", function(){
+      var idx = parseInt(el.getAttribute("data-test"));
+      openTest(idx);
+    });
+  })(tItems[i]);
+}
+var qs=[],idx=0,corr=0,wrong=0,lock=false,cur=0;
+function Q(q,a,b,c,d,e,iz){ return {q:q,a:a,opts:[a,b,c,d,e],iz:iz}; }
+function sh(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t} return a; }
+
+function gen(L){
+var A=[];
+if(L==0){
+A.push(Q("300 ədədinin natural bölənlərinin sayı neçədir?","18","20","30","15","12","300 = 2² • 3 • 5². Bölən sayı = (2+1)•(1+1)•(2+1) = 18."));
+A.push(Q("Ən kiçik sadə ədəd hansıdır?","2","1","3","4","0","Sadə ədəd yalnız 1-ə və özünə bölünür. 1 sadə deyil. Ən kiçik sadə 2-dir."));
+A.push(Q("Ən kiçik mürəkkəb ədəd hansıdır?","4","2","1","6","8","4-ün bölənləri 1,2,4-dür. Ən kiçik mürəkkəb 4-dür."));
+A.push(Q("72 ədədinin natural bölənlərinin sayı neçədir?","12","10","8","18","24","72 = 2³ • 3². (3+1)•(2+1) = 12."));
+A.push(Q("Hansı natural ədəd deyil?","0","1","5","100","20","Natural ədədlər 1-dən başlayır. 0 natural deyil."));
+A.push(Q("120 ədədinin natural bölənlərinin sayı neçədir?","16","12","20","18","24","120 = 2³ • 3 • 5. (3+1)•(1+1)•(1+1) = 16."));
+A.push(Q("Hansı həm natural, həm də sadədir?","5","1","0","4","-3","1 sadə deyil, 0 natural deyil, 4 mürəkkəbdir. 5 həm naturaldır, həm sadədir."));
+A.push(Q("Natural ədədlər çoxluğu hansı hərflə işarə olunur?","N","Z","Q","R","I","N - Natural. Z - Tam, Q - Rasional, R - Həqiqi, I - İrrasional."));
+A.push(Q("Ən kiçik natural ədəd hansıdır?","1","0","2","-1","10","Saymağa 1-dən başlayırıq. Ən kiçik natural 1-dir."));
+A.push(Q("3 ardıcıl natural ədədin cəmi 60-dır. Ortadakı hansıdır?","20","19","21","18","22","60 : 3 = 20. Yoxlayaq: 19+20+21=60."));
+A.push(Q("İki natural ədədin hasili 72, cəmi 17-dir. Böyüyü hansıdır?","9","8","12","6","18","9•8=72 və 9+8=17. Böyüyü 9-dur."));
+A.push(Q("1-dən 100-ə qədər neçə natural ədəd var?","100","99","101","98","90","1-dən 100-ə qədər 100 dənə natural ədəd var."));
+A.push(Q("Ən böyük iki rəqəmli ilə ən kiçik üç rəqəmli ədədin cəmi neçədir?","199","198","200","189","190","99+100=199."));
+A.push(Q("1-dən 50-yə qədər neçə cüt natural ədəd var?","25","24","26","50","20","Hər ikinci ədəd cütdür. 50:2=25."));
+A.push(Q("5, 8, 11, ... ardıcıllığında 10-cu hədd neçədir?","32","30","35","29","38","Hər dəfə +3 artır. 5 + 9•3 = 32."));
+A.push(Q("a + 15 = 42 olarsa, a neçədir?","27","28","26","57","30","42-15=27."));
+A.push(Q("Hansı sadə ədəd deyil?","9","2","3","5","7","9 = 3•3, mürəkkəbdir."));
+A.push(Q("Ən böyük üç rəqəmli ilə ən kiçik üç rəqəmli ədədin fərqi neçədir?","899","900","898","800","999","999-100=899."));
+A.push(Q("Hansı natural ədəddir?","7","0","-2","1/2","0,5","7 saymaq üçün istifadə olunur."));
+A.push(Q("Natural ədədlər çoxluğu necədir?","Sonsuzdur","Sonludur","0 ilə bitir","Mənfi ilə bitir","Boşdur","Natural ədədlər sonsuzdur: 1,2,3,..."));
+}else if(L==1){
+A.push(Q("Hansı tam ədəddir?","-4","1,5","√2","π","0,5","Tam ədədlər: ..., -2,-1,0,1,2,... -4 tamdır."));
+A.push(Q("Hansı tam ədəd deyil?","1,5","-5","0","7","-1","1,5 kəsrdir, tam deyil."));
+A.push(Q("Tam ədədlər çoxluğu hansıdır?","{...,-2,-1,0,1,2,...}","{1,2,3,...}","{1/2,1/3}","{√2,π}","{0,1}","Z tam ədədlərdir: mənfilər + 0 + naturallar."));
+A.push(Q("0 hansı çoxluğa aiddir?","Tam","Natural","İrrasional","Heç birinə","Kəsr","0 tamdır, natural deyil."));
+A.push(Q("-5 + 8 = ?","3","-3","13","-13","0","8-5=3, 8 müsbətdir, cavab +3."));
+A.push(Q("0 - 7 = ?","-7","7","0","1","-1","0-7=-7."));
+A.push(Q("-3 - 4 = ?","-7","7","1","-1","0","İki mənfi toplanır: 3+4=7, işarə mənfi: -7."));
+A.push(Q("Tam ədədlər arasında ən kiçiyi varmı?","Yoxdur","0","1","-100","-1000","Tam ədədlər hər iki tərəfə sonsuzdur."));
+A.push(Q("Hansı həm tam, həm də naturaldır?","5","-5","0","1,5","-1","5 həm tamdır, həm naturaldır."));
+A.push(Q("Hansı tamdır, amma natural deyil?","-3","3","1","5","100","-3 tamdır, natural deyil."));
+A.push(Q("Tam ədədlər hansı hərflə işarə olunur?","Z","N","Q","R","I","Z - Tam."));
+A.push(Q("7 + (-10) = ?","-3","3","17","-17","0","10-7=3, cavab -3."));
+A.push(Q("-2 + (-6) = ?","-8","8","4","-4","0","-2-6=-8."));
+A.push(Q("10 - (-3) = ?","13","7","-13","-7","10","10 - (-3) = 10 + 3 = 13."));
+A.push(Q("Ən böyük mənfi tam ədəd hansıdır?","-1","0","-100","1","-2","Mənfilər arasında 0-a ən yaxın olan ən böyükdür: -1."));
+A.push(Q("Hansı tam ədədlərə aiddir?","-100","0,5","1/2","√2","π","-100 tamdır."));
+A.push(Q("-8 + 8 = ?","0","16","-16","1","-1","Əks ədədlərin cəmi 0-dır."));
+A.push(Q("5 - 9 = ?","-4","4","14","-14","0","9-5=4, cavab -4."));
+A.push(Q("Hansı doğru deyil?","0 naturaldır","-2 tamdır","0 tamdır","5 tamdır","-5 tamdır","0 tamdır, amma natural deyil."));
+A.push(Q("Z-ə hansı daxil deyil?","1/2","0","-1","5","-100","1/2 kəsrdir, tam deyil."));
+}else if(L==2){
+A.push(Q("Hansı rasional ədəddir?","1/2","√2","√3","π","√5","1/2 adi kəsrdir, rasionaldır."));
+A.push(Q("Hansı rasional ədəd deyil?","√2","1/2","5","0,5","7/9","√2-ni adi kəsr kimi yazmaq olmur."));
+A.push(Q("0,(7) hansı ədəddir?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","0,(7)=7/9, dövri kəsr rasionaldır."));
+A.push(Q("Rasional ədədlər hansı hərflə işarə olunur?","Q","N","Z","R","I","Q - Rasional."));
+A.push(Q("Hansı rasionaldır və tamdır?","5","√2","π","√3","√5","5=5/1, rasional və tamdır."));
+A.push(Q("1/4 + 1/4 = ?","1/2","1/4","2/4","1","0","(1+1)/4 = 2/4 = 1/2."));
+A.push(Q("Hansı rasional ədəddir?","0,5","√2","π","√7","√11","0,5 = 1/2."));
+A.push(Q("Q = {N, Z, a/b} - bu nədir?","Rasional","İrrasional","Həqiqi","Natural","Tam","Q rasional çoxluqdur."));
+A.push(Q("-3/4 hansı ədəddir?","Rasional","İrrasional","Natural","Həqiqi deyil","Tam deyil","Mənfi kəsr də rasionaldır."));
+A.push(Q("Hansı rasional ədəddir?","7/9","√2","√3","π","√10","7/9 adi kəsrdir."));
+A.push(Q("2,5 hansı ədəddir?","Rasional","İrrasional","Natural","Tam deyil","Həqiqi deyil","2,5 = 5/2."));
+A.push(Q("Hansı həm rasional, həm də tamdır?","-8","√2","π","√3","√7","-8 tam və rasionaldır."));
+A.push(Q("0 hansı ədəddir?","Rasional","İrrasional","Həqiqi deyil","Natural","Kəsr deyil","0 = 0/1."));
+A.push(Q("1/3 + 1/3 = ?","2/3","1/3","1/6","1","0","(1+1)/3 = 2/3."));
+A.push(Q("Hansı rasional ədəd deyil?","π","2","3","4","5","π irrasionaldır."));
+A.push(Q("Hansı rasional ədəddir?","3/7","√5","√6","π","√8","3/7 kəsrdir."));
+A.push(Q("10/2 = ? Hansı tipdir?","Rasional və tam","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","10/2=5."));
+A.push(Q("Hansı rasional ədəddir?","-1/3","√2","√3","π","√7","-1/3 kəsrdir."));
+A.push(Q("0,(3) = ?","1/3","√3","π","√2","3","0,(3)=1/3."));
+A.push(Q("Hansı rasional ədəddir?","100","√101","√102","π","√103","100 tamdır, rasionaldır."));
+}else if(L==3){
+A.push(Q("Hansı irrasional ədəddir?","√2","1/2","5","0,5","7/9","√2 dövrü olmayan kəsrdir."));
+A.push(Q("π hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","π = 3,14159... irrasionaldır."));
+A.push(Q("π təxminən neçədir?","3,14159...","3","2","1","3,14 tam","π-nin sonu yoxdur."));
+A.push(Q("0,785649... hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","Dövrü yoxdur, irrasionaldır."));
+A.push(Q("İrrasional ədədlər hansı hərflə işarə olunur?","I","N","Z","Q","R","I - İrrasional."));
+A.push(Q("Hansı irrasional ədəd deyil?","√25","√2","√3","π","√7","√25 = 5, rasionaldır."));
+A.push(Q("√16 hansı ədəddir?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","√16 = 4."));
+A.push(Q("√10 hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","10 tam kvadrat deyil."));
+A.push(Q("Hansı irrasional ədəddir?","√5","4","9","16","25","√5 irrasionaldır."));
+A.push(Q("1,2754091... hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","Dövrü yoxdur."));
+A.push(Q("Hansı irrasional ədəddir?","√3","1/3","2/3","3/3","4/3","√3 irrasionaldır."));
+A.push(Q("Hansı irrasional ədəd deyil?","0,5","√2","√3","π","√11","0,5 = 1/2."));
+A.push(Q("-0,070070007... hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","Dövrü yoxdur."));
+A.push(Q("√2 + 1 hansı ədəddir?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","İrrasional + rasional = irrasional."));
+A.push(Q("Hansı irrasional ədəddir?","√7","√9","√16","√25","√36","√7 irrasionaldır, digərləri tamdır."));
+A.push(Q("√49 hansı ədəddir?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","√49 = 7."));
+A.push(Q("Hansı irrasional ədəddir?","π","3","4","5","6","π irrasionaldır."));
+A.push(Q("√2 • √2 = ? Hansı tipdir?","Rasional","İrrasional","Həqiqi deyil","Natural deyil","Tam deyil","√2•√2 = 2, rasionaldır."));
+A.push(Q("Hansı irrasional ədəddir?","√13","√16","√25","√4","√1","√13 irrasionaldır."));
+A.push(Q("İrrasional + Rasional = ?","İrrasional","Rasional","Natural","Tam","Həqiqi deyil","İrrasional + rasional = irrasional."));
+}else if(L==4){
+A.push(Q("Rasional + İrrasional = ?","Həqiqi","Natural","Tam","Rasional","İrrasional","Həqiqi = Rasional + İrrasional."));
+A.push(Q("N ⊂ Z ⊂ Q ⊂ ?","R","N","I","Z","Q","Ən böyük çoxluq R - Həqiqidir."));
+A.push(Q("√2 hansı çoxluğa aiddir?","Həqiqi və İrrasional","Rasional","Natural","Tam","Heç birinə","√2 irrasionaldır, irrasional da həqiqiyə daxildir."));
+A.push(Q("Həqiqi ədədlər hansı hərflə işarə olunur?","R","N","Z","Q","I","R - Həqiqi."));
+A.push(Q("Hansı həqiqi ədəd deyil?","Heç biri, hamısı həqiqidir","√2","5","-3","π","Hamısı həqiqidir."));
+A.push(Q("5 hansı ədəddir?","Həqiqi","Həqiqi deyil","İrrasional","Natural deyil","Tam deyil","5 rasionaldır, deməli həqiqidir."));
+A.push(Q("R = Q ∪ I - bu nə deməkdir?","Həqiqi = Rasional + İrrasional","Natural = Tam","Tam = Natural","İrrasional = Rasional","Heç biri","∪ birləşmə deməkdir."));
+A.push(Q("Hansı həm rasional, həm də həqiqidir?","5","√2","π","√3","√7","5 rasionaldır, deməli həqiqidir."));
+A.push(Q("Hansı həqiqi ədəddir?","-100","Heç biri","Yalnız √2","Yalnız π","Yalnız 5","-100 həqiqidir."));
+A.push(Q("0,333... + √2 = ?","Həqiqi","Natural","Tam","Rasional","İrrasional deyil","Hər ikisi həqiqidir, cəmi də həqiqidir."));
+A.push(Q("Hansı həqiqi ədəd deyil?","Yoxdur","√2","π","5","-3","Hamısı həqiqidir."));
+A.push(Q("Hansı çoxluq ən böyükdür?","R","N","Z","Q","I","R hamısını əhatə edir."));
+A.push(Q("Z ⊂ Q ⊂ R - hansı doğrudur?","Hamısı doğrudur","Z ⊂ N","Q ⊂ Z","R ⊂ Q","N ⊂ I","Z ⊂ Q ⊂ R doğrudur."));
+A.push(Q("π hansı çoxluğa aiddir?","Həqiqi və İrrasional","Rasional","Natural","Tam","Heç birinə","π irrasionaldır, deməli həqiqidir."));
+A.push(Q("Hansı həqiqidir və rasionaldır?","-7","√2","π","√3","√5","-7 rasionaldır, deməli həqiqidir."));
+A.push(Q("Hansı həqiqidir və irrasionaldır?","√10","5","-3","1/2","0","√10 irrasionaldır, deməli həqiqidir."));
+A.push(Q("Rasional + Rasional = ?","Həqiqi","Natural","Tam","İrrasional","Heç biri","Rasional + rasional = rasional = həqiqi."));
+A.push(Q("İrrasional + İrrasional = ?","Həqiqi ola bilər","Natural","Tam","Rasional","Heç biri","İki irrasionalın cəmi həqiqidir."));
+A.push(Q("N ⊂ Z - bu nə deməkdir?","Hər natural tamdır","Hər tam naturaldır","N=Z","Z=N","Heç biri","Hər natural tamdır, əksi doğru deyil."));
+A.push(Q("Hansı həqiqi ədəddir?","√2","Heç biri","Yalnız 5","Yalnız π","Yalnız -3","√2 həqiqidir."));
+}else if(L==5){
+A.push(Q("5-in əksi hansıdır?","-5","5","0","1","-1","Əks ədəd yalnız işarəsinə görə fərqlənir."));
+A.push(Q("-(-7) = ?","7","-7","0","14","-14","-(-7) 'mənfi 7-nin əksi' deməkdir, +7-dir."));
+A.push(Q("0-ın əksi hansıdır?","0","1","-1","-0","Yoxdur","0-ın əksi özüdür."));
+A.push(Q("-2-nin əksi hansıdır?","2","-2","0","4","-4","-2-nin əksi 2-dir."));
+A.push(Q("a-nın əksi hansıdır?","-a","a","0","1","-1","a-nın əksi -a yazılır."));
+A.push(Q("8-in əksi + 8 = ?","0","16","-16","1","-1","8-in əksi -8-dir. -8+8=0."));
+A.push(Q("Hər ədədin neçə əksi var?","1","2","0","Sonsuz","Bilinmir","Hər ədədin yalnız bir əksi var."));
+A.push(Q("-(-a) = ?","a","-a","0","1","-1","Ümumi qayda: -(-a)=a."));
+A.push(Q("Əksi 12 olan ədəd hansıdır?","-12","12","0","1","24","Əksi 12 olan -12-dir."));
+A.push(Q("Əksi -9 olan ədəd hansıdır?","9","-9","0","1","18","Əksi -9 olan 9-dur."));
+A.push(Q("-5-in əksi + (-5) = ?","0","10","-10","1","-1","-5-in əksi 5-dir. 5 + (-5) = 0."));
+A.push(Q("3-ün əksi hansıdır?","-3","3","0","1","-1","3-ün əksi -3-dür."));
+A.push(Q("-10-un əksi hansıdır?","10","-10","0","20","-20","-10-un əksi +10-dur."));
+A.push(Q("a + (-a) = ?","0","2a","1","-1","a","a ilə əksi -a-nın cəmi 0-dır."));
+A.push(Q("Hansı cüt əks ədədlərdir?","7 və -7","7 və 7","7 və 1/7","7 və 0","7 və 1","7 + (-7) = 0."));
+A.push(Q("Əks ədədlər necə yerləşir?","Simmetrik","Eyni yerdə","Sağda","Solda","Bilinmir","5 və -5, 0-a görə simmetrikdir."));
+A.push(Q("0-ın əksi ilə 0-ın cəmi neçədir?","0","1","-1","2","-2","0+0=0."));
+A.push(Q("-a-nın əksi hansıdır?","a","-a","0","1","-1","-a-nın əksi a-dır."));
+A.push(Q("Hansı doğru deyil?","0-ın əksi 1-dir","5-in əksi -5-dir","-5-in əksi 5-dir","0-ın əksi 0-dır","-(-7)=7","0-ın əksi 0-dır, 1 deyil."));
+A.push(Q("x-in əksi -4 olarsa, x neçədir?","4","-4","0","1","8","Əksi -4 olan 4-dür."));
+}else if(L==6){
+A.push(Q("Hansı qarşılıqlı əks ədədlərdir?","-5 və 5","5 və 5","5 və 1/5","0 və 1","2 və 3","Cəmi 0 olmalıdır. -5+5=0."));
+A.push(Q("a + (-a) = ?","0","2a","1","-1","a","Qarşılıqlı əks ədədlərin cəmi 0-dır."));
+A.push(Q("x + 8 = 0 olarsa, x neçədir?","-8","8","0","1","16","x = 0-8 = -8."));
+A.push(Q("Qarşılıqlı əks ədədlərin cəmi neçədir?","0","1","2","-1","Bilinmir","Tərifə görə cəmi 0-dır."));
+A.push(Q("Hansı cüt qarşılıqlı əks ədədlər deyil?","3 və 1/3","3 və -3","-4 və 4","10 və -10","-7 və 7","3 + 1/3 ≠ 0. Bunlar qarşılıqlı tərsdir."));
+A.push(Q("a + b = 0 olarsa, a və b necə ədədlərdir?","Qarşılıqlı əks","Qarşılıqlı tərs","Bərabər","Müsbət","Mənfi","Cəmi 0 olanlar qarşılıqlı əksdir."));
+A.push(Q("12 + x = 0 olarsa, x neçədir?","-12","12","0","1","24","x = -12."));
+A.push(Q("-20 + 20 = ?","0","40","-40","1","-1","-20 ilə 20 əksdir, cəmi 0."));
+A.push(Q("Hansı qarşılıqlı əks ədədlərdir?","-9 və 9","9 və 9","9 və 1/9","9 və 0","9 və 1","-9+9=0."));
+A.push(Q("x + (-7) = 0 olarsa, x neçədir?","7","-7","0","1","14","x=7."));
+A.push(Q("Qarşılıqlı əks ədədlər eyni zamanda nədir?","Əks ədədlər","Tərs ədədlər","Bərabər ədədlər","Natural ədədlər","Tam ədədlər","Qarşılıqlı əks = əks."));
+A.push(Q("-3 + 3 + 5 = ?","5","0","-5","8","-8","-3+3=0, 0+5=5."));
+A.push(Q("a + (-a) + b = ?","b","0","a","-a","2a","a+(-a)=0, 0+b=b."));
+A.push(Q("Hansı cüt qarşılıqlı əks ədədlərdir?","-100 və 100","100 və 100","100 və 1/100","100 və 0","100 və 1","-100+100=0."));
+A.push(Q("Qarşılıqlı əks ədədlərin fərqi neçədir?","2a","0","1","-1","a","a - (-a) = 2a."));
+A.push(Q("x - 5 = 0 olarsa, x-in əksi neçədir?","-5","5","0","1","10","x=5, əksi -5."));
+A.push(Q("0-ın qarşılıqlı əksi hansıdır?","0","1","-1","Yoxdur","Bilinmir","0+0=0, əksi özüdür."));
+A.push(Q("a və -a-nın cəmi neçədir?","0","2a","1","-1","a","a+(-a)=0."));
+A.push(Q("Hansı doğru deyil?","Qarşılıqlı əks ədədlərin hasili 1-dir","Qarşılıqlı əks ədədlərin cəmi 0-dır","5 və -5 qarşılıqlı əksdir","-5+5=0","a+(-a)=0","Hasili 1 olanlar qarşılıqlı tərsdir."));
+A.push(Q("b + 15 = 0 olarsa, b neçədir?","-15","15","0","1","30","b = -15."));
+}else if(L==7){
+A.push(Q("2/3-nin tərsi hansıdır?","3/2","2/3","1/2","3/1","1","Surət-məxrəc yer dəyişir: 2/3 → 3/2."));
+A.push(Q("5-in tərsi hansıdır?","1/5","5","0","1","2","5 = 5/1 → tərsi 1/5."));
+A.push(Q("0,8-in tərsi hansıdır?","1,25","0,8","0,2","2,5","1","0,8 = 4/5 → tərsi 5/4 = 1,25."));
+A.push(Q("2 1/3-ün tərsi hansıdır?","3/7","7/3","1/3","2/3","1","2 1/3 = 7/3 → tərsi 3/7."));
+A.push(Q("Hansı cüt qarşılıqlı tərs ədədlərdir?","2/3 və 3/2","2/3 və 2/3","5 və 5","0 və 1","1 və 0","2/3 • 3/2 = 1."));
+A.push(Q("Qarşılıqlı tərs ədədlərin hasili neçədir?","1","0","2","-1","Bilinmir","Tərifə görə hasili 1-dir."));
+A.push(Q("12-nin tərsi hansıdır?","1/12","12","0","1","2","12 • 1/12 = 1."));
+A.push(Q("1-in tərsi hansıdır?","1","0","2","1/2","-1","Vahidin tərsi özüdür."));
+A.push(Q("0-ın tərsi varmı?","Yoxdur","0","1","-1","2","0 • x = 0, heç vaxt 1 olmur."));
+A.push(Q("3/4-ün tərsi hansıdır?","4/3","3/4","1/4","4/1","1","3/4 → 4/3."));
+A.push(Q("1/2-nin tərsi hansıdır?","2","1/2","0","1","4","1/2 → 2/1 = 2."));
+A.push(Q("4/5-in tərsi hansıdır?","5/4","4/5","1/5","5/1","1","4/5 → 5/4."));
+A.push(Q("0,5-in tərsi hansıdır?","2","0,5","1","0","4","0,5 = 1/2 → tərsi 2."));
+A.push(Q("2-nin tərsi hansıdır?","1/2","2","0","1","4","2 = 2/1
