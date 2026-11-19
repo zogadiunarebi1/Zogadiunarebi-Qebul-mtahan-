@@ -97,6 +97,7 @@ main{max-width:1050px;margin:auto;padding:25px 18px 50px}
  border-radius:9px;padding:17px;text-align:center;
  color:#155ba5;font-size:21px;font-weight:bold;
  margin:15px 0;overflow-wrap:anywhere;
+ white-space:pre-line;
 }
 .example{
  background:#f6f9fd;border:1px solid #e8eef6;
@@ -191,7 +192,6 @@ footer strong{color:#1769c2}
 
 <main>
 
-<!-- ANA SƏHİFƏ -->
 <section id="home" class="page active">
  <div class="hero">
   <div class="hero-tag">Təhsil platforması</div>
@@ -218,16 +218,13 @@ footer strong{color:#1769c2}
  </div>
 </section>
 
-<!-- RİYAZİYYAT BÖLMƏSİ -->
 <section id="math" class="page">
  <button class="back" onclick="showPage('home')">← Geri</button>
  <h1>Riyaziyyat</h1>
  <p>Öyrənmək istədiyin mövzunu seç.</p>
-
  <div class="topic-grid" id="topic-list"></div>
 </section>
 
-<!-- VERBAL BÖLMƏSİ -->
 <section id="verbal" class="page">
  <button class="back" onclick="showPage('home')">← Geri</button>
  <div class="card" style="text-align:center;padding:45px 20px">
@@ -239,7 +236,6 @@ footer strong{color:#1769c2}
  </div>
 </section>
 
-<!-- DƏRS SƏHİFƏSİ -->
 <section id="lesson" class="page">
  <button class="back" onclick="showPage('math')">← Mövzulara qayıt</button>
  <div id="lesson-content"></div>
@@ -317,7 +313,7 @@ const topics = [
   symbol:"I",
   desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",
   rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",
-  formula:"√2 = 1,4142135...<br>√3 = 1,7320508...<br>π = 3,1415926...",
+  formula:"√2 = 1,4142135...\n√3 = 1,7320508...\nπ = 3,1415926...",
   examples:[
    "√2 — irrasionaldır.",
    "√3 — irrasionaldır.",
@@ -348,6 +344,68 @@ const topics = [
   questions:[
    ["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],
    ["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]
+  ]
+ },
+
+ {
+  title:"Əks ədədlər",
+  symbol:"±a",
+  desc:"Modulları bərabər, işarələri fərqli olan ədədlər.",
+  rule:"Modulları bərabər, işarələri fərqli olan ədədlərə əks ədədlər deyilir. Hər bir ədədin əksi onun qarşısında mənfi işarə ilə yazılır.",
+  formula:"a + (-a) = 0",
+  examples:[
+   "5 və -5 — əks ədədlərdir.",
+   "12 və -12 — əks ədədlərdir.",
+   "-7 ədədinin əksi 7-dir.",
+   "0 ədədinin əksi 0-dır.",
+   "3 və -4 əks ədədlər deyil."
+  ],
+  note:"Əks ədədlərin modulları bərabər, işarələri fərqli olur. Sıfır öz-özünün əksidir.",
+  questions:[
+   ["-15 ədədinin əksi hansıdır?",["-15","15","0"],1,"-15 ədədinin əksi 15-dir."],
+   ["Hansı cüt əks ədədlərdir?",["-8 və 8","-5 və 6","3 və 3"],0,"-8 və 8 ədədlərinin modulları bərabər, işarələri fərqlidir."],
+   ["0 ədədinin əksi hansıdır?",["1","-1","0"],2,"0 ədədinin əksi yenə 0-dır."]
+  ]
+ },
+ {
+  title:"Qarşılıqlı əks ədədlər",
+  symbol:"a + b = 0",
+  desc:"Cəmləri sıfıra bərabər olan ədədlər.",
+  rule:"Cəmləri sıfıra bərabər olan iki ədədə qarşılıqlı əks ədədlər deyilir. Bu ədədlərin modulları bərabər, işarələri isə fərqli olur.",
+  formula:"a + b = 0\nb = -a",
+  examples:[
+   "9 + (-9) = 0",
+   "14 + (-14) = 0",
+   "-6 + 6 = 0",
+   "25 və -25 qarşılıqlı əks ədədlərdir.",
+   "4 və -7 qarşılıqlı əks ədədlər deyil."
+  ],
+  note:"Qarşılıqlı əks ədədlərin cəmi həmişə sıfır olur.",
+  questions:[
+   ["Hansı iki ədədin cəmi sıfırdır?",["-7 və 7","-7 və 8","5 və 5"],0,"-7 + 7 = 0."],
+   ["x + 13 = 0 olarsa, x neçədir?",["13","-13","0"],1,"x = -13, çünki -13 + 13 = 0."],
+   ["-18 ədədinin qarşılıqlı əksi hansıdır?",["-18","18","1/18"],1,"-18 və 18-in cəmi sıfırdır."]
+  ]
+ },
+ {
+  title:"Qarşılıqlı tərs ədədlər",
+  symbol:"a · 1/a = 1",
+  desc:"Hasilləri 1-ə bərabər olan ədədlər.",
+  rule:"Hasilləri 1-ə bərabər olan iki ədədə qarşılıqlı tərs ədədlər deyilir. Sıfırdan fərqli a ədədinin tərsi 1/a-dır.",
+  formula:"a · 1/a = 1  (a ≠ 0)",
+  examples:[
+   "2 və 1/2 qarşılıqlı tərs ədədlərdir: 2 · 1/2 = 1.",
+   "5 və 1/5 qarşılıqlı tərs ədədlərdir.",
+   "3/4 və 4/3 qarşılıqlı tərs ədədlərdir.",
+   "-2 və -1/2 qarşılıqlı tərs ədədlərdir.",
+   "0-ın qarşılıqlı tərsi yoxdur."
+  ],
+  note:"Ədədin tərsini tapmaq üçün surət və məxrəcin yerini dəyişirik. Tam ədədin tərsini taparkən onu məxrəcə 1 yazılmış kəsr kimi götürürük. Sıfırın qarşılıqlı tərsi yoxdur.",
+  questions:[
+   ["4 ədədinin qarşılıqlı tərsi hansıdır?",["4","1/4","-4"],1,"4 · 1/4 = 1."],
+   ["3/5 kəsrinin qarşılıqlı tərsi hansıdır?",["3/5","5/3","-5/3"],1,"Surət və məxrəcin yerini dəyişirik: 5/3."],
+   ["Hansı cüt qarşılıqlı tərs ədədlərdir?",["2 və 1/2","3 və 1/3","4 və 4"],0,"2 · 1/2 = 1."],
+   ["0 ədədinin qarşılıqlı tərsi varmı?",["Bəli, 0-dır","Bəli, 1-dir","Xeyr"],2,"0-a bölmək mümkün olmadığı üçün onun qarşılıqlı tərsi yoxdur."]
   ]
  }
 ];
