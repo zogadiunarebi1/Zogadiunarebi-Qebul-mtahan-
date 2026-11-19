@@ -24,7 +24,6 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:bold;font
 .ok{background:#d4edda!important;border-color:#28a745!important}
 .no{background:#f8d7da!important;border-color:#dc3545!important}
 .iz{background:#fff3cd;border-radius:10px;padding:12px;margin-top:10px;display:none;line-height:1.7}
-.hide{display:none}
 .bar{background:#eee;height:10px;border-radius:99px;overflow:hidden}
 .fill{background:#007bff;height:100%;width:0%}
 .white{background:#fff;border-radius:20px;padding:16px}
@@ -36,41 +35,41 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:bold;font
 <div id="p-home">
 <div class="top"><h1>Testlər</h1><p>Riyaziyyat • Verbal</p></div>
 <div class="wrap">
-<div class="card math" onclick="go('math')"><b>Riyaziyyat</b><br>18 bölmə • Hər bölmədə 20 sual</div>
-<div class="card verbal" onclick="go('verbal')"><b>Verbal</b><br>Məntiq • Mətnlər • Analogiyalar</div>
+<div class="card math" id="btnMath"><b>Riyaziyyat</b><br>18 bölmə • Hər bölmədə 20 sual</div>
+<div class="card verbal" id="btnVerbal"><b>Verbal</b><br>Məntiq • Mətnlər • Analogiyalar</div>
 </div>
 </div>
 
-<div id="p-math" class="hide"><div class="wrap">
-<div class="back" onclick="go('home')">← Geri</div>
+<div id="p-math" style="display:none"><div class="wrap">
+<div class="back" id="back1">← Geri</div>
 <h2>Riyaziyyat • 18 Bölmə</h2>
 <div id="mathList"></div>
 </div></div>
 
-<div id="p-verbal" class="hide"><div class="wrap">
-<div class="back" onclick="go('home')">← Geri</div>
+<div id="p-verbal" style="display:none"><div class="wrap">
+<div class="back" id="back2">← Geri</div>
 <h2 style="color:#d32f2f">Verbal • 3 Bölmə</h2>
-<div class="item" onclick="vshow('Məntiq')"><div class="num" style="background:#ff3b30">1</div><div>Məntiq</div></div>
-<div class="item" onclick="vshow('Mətnlər')"><div class="num" style="background:#ff9500">2</div><div>Mətnlər</div></div>
-<div class="item" onclick="vshow('Analogiyalar')"><div class="num" style="background:#00c853">3</div><div>Analogiyalar</div></div>
-<div id="vmsg" class="hide" style="background:linear-gradient(135deg,#ffcc00,#ff3b30);color:#fff;padding:22px;border-radius:20px;text-align:center">
+<div class="item" data-v="Məntiq"><div class="num" style="background:#ff3b30">1</div><div>Məntiq</div></div>
+<div class="item" data-v="Mətnlər"><div class="num" style="background:#ff9500">2</div><div>Mətnlər</div></div>
+<div class="item" data-v="Analogiyalar"><div class="num" style="background:#00c853">3</div><div>Analogiyalar</div></div>
+<div id="vmsg" style="display:none;background:linear-gradient(135deg,#ffcc00,#ff3b30);color:#fff;padding:22px;border-radius:20px;text-align:center">
 <h2 id="vtitle" style="color:#fff">Məntiq</h2>
 <p>Suallar tezliklə əlavə olunacaq ⏳</p>
 </div>
 </div></div>
 
-<div id="p-test" class="hide"><div class="wrap"><div class="white">
-<div class="back" onclick="go('math')" style="background:#eaf4ff">← 18 Bölmə</div>
+<div id="p-test" style="display:none"><div class="wrap"><div class="white">
+<div class="back" id="back3" style="background:#eaf4ff">← 18 Bölmə</div>
 <h2 id="lt"></h2>
-<button onclick="tog()" style="background:#eaf4ff;color:#007bff;border:2px solid #007bff">📖 Qaydaya bax</button>
+<button id="qaydaBtn" style="background:#eaf4ff;color:#007bff;border:2px solid #007bff">📖 Qaydaya bax</button>
 <div class="qbox" id="qbox"><div id="lc"></div><div id="qeyd" style="background:#fff8dc;padding:10px;margin-top:8px;border-radius:8px"></div><div id="misal" style="background:#e8f5e9;padding:10px;margin-top:8px;border-radius:8px"></div></div>
 <div style="display:flex;justify-content:space-between;margin-top:12px"><b id="qn"></b><b id="sc"></b></div>
 <div class="bar"><div class="fill" id="fill"></div></div>
 <h3 id="qt"></h3>
 <div id="opts"></div>
 <div class="iz" id="iz"></div>
-<button class="pri hide" id="nxt">Növbəti ➡️</button>
-<div id="res" class="hide" style="text-align:center"><h2>🎉 Nəticə</h2><div id="resT" style="line-height:1.8"></div><button class="pri" id="again">🔄 Yenidən - 20 Sual</button></div>
+<button class="pri" id="nxt" style="display:none">Növbəti ➡️</button>
+<div id="res" style="display:none;text-align:center"><h2>🎉 Nəticə</h2><div id="resT" style="line-height:1.8"></div><button class="pri" id="again">🔄 Yenidən - 20 Sual</button></div>
 </div></div></div>
 
 <script>
@@ -95,20 +94,53 @@ var RULES=[
 "Kəsrlərin ixtisarı: Surət və məxrəci ortaq bölənə bölmək.",
 "Kəsrlərin müqayisəsi: Məxrəc eyni - surəti böyük olan böyükdür. Surət eyni - məxrəci kiçik olan böyükdür."
 ];
+
+function showPage(p){
+  document.getElementById("p-home").style.display="none";
+  document.getElementById("p-math").style.display="none";
+  document.getElementById("p-verbal").style.display="none";
+  document.getElementById("p-test").style.display="none";
+  document.getElementById("p-"+p).style.display="block";
+  window.scrollTo(0,0);
+}
+
+document.getElementById("btnMath").addEventListener("click", function(){ showPage("math"); });
+document.getElementById("btnVerbal").addEventListener("click", function(){ showPage("verbal"); });
+document.getElementById("back1").addEventListener("click", function(){ showPage("home"); });
+document.getElementById("back2").addEventListener("click", function(){ showPage("home"); });
+document.getElementById("back3").addEventListener("click", function(){ showPage("math"); });
+
+var vItems = document.querySelectorAll("[data-v]");
+for(var i=0;i<vItems.length;i++){
+  (function(el){
+    el.addEventListener("click", function(){
+      document.getElementById("vtitle").innerText = el.getAttribute("data-v");
+      document.getElementById("vmsg").style.display="block";
+    });
+  })(vItems[i]);
+}
+
+document.getElementById("qaydaBtn").addEventListener("click", function(){
+  var b=document.getElementById("qbox");
+  if(b.style.display=="block"){ b.style.display="none"; } else { b.style.display="block"; }
+});
+
 var CLASSES=["c1","c2","c3","c4","c5","c6"];
 var h="";
-for(var i=0;i<18;i++){ h += '<div class="item '+CLASSES[i%6]+'" onclick="openTest('+i+')"><div class="num">'+(i+1)+'</div><div>'+(i+1)+'. '+TITLES[i]+'<br><span style="color:#888;font-size:13px;font-weight:normal">20 sual • İzah var</span></div></div>'; }
-document.getElementById("mathList").innerHTML=h;
-function go(p){
-document.getElementById("p-home").style.display="none";
-document.getElementById("p-math").style.display="none";
-document.getElementById("p-verbal").style.display="none";
-document.getElementById("p-test").style.display="none";
-document.getElementById("p-"+p).style.display="block";
-window.scrollTo(0,0);
+for(var i=0;i<18;i++){
+  h += '<div class="item '+CLASSES[i%6]+'" data-test="'+i+'"><div class="num">'+(i+1)+'</div><div>'+(i+1)+'. '+TITLES[i]+'<br><span style="color:#888;font-size:13px;font-weight:normal">20 sual • İzah var</span></div></div>';
 }
-function vshow(t){ document.getElementById("vtitle").innerText=t; document.getElementById("vmsg").style.display="block"; }
-function tog(){ var b=document.getElementById("qbox"); if(b.style.display=="block"){b.style.display="none"}else{b.style.display="block"} }
+document.getElementById("mathList").innerHTML=h;
+var tItems = document.querySelectorAll("[data-test]");
+for(var i=0;i<tItems.length;i++){
+  (function(el){
+    el.addEventListener("click", function(){
+      var idx = parseInt(el.getAttribute("data-test"));
+      openTest(idx);
+    });
+  })(tItems[i]);
+}
+
 var qs=[],idx=0,corr=0,wrong=0,lock=false,cur=0;
 function Q(q,a,b,c,d,e,iz){ return {q:q,a:a,opts:[a,b,c,d,e],iz:iz}; }
 function sh(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t} return a; }
@@ -134,7 +166,7 @@ A.push(Q("5, 8, 11, ... ardıcıllığında 10-cu hədd neçədir?","32","30","3
 A.push(Q("a + 15 = 42 olarsa, a neçədir?","27","28","26","57","30","42-15=27."));
 A.push(Q("Hansı sadə ədəd deyil?","9","2","3","5","7","9 = 3•3, mürəkkəbdir."));
 A.push(Q("Ən böyük üç rəqəmli ilə ən kiçik üç rəqəmli ədədin fərqi neçədir?","899","900","898","800","999","999-100=899."));
-A.push(Q("Hansı natural ədəddir?","7","0","-2","1/2","0,5","7 saymaq üçün istifadə olunur. 0, mənfi və kəsr natural deyil."));
+A.push(Q("Hansı natural ədəddir?","7","0","-2","1/2","0,5","7 saymaq üçün istifadə olunur."));
 A.push(Q("Natural ədədlər çoxluğu necədir?","Sonsuzdur","Sonludur","0 ilə bitir","Mənfi ilə bitir","Boşdur","Natural ədədlər sonsuzdur: 1,2,3,..."));
 }else if(L==1){
 A.push(Q("Hansı tam ədəddir?","-4","1,5","√2","π","0,5","Tam ədədlər: ..., -2,-1,0,1,2,... -4 tamdır."));
@@ -231,13 +263,4 @@ A.push(Q("Hər ədədin neçə əksi var?","1","2","0","Sonsuz","Bilinmir","Hər
 A.push(Q("-(-a) = ?","a","-a","0","1","-1","Ümumi qayda: -(-a)=a."));
 A.push(Q("Əksi 12 olan ədəd hansıdır?","-12","12","0","1","24","Əksi 12 olan -12-dir."));
 A.push(Q("Əksi -9 olan ədəd hansıdır?","9","-9","0","1","18","Əksi -9 olan 9-dur."));
-A.push(Q("-5-in əksi + (-5) = ?","0","10","-10","1","-1","-5-in əksi 5-dir. 5 + (-5) = 0."));
-A.push(Q("3-ün əksi hansıdır?","-3","3","0","1","-1","3-ün əksi -3-dür."));
-A.push(Q("-10-un əksi hansıdır?","10","-10","0","20","-20","-10-un əksi +10-dur."));
-A.push(Q("a + (-a) = ?","0","2a","1","-1","a","a ilə əksi -a-nın cəmi 0-dır."));
-A.push(Q("Hansı cüt əks ədədlərdir?","7 və -7","7 və 7","7 və 1/7","7 və 0","7 və 1","7 + (-7) = 0."));
-A.push(Q("Əks ədədlər necə yerləşir?","Simmetrik","Eyni yerdə","Sağda","Solda","Bilinmir","5 və -5, 0-a görə simmetrikdir."));
-A.push(Q("0-ın əksi ilə 0-ın cəmi neçədir?","0","1","-1","2","-2","0+0=0."));
-A.push(Q("-a-nın əksi hansıdır?","a","-a","0","1","-1","-a-nın əksi a-dır."));
-A.push(Q("Hansı doğru deyil?","0-ın əksi 1-dir","5-in əksi -5-dir","-5-in əksi 5-dir","0-ın əksi 0-dır","-(-7)=7","0-ın əksi 0-dır, 1 deyil."));
-A.push(Q("x-in əksi -4 olarsa, x neçədir?","4","-4","0","1","8","Əksi -4 o
+A.push(Q("-5-in əksi + 
