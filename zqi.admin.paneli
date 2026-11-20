@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel</title>
+<style>
+body{margin:0;background:#111;font-family:Arial;color:#fff}
+.wrap{max-width:500px;margin:auto;padding:16px}
+.card{background:#222;padding:16px;border-radius:16px;margin-top:12px}
+input{width:100%;padding:14px;border-radius:12px;border:0;margin-top:10px;font-size:16px;box-sizing:border-box}
+button{padding:10px 14px;border:0;border-radius:10px;font-weight:bold;cursor:pointer;margin-top:8px;margin-right:6px}
+.yasil{background:#00c853;color:#fff}.qirmizi{background:#ff3b30;color:#fff}.boz{background:#eee}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🛡️ Admin Panel</h1>
+
+<div class="card" id="login">
+<h3>Admin şifrəsi</h3>
+<p style="color:#aaa">Şifrə: <b>1234</b> - sonra dəyişərsən</p>
+<input id="sifre" type="password" placeholder="Admin şifrəsi">
+<button class="yasil" id="gir">Gir</button>
+</div>
+
+<div id="panel" style="display:none">
+<h3>Qeydiyyatlar</h3>
+<button class="boz" id="yenile">🔄 Yenilə</button>
+<div id="list"></div>
+<p style="color:#aaa;font-size:13px">Qeyd: Bu sistem telefonda saxlanılır. Eyni telefonda / brauzerdə yoxlanılır. Həqiqi sayt üçün Firebase lazımdır.</p>
+</div>
+</div>
+<script>
+function al(){ try{ return JSON.parse(localStorage.getItem("users")||"[]"); }catch(e){ return []; } }
+function saxla(u){ localStorage.setItem("users", JSON.stringify(u)); }
+function render(){
+  var users=al();
+  var box=document.getElementById("list"); box.innerHTML="";
+  if(users.length==0){ box.innerHTML="<p>Heç kim qeydiyyatdan keçməyib.</p>"; return; }
+  users.forEach(function(u,i){
+    var renk = u.status=="pending" ? "🟡 GÖZLƏYİR" : u.status=="approved" ? "🟢 İCAZƏLİ" : "🔴 RƏDD";
+    var d=document.createElement("div"); d.className="card";
+    d.innerHTML="<b>"+u.ad+"</b> - "+renk+"<br>Tel: "+u.tel+"<br>Vaxt: "+(u.vaxt||"");
+    var b1=document.createElement("button"); b1.className="yasil"; b1.innerText="✅ İcazə ver";
+    var b2=document.createElement("button"); b2.className="qirmizi"; b2.innerText="⛔ Rədd et";
+    var b3=document.createElement("button"); b3.className="boz"; b3.innerText="🗑️ Sil";
+    b1.addEventListener("click", function(){ users[i].status="approved"; saxla(users); render(); });
+    b2.addEventListener("click", function(){ users[i].status="rejected"; saxla(users); render(); });
+    b3.addEventListener("click", function(){ if(confirm("Silinsin?")){ users.splice(i,1); saxla(users); render(); } });
+    d.appendChild(document.createElement("br")); d.appendChild(b1); d.appendChild(b2); d.appendChild(b3);
+    box.appendChild(d);
+  });
+}
+document.getElementById("gir").addEventListener("click", function(){
+  if(document.getElementById("sifre").value=="1234"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("panel").style.display="block";
+    render();
+  } else { alert("Şifrə səhvdir!"); }
+});
+document.getElementById("yenile").addEventListener("click", render);
+</script>
+</body>
+</html>
