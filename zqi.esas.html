@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bilik Testi - Qeydiyyat</title>
+<style>
+body{margin:0;background:#f0f4ff;font-family:Arial}
+.wrap{max-width:420px;margin:auto;padding:16px}
+.top{background:linear-gradient(135deg,#007bff,#7b2ff7);color:#fff;text-align:center;padding:30px 10px;border-radius:0 0 30px 30px}
+.card{background:#fff;padding:20px;border-radius:20px;margin-top:15px;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
+input{width:100%;padding:14px;border:2px solid #eee;border-radius:12px;margin-top:10px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:14px;border:0;border-radius:12px;background:#007bff;color:#fff;font-weight:bold;font-size:16px;margin-top:12px;cursor:pointer}
+.goy{background:#00c853}
+.boz{background:#eee;color:#333}
+.wait{text-align:center;padding:30px 10px}
+.wait span{font-size:60px}
+.ders{background:#fff;padding:18px;border-radius:16px;margin-top:10px;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="top"><h1 style="margin:0">📚 Bilik Testi</h1><p>Öyrən • Test et • Qazan</p></div>
+<div class="wrap">
+
+<!-- QEYDİYYAT -->
+<div class="card" id="qeydiyyat">
+<h2 style="margin:0">Qeydiyyatdan keç</h2>
+<p style="color:#888">Admin icazə verəndən sonra girə biləcəksən.</p>
+<input id="ad" placeholder="Adın">
+<input id="tel" placeholder="Telefon nömrən">
+<input id="sifre" type="password" placeholder="Şifrə yarat">
+<button id="qeydBtn">Qeydiyyatdan keç ➡️</button>
+<p style="text-align:center;color:#888">Artıq qeydiyyatdan keçmisən? <a href="#" id="loginLink">Giriş et</a></p>
+</div>
+
+<!-- GİRİŞ -->
+<div class="card" id="giris" style="display:none">
+<h2 style="margin:0">Giriş</h2>
+<input id="tel2" placeholder="Telefon nömrən">
+<input id="sifre2" type="password" placeholder="Şifrən">
+<button id="girisBtn">Giriş et</button>
+<p style="text-align:center;color:#888">Hesabın yoxdur? <a href="#" id="qeydLink">Qeydiyyatdan keç</a></p>
+</div>
+
+<!-- GÖZLƏMƏ -->
+<div class="card wait" id="gozle" style="display:none">
+<span>⏳</span>
+<h2>Adminnən İcazə Gözlənilir...</h2>
+<p style="color:#666;line-height:1.6">Qeydiyyatın qəbul olundu.<br>Admin sənə icazə verəndə girə biləcəksən.<br><br><b id="gozleAd"></b></p>
+<button id="yenileBtn" class="goy">Yenidən yoxla 🔄</button>
+<button id="cix1" class="boz">Başqa nömrə ilə gir</button>
+</div>
+
+<!-- RƏDD -->
+<div class="card wait" id="redd" style="display:none">
+<span>⛔</span>
+<h2>Qeydiyyatın rədd olundu</h2>
+<p>Admin icazə vermədi.</p>
+<button id="cix2" class="boz">Yenidən qeydiyyat</button>
+</div>
+
+<!-- ƏSAS SƏHİFƏ -->
+<div id="esas" style="display:none">
+<h2 id="salam"></h2>
+<div class="ders" onclick="alert('Testlər tezliklə!')"><span>1. Natural ədədlər</span><span>➡️</span></div>
+<div class="ders" onclick="alert('Testlər tezliklə!')"><span>2. Tam ədədlər</span><span>➡️</span></div>
+<div class="ders" onclick="alert('Testlər tezliklə!')"><span>3. Kəsrlər</span><span>➡️</span></div>
+<button id="cix3" class="boz">Çıxış</button>
+</div>
+
+</div>
+<script>
+function alUsers(){ try{ return JSON.parse(localStorage.getItem("users")||"[]"); }catch(e){ return []; } }
+function saxlaUsers(u){ localStorage.setItem("users", JSON.stringify(u)); }
+function goster(id){
+  ["qeydiyyat","giris","gozle","redd","esas"].forEach(function(x){ document.getElementById(x).style.display="none"; });
+  document.getElementById(id).style.display="block";
+}
+function yoxla(){
+  var tel = localStorage.getItem("myTel");
+  if(!tel){ goster("qeydiyyat"); return; }
+  var users = alUsers();
+  var u = users.find(function(x){ return x.tel==tel; });
+  if(!u){ goster("qeydiyyat"); return; }
+  if(u.status=="pending"){ document.getElementById("gozleAd").innerText=u.ad; goster("gozle"); }
+  else if(u.status=="approved"){ document.getElementById("salam").innerText="Salam, "+u.ad+" 👋"; goster("esas"); }
+  else if(u.status=="rejected"){ goster("redd"); }
+}
+document.getElementById("qeydBtn").addEventListener("click", function(){
+  var ad=document.getElementById("ad").value.trim();
+  var tel=document.getElementById("tel").value.trim();
+  var sifre=document.getElementById("sifre").value.trim();
+  if(!ad || !tel || !sifre){ alert("Hamısını doldur!"); return; }
+  var users=alUsers();
+  if(users.find(function(x){ return x.tel==tel; })){ alert("Bu nömrə artıq qeydiyyatdan keçib! Giriş et."); return; }
+  users.push({ad:ad, tel:tel, sifre:sifre, status:"pending", vaxt:new Date().toLocaleString()});
+  saxlaUsers(users);
+  localStorage.setItem("myTel", tel);
+  yoxla();
+});
+document.getElementById("girisBtn").addEventListener("click", function(){
+  var tel=document.getElementById("tel2").value.trim();
+  var sifre=document.getElementById("sifre2").value.trim();
+  var users=alUsers();
+  var u=users.find(function(x){ return x.tel==tel && x.sifre==sifre; });
+  if(!u){ alert("Nömrə və ya şifrə səhvdir!"); return; }
+  localStorage.setItem("myTel", tel);
+  yoxla();
+});
+document.getElementById("loginLink").addEventListener("click", function(e){ e.preventDefault(); goster("giris"); });
+document.getElementById("qeydLink").addEventListener("click", function(e){ e.preventDefault(); goster("qeydiyyat"); });
+document.getElementById("yenileBtn").addEventListener("click", yoxla);
+function cix(){
+  localStorage.removeItem("myTel");
+  goster("qeydiyyat");
+}
+document.getElementById("cix1").addEventListener("click", cix);
+document.getElementById("cix2").addEventListener("click", cix);
+document.getElementById("cix3").addEventListener("click", cix);
+yoxla();
+</script>
+</body>
+</html>
