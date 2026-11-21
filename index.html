@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -6,547 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1769c2">
 <title>Qəbul İmtahanı | Təhsil Platforması</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
- font-family:Arial,sans-serif;
- background:#f3f7fd;
- color:#172b46;
- line-height:1.65;
-}
+body{font-family:Arial,sans-serif;background:#f3f7fd;color:#172b46;line-height:1.65}
 button{font:inherit;cursor:pointer}
-header{
- background:#fff;
- box-shadow:0 2px 15px #183b6510;
- position:sticky;top:0;z-index:20;
-}
-.nav{
- max-width:1100px;margin:auto;padding:15px 20px;
- display:flex;align-items:center;justify-content:space-between;
-}
+header{background:#fff;box-shadow:0 2px 15px #183b6510;position:sticky;top:0;z-index:20}
+.nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-size:21px;font-weight:800;color:#1769c2}
-.menu-btn{
- border:0;background:#edf4ff;color:#1769c2;
- width:45px;height:43px;border-radius:12px;font-size:25px;
-}
+.menu-btn{border:0;background:#edf4ff;color:#1769c2;width:45px;height:43px;border-radius:12px;font-size:25px}
 main{max-width:1050px;margin:auto;padding:25px 18px 50px}
-.hero{
- background:linear-gradient(130deg,#1769c2,#4d9af0);
- color:white;border-radius:23px;padding:42px 28px;
- margin:20px 0 28px;position:relative;overflow:hidden;
-}
-.hero:after{
- content:"";position:absolute;width:210px;height:210px;
- border:35px solid #ffffff16;border-radius:50%;
- right:-50px;top:-75px;
-}
+.hero{background:linear-gradient(130deg,#1769c2,#4d9af0);color:white;border-radius:23px;padding:42px 28px;margin:20px 0 28px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:210px;height:210px;border:35px solid #ffffff16;border-radius:50%;right:-50px;top:-75px}
 .hero h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin-bottom:13px}
 .hero p{color:#e8f3ff;max-width:580px}
-.hero-tag{
- display:inline-block;background:#ffffff20;
- border:1px solid #ffffff50;padding:6px 13px;
- border-radius:20px;margin-bottom:15px;font-size:13px;
-}
+.hero-tag{display:inline-block;background:#ffffff20;border:1px solid #ffffff50;padding:6px 13px;border-radius:20px;margin-bottom:15px;font-size:13px}
 .section-title{font-size:23px;margin:30px 0 15px}
 .section-title span{color:#1769c2}
-.subjects{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;
-}
-.subject{
- border:1px solid #e3ebf6;background:white;border-radius:17px;
- padding:23px;text-align:left;transition:.2s;
- box-shadow:0 5px 18px #173c6510;
- color:#172b46;
-}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.subject{border:1px solid #e3ebf6;background:white;border-radius:17px;padding:23px;text-align:left;transition:.2s;box-shadow:0 5px 18px #173c6510;color:#172b46}
 .subject:hover{transform:translateY(-4px);border-color:#8bb9f1}
-.subject-icon{
- width:49px;height:49px;border-radius:14px;
- display:grid;place-items:center;background:#eaf3ff;
- font-size:25px;margin-bottom:15px;
-}
+.subject-icon{width:49px;height:49px;border-radius:14px;display:grid;place-items:center;background:#eaf3ff;font-size:25px;margin-bottom:15px}
 .subject h3{font-size:19px;margin-bottom:5px}
 .subject p{font-size:13px;color:#72839a}
 .arrow{color:#1769c2;font-weight:bold;margin-top:15px;display:block}
 .page{display:none}
 .page.active{display:block}
-.back{
- border:0;background:#e7f1ff;color:#1769c2;
- padding:10px 16px;border-radius:10px;font-weight:bold;
- margin:10px 0 20px;
-}
-.topic-grid{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;
-}
-.topic{
- border:1px solid #e2eaf4;background:white;border-radius:14px;
- padding:18px;text-align:left;color:#17314f;
-}
+.back{border:0;background:#e7f1ff;color:#1769c2;padding:10px 16px;border-radius:10px;font-weight:bold;margin:10px 0 20px}
+.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.topic{border:1px solid #e2eaf4;background:white;border-radius:14px;padding:18px;text-align:left;color:#17314f}
 .topic:hover{border-color:#1769c2;background:#f7fbff}
 .topic strong{display:block;color:#1769c2;font-size:17px}
 .topic small{color:#8291a5}
-.card{
- background:white;border:1px solid #e6edf6;border-radius:16px;
- padding:23px;margin:16px 0;
- box-shadow:0 4px 16px #173c6508;
-}
+.card{background:white;border:1px solid #e6edf6;border-radius:16px;padding:23px;margin:16px 0;box-shadow:0 4px 16px #173c6508}
 .card h2,.card h3{color:#1769c2;margin-bottom:12px}
 .card h2{font-size:22px}
-.formula{
- background:#edf5ff;border-left:4px solid #287bd1;
- border-radius:9px;padding:17px;text-align:center;
- color:#155ba5;font-size:21px;font-weight:bold;
- margin:15px 0;overflow-wrap:anywhere;
- white-space:pre-line;
-}
-.example{
- background:#f6f9fd;border:1px solid #e8eef6;
- border-radius:10px;padding:13px;margin:10px 0;
-}
-.note{
- background:#fff8e8;border-left:4px solid #e7b344;
- padding:14px;border-radius:8px;margin-top:15px;
-}
+.formula{background:#edf5ff;border-left:4px solid #287bd1;border-radius:9px;padding:17px;text-align:center;color:#155ba5;font-size:21px;font-weight:bold;margin:15px 0;overflow-wrap:anywhere;white-space:pre-line}
+.example{background:#f6f9fd;border:1px solid #e8eef6;border-radius:10px;padding:13px;margin:10px 0}
+.note{background:#fff8e8;border-left:4px solid #e7b344;padding:14px;border-radius:8px;margin-top:15px}
 .quiz-question{padding:16px 0;border-bottom:1px solid #e7edf5}
 .quiz-question:last-child{border:0}
 .quiz-question>p{font-weight:bold;margin-bottom:10px}
-.option{
- display:block;background:#f5f8fc;border:1px solid #e1eaf4;
- border-radius:9px;padding:11px;margin:8px 0;cursor:pointer;
-}
+.option{display:block;background:#f5f8fc;border:1px solid #e1eaf4;border-radius:9px;padding:11px;margin:8px 0;cursor:pointer}
 .option:hover{border-color:#1769c2}
 .option input{margin-right:9px;accent-color:#1769c2}
-.primary{
- border:0;background:#1769c2;color:white;
- padding:13px 18px;border-radius:10px;font-weight:bold;width:100%;
-}
+.primary{border:0;background:#1769c2;color:white;padding:13px 18px;border-radius:10px;font-weight:bold;width:100%}
 .primary:hover{background:#1056a3}
-.result{
- display:none;background:#edf5ff;border-radius:12px;
- padding:17px;margin-top:17px;
-}
+.result{display:none;background:#edf5ff;border-radius:12px;padding:17px;margin-top:17px}
 .correct{color:#16844c}
 .wrong{color:#cf4141}
-.menu-overlay{
- display:none;position:fixed;inset:0;background:#071a3180;
- z-index:30;
-}
+.menu-overlay{display:none;position:fixed;inset:0;background:#071a3180;z-index:30}
 .menu-overlay.open{display:block}
-.side-menu{
- position:absolute;right:0;top:0;height:100%;width:min(330px,85%);
- background:white;padding:27px;
- box-shadow:-5px 0 25px #0002;
-}
-.close-menu{
- float:right;border:0;background:#edf4ff;color:#1769c2;
- width:38px;height:38px;border-radius:10px;font-size:22px;
-}
+.side-menu{position:absolute;right:0;top:0;height:100%;width:min(330px,85%);background:white;padding:27px;box-shadow:-5px 0 25px #0002}
+.close-menu{float:right;border:0;background:#edf4ff;color:#1769c2;width:38px;height:38px;border-radius:10px;font-size:22px}
 .side-menu h2{color:#1769c2;margin:35px 0 22px}
-.contact-item{
- background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0;
-}
+.contact-item{background:#f2f7ff;padding:15px;border-radius:12px;margin:12px 0}
 .contact-item strong{display:block;color:#1769c2;font-size:14px}
 .contact-item a{color:#243b57;text-decoration:none;overflow-wrap:anywhere}
-footer{
- text-align:center;background:#fff;border-top:1px solid #e7edf5;
- padding:27px 15px;color:#718198;font-size:13px;
-}
+footer{text-align:center;background:#fff;border-top:1px solid #e7edf5;padding:27px 15px;color:#718198;font-size:13px}
 footer strong{color:#1769c2}
-@media(max-width:600px){
- main{padding:15px 13px 35px}
- .hero{padding:32px 20px}
- .subjects{gap:11px}
- .subject{padding:16px}
- .subject h3{font-size:16px}
- .topic-grid{grid-template-columns:1fr}
- .card{padding:17px}
-}
+@media(max-width:600px){main{padding:15px 13px 35px}.hero{padding:32px 20px}.subjects{gap:11px}.subject{padding:16px}.subject h3{font-size:16px}.topic-grid{grid-template-columns:1fr}.card{padding:17px}}
 </style>
 </head>
-
 <body>
-
-<header>
- <div class="nav">
-  <div class="brand">Qəbul İmtahanı</div>
-  <button class="menu-btn" onclick="openMenu()" aria-label="Menyu">☰</button>
- </div>
-</header>
-
-<div class="menu-overlay" id="menu">
- <div class="side-menu">
-  <button class="close-menu" onclick="closeMenu()">×</button>
-  <h2>Əlaqə</h2>
-  <div class="contact-item">
-   <strong>Telefon nömrəsi</strong>
-   <a href="tel:+995555936547">+995 555 93 65 47</a>
-  </div>
-  <div class="contact-item">
-   <strong>E-poçt</strong>
-   <a href="mailto:zogadiunarebiqebul@gmail.com">
-    zogadiunarebiqebul@gmail.com
-   </a>
-  </div>
- </div>
-</div>
-
+<header><div class="nav"><div class="brand">Qəbul İmtahanı</div><button class="menu-btn" onclick="openMenu()">☰</button></div></header>
+<div class="menu-overlay" id="menu"><div class="side-menu"><button class="close-menu" onclick="closeMenu()">×</button><h2>Əlaqə</h2><div class="contact-item"><strong>Telefon nömrəsi</strong><a href="tel:+995555936547">+995 555 93 65 47</a></div><div class="contact-item"><strong>E-poçt</strong><a href="mailto:zogadiunarebiqebul@gmail.com">zogadiunarebiqebul@gmail.com</a></div></div></div>
 <main>
-
 <section id="home" class="page active">
- <div class="hero">
-  <div class="hero-tag">Təhsil platforması</div>
-  <h1>Öyrənməyə buradan başla!</h1>
-  <p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p>
- </div>
-
- <h2 class="section-title">Tədris <span>bölmələri</span></h2>
-
- <div class="subjects">
-  <button class="subject" onclick="showPage('math')">
-   <div class="subject-icon">📐</div>
-   <h3>Riyaziyyat</h3>
-   <p>Riyazi qaydalar, izahlar və testlər</p>
-   <span class="arrow">Daxil ol →</span>
-  </button>
-
-  <button class="subject" onclick="showPage('verbal')">
-   <div class="subject-icon">📚</div>
-   <h3>Verbal</h3>
-   <p>Verbal dərslər və tapşırıqlar</p>
-   <span class="arrow">Daxil ol →</span>
-  </button>
- </div>
+<div class="hero"><div class="hero-tag">Təhsil platforması</div><h1>Öyrənməyə buradan başla!</h1><p>Qaydaları öyrən, mövzuları təkrar et və biliklərini testlərlə yoxla. Uğura doğru ilk addımını at!</p></div>
+<h2 class="section-title">Tədris <span>bölmələri</span></h2>
+<div class="subjects">
+<button class="subject" onclick="showPage('math')"><div class="subject-icon">📐</div><h3>Riyaziyyat</h3><p>Riyazi qaydalar, izahlar və testlər</p><span class="arrow">Daxil ol →</span></button>
+<button class="subject" onclick="showPage('verbal')"><div class="subject-icon">📚</div><h3>Verbal</h3><p>Verbal dərslər və tapşırıqlar</p><span class="arrow">Daxil ol →</span></button>
+</div>
 </section>
-
-<section id="math" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <h1>Riyaziyyat</h1>
- <p>Öyrənmək istədiyin mövzunu seç.</p>
- <div class="topic-grid" id="topic-list"></div>
-</section>
-
-<section id="verbal" class="page">
- <button class="back" onclick="showPage('home')">← Geri</button>
- <div class="card" style="text-align:center;padding:45px 20px">
-  <div style="font-size:55px">📚</div>
-  <h2>Verbal bölməsi</h2>
-  <p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p>
-  <p style="color:#8090a4">Yeni dərslər tezliklə əlavə ediləcək.</p>
-  <button class="primary" style="margin-top:20px;max-width:220px" onclick="showPage('home')">Ana səhifəyə qayıt</button>
- </div>
-</section>
-
-<section id="lesson" class="page">
- <button class="back" onclick="showPage('math')">← Mövzulara qayıt</button>
- <div id="lesson-content"></div>
-</section>
-
+<section id="math" class="page"><button class="back" onclick="showPage('home')">← Geri</button><h1>Riyaziyyat</h1><p>Öyrənmək istədiyin mövzunu seç.</p><div class="topic-grid" id="topic-list"></div></section>
+<section id="verbal" class="page"><button class="back" onclick="showPage('home')">← Geri</button><div class="card" style="text-align:center;padding:45px 20px"><div style="font-size:55px">📚</div><h2>Verbal bölməsi</h2><p>Bu bölməyə hələlik dərslər əlavə olunmayıb.</p><p style="color:#8090a4">Yeni dərslər tezliklə əlavə ediləcək.</p><button class="primary" style="margin-top:20px;max-width:220px" onclick="showPage('home')">Ana səhifəyə qayıt</button></div></section>
+<section id="lesson" class="page"><button class="back" onclick="showPage('math')">← Mövzulara qayıt</button><div id="lesson-content"></div></section>
 </main>
-
-<footer>
- <p>© <span id="year"></span> Bütün hüquqlar qorunur.</p>
- <p>Hazırlayan: <strong>Haldun Məmmədov</strong></p>
-</footer>
-
+<footer><p>© <span id="year"></span> Bütün hüquqlar qorunur.</p><p>Hazırlayan: <strong>Haldun Məmmədov</strong></p></footer>
 <script>
-const topics = [
- {
-  title:"Natural ədədlər",
-  symbol:"N",
-  desc:"Saymaq üçün istifadə olunan ədədlər.",
-  rule:"Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.",
-  formula:"N = {1, 2, 3, 4, 5, 6, ...}",
-  examples:[
-   "1 — natural ədəddir.",
-   "15 — natural ədəddir.",
-   "100 — natural ədəddir.",
-   "-5 — natural ədəd deyil.",
-   "2,5 — natural ədəd deyil."
-  ],
-  note:"Bu saytda N = {1, 2, 3, ...} qəbul edilir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.",
-  questions:[
-   ["Hansı natural ədəddir?",["-4","12","2,5"],1,"12 natural ədəddir."],
-   ["Natural ədədlər hansı məqsədlə istifadə olunur?",["Saymaq üçün","Mənfi ədədləri göstərmək üçün","Yalnız kəsrləri göstərmək üçün"],0,"Natural ədədlər saymaq üçün istifadə olunur."]
-  ]
- },
- {
-  title:"Tam ədədlər",
-  symbol:"Z",
-  desc:"Mənfi, müsbət ədədlər və sıfır.",
-  rule:"Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.",
-  formula:"Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",
-  examples:[
-   "-8 — tam ədəddir.",
-   "0 — tam ədəddir.",
-   "15 — tam ədəddir.",
-   "2,5 — tam ədəd deyil.",
-   "1/2 — tam ədəd deyil."
-  ],
-  note:"Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.",
-  questions:[
-   ["Hansı tam ədəddir?",["2,5","-8","1/3"],1,"-8 tam ədəddir."],
-   ["Tam ədədlərə hansı daxildir?",["Yalnız müsbət ədədlər","Yalnız mənfi ədədlər","Mənfi, müsbət ədədlər və sıfır"],2,"Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir."]
-  ]
- },
- {
-  title:"Rasional ədədlər",
-  symbol:"Q",
-  desc:"Adi kəsr şəklində yazıla bilən ədədlər.",
-  rule:"İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.",
-  formula:"Q = {a/b : a,b ∈ Z; b ≠ 0}",
-  examples:[
-   "1/2 — rasional ədəddir.",
-   "3/4 — rasional ədəddir.",
-   "-5/2 — rasional ədəddir.",
-   "0,5 = 1/2",
-   "0,75 = 3/4",
-   "0,333... = 1/3"
-  ],
-  note:"Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir. Bütün tam ədədlər də rasionaldır.",
-  questions:[
-   ["Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."],
-   ["Aşağıdakılardan hansı rasionaldır?",["0,333...","√7","π"],0,"0,333... = 1/3 olduğuna görə rasionaldır."]
-  ]
- },
- {
-  title:"İrrasional ədədlər",
-  symbol:"I",
-  desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",
-  rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",
-  formula:"√2 = 1,4142135...\n√3 = 1,7320508...\nπ = 3,1415926...",
-  examples:[
-   "√2 — irrasionaldır.",
-   "√3 — irrasionaldır.",
-   "√5 — irrasionaldır.",
-   "π — irrasionaldır.",
-   "√4 = 2 — rasionaldır."
-  ],
-  note:"İrrasional ədədlərin onluq yazılışı sonsuz və dövri olmayan olur. Hər kökaltı ifadə irrasional deyil!",
-  questions:[
-   ["Hansı irrasional ədəddir?",["√9","√2","4"],1,"√2 irrasional ədəddir."],
-   ["√16 hansı ədəddir?",["İrrasional","Rasional","Heç biri"],1,"√16 = 4 olduğuna görə rasionaldır."]
-  ]
- },
- {
-  title:"Həqiqi ədədlər və əlaqələr",
-  symbol:"R",
-  desc:"Bütün rasional və irrasional ədədlər.",
-  rule:"Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu təşkil edir.",
-  formula:"N ⊂ Z ⊂ Q ⊂ R",
-  examples:[
-   "N — natural ədədlər.",
-   "Z — tam ədədlər.",
-   "Q — rasional ədədlər.",
-   "R — həqiqi ədədlər.",
-   "İrrasional ədədlər də R çoxluğuna daxildir."
-  ],
-  note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional ədədlər isə həqiqi ədədlər çoxluğuna daxildir.",
-  questions:[
-   ["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],
-   ["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]
-  ]
- },
-
- {
-  title:"Əks ədədlər",
-  symbol:"±a",
-  desc:"Modulları bərabər, işarələri fərqli olan ədədlər.",
-  rule:"Modulları bərabər, işarələri fərqli olan ədədlərə əks ədədlər deyilir. Hər bir ədədin əksi onun qarşısında mənfi işarə ilə yazılır.",
-  formula:"a + (-a) = 0",
-  examples:[
-   "5 və -5 — əks ədədlərdir.",
-   "12 və -12 — əks ədədlərdir.",
-   "-7 ədədinin əksi 7-dir.",
-   "0 ədədinin əksi 0-dır.",
-   "3 və -4 əks ədədlər deyil."
-  ],
-  note:"Əks ədədlərin modulları bərabər, işarələri fərqli olur. Sıfır öz-özünün əksidir.",
-  questions:[
-   ["-15 ədədinin əksi hansıdır?",["-15","15","0"],1,"-15 ədədinin əksi 15-dir."],
-   ["Hansı cüt əks ədədlərdir?",["-8 və 8","-5 və 6","3 və 3"],0,"-8 və 8 ədədlərinin modulları bərabər, işarələri fərqlidir."],
-   ["0 ədədinin əksi hansıdır?",["1","-1","0"],2,"0 ədədinin əksi yenə 0-dır."]
-  ]
- },
- {
-  title:"Qarşılıqlı əks ədədlər",
-  symbol:"a + b = 0",
-  desc:"Cəmləri sıfıra bərabər olan ədədlər.",
-  rule:"Cəmləri sıfıra bərabər olan iki ədədə qarşılıqlı əks ədədlər deyilir. Bu ədədlərin modulları bərabər, işarələri isə fərqli olur.",
-  formula:"a + b = 0\nb = -a",
-  examples:[
-   "9 + (-9) = 0",
-   "14 + (-14) = 0",
-   "-6 + 6 = 0",
-   "25 və -25 qarşılıqlı əks ədədlərdir.",
-   "4 və -7 qarşılıqlı əks ədədlər deyil."
-  ],
-  note:"Qarşılıqlı əks ədədlərin cəmi həmişə sıfır olur.",
-  questions:[
-   ["Hansı iki ədədin cəmi sıfırdır?",["-7 və 7","-7 və 8","5 və 5"],0,"-7 + 7 = 0."],
-   ["x + 13 = 0 olarsa, x neçədir?",["13","-13","0"],1,"x = -13, çünki -13 + 13 = 0."],
-   ["-18 ədədinin qarşılıqlı əksi hansıdır?",["-18","18","1/18"],1,"-18 və 18-in cəmi sıfırdır."]
-  ]
- },
- {
-  title:"Qarşılıqlı tərs ədədlər",
-  symbol:"a · 1/a = 1",
-  desc:"Hasilləri 1-ə bərabər olan ədədlər.",
-  rule:"Hasilləri 1-ə bərabər olan iki ədədə qarşılıqlı tərs ədədlər deyilir. Sıfırdan fərqli a ədədinin tərsi 1/a-dır.",
-  formula:"a · 1/a = 1  (a ≠ 0)",
-  examples:[
-   "2 və 1/2 qarşılıqlı tərs ədədlərdir: 2 · 1/2 = 1.",
-   "5 və 1/5 qarşılıqlı tərs ədədlərdir.",
-   "3/4 və 4/3 qarşılıqlı tərs ədədlərdir.",
-   "-2 və -1/2 qarşılıqlı tərs ədədlərdir.",
-   "0-ın qarşılıqlı tərsi yoxdur."
-  ],
-  note:"Ədədin tərsini tapmaq üçün surət və məxrəcin yerini dəyişirik. Tam ədədin tərsini taparkən onu məxrəcə 1 yazılmış kəsr kimi götürürük. Sıfırın qarşılıqlı tərsi yoxdur.",
-  questions:[
-   ["4 ədədinin qarşılıqlı tərsi hansıdır?",["4","1/4","-4"],1,"4 · 1/4 = 1."],
-   ["3/5 kəsrinin qarşılıqlı tərsi hansıdır?",["3/5","5/3","-5/3"],1,"Surət və məxrəcin yerini dəyişirik: 5/3."],
-   ["Hansı cüt qarşılıqlı tərs ədədlərdir?",["2 və 1/2","3 və 1/3","4 və 4"],0,"2 · 1/2 = 1."],
-   ["0 ədədinin qarşılıqlı tərsi varmı?",["Bəli, 0-dır","Bəli, 1-dir","Xeyr"],2,"0-a bölmək mümkün olmadığı üçün onun qarşılıqlı tərsi yoxdur."]
-  ]
- }
-];
-
-<!-- 9. QALIQ LI BOLME - YENI -->
-<div class="lesson" onclick="ac('d9')"><div class="lic" style="background:#EDE9FE">➗</div><div><b>9. Qalıqlı Bölmə</b><p>Hasıl və cəmin qalığı</p></div><div class="faiz"><b>0%</b><div class="bar"><i style="width:0%"></i></div></div></div>
-<div class="detail" id="d9">
-<p>Bir ədəd digərinə tam bölünmürsə, <b>qalıqlı bölmə</b> alınır.</p>
-<div class="formula">42 = 8 • 5 + 2</div>
-<p>42 - bölünən, 8 - bölən, 5 - natamam qismət, 2 - qalıqdır.</p>
-<div class="note"><b>a = b • q + r, r &lt; b</b><br>Qalıq həmişə böləndən kiçikdir.</div>
-<b>Hasılın qalığı:</b> Hər vuruğun qalığını tapıb vururuq, sonra yenidən bölürük.<br>
-Misal: 25•45•38•18 ədədinin 11-ə bölünməsindən alınan qalıq:<br>
-Qalıqlar 3, 1, 5, 7<br>
-3•1•5•7 = 105 → 105 = 9•11 + 6 → <b>r = 6</b><br><br>
-<b>Cəmin qalığı:</b> Hər toplananın qalığını tapıb toplayırıq, sonra yenidən bölürük.<br>
-Misal: 203+542+438 ədədinin 5-ə bölünməsindən alınan qalıq:<br>
-Qalıqlar 3, 2, 3<br>
-3+2+3 = 8 → 8 = 1•5 + 3 → <b>r = 3</b>
-<div class="note2"><b>Yadda saxla:</b> Qalıq 0-dırsa, ədəd tam bölünür.</div>
-<div class="quiz"><b>Özünü yoxla: 47 : 6 = ? Qalıq neçədir?</b>
-<button onclick="alert('Düzgündür! ✅ 47 = 6•7 + 5')">5</button>
-<button onclick="alert('Səhvdir ❌ Yenidən denə')">6</button>
-<button onclick="alert('Səhvdir ❌ Yenidən denə')">1</button></div>
-</div>
-
-<!-- 10. BOLUNME ELAMETLERI - YENI -->
-<div class="lesson" onclick="ac('d10')"><div class="lic" style="background:#FEF3C7">🔢</div><div><b>10. Bölünmə Əlamətləri</b><p>2,3,4,5,6,8,9,10,11-ə</p></div><div class="faiz"><b>0%</b><div class="bar"><i style="width:0%;background:#F59E0B"></i></div></div></div>
-<div class="detail" id="d10">
-<p><b>2-yə:</b> Cüt ədədlər bölünür.<br>12, 34, 102, 1428</p>
-<p><b>3-ə:</b> Rəqəmləri cəmi 3-ə bölünən ədədlər.<br>222, 456, 1008</p>
-<p><b>4-ə:</b> Son iki rəqəmi 4-ə bölünən və ya 00 olan ədədlər.<br>512, 5124, 13716, 1200</p>
-<p><b>5-ə:</b> Sonu 0 və ya 5 ilə bitən ədədlər.<br>615, 4850, 36435</p>
-<p><b>6-ya:</b> Həm 2-yə, həm 3-ə bölünən ədədlər.<br>306, 1842, 42534</p>
-<p><b>8-ə:</b> Son üç rəqəmi 8-ə bölünən və ya 000 olan ədədlər.<br>512, 1016, 24000</p>
-<p><b>9-a:</b> Rəqəmləri cəmi 9-a bölünən ədədlər.<br>459, 3627, 12501</p>
-<p><b>10-a:</b> Sonu 0 ilə bitən ədədlər.<br>2560, 85690</p>
-<p><b>11-ə:</b> Tək yerdə duran rəqəmlər cəmi ilə cüt yerdə duranların fərqi 0 və ya 11-ə bölünürsə.</p>
-<div class="note"><b>Hiylə:</b> 9-a bölünən hər ədəd mütləq 3-ə bölünür, amma tərsı doğru deyil!</div>
-<div class="quiz"><b>Özünü yoxla: 513 hansına bölünür?</b>
-<button onclick="alert('Düzgündür! ✅ 5+1+3=9')">3-ə və 9-a</button>
-<button onclick="alert('Səhvdir ❌')">5-ə</button>
-<button onclick="alert('Səhvdir ❌')">2-yə</button></div>
-</div>
-
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- closeMenu();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function openMenu(){
- document.getElementById("menu").classList.add("open");
-}
-function closeMenu(){
- document.getElementById("menu").classList.remove("open");
-}
-document.getElementById("menu").addEventListener("click",function(e){
- if(e.target===this) closeMenu();
-});
-
-function renderTopics(){
- const list=document.getElementById("topic-list");
- topics.forEach((t,i)=>{
-  const button=document.createElement("button");
-  button.className="topic";
-  button.innerHTML=
-   "<strong>"+(i+1)+". "+t.title+"</strong>"+
-   "<small>"+t.desc+"</small>";
-  button.addEventListener("click",()=>openLesson(i));
-  list.appendChild(button);
- });
-}
-
-function openLesson(index){
- const t=topics[index];
- let html=`
-  <div class="card">
-   <h2>${t.title}</h2>
-   <p>${t.desc}</p>
-   <h3 style="margin-top:22px">📖 Qayda və izah</h3>
-   <p>${t.rule}</p>
-   <div class="formula">${t.formula}</div>
-   <h3>📝 Nümunələr</h3>
-   ${t.examples.map(x=>`<div class="example">${x}</div>`).join("")}
-   <div class="note"><b>Yadda saxla:</b><br>${t.note}</div>
-  </div>
-  <div class="card">
-   <h2>✍️ Mövzu testi</h2>
-   <p>Sualları cavablandır və nəticəni yoxla.</p>
-   <form id="topic-test">
-    ${t.questions.map((q,i)=>`
-     <div class="quiz-question">
-      <p>${i+1}. ${q[0]}</p>
-      ${q[1].map((option,j)=>`
-       <label class="option">
-        <input type="radio" name="q${i}" value="${j}">
-        ${option}
-       </label>
-      `).join("")}
-     </div>
-    `).join("")}
-    <button class="primary" type="submit">Cavabları yoxla</button>
-   </form>
-   <div class="result" id="topic-result" aria-live="polite"></div>
-  </div>
- `;
- document.getElementById("lesson-content").innerHTML=html;
- showPage("lesson");
-
- document.getElementById("topic-test").addEventListener("submit",function(e){
-  e.preventDefault();
-  let score=0;
-  let output="";
-  t.questions.forEach((q,i)=>{
-   const selected=this.querySelector('input[name="q'+i+'"]:checked');
-   const ok=selected && Number(selected.value)===q[2];
-   if(ok) score++;
-   output+=`
-    <div class="example">
-     <b class="${ok?'correct':'wrong'}">
-      ${i+1}. ${ok?'✓ Düzgün':'✗ Yanlış'}
-     </b>
-     <p>${q[3]}</p>
-    </div>`;
-  });
-  const result=document.getElementById("topic-result");
-  result.innerHTML="<h3>Nəticə: "+score+" / "+t.questions.length+"</h3>"+output+
-   '<button type="button" class="primary" onclick="openLesson('+index+')">Yenidən cəhd et</button>';
-  result.style.display="block";
-  this.querySelectorAll("input").forEach(input=>input.disabled=true);
-  this.querySelector("button[type=submit]").disabled=true;
-  this.querySelector("button[type=submit]").style.opacity=".5";
-  result.scrollIntoView({behavior:"smooth",block:"nearest"});
- });
-}
-
-document.getElementById("year").textContent=new Date().getFullYear();
-renderTopics();
-</script>
-
-</body>
-</html>
+const topics=[
+{title:"Natural ədədlər",symbol:"N",desc:"Saymaq üçün istifadə olunan ədədlər.",rule:"Natural ədədlər saymaq üçün istifadə etdiyimiz ədədlərdir.",formula:"N = {1, 2, 3, 4, 5, 6, ...}",examples:["1 — natural ədəddir.","15 — natural ədəddir.","100 — natural ədəddir.","-5 — natural ədəd deyil.","2,5 — natural ədəd deyil."],note:"Bu saytda N = {1, 2, 3, ...} qəbul edilir. Bəzi dərsliklərdə 0 da natural ədədlərə daxil edilir.",questions:[["Hansı natural ədəddir?",["-4","12","2,5"],1,"12 natural ədəddir."],["Natural ədədlər hansı məqsədlə istifadə olunur?",["Saymaq üçün","Mənfi ədədləri göstərmək üçün","Yalnız kəsrləri göstərmək üçün"],0,"Natural ədədlər saymaq üçün istifadə olunur."]]},
+{title:"Tam ədədlər",symbol:"Z",desc:"Mənfi, müsbət ədədlər və sıfır.",rule:"Tam ədədlər müsbət ədədlərdən, mənfi ədədlərdən və sıfırdan ibarətdir.",formula:"Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",examples:["-8 — tam ədəddir.","0 — tam ədəddir.","15 — tam ədəddir.","2,5 — tam ədəd deyil.","1/2 — tam ədəd deyil."],note:"Hər natural ədəd tam ədəddir, amma hər tam ədəd natural ədəd deyil.",questions:[["Hansı tam ədəddir?",["2,5","-8","1/3"],1,"-8 tam ədəddir."],["Tam ədədlərə hansı daxildir?",["Yalnız müsbət ədədlər","Yalnız mənfi ədədlər","Mənfi, müsbət ədədlər və sıfır"],2,"Tam ədədlərə mənfi, müsbət ədədlər və sıfır daxildir."]]},
+{title:"Rasional ədədlər",symbol:"Q",desc:"Adi kəsr şəklində yazıla bilən ədədlər.",rule:"İki tam ədədin nisbəti şəklində yazıla bilən ədədlərə rasional ədədlər deyilir.",formula:"Q = {a/b : a,b ∈ Z; b ≠ 0}",examples:["1/2 — rasional ədəddir.","3/4 — rasional ədəddir.","-5/2 — rasional ədəddir.","0,5 = 1/2","0,75 = 3/4","0,333... = 1/3"],note:"Sonlu onluq kəsrlər və dövri onluq kəsrlər rasional ədədlərdir. Bütün tam ədədlər də rasionaldır.",questions:[["Hansı rasional ədəddir?",["√2","0,25","π"],1,"0,25 = 1/4 olduğuna görə rasionaldır."],["Aşağıdakılardan hansı rasionaldır?",["0,333...","√7","π"],0,"0,333... = 1/3 olduğuna görə rasionaldır."]]},
+{title:"İrrasional Ədədlər",symbol:"I",desc:"Adi kəsr şəklində yazıla bilməyən ədədlər.",rule:"İki tam ədədin nisbəti şəklində yazıla bilməyən ədədlərə irrasional ədədlər deyilir.",formula:"√2 = 1,4142135...\n√3 = 1,7320508...\nπ = 3,1415926...",examples:["√2 — irrasionaldır.","√3 — irrasionaldır.","√5 — irrasionaldır.","π — irrasionaldır.","√4 = 2 — rasionaldır."],note:"İrrasional ədədlərin onluq yazılışı sonsuz və dövri olmayan olur. Hər kökaltı ifadə irrasional deyil!",questions:[["Hansı irrasional ədəddir?",["√9","√2","4"],1,"√2 irrasional ədəddir."],["√16 hansı ədəddir?",["İrrasional","Rasional","Heç biri"],1,"√16 = 4 olduğuna görə rasionaldır."]]},
+{title:"Həqiqi Ədədlər",symbol:"R",desc:"Bütün rasional və irrasional ədədlər.",rule:"Rasional və irrasional ədədlərin birləşməsi həqiqi ədədlər çoxluğunu təşkil edir.",formula:"N ⊂ Z ⊂ Q ⊂ R",examples:["N — natural ədədlər.","Z — tam ədədlər.","Q — rasional ədədlər.","R — həqiqi ədədlər.","İrrasional ədədlər də R çoxluğuna daxildir."],note:"Natural ədədlər tam, tam ədədlər rasional, rasional və irrasional ədədlər isə həqiqi ədədlər çoxluğuna daxildir.",questions:[["Hansı münasibət doğrudur?",["N ⊂ Z ⊂ Q","Q ⊂ N ⊂ Z","Z ⊂ N ⊂ Q"],0,"N ⊂ Z ⊂ Q düzgün münasibətdir."],["İrrasional ədədlər hansı çoxluğa daxildir?",["N","Z","R"],2,"İrrasional ədədlər həqiqi ədədlərə daxildir."]]},
+{title:"Əks Ədədlər",symbol:"±a",desc:"Modulları bərabər, işarələri fərqli olan ədədlər.",rule:"Modulları bərabər, işarələri fərqli olan ədədlərə əks ədədlər deyilir. Hər bir ədədin əksi onun qarşısında mənfi işarə ilə yazılır.",formula:"a + (-a) = 0",examples:["5 və -5 — əks ədədlərdir.","12 və -12 — əks ədədlərdir.","-7 ədədinin əksi 7-dir.","0 ədədinin əksi 0-dır.","3 və -4 əks ədədlər deyil."],note:"Əks ədədlərin modulları bərabər, işarələri fərqli olur. Sıfır öz-özünün əksidir.",questions:[["-15 ədədinin əksi hansıdır?",["-15","15","0"],1,"-15 ədədinin əksi 15-dir."],["Hansı cüt əks ədədlərdir?",["-8 və 8","-5 və 6","3 və 3"],0,"-8 və 8 ədədlərinin modulları bərabər, işarələri fərqlidir."],["0 ədədinin əksi hansıdır?",["1","-1","0"],2,"0 ədədinin əksi yenə 0-dır."]]},
+{title:"Qarşılıqlı əks Ədədlər",symbol:"a + b = 0",desc:"Cəmləri sıfıra bərabər olan ədədlər.",rule:"Cəmləri sıfıra bərabər olan iki ədədə qarşılıqlı əks ədədlər deyilir. Bu ədədlərin modulları bərabər, işarələri isə fərqli olur.",formula:"a + b = 0\nb = -a",examples:["9 + (-9) = 0","14 + (-14) = 0","-6 + 6 = 0","25 və -25 qarşılıqlı əks ədədlərdir.","4 və -7 qarşılıqlı əks ədədlər deyil."],note:"Qarşılıqlı əks ədədlərin cəmi həmişə sıfır olur.",questions:[["Hansı iki ədədin cəmi sıfırdır?",["-7 və 7","-7 və 8","5 və 5"],0,"-7 + 7 = 0."],["x + 13 = 0 olarsa, x neçədir?",["13","-13","0"],1,"x = -13, çünki -13 + 13 = 0."],["-18 ədədinin qarşılıqlı əksi hansıdır?",["-18","18","1/18"],1,"-18 və 18-in cəmi sıfırdır."]]},
+{title:"Qarşılıqlı Tərs Ədədlər",symbol:"a · 1/a = 1",desc:"Hasilləri 1-ə bərabər olan ədədlər.",rule:"Hasilləri 1-ə bərabər olan iki ədədə qarşılıqlı tərs ədədlər deyilir. Sıfırdan fərqli a ədədinin tərsi 1/a-dır.",formula:"a · 1/a = 1  (a ≠ 0)",examples:["2 və 1/2 qarşılıqlı tərs ədədlərdir: 2 · 1/2 = 1.","5 və 1/5 qarşılıqlı tərs ədədlərdir.","3/4 və 4/3 qarşılıqlı tərs ədədlərdir.","-2 və -1/2 qarşılıqlı tərs ədədlərdir.","0-ın qarşılıqlı tərsi yoxdur."],note:"Ədədin tərsini tapmaq üçün surət və məxrəcin yerini dəyişirik. Sıfırın qarşılıqlı tərsi yoxdur.",questions:[["4 ədədinin qarşılıqlı tərsi hansıdır?",["4","1/4","-4"],1,"4 · 1/4 = 1."],["3/5 kəsrinin qarşılıqlı tərsi hansıdır?",["3/5","5/3","-5/3"],1,"Surət və məxrəcin yerini dəyişirik: 5/3."],["0 ədədinin qarşılıqlı tərsi varmı?",["Bəli, 0-dır","Bəli, 1-dir","Xeyr"],2,"0-a bölmək mümkün olmadığı üçün onun qarşılıqlı tərsi yoxdur."]]},
+{title:"Qalıqlı Bölmə",symbol:"a = b·q + r",desc:"Tam bölünməyən ədədlərdə qalıq.",rule:"Bir ədəd digərinə tam bölünmürsə, qalıqlı bölmə alınır. Qalıq həmişə böləndən kiçik olmalıdır.",formula:"a = b • q + r , r < b\n42 = 8 • 5 + 2",examples:["42 : 8 → qismət 5, qalıq 2","47 : 6 → 47 = 6•7 + 5, qalıq 5","Hasılın qalığı: 25•45•38•18-in 11-ə bölünməsindən qalıq 6-dır. Çünki qalıqlar 3,1,5,7 → 3•1•5•7=105 → 105=9•11+6","Cəmin qalığı: 203+542+438-in 5-ə bölünməsindən qalıq 3-dür. Qalıqlar 3,2,3 → 3+2+3=8 → 8=1•5+3"],note:"Qalıq 0-dırsa, ədəd tam bölünür. Qalıq heç vaxt bölənə bərabər ola bilməz.",questions:[["47 : 6 bölməsində qalıq neçədir?",["6","5","1"],1,"47 = 6•7 + 5"],["a = b•q + r düsturunda r üçün hansı doğrudur?",["r > b","r < b","r = b"],1,"Qalıq həmişə böləndən kiçikdir."],["25-in 7-yə bölünməsindən qalıq?",["3","4","5"],1,"25 = 7•3 + 4"]]},
+{title:"Bölünmə Əlamətləri",symbol:"2,3,4,5,6,8,9,10,11",desc:"Ədədin bölünüb-bölünmədiyini tez tapmaq.",rule:"Bölmədən istifadə etmədən ədədin bölündüyünü yoxlamaq üçün bölünmə əlamətlərindən istifadə edirik.",formula:"2-yə: cüt ədədlər\n3-ə: rəqəmlər cəmi 3-ə bölünsə\n9-a: rəqəmlər cəmi 9-a bölünsə\n5-ə: sonu 0 və ya 5\n10-a: sonu 0",examples:["2-yə: 12, 34, 102, 1428","3-ə: 222, 456, 1008","4-ə: 512, 5124, 13716, 1200","5-ə: 615, 4850, 36435","6-ya: 306, 1842, 42534 — həm 2-yə, həm 3-ə bölünür","8-ə: son üç rəqəmi 8-ə bölünənlər","9-a: 459, 3627, 12501","10-a: 2560, 85690","11-ə: tək yerdəkilərin cəmi ilə cüt yerdəkilərin fərqi 0 və ya 11-ə bölünsə"],note:"9-a bölünən hər ədəd mütləq 3-ə bölünür, amma tərsı doğru deyil!",questions:[["513 hansına bölünür?",["5-ə","3-ə və 9-a","2-yə"],1,"5+1+3=9"],["Hansısı 4-ə bölünür?",["123","132","125"],1,"132-nin son iki rəqəmi 32, 4-ə bölünür."],["Hansısı 5-ə bölünür?",["123","130","131"],1,"Sonu 0 ilə bitir."]]},
+{title:"ƏBOB (Ən böyük ortaq bölen)",symbol:"ƏBOB",desc:"İki ədədi bölən ən böyük ədəd.",rule:"İki və ya daha çox ədədin bölündüyü ən böyük ədədə ƏBOB deyilir.",formula:"ƏBOB(12, 18) = 6\n12 = 2•2•3\n18 = 2•3•3\nOrtaklar: 2•3 = 6",examples:["ƏBOB(12,18)=6","ƏBOB(20,30)=10","ƏBOB(8,24)=8 — biri digərinə bölünürsə, ƏBOB kiçik ədəddir","24 və 36 m lentləri ən uzun bərabər parçalara bölmək: ƏBOB=12 m"],note:"Kəsrləri ixtisar edəndə və bərabər hissələrə böləndə ƏBOB-dən istifadə edirik.",questions:[["ƏBOB(20,30) neçədir?",["60","10","5"],1,"20 və 30-un ən böyük ortaq böləni 10-dur."],["ƏBOB(8,24) neçədir?",["8","24","4"],0,"8, 24-ə bölünür, ƏBOB kiçik ədəddir."]]},
+{title:"ƏKOB (Ən kiçik ortaq bölünən)",symbol:"ƏKOB",desc:"Hər iki ədədə bölünən ən kiçik ədəd.",rule:"Hər iki ədədə bölünən ən kiçik ədədə ƏKOB deyilir.",formula:"ƏKOB(12, 18) = 36\nƏBOB(a,b) • ƏKOB(a,b) = a • b",examples:["ƏKOB(12,18)=36","ƏKOB(6,8)=24","ƏKOB(8,24)=24 — biri digərinə bölünürsə, ƏKOB böyük ədəddir","Biri 12 dəq, biri 18 dəq-dən bir gələn avtobus birlikdə 36 dəq-dən bir gələr"],note:"ƏKOB-u tapanda ortaq + ortaq olmayanların hamısını ən böyük qüvvətlə götürürük.",questions:[["ƏKOB(6,8) neçədir?",["48","24","2"],1,"6 və 8-ə bölünən ən kiçik ədəd 24-dür."],["ƏKOB(8,24) neçədir?",["8","24","192"],1,"24, 8-ə bölünür, ƏKOB böyük ədəddir."]]},
+{title:"Tam ədədlərin müqasiyəsi",symbol:"<  >",desc:"Mənfi və müsbət ədədləri müqayisə etmək.",rule:"Ədəd oxunda sağda olan ədəd böyükdür. Hər müsbət ədəd 0-dan və hər mənfi ədəddən böyükdür. Hər mənfi ədəd 0-dan kiçikdir.",formula:"... -3 < -2 < -1 < 0 < 1 < 2 < 3 ...",examples:["5 > -3","-4 < -1","0 > -7","-10 < -9 — çünki -10 daha solda","İki mənfi ədəddən modulu kiçik olan böyükdür: -2 > -5"],note:"Ən çox səhv: -10, -9-dan kiçikdir! Borc kimi fikirləş: 10 manat borc, 9 manat borcdan pisdir.",questions:[["Hansı böyükdür?",["-4 > -1","-1 > -4","Bərabərdir"],1,"-1 daha sağdadır."],["Hansı doğrudur?",["-5 > 0","0 > -5","-5 = 0"],1,"0 hər mənfi ədəddən böyükdür."]]},
+{title:"Tək və cüt ədədlər",symbol:"2n / 2n+1",desc:"2-yə bölünən və bölünməyən ədədlər.",rule:"2-yə tam bölünən ədədlər cüt, bölünməyənlər tək ədədlərdir.",formula:"Cüt: 2n = ..., -4, -2, 0, 2, 4, ...\nTək: 2n+1 = ..., -3, -1, 1, 3, ...",examples:["Cüt: 2, 4, 6, 8, 10, 100","Tək: 1, 3, 5, 7, 9, 101","Cüt + Cüt = Cüt","Tək + Tək = Cüt","Tək + Cüt = Tək","Cüt • istənilən = Cüt"],note:"0 cüt ədəddir! Çünki 0 : 2 = 0, qalıq 0-dır.",questions:[["Hansı tək ədəddir?",["12","15","20"],1,"15, 2-yə bölünmür."],["Tək + Tək = ?",["Tək","Cüt","0"],1,"3+5=8 — cüt alınır."],["0 hansı ədəddir?",["Tək","Cüt","Heç biri"],1,"0 cüt ədəddir."]]},
+{title:"Kəsrlər",symbol:"a/b",desc:"Bütövün hissəsi.",rule:"Kəsr bütövün bərabər hissələrindən birini və ya bir neçəsini göstərir. a — surət, b — məxrəc.",formula:"Kəsr = a / b\nSurət — neçə hissə götürdük\nMəxrəc — neçə bərabər hissəyə böldük",examples:["1/2 — yarım","1/4 — dörddə bir","3/4 — dörddə üç","Düzgün kəsr: 2/5 — surət < məxrəc","Düzgün olmayan kəsr: 7/4 — surət > məxrəc","Qarışıq ədəd: 1 3/4 = 7/4"],note:"Məxrəc heç vaxt 0 ola bilməz!",questions:[["Hansı düzgün kəsrdır?",["7/4","2/5","5/2"],1,"Surət məxrəcdən kiçikdir."],["1 3/4 qarışıq ədədi hansı kəsrdir?",["7/4","4/7","3/4"],0,"1 3/4 = (4+3)/4 = 7/4"]]},
+{title:"Kəsrin Əsas xassəsi",symbol:"a/b = a•k / b•k",desc:"Kəsrin dəyərini dəyişmədən böyütmək-kiçiltmək.",rule:"Kəsrin surət və məxrəcini eyni sıfırdan fərqli ədədə vursaq və ya bölsək, kəsrin qiyməti dəyişməz.",formula:"a/b = (a•k)/(b•k)\na/b = (a:k)/(b:k)",examples:["1/2 = 2/4 = 3/6 = 4/8","2/3 = 4/6 = 6/9","10/15 = 2/3 — surət və məxrəci 5-ə böldük","Kəsrləri ortaq məxrəcə gətirmək üçün bu xassədən istifadə edirik"],note:"Surət və məxrəci eyni ədədə vurmaq/bölmək lazımdır. Biri vurulub, biri bölünsə, kəsr dəyişər!",questions:[["1/2-yə bərabər olan kəsr hansıdır?",["2/3","3/6","4/3"],1,"Surət və məxrəci 3-ə vurduq."],["10/15-i sadələşdirsək?",["2/3","5/3","10/5"],0,"Hər ikisini 5-ə böldük."]]},
+{title:"Kəsrlərin ixtisarı",symbol:"÷ ƏBOB",desc:"Kəsri ən sadə hala gətirmək.",rule:"Kəsrin surət və məxrəcini onların ƏBOB-una bölməyə ixtisar deyilir.",formula:"12/18 = (12:6)/(18:6) = 2/3",examples:["12/18 = 2/3","20/30 = 2/3","24/36 = 2/3","15/25 = 3/5","İxtisar olunmayan kəsr: 3/7 — surət və məxrəc qarşılıqlı sadədir"],note:"İxtisar edəndə kəsrin qiyməti dəyişmir, sadəcə yazılışı sadələşir.",questions:[["12/18-i ixtisar et:",["2/3","3/2","6/9"],0,"12 və 18-in ƏBOB-u 6-dır."],["15/25-i ixtisar et:",["3/5","5/3","15/5"],0,"Hər ikisini 5-ə böldük."]]},
+{title:"Kəsirlərin müqasiyəsi",symbol:"<  >",desc:"Hansı kəsr böyükdür?",rule:"Məxrəcləri bərabər olan kəsrlərdən surəti böyük olan böyükdür. Surətləri bərabər olanlardan məxrəci kiçik olan böyükdür.",formula:"Məxrəc eynidirsə: 3/7 < 5/7\nSurət eynidirsə: 3/4 > 3/8\nFərqlidirsə: ortaq məxrəcə gətir",examples:["3/7 < 5/7","3/4 > 3/8 — eyni tortun 4-də biri, 8-də birindən böyükdür","1/2 və 2/3: 1/2=3/6, 2/3=4/6 → 1/2 < 2/3","1/2 = 0,5, 3/4 = 0,75 → 1/2 < 3/4"],note:"Fərqli məxrəcli kəsrləri müqayisə etmək üçün əvvəl ortaq məxrəcə gətir!",questions:[["Hansı böyükdür? 3/7 və 5/7", ["3/7","5/7","Bərabərdir"],1,"Məxrəc eynidir, surəti böyük olan böyükdür."],["Hansı böyükdür? 1/2 və 1/4",["1/4","1/2","Bərabərdir"],1,"Surət eynidir, məxrəci kiçik olan böyükdür.
