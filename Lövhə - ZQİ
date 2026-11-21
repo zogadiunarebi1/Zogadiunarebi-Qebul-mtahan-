@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZQİ Ağ Lövhə</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+}
+
+.top {
+  height: 48px;
+  background: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 12px;
+  box-shadow: 0 1px 5px #0002;
+  position: relative;
+  z-index: 5;
+}
+
+.menu-button {
+  border: none;
+  background: transparent;
+  font-size: 27px;
+  cursor: pointer;
+  padding: 4px 12px;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 46px;
+  right: 10px;
+  width: 190px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #0003;
+  padding: 7px;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.tool {
+  width: 100%;
+  padding: 11px;
+  background: white;
+  border: none;
+  border-radius: 7px;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  color: #222;
+}
+
+.tool:active, .tool.active {
+  background: #e7f0ff;
+  color: #1769c2;
+}
+
+.color-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+}
+
+input[type="color"] {
+  width: 42px;
+  height: 32px;
+  border: none;
+  background: none;
+}
+
+input[type="range"] {
+  width: 95px;
+}
+
+.board {
+  width: 100%;
+  height: calc(100dvh - 48px);
+  background: white;
+  overflow: hidden;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <button class="menu-button" id="menuBtn">⋮</button>
+
+  <div class="dropdown" id="dropdown">
+
+    <button class="tool active" id="writeBtn">
+      ✏️ Yazmaq
+    </button>
+
+    <button class="tool" id="eraseBtn">
+      🧽 Silmək
+    </button>
+
+    <div class="color-area">
+      <span>🎨 Rəng seç</span>
+      <input type="color" id="color" value="#000000">
+    </div>
+
+    <div class="color-area">
+      <span>Yazı ölçüsü</span>
+      <input type="range" id="size" min="1" max="35" value="3">
+    </div>
+
+    <button class="tool" id="clearBtn">
+      🗑 Ekranı təmizlə
+    </button>
+
+  </div>
+</header>
+
+<div class="board">
+  <canvas id="canvas"></canvas>
+</div>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let erasing = false;
+
+function setup() {
+  const rect = canvas.getBoundingClientRect();
+  const ratio = window.devicePixelRatio || 1;
+
+  const old = document.createElement("canvas");
+  old.width = canvas.width;
+  old.height = canvas.height;
+  old.getContext("2d").drawImage(canvas, 0, 0);
+
+  const oldW = canvas.width;
+  const oldH = canvas.height;
+
+  canvas.width = rect.width * ratio;
+  canvas.height = rect.height * ratio;
+
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+  if (oldW && oldH) {
+    ctx.drawImage(old, 0, 0, oldW, oldH,
+      0, 0, rect.width, rect.height);
+  }
+
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+}
+
+setup();
+window.addEventListener("resize", setup);
+
+document.getElementById("menuBtn").onclick = () => {
+  document.getElementById("dropdown").classList.toggle("show");
+};
+
+function getPosition(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+canvas.addEventListener("pointerdown", e => {
+  drawing = true;
+  canvas.setPointerCapture(e.pointerId);
+
+  const p = getPosition(e);
+  ctx.beginPath();
+  ctx.moveTo(p.x, p.y);
+});
+
+canvas.addEventListener("pointermove", e => {
+  if (!drawing) return;
+
+  const p = getPosition(e);
+
+  ctx.globalCompositeOperation = erasing
+    ? "destination-out"
+    : "source-over";
+
+  ctx.strokeStyle = document.getElementById("color").value;
+  ctx.lineWidth = Number(document.getElementById("size").value);
+
+  ctx.lineTo(p.x, p.y);
+  ctx.stroke();
+});
+
+function stop() {
+  drawing = false;
+  ctx.beginPath();
+  ctx.globalCompositeOperation = "source-over";
+}
+
+canvas.addEventListener("pointerup", stop);
+canvas.addEventListener("pointercancel", stop);
+
+document.getElementById("writeBtn").onclick = () => {
+  erasing = false;
+  setActive("writeBtn");
+};
+
+document.getElementById("eraseBtn").onclick = () => {
+  erasing = true;
+  setActive("eraseBtn");
+};
+
+function setActive(id) {
+  document.querySelectorAll(".tool").forEach(b =>
+    b.classList.remove("active")
+  );
+  document.getElementById(id).classList.add("active");
+}
+
+document.getElementById("clearBtn").onclick = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.getElementById("dropdown").classList.remove("show");
+};
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".top")) {
+    document.getElementById("dropdown").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
