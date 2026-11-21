@@ -410,6 +410,47 @@ const topics = [
  }
 ];
 
+<!-- 9. QALIQ LI BOLME - YENI -->
+<div class="lesson" onclick="ac('d9')"><div class="lic" style="background:#EDE9FE">➗</div><div><b>9. Qalıqlı Bölmə</b><p>Hasıl və cəmin qalığı</p></div><div class="faiz"><b>0%</b><div class="bar"><i style="width:0%"></i></div></div></div>
+<div class="detail" id="d9">
+<p>Bir ədəd digərinə tam bölünmürsə, <b>qalıqlı bölmə</b> alınır.</p>
+<div class="formula">42 = 8 • 5 + 2</div>
+<p>42 - bölünən, 8 - bölən, 5 - natamam qismət, 2 - qalıqdır.</p>
+<div class="note"><b>a = b • q + r, r &lt; b</b><br>Qalıq həmişə böləndən kiçikdir.</div>
+<b>Hasılın qalığı:</b> Hər vuruğun qalığını tapıb vururuq, sonra yenidən bölürük.<br>
+Misal: 25•45•38•18 ədədinin 11-ə bölünməsindən alınan qalıq:<br>
+Qalıqlar 3, 1, 5, 7<br>
+3•1•5•7 = 105 → 105 = 9•11 + 6 → <b>r = 6</b><br><br>
+<b>Cəmin qalığı:</b> Hər toplananın qalığını tapıb toplayırıq, sonra yenidən bölürük.<br>
+Misal: 203+542+438 ədədinin 5-ə bölünməsindən alınan qalıq:<br>
+Qalıqlar 3, 2, 3<br>
+3+2+3 = 8 → 8 = 1•5 + 3 → <b>r = 3</b>
+<div class="note2"><b>Yadda saxla:</b> Qalıq 0-dırsa, ədəd tam bölünür.</div>
+<div class="quiz"><b>Özünü yoxla: 47 : 6 = ? Qalıq neçədir?</b>
+<button onclick="alert('Düzgündür! ✅ 47 = 6•7 + 5')">5</button>
+<button onclick="alert('Səhvdir ❌ Yenidən denə')">6</button>
+<button onclick="alert('Səhvdir ❌ Yenidən denə')">1</button></div>
+</div>
+
+<!-- 10. BOLUNME ELAMETLERI - YENI -->
+<div class="lesson" onclick="ac('d10')"><div class="lic" style="background:#FEF3C7">🔢</div><div><b>10. Bölünmə Əlamətləri</b><p>2,3,4,5,6,8,9,10,11-ə</p></div><div class="faiz"><b>0%</b><div class="bar"><i style="width:0%;background:#F59E0B"></i></div></div></div>
+<div class="detail" id="d10">
+<p><b>2-yə:</b> Cüt ədədlər bölünür.<br>12, 34, 102, 1428</p>
+<p><b>3-ə:</b> Rəqəmləri cəmi 3-ə bölünən ədədlər.<br>222, 456, 1008</p>
+<p><b>4-ə:</b> Son iki rəqəmi 4-ə bölünən və ya 00 olan ədədlər.<br>512, 5124, 13716, 1200</p>
+<p><b>5-ə:</b> Sonu 0 və ya 5 ilə bitən ədədlər.<br>615, 4850, 36435</p>
+<p><b>6-ya:</b> Həm 2-yə, həm 3-ə bölünən ədədlər.<br>306, 1842, 42534</p>
+<p><b>8-ə:</b> Son üç rəqəmi 8-ə bölünən və ya 000 olan ədədlər.<br>512, 1016, 24000</p>
+<p><b>9-a:</b> Rəqəmləri cəmi 9-a bölünən ədədlər.<br>459, 3627, 12501</p>
+<p><b>10-a:</b> Sonu 0 ilə bitən ədədlər.<br>2560, 85690</p>
+<p><b>11-ə:</b> Tək yerdə duran rəqəmlər cəmi ilə cüt yerdə duranların fərqi 0 və ya 11-ə bölünürsə.</p>
+<div class="note"><b>Hiylə:</b> 9-a bölünən hər ədəd mütləq 3-ə bölünür, amma tərsı doğru deyil!</div>
+<div class="quiz"><b>Özünü yoxla: 513 hansına bölünür?</b>
+<button onclick="alert('Düzgündür! ✅ 5+1+3=9')">3-ə və 9-a</button>
+<button onclick="alert('Səhvdir ❌')">5-ə</button>
+<button onclick="alert('Səhvdir ❌')">2-yə</button></div>
+</div>
+
 function showPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById(id).classList.add("active");
